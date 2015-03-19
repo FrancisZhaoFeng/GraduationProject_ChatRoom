@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" 
+    android:id="@+id/mainLoginRoot"
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent"
+	android:background="@drawable/main_default_bg"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+		<RelativeLayout android:id="@+id/mainLoginLayoutBack"
+			android:background="@drawable/main_login_back" android:paddingTop="21.0dp"
+			android:paddingBottom="40.0dp" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:layout_marginLeft="15.0dp"
+			android:layout_marginTop="40.0dp" android:layout_marginRight="15.0dp">
+			<EditText android:id="@+id/mainLoginEditAccount"
+				android:background="@drawable/main_qq_edit_login" android:paddingLeft="5.0sp"
+				android:saveEnabled="true" android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:layout_marginLeft="5.0dp"
+				android:layout_marginTop="5.0dp" android:layout_marginRight="5.0dp"
+				android:layout_marginBottom="5.0dp" android:hint="input your name"
+				android:maxLength="15"
+				android:layout_alignParentTop="true" />
+
+			<EditText 
+			    android:id="@+id/mainLoginEditPassword"
+			    android:layout_below="@id/mainLoginEditAccount"
+			    android:background="@drawable/main_qq_edit_login" android:paddingLeft="5.0sp"
+				android:saveEnabled="true" android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:layout_marginLeft="5.0dp"
+				android:layout_marginTop="60dp" android:layout_marginRight="5.0dp"
+				android:layout_marginBottom="5.0dp" 
+				android:inputType="textPassword"
+				android:hint="password"
+				android:maxLength="15"
+				android:layout_alignParentTop="true" />
+			<!-- 			
+			<RelativeLayout
+			    android:id="@+id/mainLoginLayoutChooseSex"
+			    android:layout_below="@id/mainLoginEditAccount"
+			    android:layout_centerHorizontal="true"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_marginTop="50dp"
+			    >
+				<TextView
+				    android:id="@+id/mainLoginTextViewChooseSex"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="Choose Your Sex"
+				    android:textSize="16sp"
+				    android:layout_centerVertical="true"/>
+				
+				<RadioGroup
+				    android:id="@+id/mainLoginRgpChooseSex"
+				    android:layout_toRightOf="@id/mainLoginTextViewChooseSex"
+				    android:paddingLeft="5dp"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:layout_centerVertical="true">
+				    <RadioButton
+				        android:id="@+id/mainLoginRdBtnFemale"
+				        android:layout_width="wrap_content"
+				    	android:layout_height="wrap_content"
+				    	android:text="female"/>
+				    <RadioButton
+				        android:id="@+id/mainLoginRdBtnMale"
+				        android:layout_width="wrap_content"
+				    	android:layout_height="wrap_content"
+				    	android:text="male"/>
+				</RadioGroup>
+			</RelativeLayout>
+			 -->
+			
+			
+			<Button
+			    android:id="@+id/mainLoginBtn"
+			    android:layout_width="match_parent"
+			    android:layout_height="45dp"
+			    android:layout_marginLeft="10dp"
+			    android:layout_marginRight="10dp"
+			    android:layout_below="@id/mainLoginEditPassword"
+			    android:layout_marginTop="40dp"
+			    android:layout_centerHorizontal="true"
+			    android:gravity="center"
+			    android:padding="0dp"
+			    android:text="Log In"
+			    android:background="@drawable/light_green" />
+			
+			<Button
+			    android:id="@+id/main_btn_register"
+			    android:layout_width="match_parent"
+			    android:layout_height="45dp"
+			    android:layout_marginLeft="10dp"
+			    android:layout_marginRight="10dp"
+			    android:layout_below="@id/mainLoginBtn"
+			    android:layout_centerHorizontal="true"
+			    android:layout_marginTop="80dp"
+			    android:gravity="center"
+			    android:padding="0dp"
+			    android:text="register"
+			    android:background="@drawable/white_btn"	/>
+			    
+	</RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+        <ImageView 
+            android:id="@+id/cc0_friend_search_result_popup_avatar"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp" />
+        <TextView 
+            android:id="@+id/cc0_friend_search_result_popup_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cc0_friend_search_result_popup_avatar"
+            android:layout_alignLeft="@id/cc0_friend_search_result_popup_avatar" />
+        <TextView 
+            android:id="@+id/cc0_friend_search_result_popup_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/cc0_friend_search_result_popup_avatar"
+            android:text="are you sure to send this client friend request?" />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+        <Button 
+            android:id="@+id/cc0_friend_search_result_popup_btn_agree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="ok" />
+        <Button 
+            android:id="@+id/cc0_friend_search_result_popup_btn_refuse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/cc0_friend_search_result_popup_btn_agree"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="no" />
+    </RelativeLayout>
+    
+
+</LinearLayout>

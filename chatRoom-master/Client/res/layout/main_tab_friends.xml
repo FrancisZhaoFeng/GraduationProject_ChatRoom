@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#eee"
+        android:orientation="vertical" >
+        
+        <LinearLayout 
+  			android:layout_width="fill_parent"
+  			android:layout_height="45dp"
+  			android:background="@drawable/title_bar"
+  			android:gravity="center_horizontal|center_vertical"  >  
+      		<TextView
+        		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content" 
+        		android:text="Friends"
+        		android:textSize="20sp"		
+				android:textColor="#ffffff" />       
+			</LinearLayout>
+		<RelativeLayout   
+		    android:id="@+id/main_tab_friends_find_by_name"   				    
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:background="@drawable/preference_single_item" >
+      		<ImageView
+      		    android:id="@+id/main_tab_friends_img_by_name"
+            	android:layout_width="30dp"
+        		android:layout_height="30dp"
+        		android:layout_centerVertical="true"
+        		android:layout_alignParentLeft="true"
+        		android:src="@drawable/find_more_friend_addfriend_icon" />    
+            <TextView
+        		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content"
+        		android:layout_toRightOf="@id/main_tab_friends_img_by_name"
+        		android:layout_centerVertical="true"
+        		android:padding="8dp" 
+        		android:text="find by name"
+        		android:textSize="17sp"		
+				android:textColor="#000" /> 
+			<ImageView
+            	android:layout_width="16dp"
+        		android:layout_height="16dp"
+        		android:layout_centerVertical="true"
+        		android:layout_alignParentRight="true"
+        		android:src="@drawable/right_arrow" />      					
+   		</RelativeLayout>
+   		
+		<RelativeLayout      	
+		    android:id="@+id/main_tab_friends_find_by_else"			    
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:background="@drawable/preference_single_item" >
+      		<ImageView
+      		    android:id="@+id/main_tab_friends_img_by_else"
+            	android:layout_width="30dp"
+        		android:layout_height="30dp"
+        		android:layout_centerVertical="true"
+        		android:layout_alignParentLeft="true"
+        		android:src="@drawable/find_more_friend_addfriend_icon" />    
+            <TextView
+        		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content"
+        		android:layout_toRightOf="@id/main_tab_friends_img_by_else"
+        		android:layout_centerVertical="true"
+        		android:padding="8dp" 
+        		android:text="find more"
+        		android:textSize="17sp"		
+				android:textColor="#000" /> 
+			<ImageView
+            	android:layout_width="16dp"
+        		android:layout_height="16dp"
+        		android:layout_centerVertical="true"
+        		android:layout_alignParentRight="true"
+        		android:src="@drawable/right_arrow" />      					
+   		</RelativeLayout>
+
+    </LinearLayout>

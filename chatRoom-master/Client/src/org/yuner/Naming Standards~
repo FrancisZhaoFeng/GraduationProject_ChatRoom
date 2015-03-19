@@ -1,0 +1,64 @@
+/**************************** java classes *******************************************/
+Actually, all these three can simply share one class, only we need to maintain three List, one for public, one for Single, one for Group
+1. Single : one on one chat
+	SingleActivity.java
+	SingleAdapter.java
+	SingleService.java
+	SingleMsgReceiver.java
+2. Public : public chatting room
+	PublicActivity.java
+	PublicAdapter.java
+	PublicService.java
+	PublicMsgReceiver.java
+3. Group : group chatting room
+	GroupActivity.java
+	GroupAdapter.java
+	GroupService.java
+	GroupMsgReceiver.java
+
+4. ContactChoose : whether public room, group room, or peronal contact to choose
+	ContactChooseActivity.java
+	ContactChooseAdapter.java
+5. FriendList : which one of your friend to choose
+	FriendListActivity.java
+	FriendListAdapter.java
+	FriendListItem.java
+6. GroupList : which one of the groups you would like to go into
+	GroupListActivity.java
+	GroupListAdapter.java
+/**************************** java classes *******************************************/
+
+/**************************** variables **********************************************/
+1. class private variables:
+	mWordWord, should start with m, indicating this is a class private variable
+2. public or protected variables:
+	meaningful combinations of words/acronyms
+2. local variables which can be thrown away after a short piece of codes
+	can be short
+	
+/**************************** variables **********************************************/
+
+/**************************** layout xml files *******************************************/
+All the three sort of chatting form should share a same look, so the chatting part are same:
+1. Chatting part:
+    cb0_chat.xml    					// main chatting page
+	cb0_chat_listview_item_left.xml     // sentence items from others
+	cb0_chat_listview_item_right.xml    // sentence items from self
+2. ReadyMade dialog:
+	cb0_ready_made.xml
+	cb0_ready_made_item.xml
+3. Main Login:
+	main_login.xml
+
+/**************************** layout xml files *******************************************/
+
+
+/**************************** id *******************************************/
+note: id name can contain uppercase letters, so:
+so all id name will be its file name plus its function description in the form of word combinations:
+
+general rule of thumb for id naming:
+block+sub-block+view+function
+eg. 
+cb0+Chat+Btn+SendMsg = cb0ChatBtnSendMsg
+/**************************** id *******************************************/

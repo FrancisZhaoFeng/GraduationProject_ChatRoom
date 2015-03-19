@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/register_title_bar" >
+        
+        <Button
+            android:id="@+id/main_register_btn_back"
+            android:layout_width="65dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dip"
+            android:background="@drawable/top_back_left"
+            android:gravity="center_horizontal|center_vertical"
+            android:padding="0dp"
+            android:text="back"
+            android:textColor="#ffffff"
+            android:textSize="12sp"
+            android:visibility="invisible" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="register"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />                
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/shape_bg"
+        android:orientation="vertical" >
+        
+        <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="50dp"
+	        android:gravity="center_vertical"
+	        android:orientation="horizontal" >
+	        <EditText
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="10dp"
+	            android:layout_marginRight="10dp"
+	            android:paddingTop="2dp"
+	            android:paddingBottom="2dp"
+	            android:paddingLeft="6dp"
+	            android:hint="Nickname"
+	            android:singleLine="true"
+	            android:maxLength="15"
+	            android:background="#ffffff"
+	            android:id="@+id/main_register_edittext_nickname"
+	            android:textSize="18sp" />
+	    </LinearLayout>
+	    
+	    <View
+	        android:layout_width="match_parent"
+	        android:layout_height="1dp"
+	        android:background="@drawable/shape_line" />
+	    
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="50dp"
+	        android:gravity="center_vertical"
+	        android:orientation="horizontal" >    
+	        <EditText
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="10dp"
+	            android:layout_marginRight="10dp"
+	            android:paddingTop="2dp"
+	            android:paddingBottom="2dp"
+	            android:paddingLeft="6dp"
+	            android:singleLine="true"
+	            android:hint="Password, at least 5 letters"
+	            android:inputType="textPassword"
+	            android:maxLength="15"
+	            android:background="#ffffff"
+	            android:id="@+id/main_register_edittext_password"
+	            android:textSize="18sp" />
+	    </LinearLayout>
+	    
+	    <View
+	        android:layout_width="match_parent"
+	        android:layout_height="1dp"
+	        android:background="@drawable/shape_line" />
+	    
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="50dp"
+	        android:gravity="center_vertical"
+	        android:orientation="horizontal" > 
+	        <EditText
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="10dp"
+	            android:layout_marginRight="10dp"
+	            android:paddingTop="2dp"
+	            android:paddingBottom="2dp"
+	            android:paddingLeft="6dp"
+	            android:singleLine="true"
+	            android:hint="Confirm Password"
+	            android:inputType="textPassword"
+	            android:maxLength="15"
+	            android:background="#ffffff"
+	            android:id="@+id/main_register_edittext_confirm_password"
+	            android:textSize="18sp" />
+	    </LinearLayout>
+	    
+	    <View
+	        android:layout_width="match_parent"
+	        android:layout_height="1dp"
+	        android:background="@drawable/shape_line" />
+	    
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="50dp"
+	        android:gravity="center_vertical"
+	        android:orientation="horizontal" >    
+	        <TextView
+	            android:layout_width="0px"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:layout_marginLeft="10dp"
+	            android:paddingLeft="6dp"
+	            android:gravity="left"
+	            android:text="Birthday"
+	            android:textSize="18sp" />
+	        <RelativeLayout 
+	            android:layout_width="0px"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="2.6"
+	            android:layout_marginLeft="5dp"
+	            android:layout_marginRight="5dp" >		        
+	            <Spinner
+		            android:id="@+id/main_register_spinner_year"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentLeft="true"
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="1dp"
+		            android:entries="@array/birth_year_range" />
+		        <Spinner
+		            android:id="@+id/main_register_spinner_month"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_toRightOf="@id/main_register_spinner_year"
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="1dp"
+		            android:entries="@array/birth_month_range" />
+		        <Spinner
+		            android:id="@+id/main_register_spinner_day"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_toRightOf="@id/main_register_spinner_month"
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="1dp"
+		            android:entries="@array/birth_day_range" />
+	        </RelativeLayout>
+	        
+	    </LinearLayout>
+	    
+	    <View
+	        android:layout_width="match_parent"
+	        android:layout_height="1dp"
+	        android:background="@drawable/shape_line" />
+	    
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="60dp"
+	        android:gravity="center_vertical"
+	        android:orientation="horizontal" >    
+	        <TextView
+	            android:layout_width="0px"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:layout_marginLeft="10dp"
+	            android:paddingLeft="6dp"
+	            android:gravity="left"
+	            android:text="Gender"
+	            android:textSize="18sp" />
+	        <RadioGroup
+	            android:layout_width="0px"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="2.6"
+			    android:id="@+id/mainRegisterRgpChooseSex"
+			    android:paddingLeft="5dp"
+			    android:layout_centerVertical="true">
+			    <RadioButton
+			        android:id="@+id/mainRegisterRdBtnFemale"
+			        android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+			    	android:text="Female"/>
+			    <RadioButton
+			        android:id="@+id/mainRegisterRdBtnMale"
+			        android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+			    	android:text="Male"/>
+			</RadioGroup>
+	    </LinearLayout>
+	    
+	    <View
+	        android:layout_width="match_parent"
+	        android:layout_height="1dp"
+	        android:background="@drawable/shape_line" />
+	    
+	</LinearLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" >
+	    <Button
+	        android:id="@+id/main_register_btn_register"
+	        android:layout_width="match_parent"
+	        android:layout_height="40dp"
+	        android:layout_centerInParent="true"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginRight="20dp"
+	        android:layout_marginTop="40dp"
+	        android:text="Register"
+	        android:background="@drawable/register_btn_bg" />
+    </RelativeLayout>
+    
+</LinearLayout>

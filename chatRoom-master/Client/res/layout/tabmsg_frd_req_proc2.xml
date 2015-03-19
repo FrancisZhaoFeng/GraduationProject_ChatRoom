@@ -1,0 +1,126 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <RelativeLayout
+        android:id="@+id/tabmsg_frd_req_proc_header"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_height="45dp"
+        android:background="@drawable/title_bar" >
+        
+        <TextView
+            android:id="@+id/tabmsg_frd_req_proc_header_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+        
+    </RelativeLayout>
+    
+    <LinearLayout
+       android:id="@+id/tabmsg_frd_req_proc_mid_body"
+	   android:layout_width="match_parent"
+	   android:layout_height="wrap_content"
+	   android:layout_marginTop="70dp"
+	   android:layout_marginLeft="10dp"
+	   android:layout_marginRight="10dp"
+	   android:background="@drawable/shape_bg"
+	   android:orientation="vertical" >
+    
+       <RelativeLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:paddingBottom="10dp"  >
+       
+		    <ImageView
+		        android:id="@+id/tabmsg_frd_req_proc_icon"
+		        android:layout_width="48dp"
+		        android:layout_height="48dp"
+		        android:layout_marginTop="10dp"
+		        android:layout_marginBottom="10dp"
+		        android:layout_marginLeft="15dp" />
+		    
+		    <TextView
+		        android:id="@+id/tabmsg_frd_req_proc_statement"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_toRightOf="@id/tabmsg_frd_req_proc_icon"
+		        android:layout_marginLeft="18dp"
+		        android:layout_marginTop="21dp"
+		        android:textSize="18sp"
+		        android:textColor="#666666"
+		        android:text="wants to be your friend" />
+	    
+	    </RelativeLayout>
+	    
+	    <View
+	        android:layout_width="match_parent"
+	        android:layout_height="1dp"
+	        android:background="@drawable/shape_line" />
+	    
+	    <TextView
+	        android:id="@+id/tabmsg_frd_req_proc_gender"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="15dp"
+	        android:layout_marginTop="10dp"
+	        android:layout_marginBottom="10dp"
+	        android:textSize="18sp" />
+	    
+	    <View
+	        android:layout_width="match_parent"
+	        android:layout_height="1dp"
+	        android:background="@drawable/shape_line" />
+	    
+	    <TextView
+	        android:id="@+id/tabmsg_frd_req_proc_age"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="15dp"
+	        android:layout_marginTop="10dp"
+	        android:layout_marginBottom="10dp"
+	        android:textSize="18sp" />
+	    
+	    <View
+	        android:layout_width="match_parent"
+	        android:layout_height="1dp"
+	        android:background="@drawable/shape_line" />
+
+    </LinearLayout>
+    
+    <Button
+       android:id="@+id/tabmsg_frd_req_proc_btn_accept"
+       android:layout_width="match_parent"
+       android:layout_height="42dp"
+       android:layout_marginLeft="20dp"
+       android:layout_marginRight="20dp"
+       android:layout_below="@id/tabmsg_frd_req_proc_mid_body"
+       android:layout_marginTop="50dp"
+       android:layout_centerHorizontal="true"
+       android:background="@drawable/green_2"
+       android:padding="0dp"
+       android:gravity="center"
+       android:text="Accept"
+       android:textSize="16sp"
+       android:textStyle="bold" />
+    
+    <Button
+       android:id="@+id/tabmsg_frd_req_proc_btn_decline"
+       android:layout_width="match_parent"
+       android:layout_height="42dp"
+       android:layout_marginLeft="20dp"
+       android:layout_marginRight="20dp"
+       android:layout_below="@id/tabmsg_frd_req_proc_btn_accept"
+       android:layout_marginTop="40dp"
+       android:layout_centerHorizontal="true"
+       android:background="@drawable/deny_button"
+       android:padding="0dp"
+       android:gravity="center"
+       android:text="Decline"
+       android:textSize="16sp"
+       android:textStyle="bold" />
+    
+</RelativeLayout>

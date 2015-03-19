@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#ffffff" >
+    <ImageView
+        android:id="@+id/cb0ChatListviewAvatarRight"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/avatar_default" />
+    <TextView 
+        android:id="@+id/cb0ChatListviewNameRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/cb0ChatListviewAvatarRight"
+        android:text="name"/>
+    <RelativeLayout
+        android:id="@+id/cb0ChatListviewRlRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/cb0ChatListviewAvatarRight"
+        android:layout_below="@id/cb0ChatListviewNameRight"
+        android:background="@drawable/cb0_chat_right" >
+    <TextView
+        android:id="@+id/cb0ChatListviewMsgRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="160dp" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/cb0ChatListviewTimeRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cb0ChatListviewRlRight"
+        android:layout_toLeftOf="@+id/cb0ChatListviewAvatarRight"
+        android:textSize="10sp"/>
+</RelativeLayout>
