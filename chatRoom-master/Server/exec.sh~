@@ -1,1 +1,0 @@
-java -classpath $CLASSPATH:bin org/yuner/www/ServerListen

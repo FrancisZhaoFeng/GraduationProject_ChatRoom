@@ -1,4 +1,0 @@
-.Phony : clean
-
-clean :
-	rm *~
