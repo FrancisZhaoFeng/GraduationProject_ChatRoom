@@ -1,0 +1,84 @@
+<!-- 
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+</RelativeLayout>
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/cb0ChatOuterMost"
+    android:background="#ffffff" >    
+    
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:id="@+id/cb0ChatTopBanner"
+        android:background="#000000"> 
+        
+	    <TextView   android:layout_width="wrap_content"
+	       			android:layout_height="wrap_content"
+	       			android:layout_centerInParent="true"
+	        		android:text="Messages:"
+	        		android:id="@+id/cb0ChatFriendName"
+	        		android:textColor="#ffffff"
+	   	/>
+	    
+    </RelativeLayout>
+   
+    <RelativeLayout
+        android:layout_width="fill_parent"
+       			android:layout_height="0dp"
+       			android:layout_weight="10">
+        <ListView
+	        android:id="@+id/cb0ChatListview"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" 
+	        android:layout_below="@id/cb0ChatTopBanner"
+	        android:divider="@null"
+	        android:soundEffectsEnabled="true">
+		</ListView> 
+    </RelativeLayout>
+    
+    <LinearLayout android:orientation="horizontal"
+    			  android:layout_width="fill_parent"
+    			  android:layout_height="60dp"
+    			  android:background="#e0e0e0"
+    			  android:id="@+id/cb0ChatLayoutMsg">
+        
+        	<ImageView
+        	    android:layout_height="wrap_content"
+	        	android:layout_width="0dp"
+	        	android:layout_weight="0.6"
+	        	android:id="@+id/cb0ChatImvReadymade"
+	        	android:src="@drawable/cb0_ready_made_xml"
+	        	android:layout_gravity ="center_vertical"/>
+		
+			<EditText 	android:id="@+id/cb0ChatMsgInput"
+			 			android:layout_height="match_parent"
+			 			android:layout_width="0dp"
+		        		android:layout_weight="5"
+		      			android:background="@drawable/cb0_bg_edittext"
+		      			android:layout_gravity ="center_vertical"
+		      			android:paddingLeft="10.0dp"
+		      			android:layout_marginTop="10dp"
+		      			android:layout_marginBottom="10dp"
+		      			android:soundEffectsEnabled="true"
+		      			android:textSize="20sp"
+		      			/>
+		      			 		  
+		    <Button android:id="@+id/cb0ChatBtnSendMsg"
+		        	android:layout_height="wrap_content"
+		        	android:layout_width="0dp"
+		        	android:layout_weight="1.25"
+		        	android:textSize="15dp"
+		        	android:layout_gravity ="center_vertical"
+		        	android:text="Send"
+		    />
+   
+	</LinearLayout>
+    
+</LinearLayout>

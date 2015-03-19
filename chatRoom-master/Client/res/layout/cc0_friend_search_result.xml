@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">    
+    
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/title_bar"> 
+        
+	    <TextView   android:layout_width="wrap_content"
+	       			android:layout_height="wrap_content"
+	       			android:layout_centerInParent="true"
+	        		android:text="Search Results"
+	        		android:textColor="#ffffff"
+	   	/>
+	    
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="fill_parent"
+       			android:layout_height="0dp"
+       			android:layout_weight="10">
+        <ListView
+	        android:id="@+id/cc0_friend_search_result_listview"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content">
+		</ListView> 
+		<View
+		    android:background="#e0e0e0"
+		    android:layout_width="fill_parent"
+		    android:layout_height="1dp"
+		    android:layout_alignParentLeft="true"
+		    android:layout_alignParentRight="true"
+		    android:layout_below="@id/cc0_friend_search_result_listview" />
+    </RelativeLayout>
+    
+</LinearLayout>

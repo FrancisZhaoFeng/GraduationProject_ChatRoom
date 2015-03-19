@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GGMM</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">wa ka ka, wa ka ka!</string>
+    <string name="hello">"hello, I am Divanihno, a guy from Brazil, fervent about playing
+        football, as are almost all guys in my country, and even lots of girls. We are 
+        known for a kingdom of football, we have won the world cup for five times, and we have
+        contributed numerous great football players to the world, like Pele, Ronaldo and Ronaldinho"</string>
+
+</resources>

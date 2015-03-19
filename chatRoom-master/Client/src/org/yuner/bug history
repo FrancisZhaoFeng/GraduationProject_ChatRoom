@@ -1,0 +1,5 @@
+1. when the user sends a message starting with "\n", socket got closed
+	reason : the msg will look like this : m+&#&+m+&#&+m+&#&+name+&#&+m+&#&+time+&#&+"\nXXXXX"+&#&+id+&#&, the msg will
+			break into two parts, m+&#&+m+&#&+m+&#&+name+&#&+m+&#&+time+&#& "XXXXX"+&#&+id+&#&, our mechnism to detect "\n"
+			is by checking whether it's ended with "&#&", when content doesn't begin with "\n", this works fine, but when content
+			does begin with "\n", the first part ended with "&#&", although the message reading is not finished yet, thus lead to error,

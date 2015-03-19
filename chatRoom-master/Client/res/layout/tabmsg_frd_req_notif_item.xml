@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="false"
+    android:focusable="false" >
+    
+    <RelativeLayout
+        android:id="@+id/tabmsg_frd_req_notif_item_time_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:clickable="false"
+        android:focusable="false"  >
+        
+        <TextView
+	        android:id="@+id/tabmsg_frd_req_notif_item_time"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerInParent="true"
+	        android:text="jhajsxjashxjasx"
+	        android:textSize="14sp" />
+        
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/tabmsg_frd_req_notif_item_main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_below="@id/tabmsg_frd_req_notif_item_time_layout"
+        android:background="@drawable/shape_bg"
+        android:focusable="true" >
+        
+        <ImageView
+	        android:id="@+id/tabmsg_frd_req_notif_item_icon"
+	        android:layout_width="48dp"
+	        android:layout_height="48dp"
+	        android:layout_alignParentLeft="true"
+	        android:layout_centerVertical="true"
+	        android:layout_marginLeft="8dp" />
+    
+	    <TextView
+	        android:id="@+id/tabmsg_frd_req_notif_item_name"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@id/tabmsg_frd_req_notif_item_icon"
+	        android:layout_marginLeft="10dp"
+	        android:textSize="16sp" />
+	    
+	    <TextView
+	        android:id="@+id/tabmsg_frd_req_notif_item_content"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@id/tabmsg_frd_req_notif_item_name"
+	        android:layout_below="@id/tabmsg_frd_req_notif_item_name"
+	        android:textSize="14sp"
+	        android:textColor="#999999"
+	        android:text="wants to be your friend" />
+	    
+	    <TextView
+	        android:id="@+id/tabmsg_frd_req_notif_item_status"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignTop="@id/tabmsg_frd_req_notif_item_icon"
+	        android:layout_alignParentRight="true"
+	        android:layout_marginRight="10dp"
+	        android:textSize="14sp"
+	        android:textColor="#999999"
+	        android:text="answered" />
+        
+    </RelativeLayout>
+
+</RelativeLayout>
