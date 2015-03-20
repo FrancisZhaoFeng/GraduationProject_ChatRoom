@@ -1,9 +1,14 @@
 package com.zhbit.crs.service;
 
 import java.io.BufferedReader;
+import java.io.ObjectInputStream;
 import java.lang.String;
 
 import com.zhbit.crs.commons.*;
+import com.zhbit.crs.domain.ChatEntity;
+import com.zhbit.crs.domain.ChatPerLog;
+import com.zhbit.crs.domain.ChatRoomLog;
+import com.zhbit.crs.domain.User;
 
 /**
  * @author zhaoguofeng 监听线程类，用于监听客户端发送到服务端的信息
@@ -11,33 +16,39 @@ import com.zhbit.crs.commons.*;
 public class ServerListenThread extends Thread {
 
 	private ServerActivity mServerActivity;
-	private BufferedReader mBuffRder;
+	private ObjectInputStream mBuffRder;
+	private User user;
 
-	public ServerListenThread(ServerActivity ca0, BufferedReader br0) {
+	public ServerListenThread(ServerActivity ca0, ObjectInputStream br0) {
 		mServerActivity = ca0;
 		mBuffRder = br0;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Thread#run()
+	 */
 	@Override
 	public void run() {
 		super.run();
 		while (true) {
 			try {
-				String received = mBuffRder.readLine();
-				if (received == null) { // if received == null, meaning the
-										// socket has been closed
-										// remove the class/threads etc.
-										// associated with this
-										// specific client
+//				String received = mBuffRder.readLine();
+				Object obj = mBuffRder.readObject();
+				int msgType = Integer.parseInt((String)obj);
+				// if received == null, meaning the socket has been closed
+				// remove the class/threads etc.associated with this specific
+				// client
+				if (obj == null) {   //received == null
 					mServerActivity.goOffLine();
 					return;
 				} else {
-					int msgType = Integer.parseInt(received); // type of message
-																// received
-
-					String actualMsg = mBuffRder.readLine();
-					actualMsg = actualMsg.replace(GlobalStrings.replaceOfReturn, "\n");
-
+					// type of message received
+//					int msgType = Integer.parseInt(received);
+//					String actualMsg = mBuffRder.readLine();
+//					actualMsg = actualMsg.replace(GlobalStrings.replaceOfReturn, "\n");
+					obj = mBuffRder.readObject();
 					try {
 						System.out.println("a message with type " + msgType + " received from " + mServerActivity.getUserInfo().getName());
 					} catch (Exception e) {
@@ -45,45 +56,62 @@ public class ServerListenThread extends Thread {
 
 					switch (msgType) {
 					case GlobalMsgTypes.msgPublicRoom:
-						ChatEntity msg = ChatEntity.Str2Ent(actualMsg);
-						mServerActivity.receivedNewMsg(msgType, msg.toString());
+						System.out.println("GlobalMsgTypes.msgPublicRoom"+GlobalMsgTypes.msgPublicRoom);
+//						ChatEntity msg = ChatEntity.Str2Ent(actualMsg);
+						ChatRoomLog chatRoomLog = (ChatRoomLog)obj;
+//						mServerActivity.receivedNewMsg(msgType, msg.toString());
+//						mServerActivity.receivedNewMsg(msgType, chatRoomLog);
 						// add this ChatEntity data package into the system
 						// stack
 						break;
 					case GlobalMsgTypes.msgChattingRoom:
+						System.out.println("GlobalMsgTypes.msgChattingRoom"+GlobalMsgTypes.msgChattingRoom);
 						/* to be added later */
 						break;
 					case GlobalMsgTypes.msgFromFriend:
-						ChatEntity msg2 = ChatEntity.Str2Ent(actualMsg);
-						mServerActivity.receivedNewMsg(msgType, msg2.toString());
+						System.out.println("GlobalMsgTypes.msgFromFriend"+GlobalMsgTypes.msgFromFriend);
+						ChatPerLog chatPerLog = (ChatPerLog)obj;
+//						ChatEntity msg2 = ChatEntity.Str2Ent(actualMsg);
+//						mServerActivity.receivedNewMsg(msgType, msg2.toString());
+						mServerActivity.receivedNewMsg(msgType, chatPerLog);
 						/* to be added later */
 						break;
 					case GlobalMsgTypes.msgHandShake:
-						mServerActivity.startHandShake(actualMsg);
+						System.out.println("GlobalMsgTypes.msgHandShake"+GlobalMsgTypes.msgHandShake);
+//						mServerActivity.startHandShake(actualMsg);
+						mServerActivity.startHandShake((User)obj);
 						break;
 					case GlobalMsgTypes.msgSignUp:
-						mServerActivity.trySignup(actualMsg);
+						System.out.println("GlobalMsgTypes.msgSignUp"+GlobalMsgTypes.msgSignUp);
+						mServerActivity.trySignup((User)obj);
 						break;
 					case GlobalMsgTypes.msgSearchPeople:
+						System.out.println("GlobalMsgTypes.msgSearchPeople"+GlobalMsgTypes.msgSearchPeople);
 						mServerActivity.startSearchPeople(actualMsg);
 						break;
 					case GlobalMsgTypes.msgFriendshipRequest:
+						System.out.println("GlobalMsgTypes.msgFriendshipRequest"+GlobalMsgTypes.msgFriendshipRequest);
 						System.out.println("one friend request comes");
 						mServerActivity.startFriendshipRequest(actualMsg);
 						break;
 					case GlobalMsgTypes.msgFriendshipRequestResponse:
+						System.out.println("GlobalMsgTypes.msgFriendshipRequestResponse"+GlobalMsgTypes.msgFriendshipRequestResponse);
 						mServerActivity.onFriendshipRequestResponse(actualMsg);
 						break;
 					case GlobalMsgTypes.msgUpdateUserInfo:
+						System.out.println("GlobalMsgTypes.msgUpdateUserInfo"+GlobalMsgTypes.msgUpdateUserInfo);
 						mServerActivity.onUpdateUserInfo(actualMsg);
 						break;
 					case GlobalMsgTypes.msgAskForUnsendMsgs:
+						System.out.println("GlobalMsgTypes.msgAskForUnsendMsgs"+GlobalMsgTypes.msgAskForUnsendMsgs);
 						mServerActivity.onAskForUnsendMsgs();
 						break;
 					case GlobalMsgTypes.msgMsgReceived:
+						System.out.println("GlobalMsgTypes.msgMsgReceived"+GlobalMsgTypes.msgMsgReceived);
 						mServerActivity.responsedOfMsgReceived();
 						break;
 					case GlobalMsgTypes.msgBackOnline:
+						System.out.println("GlobalMsgTypes.msgBackOnline"+GlobalMsgTypes.msgBackOnline);
 						mServerActivity.backOnline(actualMsg);
 						break;
 					default:

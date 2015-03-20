@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000000" >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="back"
+            android:textColor="#ffffff"
+            android:id="@+id/cc0_friend_list_search_btn_back" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="find your firends"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />                
+    </RelativeLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/shape_bg"
+        android:orientation="vertical" >
+        
+        <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="50dp"
+	        android:gravity="center_vertical"
+	        android:orientation="horizontal" >    
+	        <TextView
+	            android:layout_width="0px"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:gravity="center"
+	            android:textStyle="bold"
+	            android:text="nickname"
+	            android:textSize="18sp" />
+	        <EditText
+	            android:layout_width="0px"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="2"
+	            android:layout_marginLeft="10dp"
+	            android:layout_marginRight="10dp"
+	            android:paddingTop="2dp"
+	            android:paddingBottom="2dp"
+	            android:paddingLeft="10dp"
+	            android:singleLine="true"
+	            android:maxLength="15"
+	            android:background="#ffffff"
+	            android:id="@+id/cc0_friend_list_search_et_name"
+	            android:textSize="18sp" />
+	    </LinearLayout>
+	    
+	    <View
+	        android:layout_width="match_parent"
+	        android:layout_height="1dp"
+	        android:background="@drawable/shape_line" />
+	    
+	    <Button
+	        android:id="@+id/cc0_friend_list_search_btn_byname"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="10dp"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginRight="20dp"
+	        android:layout_marginBottom="10dp"
+	        android:text="search by name" />
+	</LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/shape_bg"
+        android:orientation="vertical" >
+        
+        <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="50dp"
+	        android:gravity="center_vertical"
+	        android:orientation="horizontal" >    
+	        <TextView
+	            android:layout_width="0px"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:gravity="center"
+	            android:textStyle="bold"
+	            android:text="age"
+	            android:textSize="18sp" />
+	        <Spinner
+	            android:id="@+id/cc0_friend_list_search_spinner_lowage"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="2"
+	            android:entries="@array/age_range" />
+	        <TextView 
+	            android:layout_width="0px"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:gravity="center"
+	            android:textStyle="bold"
+	            android:text="to"
+	            android:textSize="16sp" />
+	        <Spinner
+	            android:id="@+id/cc0_friend_list_search_spinner_highage"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="2"
+	            android:entries="@array/age_range" />
+	    </LinearLayout>
+	    
+	    <View
+	        android:layout_width="match_parent"
+	        android:layout_height="1dp"
+	        android:background="@drawable/shape_line" />
+	    
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center_vertical"
+	        android:orientation="horizontal" >    
+	        <TextView
+	            android:layout_width="0px"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:layout_marginLeft="10dp"
+	            android:gravity="center"
+	            android:textStyle="bold"
+	            android:text="gender"
+	            android:textSize="18sp" />
+	        <RadioGroup
+	            android:layout_width="0px"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="2"
+			    android:id="@+id/cc0_friend_list_search_rgp_choose_sex"
+			    android:paddingLeft="5dp"
+			    android:layout_centerVertical="true">
+			    <RadioButton
+			        android:id="@+id/cc0_friend_list_search_rdbtn_female"
+			        android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+			    	android:text="female"/>
+			    <RadioButton
+			        android:id="@+id/cc0_friend_list_search_rdbtn_male"
+			        android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+			    	android:text="male"/>
+			    <RadioButton
+			        android:id="@+id/cc0_friend_list_search_rdbtn_both"
+			        android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+			    	android:text="both"/>
+			</RadioGroup>
+	    </LinearLayout>
+	    
+	    <View
+	        android:layout_width="match_parent"
+	        android:layout_height="1dp"
+	        android:background="@drawable/shape_line" />
+	    
+	    <Button
+	        android:id="@+id/cc0_friend_list_search_btn_byfilter"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="10dp"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginRight="20dp"
+	        android:layout_marginBottom="10dp"
+	        android:text="search" />
+	</LinearLayout>
+    
+</LinearLayout>

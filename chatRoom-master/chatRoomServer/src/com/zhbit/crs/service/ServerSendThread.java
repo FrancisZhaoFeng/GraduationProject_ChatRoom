@@ -1,24 +1,27 @@
 package com.zhbit.crs.service;
 
 import java.io.BufferedWriter;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import com.zhbit.crs.commons.*;
 import com.zhbit.crs.domain.ChatEntity;
 import com.zhbit.crs.domain.SendStackItem;
+import com.zhbit.crs.domain.User;
 
 public class ServerSendThread extends Thread {
 
 	private ServerActivity mClientActivity;
 
-	private BufferedWriter mBuffWter;
+//	private BufferedWriter mBuffWter;
+	private ObjectOutputStream mBuffWter;
 	private ArrayList<SendStackItem> mSendList;
 
 	private boolean mIsRunning;
 	private boolean mReceived; // the heartbeat message from client verifying
 								// they have received the message you send
 
-	public ServerSendThread(ServerActivity ca0, BufferedWriter bufw) {
+	public ServerSendThread(ServerActivity ca0, ObjectOutputStream bufw) {
 		mClientActivity = ca0;
 
 		mBuffWter = bufw;
@@ -67,7 +70,7 @@ public class ServerSendThread extends Thread {
 		mIsRunning = false;
 	}
 
-	public synchronized void insert(int type, String str0) {
+	public synchronized void insert(int type, Object obj) {
 		switch (type) {
 		case GlobalMsgTypes.msgFromFriend:
 		case GlobalMsgTypes.msgFriendshipRequest:
@@ -75,22 +78,23 @@ public class ServerSendThread extends Thread {
 			break;
 		default:
 			send(type + "");
-			send(str0);
+			send(obj);
 			return;
 		}
 
-		SendStackItem item0 = new SendStackItem(type, str0);
+		SendStackItem item0 = new SendStackItem(type, obj);
 		mSendList.add(item0); // add this item to the end of stack
 	}
 
-	private synchronized void send(String str0) {
-		String strToSend = str0;
-
-		strToSend = strToSend.replace("\n", GlobalStrings.replaceOfReturn);
+	private synchronized void send(Object obj) {
+//		String strToSend = str0;
+//
+//		strToSend = strToSend.replace("\n", GlobalStrings.replaceOfReturn);
 		try {
-			mBuffWter.write(strToSend + "\n");
+//			mBuffWter.write(strToSend + "\n");
+			mBuffWter.writeObject(obj);
 			mBuffWter.flush();
-			System.out.println(strToSend);
+			System.out.println("here is send object function\n");
 		} catch (Exception e) {
 		}
 	}

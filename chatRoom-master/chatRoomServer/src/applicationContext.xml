@@ -31,6 +31,7 @@
 	<!-- dao -->
 	<bean id="ManagerDao" class="com.zhbit.crs.dao.ManagerDao" />
 	<bean id="UserDao" class="com.zhbit.crs.dao.UserDao" />
+	<bean id="ChatLogDao" class="com.zhbit.crs.dao.ChatLogDao" />
 	
 	<!-- MD5 -->
 	<bean id="MD5" class="com.zhbit.crs.md5.MD5" />

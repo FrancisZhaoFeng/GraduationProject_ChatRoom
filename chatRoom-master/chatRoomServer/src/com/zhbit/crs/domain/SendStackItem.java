@@ -7,19 +7,28 @@ package com.zhbit.crs.domain;
 public class SendStackItem {
 
 	private int mType;
-	private String mStr;
+//	private String mStr;
+	private Object mObj;
 
-	public SendStackItem(int type, String str) {
+	public SendStackItem(int type, Object obj) {
 		mType = type;
-		mStr = str;
+//		mStr = str;
+		mObj = obj;
 	}
 
-	public int getType() {
+	public int getmType() {
 		return mType;
 	}
 
-	public String getStr() {
-		return mStr;
+	public void setmType(int mType) {
+		this.mType = mType;
 	}
 
+	public Object getmObj() {
+		return mObj;
+	}
+
+	public void setmObj(Object mObj) {
+		this.mObj = mObj;
+	}
 }

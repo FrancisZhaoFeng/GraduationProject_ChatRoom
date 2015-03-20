@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 
+
+
 import com.zhbit.crs.domain.Friend;
 import com.zhbit.crs.domain.User;
 
@@ -34,6 +36,7 @@ public class UserDao {
 		return true;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<User> login(User user){
 		List<User> users = null;
 		String hql = "from User where username="+user.getUsername()+" and password="+user.getPassword();
@@ -51,6 +54,7 @@ public class UserDao {
 		return users;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Friend> selectFriend(User user){
 		List<Friend> friends = null;
 		String hql = "from Friend where userid="+user.getUserid();

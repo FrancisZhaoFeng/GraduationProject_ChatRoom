@@ -1,0 +1,4 @@
+0 : public room msg
+1 : group room msg
+2 : one on one msg
+3 : hand shaking msg when establishing connection

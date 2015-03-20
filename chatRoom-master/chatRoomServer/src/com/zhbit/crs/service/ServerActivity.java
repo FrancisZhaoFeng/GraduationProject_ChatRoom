@@ -7,19 +7,26 @@
 
 package com.zhbit.crs.service;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 
 import com.zhbit.crs.action.ServerListen;
 import com.zhbit.crs.commons.*;
+import com.zhbit.crs.dao.ChatLogDao;
 import com.zhbit.crs.dao.UserDao;
 import com.zhbit.crs.domain.ChatEntity;
+import com.zhbit.crs.domain.ChatPerLog;
+import com.zhbit.crs.domain.Friend;
 import com.zhbit.crs.domain.SearchEntity;
 import com.zhbit.crs.domain.User;
 import com.zhbit.crs.domain.UserInfo;
@@ -33,8 +40,8 @@ import com.zhbit.crs.domain.UserInfo;
 public class ServerActivity {
 
 	private Socket mSocket;
-	private BufferedReader mBuffRder;
-	private BufferedWriter mBuffWter;
+	private ObjectInputStream mBuffRder;
+	private ObjectOutputStream mBuffWter;
 	private ServerListen mServerListen;
 
 	private HandShakeThread mHandShake;
@@ -60,8 +67,8 @@ public class ServerActivity {
 		mConnectSuccessfully = true;
 		mIsClosingAndSaving = false;
 		try {
-			mBuffRder = new BufferedReader(new InputStreamReader(mSocket.getInputStream()));
-			mBuffWter = new BufferedWriter(new OutputStreamWriter(mSocket.getOutputStream()));
+			mBuffRder = new ObjectInputStream(new BufferedInputStream(mSocket.getInputStream()));
+			mBuffWter = new ObjectOutputStream(mSocket.getOutputStream());
 			mServerListen = serverListen;
 
 			mClientListen = new ServerListenThread(this, mBuffRder);
@@ -74,18 +81,18 @@ public class ServerActivity {
 		}
 	}
 
-	public void Signup(String msg0) {
-		String[] strArr0 = msg0.split(GlobalStrings.signupDivider);
+	public void trySignup(User user) {
+//		String[] strArr0 = msg0.split(GlobalStrings.signupDivider);
+//
+//		String userStr = strArr0[0];
+//		String password = strArr0[1];
+//
+//		UserInfo uu0 = new UserInfo(userStr);
+//
+//		UserInfo uux = DBUtil.signUp(uu0, password);
+		userDao.signUp(user);
 
-		String userStr = strArr0[0];
-		String password = strArr0[1];
-
-		UserInfo uu0 = new UserInfo(userStr);
-
-		UserInfo uux = DBUtil.signUp(uu0, password);
-		User uux = userDao.signUp(user);
-
-		sendOneString(uux.toString(), GlobalMsgTypes.msgSignUp);
+		sendOneString(user, GlobalMsgTypes.msgSignUp);
 	}
 
 	public void backOnline(String str0) {
@@ -111,13 +118,20 @@ public class ServerActivity {
 		onAskForUnsendMsgs();
 	}
 
-	public void startHandShake(String msg0) {
+	public void startHandShake(User user) {  //String msg0
 		mHandShake = new HandShakeThread();
-		mUsrInfo = mHandShake.start(msg0);
-		if (mUsrInfo != null) {
-			mHandShake.sendHandShakeBack(this, mUsrInfo);
-			if (mUsrInfo.getId() >= 0) {
-				mHandShake.sendFriendList(this, DBUtil.loginToGetFriendList(mUsrInfo.getId()));
+//		mUsrInfo = mHandShake.start(msg0);
+		this.user = mHandShake.start(user);
+		if (user != null) {
+			mHandShake.sendHandShakeBack(this, user);
+			if (user.getUserid() >= 0 ) {  //mUsrInfo.getId() >= 0
+				List<Friend> friends = userDao.selectFriend(user);
+//				mHandShake.sendFriendList(this, DBUtil.loginToGetFriendList(mUsrInfo.getId()));
+				List <User> users = null;
+				for(int i = 0 ; i < friends.size();i++){
+					users.add(userDao.selectUser(friends.get(i).getUserByFriendid()).get(0));
+				}
+				mHandShake.sendFriendList(this, users);
 			} else {
 				unableToConnect();
 				return;
@@ -195,36 +209,40 @@ public class ServerActivity {
 	}
 
 	/** notify a new message has come */
-	public void receivedNewMsg(int type, String msg) {
-		ChatEntity ent0 = ChatEntity.Str2Ent(msg);
+	public void receivedNewMsg(int type, ChatPerLog chatPerLog) {
+//		ChatEntity ent0 = ChatEntity.Str2Ent(msg);
 		if (type == 2) {
-			int recvId = ent0.getReceiverId();
+//			int recvId = ent0.getReceiverId();
+			int recvId = chatPerLog.getUserByReceiverid().getUserid();
+			System.out.println("receivedNewMsg-");
 			ServerActivity ca0 = mServerListen.getClientActivityById(recvId);
 			if (ca0 != null) {
-				ca0.sendOneData(ent0, 2);
+				ca0.sendOneData(chatPerLog, 2);
 			} else {
-				DBTempSaveUtil.saveUnsentChatMsg(mUsrInfo.getId(), recvId, ent0);
+//				DBTempSaveUtil.saveUnsentChatMsg(mUsrInfo.getId(), recvId, ent0);
+				new ChatLogDao().insertChatPerLog(chatPerLog);
 			}
 		}
 	}
 
 	/* send one String */
-	public void sendOneString(String str0, int type) {
+	public void sendOneString(Object obj, int type) {
 		try {
-			mClientSend.insert(type, str0);
+			mClientSend.insert(type, obj);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	/** send one ChatEntity to this client */
-	public void sendOneData(ChatEntity entPackage, int sendType) {
+	public void sendOneData(ChatPerLog chatPerLog, int sendType) {//ChatEntity entPackage
 		System.out.println("Receiver is " + getUserInfo().getName());
 
-		String toSend;
-
-		toSend = entPackage.toString();
-		sendOneString(toSend, sendType);
+//		String toSend;
+//
+//		toSend = entPackage.toString();
+//		sendOneString(toSend, sendType);
+		sendOneString(chatPerLog, sendType);
 	}
 
 	public void unableToConnect() {

@@ -1,0 +1,10 @@
+1. the interface between network block and chatter block:
+	chatter will provide network with the name/sex/context to network to instantiate
+	on the other hand, (1) network part can instantiate a netConn class and run start() to start the thread, (2)besides chatter can sendUpload() to send a message up to server, (3)ClientListen will send broadcast to the chatter once there's a incoming message
+
+2. interface protocol
+	when received a message broadcast, the corresponding processing function, i.e. onReceive in class MyBroadcastReceiver, will put the received string into constructor of ChatEntity, and push it into the vector. Meanwhile, in ChatAdapter, which is an adapter for the messaging listview, it will call getNick(), getContent() etc. to retrieve name and message, etc. from the ChatEntity instance. This means, all that format stuff is solely controlled by ChatEntity itself, which is part of network block, simplifies the task to modify protocol.
+
+3. layout/drawables need to have a prefix, like bc0, where b stands for block, and c stands for chatter, 0 means this is first for cb
+
+4. keep constant heed to the life cycles, remember to unregister and register broadcastreceivers, etc.
