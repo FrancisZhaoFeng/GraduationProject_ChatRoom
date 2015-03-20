@@ -17,14 +17,24 @@ public class FriendListInfo {
 
 	public static final String strSplitter = GlobalStrings.friendListDivider;
 	
-	/* single instance */
+	/**
+	 * single instance
+	 */
 	private static FriendListInfo mFriendListInfo;
 	
-	/* list stores all users */
+	/**
+	 * list stores all users
+	 */
 	private List<UserInfo> mListOfFriends;
-	private SparseArray<UserInfo> mSparseArrayOfFriends;   // this is to facilitate the search
+	/**
+	 *  this is to facilitate the search
+	 */
+	private SparseArray<UserInfo> mSparseArrayOfFriends;   
 	
-	/* retrieve single instance */
+	/**
+	 * @return
+	 *  retrieve single instance
+	 */
 	public static FriendListInfo getFriendListInfo() {
 		if(mFriendListInfo == null) {
 			mFriendListInfo = new FriendListInfo();
@@ -32,7 +42,7 @@ public class FriendListInfo {
 		return mFriendListInfo;
 	}
 	
-	/* private constructor */
+	/** private constructor */
 	private FriendListInfo() {
 		mListOfFriends = InitData.getInitData().getListOfFriends();
 		
@@ -97,7 +107,6 @@ public class FriendListInfo {
 	}
 	
 	public UserInfo getUserFromId(int id) {
-		
 		return mSparseArrayOfFriends.get(id);
 	}
 	

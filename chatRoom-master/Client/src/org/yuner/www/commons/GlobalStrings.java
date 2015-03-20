@@ -18,6 +18,6 @@ public class GlobalStrings {
 	
 	public static final String friendshipRequestDivider = "####!!!!&&";  // divider between the response and the UserInfo
 
-	public static final String replaceOfReturn = "@^@^@^@^@";
+	public static final String replaceOfReturn = "@^@^@^@^@";   
 	
 }

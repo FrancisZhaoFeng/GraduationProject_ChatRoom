@@ -26,6 +26,10 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/**
+ * @author zhaoguofeng
+ * 连接服务端的类（通过ip和port，连接服务端），继承了Thread，重写了run方法
+ */
 public class NetConnect extends Thread{
 	
 	/*  information about Server, ip address and portal number  */
@@ -49,6 +53,9 @@ public class NetConnect extends Thread{
 	}
 	*/
 	
+	/**
+	 * 连接服务端的类（通过ip和port，连接服务端），继承了Thread，重写了run方法
+	 */
 	public NetConnect()
 	{
 		
@@ -76,10 +83,18 @@ public class NetConnect extends Thread{
 		}
 	}
 	
+	/**
+	 * @return
+	 * 获取一个连接服务端的socket对象
+	 */
 	public Socket getSocket() {
 		return mSocket0;
 	}
 	
+	/**
+	 * @return
+	 * 检查当前socket对象是否连接服务端
+	 */
 	public boolean connectedOrNot()
 	{
 		return connectedAlready;
