@@ -1,0 +1,24 @@
+#MyEclipse Hibernate Properties
+#Sat Feb 28 17:08:32 CST 2015
+sessionFactoryName=com.zhbit.crs.tools.HibernateSessionFactory
+genBasicCompId=true
+profile=
+daoSFId=
+version=3.3
+jndiPath=
+detectM2M=true
+reStrategyClass=
+detectO2O=true
+springDaoFile=
+useJavaTypes=false
+keyGenerator=identity
+libInstallFolder=/WebRoot/WEB-INF/lib
+addLibs2Project=true
+genVersionTag=false
+sessionFactoryId=
+basePersistenceClass=
+genAnnotations=false
+reSettingsFile=
+configFile=/chatRoomServer-test/src/hibernate.cfg.xml
+createConfigFile=true
+addLibs2Classpath=true

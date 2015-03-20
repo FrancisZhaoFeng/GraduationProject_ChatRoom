@@ -1,0 +1,89 @@
+@charset "utf-8";
+/* CSS Document */
+ *{
+	margin:0px;
+	padding:0px;
+	/*border:none*/;
+	font-family:"微软雅黑";
+	}
+.box1{
+	width:100%;
+	float:left;
+	}
+.box2{
+	width:960px;
+	margin:0 auto;
+}
+
+.blok2{
+	float:left;
+	width:284px;
+	margin-right:42px;
+}
+.blok2 div{
+	float:left;
+	width:284px;
+	padding:10px 0px;
+}
+.blok2-1-1{
+	float:left;
+	margin-top:25px;
+	font-size:18px;
+	border-bottom:1px #999 dashed;
+}
+.blok2-1-2{
+	font-size:12px;
+}
+.blok2-1-3{
+}
+.blok2-1-3 a{
+	padding-right:10px;
+}
+.blok2-2-2{
+}
+.blok2-2-2 a{
+	float:left;
+	width:284px;
+	padding:2px 0px;
+}
+.blok2-2-2 h1{
+	float:left;
+	font-size:12px;
+}
+.blok2-2-2 h2{
+	float:right;
+	font-size:12px;
+}
+.blok3{
+}
+.blok3 div{
+	float:left;
+	width:284px;
+	padding:10px 0px;
+}
+.blok3 h1{
+	width:58px;
+	float:left;
+}
+.blok3 h2{
+	float:left;
+	width:220px;
+	font-size:9px;
+	padding-left:5px;
+}
+.blok4-1{
+	float:left;
+	margin:25px;
+	font-size:11px;
+	font-weight:bold;
+	color:#CCC;
+	width: 500px;
+}
+.blok4-2{
+	float:right;
+	margin:25px;
+	font-size:11px;
+	font-weight:bold;
+	color:#CCC;
+	width: 300px;
+}

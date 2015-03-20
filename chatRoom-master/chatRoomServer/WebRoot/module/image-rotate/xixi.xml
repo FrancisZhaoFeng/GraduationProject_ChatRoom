@@ -1,0 +1,13 @@
+﻿<GamePackBrand>
+
+		<brand id='1'><brandtitle>魔方</brandtitle><thumb>module/image-rotate/images/01.jpg</thumb><swf>module/image-rotate/images/1.jpg</swf><link>http://www.niutuku.com/</link><target>_blank</target></brand>
+	
+		<brand id='2'><brandtitle>飞扬</brandtitle><thumb>module/image-rotate/images/02.jpg</thumb><swf>module/image-rotate/images/2.jpg</swf><link>http://www.niutuku.com/js/</link><target>_blank</target></brand>
+	
+		<brand id='3'><brandtitle>长城</brandtitle><thumb>module/image-rotate/images/03.jpg</thumb><swf>module/image-rotate/images/3.jpg</swf><link>http://www.niutuku.com/js/nav/</link><target>_blank</target></brand>
+	
+		<brand id='4'><brandtitle>红球</brandtitle><thumb>module/image-rotate/images/04.jpg</thumb><swf>module/image-rotate/images/4.jpg</swf><link>http://niutuku.com/</link><target>_blank</target></brand>
+	
+		<brand id='5'><brandtitle>气球</brandtitle><thumb>module/image-rotate/images/05.jpg</thumb><swf>module/image-rotate/images/5.jpg</swf><link>http://www.niutuku.com/show/</link><target>_blank</target></brand>
+	
+</GamePackBrand>

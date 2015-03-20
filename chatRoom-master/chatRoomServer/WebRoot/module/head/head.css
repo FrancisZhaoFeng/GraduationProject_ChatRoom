@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+
+* {
+	font-size: 12px;
+}
+
+contain {
+	width:1210px;
+	margin-right:auto;
+	margin-legt:auto;
+}
+.site-topbar {
+	height: 36px;
+	border: 1px solid #DFDFDF;
+	line-height: 36px;
+	color: #8C8C8C;
+	background: #FAFAFA;
+}
+.site-topbar .sep{
+	margin:0px 10px;
+}
+.site-topbar .topbar-left {
+	float:left;
+}
+.site-topbar .topbar-right{
+	float:right;
+}

@@ -1,0 +1,30 @@
+form{
+	margin:1em 0;
+	padding:0;
+	width:350px;
+	height:45px;
+	//background-color:blue;
+	//background:url(module/search/searchfield/form_back.gif) no-repeat 0 0;
+}
+form p{
+	margin:0 40px;
+}
+form input{
+	margin-top:5px;	
+	width:200px;
+	border:none;
+	padding:3px;
+	font-size:110%;
+	vertical-align:middle;
+}
+form button{
+	margin-top:5px;
+	margin-left:10px;
+	//width:45px;
+	height:30px;
+	//border:none;
+	//text-indent:-8000px;
+	overflow:hidden;
+	cursor:pointer;
+	vertical-align:middle;
+}
