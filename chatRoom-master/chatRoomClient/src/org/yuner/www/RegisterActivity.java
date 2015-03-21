@@ -1,5 +1,6 @@
 package org.yuner.www;
 
+import org.yuner.www.bean.User;
 import org.yuner.www.bean.UserInfo;
 import org.yuner.www.commons.GlobalErrors;
 import org.yuner.www.commons.GlobalMsgTypes;
@@ -30,14 +31,17 @@ public class RegisterActivity extends Activity {
 	private EditText mEtNickname;
 	private EditText mEtPassword;
 	private EditText mEtConfirmPassword;
+	private EditText mEtTelephone;
 	private Spinner mSpBirthYear;
 	private Spinner mSpBirthMonth;
 	private Spinner mSpBirthDay;
+	private Spinner mSpAge;
 	private RadioGroup mRgpSex;
 
 	private Button mBtnRegister;
 
-	private UserInfo mUserAfterRegister;
+//	private UserInfo mUserAfterRegister;
+	private User mUserAfterRegister;
 	private boolean mReceivedRegister;
 
 	public static RegisterActivity getInstance() {
@@ -57,9 +61,11 @@ public class RegisterActivity extends Activity {
 		mEtNickname = (EditText) findViewById(R.id.main_register_edittext_nickname);
 		mEtPassword = (EditText) findViewById(R.id.main_register_edittext_password);
 		mEtConfirmPassword = (EditText) findViewById(R.id.main_register_edittext_confirm_password);
+		mEtTelephone = (EditText) findViewById(R.id.main_register_edittext_telephone);
 		mSpBirthYear = (Spinner) findViewById(R.id.main_register_spinner_year);
 		mSpBirthMonth = (Spinner) findViewById(R.id.main_register_spinner_month);
 		mSpBirthDay = (Spinner) findViewById(R.id.main_register_spinner_day);
+		mSpAge = (Spinner) findViewById(R.id.main_register_spinner_age);
 		mRgpSex = (RadioGroup) findViewById(R.id.mainRegisterRgpChooseSex);
 
 		/** this is to render the password edittext font to be default */
@@ -76,10 +82,12 @@ public class RegisterActivity extends Activity {
 				String name = mEtNickname.getText().toString().trim();
 				String password = mEtPassword.getText().toString().trim();
 				String confirmPassword = mEtConfirmPassword.getText().toString().trim();
+				String telephone = mEtTelephone.getText().toString().trim();
 
 				int birthYear = mSpBirthYear.getSelectedItemPosition() + 1941;
 				int birthMonth = mSpBirthMonth.getSelectedItemPosition() + 1;
 				int birthDay = mSpBirthDay.getSelectedItemPosition() + 1;
+				int age = mSpAge.getSelectedItemPosition()+16;
 
 				int sex;
 				int sexChoseId = mRgpSex.getCheckedRadioButtonId();
@@ -97,7 +105,13 @@ public class RegisterActivity extends Activity {
 				if (name.equals("")) {
 					Toast.makeText(RegisterActivity.this, "please set name and age correctly", Toast.LENGTH_SHORT).show();
 					return;
-				} else if (password.length() < 5) {
+				} else if (name.length() < 5) {
+					Toast.makeText(RegisterActivity.this, "name should be greater than 5 characters", Toast.LENGTH_SHORT).show();
+					return;
+				} else if (name.length() >= 16) {
+					Toast.makeText(RegisterActivity.this, "name should be less than 5 characters", Toast.LENGTH_SHORT).show();
+					return;
+				}else if (password.length() < 5) {
 					Toast.makeText(RegisterActivity.this, "password should be longer than 5 characters", Toast.LENGTH_SHORT).show();
 					return;
 				} else if (!password.equals(confirmPassword)) {
@@ -113,7 +127,7 @@ public class RegisterActivity extends Activity {
 				 * + "password : " + password + "\n" + "sex " +
 				 * sex,Toast.LENGTH_SHORT).show();
 				 */
-				tryRegister(name, password, birthYear, birthMonth, birthDay, sex);
+				tryRegister(name, password, telephone,birthYear, birthMonth, birthDay,age , sex==0?false:true);//0代表女
 			}
 		});
 	}
@@ -130,16 +144,20 @@ public class RegisterActivity extends Activity {
 		finish(); // destroy RegisterActivity when leave
 	}
 
-	public void tryRegister(String name, String password, int birthYear, int birthMonth, int birthDay, int sex) {
-		UserInfo uu0 = new UserInfo(name, 0, sex, birthYear, birthMonth, birthDay, 0);
+	public void tryRegister(String name, String password, String telephone,int birthYear, int birthMonth, int birthDay,int age, Boolean sex) {
+//		UserInfo uu0 = new UserInfo(name, 0, sex, birthYear, birthMonth, birthDay, 0);
+		User user = new User(name,password,telephone,age,sex);
+		user.setOnline(false);//注册时默认设置不在线
+		user.setBlacklist(false);//注册时默认设置没有被限制
+		Log.w("user", "-password:"+user.getPassword());
 
-		String toRegister = uu0.toString() + GlobalStrings.signupDivider + password + GlobalStrings.signupDivider;
+//		String toRegister = uu0.toString() + GlobalStrings.signupDivider + password + GlobalStrings.signupDivider;
 
 		NetworkService.getInstance().closeConnection();
 		NetworkService.getInstance().onInit(this);
 		NetworkService.getInstance().setupConnection();
 		if (NetworkService.getInstance().getIsConnected()) {
-			NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgSignUp, toRegister);
+			NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgSignUp, user);
 		} else {
 			NetworkService.getInstance().closeConnection();
 			Toast.makeText(this, "failed to connect to Server", Toast.LENGTH_LONG).show();
@@ -149,9 +167,9 @@ public class RegisterActivity extends Activity {
 		mReceivedRegister = false;
 		while (!mReceivedRegister) {
 		}
-		if (mUserAfterRegister.getId() == GlobalErrors.nameAlreadyExists) {
+		if (mUserAfterRegister.getUserid() == GlobalErrors.nameAlreadyExists) {
 			Toast.makeText(this, "sorry name already exist", Toast.LENGTH_SHORT).show();
-		} else if (mUserAfterRegister.getId() >= 0) {
+		} else if (mUserAfterRegister.getUserid() >= 0) {
 			Toast.makeText(this, "congratulations register successfully", Toast.LENGTH_SHORT).show();
 		} else {
 			Toast.makeText(this, "sorry cannot register", Toast.LENGTH_SHORT).show();
@@ -159,8 +177,9 @@ public class RegisterActivity extends Activity {
 		// con.closeNetConnect();
 	}
 
-	public void uponRegister(String msg0) {
-		mUserAfterRegister = new UserInfo(msg0);
+	public void uponRegister(User user) {//String msg0
+//		mUserAfterRegister = new UserInfo(msg0);
+		mUserAfterRegister = user;
 		mReceivedRegister = true;
 	}
 

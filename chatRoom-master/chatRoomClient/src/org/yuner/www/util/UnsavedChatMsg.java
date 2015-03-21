@@ -3,6 +3,7 @@ package org.yuner.www.util;
 import java.util.ArrayList;
 
 import org.yuner.www.bean.ChatEntity;
+import org.yuner.www.bean.User;
 import org.yuner.www.bean.UserInfo;
 
 import android.util.SparseArray;
@@ -27,8 +28,9 @@ public class UnsavedChatMsg {
 		mMapFriendsSelf = new SparseArray<ArrayList<Boolean>>();
 	}
 	
-	public void newUser(UserInfo userInfo) {
-		int id = userInfo.getId();
+	public void newUser(User user) {//UserInfo userInfo
+//		int id = userInfo.getId();
+		int id = user.getUserid();
 		
 		mMapFriendsEntity.put(id, new ArrayList<ChatEntity>());
 		mMapFriendsSelf.put(id, new ArrayList<Boolean>());

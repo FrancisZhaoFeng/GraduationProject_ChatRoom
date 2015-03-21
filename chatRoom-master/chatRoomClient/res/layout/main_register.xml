@@ -192,6 +192,14 @@
 		            android:layout_centerVertical="true"
 		            android:layout_marginLeft="1dp"
 		            android:entries="@array/birth_day_range" />
+		        <Spinner
+		            android:id="@+id/main_register_spinner_age"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_toRightOf="@id/main_register_spinner_day"
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="1dp"
+		            android:entries="@array/age_range" />
 	        </RelativeLayout>
 	        
 	    </LinearLayout>

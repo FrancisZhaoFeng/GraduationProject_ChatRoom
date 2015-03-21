@@ -38,10 +38,7 @@ public class SearchFriendByNameActivity extends Activity {
 		mBtnSearchByName.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
-				Log.d("start search by name", "+++++++++++++++++++++++++++++++++++++++++++" +
-						"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-				
+				Log.d("start search by name", "++++++" + "+++++++++++++");
 				String searchName = mSearchEtName.getText().toString();
 				SearchEntity s_ent0 = new SearchEntity(SearchEntity.SEARCH_BY_NAME, -1, -1, -1, searchName);
 				MainBodyActivity.getInstance().startSearch(s_ent0);				

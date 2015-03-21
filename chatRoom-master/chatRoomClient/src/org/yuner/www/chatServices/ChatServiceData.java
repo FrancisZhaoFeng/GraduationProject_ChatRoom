@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.yuner.www.bean.ChatEntity;
+import org.yuner.www.bean.User;
 import org.yuner.www.bean.UserInfo;
 
 import android.util.Log;
@@ -40,8 +41,9 @@ public class ChatServiceData {
 		mMapFriendsUnread = new SparseIntArray();
 	}
 	
-	public void newUser(UserInfo userInfo) {
-		int id = userInfo.getId();
+	public void newUser(User user) {  //UserInfo userInfo
+//		int id = userInfo.getId();
+		int id = user.getUserid();
 		
 		mFriendIds.add(id);
 		mMapFriendsEntity.put(id, new ArrayList<ChatEntity>());

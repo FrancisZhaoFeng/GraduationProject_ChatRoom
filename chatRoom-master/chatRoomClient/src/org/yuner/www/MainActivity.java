@@ -16,7 +16,6 @@ import android.app.Notification.Builder;
 import android.view.*;
 import android.view.View.*;
 import android.widget.*;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -32,9 +31,12 @@ import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.util.*;
 import android.os.*;
+
 import java.lang.Exception;
 import java.util.*;
+
 import org.yuner.www.R;
+import org.yuner.www.bean.User;
 import org.yuner.www.bean.UserInfo;
 import org.yuner.www.chatServices.ChatService;
 import org.yuner.www.chatServices.ChatServiceData;
@@ -55,6 +57,7 @@ public class MainActivity extends Activity {
 
 	private String mName;
 	private UserInfo mUserInfo;
+	private User user;
 	private String mPassword;
 	private NetConnect mNetCon;
 
@@ -103,11 +106,12 @@ public class MainActivity extends Activity {
 		mName = mEtAccount.getText().toString();
 		mPassword = mEtPassword.getText().toString();
 
-		if (mName.equals("") || mPassword.length() < 5) {// Please Specify Your
+		if (mName.equals("") || mName.length() <5 || mName.length() >=16 || mPassword.length() <5 || mPassword.length() >=16) {// Please Specify Your
 															// Name and Sex"
 			Toast.makeText(MainActivity.this, "Please Specify Your Name and Password correctly", Toast.LENGTH_LONG).show();
 		} else {
-			mUserInfo = new UserInfo(mName, 0, 0, 0, 0, 0, 0);
+//			mUserInfo = new UserInfo(mName, 0, 0, 0, 0, 0, 0);
+			user = new User(mName,mPassword);
 
 			/** if mNetcon is connected already, close it first 
 			 * here we use try because mNetCon might not have been instantiated
@@ -123,8 +127,9 @@ public class MainActivity extends Activity {
 			NetworkService.getInstance().onInit(this);
 			NetworkService.getInstance().setupConnection();
 			if (NetworkService.getInstance().getIsConnected()) {
-				String usrInfo = mUserInfo.toString() + GlobalStrings.signinDivider + mPassword + GlobalStrings.signinDivider;
-				NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgHandShake, usrInfo);
+//				String usrInfo = mUserInfo.toString() + GlobalStrings.signinDivider + mPassword + GlobalStrings.signinDivider;
+//				NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgHandShake, usrInfo);
+				NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgHandShake, user);
 			} else {
 				NetworkService.getInstance().closeConnection();
 				Toast.makeText(this, "failed to connect to Server", Toast.LENGTH_LONG).show();
@@ -137,7 +142,8 @@ public class MainActivity extends Activity {
 				initData.join();
 			} catch (Exception e) {
 			}
-			mUserInfo = initData.getUserInfo();
+//			mUserInfo = initData.getUserInfo();
+			user = initData.getUser();
 			Log.d("connectedApp isonline : ", "" + mUserInfo.getIsOnline() + "+++" + "++++++++++");
 			if (mUserInfo.getId() < 0) {
 				Toast.makeText(this, "invalid username or password", Toast.LENGTH_SHORT).show();

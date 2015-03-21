@@ -8,6 +8,7 @@ import org.yuner.www.R;
 import org.yuner.www.bean.ChatEntity;
 import org.yuner.www.bean.FrdReqNotifItemEntity;
 import org.yuner.www.bean.SearchEntity;
+import org.yuner.www.bean.User;
 import org.yuner.www.bean.UserInfo;
 import org.yuner.www.chatServices.ChatService;
 import org.yuner.www.chatServices.ChatServiceData;
@@ -67,8 +68,9 @@ public class MainBodyActivity extends Activity {
 	private ImageView mTabSettings;
 
 	/* friend search string/boolean definition */
-	String mSearchedString;
+//	String mSearchedString;
 	boolean mMsg9Received;
+	private List<User> users;
 
 	private NetStateReceiver mNetStateReceiver;
 
@@ -271,16 +273,15 @@ public class MainBodyActivity extends Activity {
 	/*** search friends ***/
 	public void startSearch(SearchEntity sEnt0) {
 		NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgSearchPeople, sEnt0.toString());
-
 		mMsg9Received = false;
 		while (!mMsg9Received) {
 		}
-
 		gotoFriendSearchResult(mSearchedString);
 	}
 
-	public void onReceiveSearchList(String msg0) {
-		mSearchedString = msg0;
+	public void onReceiveSearchList(List<User> users) {  //String msg0
+//		mSearchedString = msg0;
+		this.users = users;
 		mMsg9Received = true;
 	}
 

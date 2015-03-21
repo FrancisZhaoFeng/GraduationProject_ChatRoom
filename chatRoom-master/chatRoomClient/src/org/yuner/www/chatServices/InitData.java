@@ -3,6 +3,7 @@ package org.yuner.www.chatServices;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.yuner.www.bean.User;
 import org.yuner.www.bean.UserInfo;
 import org.yuner.www.util.UnsavedChatMsg;
 
@@ -12,10 +13,12 @@ public class InitData extends Thread{
 	/* singleton instance */
 	private static InitData mInitData;
 	
-	private UserInfo mUserInfo;
+//	private UserInfo mUserInfo;
+	private User user;
 	private boolean msg3Recev;
 	
-	private List<UserInfo> mListOfFriends;
+//	private List<UserInfo> mListOfFriends;
+	private List<User> mListOfFriends;
 	private boolean msg5Recev;
 	
 	public static InitData getInitData() {
@@ -28,7 +31,7 @@ public class InitData extends Thread{
 	private InitData() {
 		msg3Recev = false;
 		msg5Recev = false;
-		mListOfFriends = new ArrayList<UserInfo>();
+		mListOfFriends = new ArrayList<User>();
 	}
 	
 	@Override
@@ -36,34 +39,42 @@ public class InitData extends Thread{
 		while(!(msg3Recev && msg5Recev));
 	}
 	
-	public void msg3Arrive(String str) {
-		mUserInfo = new UserInfo(str);
+	public void msg3Arrive(User user) {//String str
+//		mUserInfo = new UserInfo(str);
 		msg3Recev = true;
-		if(mUserInfo.getId() < 0) {  // invalid username or password, no friendlist will be sent
+		if(user == null) {  //mUserInfo.getId() < 0    //invalid username or password, no friendlist will be sent
 			msg5Recev = true;
 		}
 	}
 	
-	public void msg5Arrive(String str) {
-		String strSplitter = FriendListInfo.strSplitter;
-		String[] strArr0 = str.split(strSplitter);
-		int count = Integer.parseInt(strArr0[0]);
+	public void msg5Arrive(List<User> users) {//String str
+//		String strSplitter = FriendListInfo.strSplitter;
+//		String[] strArr0 = str.split(strSplitter);
+//		int count = Integer.parseInt(strArr0[0]);
 		
 		ChatServiceData mChatServiceData = ChatServiceData.getInstance();
-		for(int p=1;p<=count;p++) {
-			UserInfo userInfo = new UserInfo(strArr0[p]);
-			mListOfFriends.add(userInfo);
-			mChatServiceData.newUser(userInfo);
-			UnsavedChatMsg.getInstance().newUser(userInfo);
+		for(int i = 1 ; i <= users.size() ; i++) {
+//			UserInfo userInfo = new UserInfo(strArr0[p]);
+//			mListOfFriends.add(u);
+			mChatServiceData.newUser(users.get(i));
+			UnsavedChatMsg.getInstance().newUser(users.get(i));
 		}
 		msg5Recev = true;
 	}
 	
-	public UserInfo getUserInfo() {
-		return mUserInfo;
+//	public UserInfo getUserInfo() {
+//		return mUserInfo;
+//	}
+	
+	public User getUser(){
+		return user;
 	}
 	
-	public List<UserInfo> getListOfFriends() {
+//	public List<UserInfo> getListOfFriends() {
+//		return mListOfFriends;
+//	}
+	
+	public List<User> getListOfFriends() {
 		return mListOfFriends;
 	}
 	
