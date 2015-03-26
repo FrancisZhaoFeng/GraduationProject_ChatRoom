@@ -45,7 +45,7 @@
 	        android:visibility="invisible" />
     </RelativeLayout>
     
-    <org.yuner.www.mainBody.PatchedExpandableListView
+    <com.zhbit.crs.mainBody.PatchedExpandableListView
         android:id="@+id/cc0_friend_list_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

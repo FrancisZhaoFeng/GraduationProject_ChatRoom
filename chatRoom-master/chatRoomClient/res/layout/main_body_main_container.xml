@@ -109,12 +109,12 @@
     	android:layout_above="@id/main_body_main_container_bottom"       
         android:orientation="vertical" >
         
-        <org.yuner.www.mainBody.CustomViewPager
+        <com.zhbit.crs.mainBody.CustomViewPager
         	android:id="@+id/main_body_main_container_tabpager"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:layout_gravity="center" > 
-        </org.yuner.www.mainBody.CustomViewPager>  
+        </com.zhbit.crs.mainBody.CustomViewPager>  
     </LinearLayout>
 
    

@@ -18,7 +18,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="org.yuner.www.MainActivity"
+            android:name="com.zhbit.crs.action.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -28,54 +28,54 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="org.yuner.www.chatter.ChatActivity"
+            android:name="com.zhbit.crs.chatter.ChatActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="org.yuner.www.friendRequest.ChooseRoomActivity"
+            android:name="com.zhbit.crs.friendRequest.ChooseRoomActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="org.yuner.www.friendRequest.FriendListActivity"
+            android:name="com.zhbit.crs.friendRequest.FriendListActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="org.yuner.www.RegisterActivity"
+            android:name="com.zhbit.crs.action.RegisterActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="org.yuner.www.friendRequest.SearchFriendActivity"
+            android:name="com.zhbit.crs.friendRequest.SearchFriendActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="org.yuner.www.friendRequest.FriendSearchResultActivity"
+            android:name="com.zhbit.crs.friendRequest.FriendSearchResultActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="org.yuner.www.mainBody.MainBodyActivity"
+            android:name="com.zhbit.crs.mainBody.MainBodyActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="org.yuner.www.mainBody.SearchFriendByNameActivity"
+            android:name="com.zhbit.crs.mainBody.SearchFriendByNameActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="org.yuner.www.mainBody.SearchFriendByElseActivity"
+            android:name="com.zhbit.crs.mainBody.SearchFriendByElseActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="org.yuner.www.mainBody.FrdRequestNotifActivity"
+            android:name="com.zhbit.crs.mainBody.FrdRequestNotifActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="org.yuner.www.mainBody.TabMsgFrdReqProcActivity"
+            android:name="com.zhbit.crs.mainBody.TabMsgFrdReqProcActivity"
             android:screenOrientation="portrait" >
         </activity>
         <service
-            android:name="org.yuner.www.chatServices.ChatService">
+            android:name="com.zhbit.crs.chatServices.ChatService">
         </service>
         <service
-            android:name="org.yuner.www.friendRequest.FriendRequestService">
+            android:name="com.zhbit.crs.friendRequest.FriendRequestService">
         </service>
     </application> 
 
