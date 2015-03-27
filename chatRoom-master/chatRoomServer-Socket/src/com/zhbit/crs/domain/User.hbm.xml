@@ -31,7 +31,7 @@
         <property name="blacklist" type="boolean">
             <column name="blacklist" />
         </property>
-        <set name="friendsForUserid" inverse="true">
+      <!--   <set name="friendsForUserid" inverse="true">
             <key>
                 <column name="userid" />
             </key>
@@ -74,6 +74,6 @@
                 <column name="senderid" />
             </key>
             <one-to-many class="com.zhbit.crs.domain.ChatPerLog" />
-        </set>
+        </set> -->
     </class>
 </hibernate-mapping>

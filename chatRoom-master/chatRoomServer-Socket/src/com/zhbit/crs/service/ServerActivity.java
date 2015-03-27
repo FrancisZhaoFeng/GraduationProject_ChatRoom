@@ -28,6 +28,7 @@ import com.zhbit.crs.domain.Friend;
 import com.zhbit.crs.domain.SearchEntity;
 import com.zhbit.crs.domain.User;
 import com.zhbit.crs.domain.UserInfo;
+import com.zhbit.crs.md5.MD5;
 
 /**
 * @author zhaoguofeng
@@ -46,7 +47,7 @@ public class ServerActivity {
 	private ServerListenThread mClientListen;
 	private ServerSendThread mClientSend;
 
-	private UserInfo mUsrInfo;
+//	private UserInfo mUsrInfo;
 
 	private boolean mConnectSuccessfully;
 
@@ -94,10 +95,11 @@ public class ServerActivity {
 		sendOneString(user, GlobalMsgTypes.msgSignUp);
 	}
 
-	public void backOnline(String str0) {
-		mUsrInfo = new UserInfo(str0);
+	public void backOnline(User userTemp) {
+//		mUsrInfo = new UserInfo(str0);
+		this.user = userTemp;
 
-		ServerActivity preceder = mServerListen.getClientActivityById(mUsrInfo.getId());
+		ServerActivity preceder = mServerListen.getClientActivityById(user.getUserid());
 		if (preceder != null) {
 			preceder.goOffLine();
 		}
@@ -119,12 +121,12 @@ public class ServerActivity {
 
 	public void startHandShake(User userTemp) {  //String msg0
 		mHandShake = new HandShakeThread();
-//		mUsrInfo = mHandShake.start(msg0);
+		userTemp.setPassword(new MD5().toMD5(userTemp.getPassword()));
 		this.user = mHandShake.start(userTemp);
 		userDao = new UserDao();
 		if (user != null) {
 			mHandShake.sendHandShakeBack(this, user);
-			if (user.getUserid() >= 0 ) {  //mUsrInfo.getId() >= 0
+			if (user.getUserid() != null ) {  //mUsrInfo.getId() >= 0
 				List<Friend> friends = userDao.selectFriend(user);
 //				mHandShake.sendFriendList(this, DBUtil.loginToGetFriendList(mUsrInfo.getId()));
 				List <User> users = null;
@@ -141,7 +143,7 @@ public class ServerActivity {
 			return;
 		}
 
-		ServerActivity preceder = mServerListen.getClientActivityById(mUsrInfo.getId());
+		ServerActivity preceder = mServerListen.getClientActivityById(user.getUserid());
 		if (preceder != null) {
 			preceder.goOffLine();
 		}
@@ -180,8 +182,8 @@ public class ServerActivity {
 		sendOneString(users, GlobalMsgTypes.msgSearchPeople);
 	}
 
-	public UserInfo getUserInfo() {
-		return mUsrInfo;
+	public User getUserInfo() {
+		return user;
 	}
 
 	public boolean isConnectedSuccessfully() {
@@ -194,7 +196,7 @@ public class ServerActivity {
 		// for chatMsgs
 //		ArrayList<ChatPerLog> listOfChatPerLog = DBTempSaveUtil.getUnsentChatMsg(mUsrInfo.getId());
 		chatLogDao = new ChatLogDao();
-		List<ChatPerLog> listOfChatPerLog =  chatLogDao.selectByReceiveId(mUsrInfo.getId());
+		List<ChatPerLog> listOfChatPerLog =  chatLogDao.selectByReceiveId(user.getUserid());
 		for (ChatPerLog ent0 : listOfChatPerLog) {
 			sendOneData(ent0, 2);
 		}
@@ -241,7 +243,7 @@ public class ServerActivity {
 
 	/** send one ChatEntity to this client */
 	public void sendOneData(ChatPerLog chatPerLog, int sendType) {//ChatEntity entPackage
-		System.out.println("Receiver is " + getUserInfo().getName());
+		System.out.println("Receiver is " + getUserInfo().getUsername());
 
 //		String toSend;
 //

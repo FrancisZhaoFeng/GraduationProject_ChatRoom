@@ -1,5 +1,6 @@
 package com.zhbit.crs.mainBody;
 
+import java.util.Date;
 import java.util.List;
 
 import org.yuner.www.R;
@@ -41,7 +42,7 @@ public class MainTabMsgAdapter extends BaseAdapter{
 		}
 		boolean avatarId = mVector.get(position).getImgId();
 		String sentence = mVector.get(position).getSentence();
-		String time = mVector.get(position).getTime();
+		Date time = mVector.get(position).getTime();
 		
 		convertView = mInflater.inflate(R.layout.tabmsg_item, null);
 		avatarV = (ImageView)convertView.findViewById(R.id.tabmsg_item_left_icon);
@@ -66,7 +67,7 @@ public class MainTabMsgAdapter extends BaseAdapter{
 		}
 		nameOfSpeakerV.setText(name);
 		textV.setText(sentence);
-		timeV.setText(time);
+//		timeV.setText(time);
 		
 		return convertView;
 	}

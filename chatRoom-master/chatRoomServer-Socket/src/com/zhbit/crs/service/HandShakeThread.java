@@ -43,8 +43,8 @@ public class HandShakeThread {
 	 */
 	public boolean sendHandShakeBack(ServerActivity cliActv, User user) {
 		try {
-//			cliActv.sendOneString(usrInfo.toString(), usrInfo.msgType);
 			cliActv.sendOneString(user, 3); //usrInfo.msgType 的值为 3
+//			cliActv.sendOneString(new User("zgfzg","zgfailmr"), 3);
 		} catch (Exception e) {
 			return false;
 		}

@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class DBCon {
 
-	private static final String url = "jdbc:mysql://192.168.52.140";
+	private static final String url = "jdbc:mysql://192.168.52.142";
     private static final String user = "francis";
     private static final String password = "zgfailmr";
 

@@ -124,6 +124,7 @@ public class MainActivity extends Activity {
 			try {
 				initData.join(); // 表示：当前线程等待这个线程对象对应的线程结束。原则：join是测试其它工作状态的唯一正确方法
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 			user = initData.getUser();
 			Log.d("connectedApp isonline : ", "" + user.getOnline() + "+++" + "++++++++++");

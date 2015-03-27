@@ -14,14 +14,14 @@ public class ChatEntity {
 	private int mSenderAvatarId=0;
 	private String mUserName="";
 	private int mSex=0;
-	private String mTime="";
+	private Date mTime;
 	private String mContent="";
 	
 	private int mReceiverId=0;
 	
 	public ChatEntity() {}
 	
-	public ChatEntity(int senderId, int avatarId, String name, int sex, String time, String content, 
+	public ChatEntity(int senderId, int avatarId, String name, int sex, Date time, String content, 
 			int receiverId) {
 		this.mSenderId = senderId;
 		this.mSenderAvatarId = avatarId;
@@ -52,7 +52,7 @@ public class ChatEntity {
 		mSenderAvatarId = Integer.parseInt(sbArr0[2]);		
 		mUserName = sbArr0[3];
 		mSex = Integer.parseInt(sbArr0[4]);
-		mTime = sbArr0[5];
+//		mTime = sbArr0[5];
 		mContent = sbArr0[6];
 		mReceiverId = Integer.parseInt(sbArr0[7]);
 	}
@@ -70,12 +70,13 @@ public class ChatEntity {
 		return str;
 	}
 	
-	public static String genDate()
+	public static Date genDate()
 	{
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd-HH:mm:ss");
 		Date date = new Date();
-		String timex=dateFormat.format(date);
-		return timex;
+//		String timex=dateFormat.format(date);
+//		return timex;
+		return date;
 	}
 
 	public int getType()
@@ -129,11 +130,11 @@ public class ChatEntity {
 		this.mSex = sex;
 	}
 	
-	public String getTime() {
+	public Date getTime() {
 		return mTime;
 	}
 
-	public void setTime(String time) {
+	public void setTime(Date time) {
 		this.mTime = time;
 	}
 

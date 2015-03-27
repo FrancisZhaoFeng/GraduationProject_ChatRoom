@@ -7,6 +7,7 @@
 
 package com.zhbit.crs.chatter;
 
+import java.util.Date;
 import java.util.List;
 
 import org.yuner.www.R;
@@ -42,7 +43,7 @@ public class ChatListviewAdapter extends BaseAdapter {
 
 		ChatPerLog ent0 = mVector.get(position);
 		String name = ent0.getUserBySenderid().getUsername();
-		String time = ent0.getSendtime();
+		Date time = ent0.getSendtime();
 		int sex = 1; // 根据性别，区别使用图片，此处固定为1
 		String real_msg = ent0.getSendtext();
 
@@ -64,7 +65,7 @@ public class ChatListviewAdapter extends BaseAdapter {
 				e.printStackTrace();
 			}
 
-			NameOfSpeaker.setText(time);
+//			NameOfSpeaker.setText(time);  //mark time
 
 //			int avatarId = ent0.getSenderAvatarid();
 			int avatarId = ent0.getUserBySenderid().getUserid();

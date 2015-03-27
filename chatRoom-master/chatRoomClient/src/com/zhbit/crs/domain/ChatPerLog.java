@@ -1,5 +1,6 @@
 package com.zhbit.crs.domain;
 
+import java.util.Date;
 
 /**
  * ChatPerLog entity. @author MyEclipse Persistence Tools
@@ -12,7 +13,7 @@ public class ChatPerLog implements java.io.Serializable {
 	private Integer logid;
 	private User userBySenderid;
 	private User userByReceiverid;
-	private String sendtime;
+	private Date sendtime;
 	private String sendtext;
 	private byte[] sendimage;
 	private byte[] sendvoice;
@@ -26,14 +27,21 @@ public class ChatPerLog implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public ChatPerLog(String sendtime, Integer type) {
+	public ChatPerLog(Date sendtime, Integer type) {
 		this.sendtime = sendtime;
 		this.type = type;
 	}
 	
+	public ChatPerLog(int type, User sender, int receiverId, String sentence) {
+		this.type = type;
+		this.userBySenderid = sender;
+		this.userByReceiverid.setUserid(receiverId);
+		this.sendtext = sentence;
+	}
+
 	/** full constructor */
 	public ChatPerLog(User userBySenderid, User userByReceiverid,
-			String sendtime, String sendtext, byte[] sendimage, byte[] sendvoice,
+			Date sendtime, String sendtext, byte[] sendimage, byte[] sendvoice,
 			Integer type, boolean isread) {
 		this.userBySenderid = userBySenderid;
 		this.userByReceiverid = userByReceiverid;
@@ -43,21 +51,6 @@ public class ChatPerLog implements java.io.Serializable {
 		this.sendvoice = sendvoice;
 		this.type = type;
 		this.isread = isread;
-	}
-	
-	public ChatPerLog(int mCurType, User mMyUserInfo, int mFriendId, String st0) {
-		// TODO Auto-generated constructor stub
-		this.type = mCurType;
-		this.userByReceiverid =  mMyUserInfo;
-		this.userByReceiverid.setUserid(mFriendId);
-		this.sendtext = st0;
-	}
-
-	public String toString(){
-		String str = ""+logid+"=";
-		str += sendtext+"=";
-		str += type;
-		return str;
 	}
 
 	// Property accessors
@@ -86,11 +79,11 @@ public class ChatPerLog implements java.io.Serializable {
 		this.userByReceiverid = userByReceiverid;
 	}
 
-	public String getSendtime() {
+	public Date getSendtime() {
 		return this.sendtime;
 	}
 
-	public void setSendtime(String sendtime) {
+	public void setSendtime(Date sendtime) {
 		this.sendtime = sendtime;
 	}
 

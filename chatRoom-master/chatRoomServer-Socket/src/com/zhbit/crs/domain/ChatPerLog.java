@@ -31,6 +31,13 @@ public class ChatPerLog implements java.io.Serializable {
 		this.sendtime = sendtime;
 		this.type = type;
 	}
+	
+	public ChatPerLog(int type, User sender, int receiverId, String sentence) {
+		this.type = type;
+		this.userBySenderid = sender;
+		this.userByReceiverid.setUserid(receiverId);
+		this.sendtext = sentence;
+	}
 
 	/** full constructor */
 	public ChatPerLog(User userBySenderid, User userByReceiverid,

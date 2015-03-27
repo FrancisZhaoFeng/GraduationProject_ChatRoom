@@ -1,6 +1,7 @@
 package com.zhbit.crs.mainBody;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.yuner.www.R;
@@ -85,7 +86,7 @@ public class MainTabMsgPage {
 		});
 	}
 
-	public void onUpdateByUserinfo(User user, String sentence, String time, boolean updateNotif) {
+	public void onUpdateByUserinfo(User user, String sentence, Date time, boolean updateNotif) {
 		if (mListOfIds.contains(user.getUserid())) {
 			int idx = mListOfIds.indexOf(user.getUserid());
 			mListOfIds.remove(idx);
@@ -99,7 +100,7 @@ public class MainTabMsgPage {
 		}
 	}
 
-	public void onUpdateById(int id, boolean avatarId, String name, String sentence, String time, boolean updateNotif) {
+	public void onUpdateById(int id, boolean avatarId, String name, String sentence, Date time, boolean updateNotif) {
 		if (mListOfIds.contains(id)) {
 			int idx = mListOfIds.indexOf(id);
 			mListOfIds.remove(idx);

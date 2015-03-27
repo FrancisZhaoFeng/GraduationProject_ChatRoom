@@ -6,9 +6,9 @@ public class SearchEntity {
 
 	private static int LOWER_BOUNDRY_OF_AGE = 5;
 	private static int UPPER_BOUNDRY_OF_AGE = 80;
-	private static int FEMALE_GENDER = 0;
-	private static int MALE_GENDER = 1;
-	private static int BOTH_GENDER = 2;
+	public static int FEMALE_GENDER = 0;
+	public static int MALE_GENDER = 1;
+	public static int BOTH_GENDER = 2;
 	public static int SEARCH_BY_NAME = 0;
 	public static int SEARCH_BY_ELSE = 1;
 

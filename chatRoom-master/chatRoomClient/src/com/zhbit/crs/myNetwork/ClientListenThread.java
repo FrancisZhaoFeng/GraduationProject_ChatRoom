@@ -27,7 +27,7 @@ public class ClientListenThread extends Thread {
 
 //	private InputStreamReader mInStrRder0;
 //	private BufferedReader mBuffRder0;
-	private ObjectInputStream is= null;
+	private ObjectInputStream is;
 	private User user;
 	private List<User> users;
 

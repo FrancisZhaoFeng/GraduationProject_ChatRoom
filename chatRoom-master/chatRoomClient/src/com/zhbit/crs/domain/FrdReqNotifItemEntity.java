@@ -1,5 +1,7 @@
 package com.zhbit.crs.domain;
 
+import java.util.Date;
+
 import com.zhbit.crs.commons.GlobalStrings;
 
 public class FrdReqNotifItemEntity {
@@ -19,12 +21,12 @@ public class FrdReqNotifItemEntity {
 	private boolean mImgId;
 	private String mName;
 	private String mContent;
-	private String mTime;
+	private Date mTime;
 	
 	private int mIsRead = 0;
 	private int mStatus = mUnanswer;
 	
-	public FrdReqNotifItemEntity(int type, int id, boolean imgId, String name, String content, String time, User strOfUser) {
+	public FrdReqNotifItemEntity(int type, int id, boolean imgId, String name, String content, Date time, User strOfUser) {
 		mType = type;
 		mNotifId = id;
 		mImgId = imgId;
@@ -42,7 +44,7 @@ public class FrdReqNotifItemEntity {
 		mImgId = Boolean.parseBoolean(strArr0[2]);
 		mName = strArr0[3];
 		mContent = strArr0[4];
-		mTime = strArr0[5];
+//		mTime = strArr0[5];
 		mIsRead = Integer.parseInt(strArr0[6]);
 		mStatus = Integer.parseInt(strArr0[7]);
 	}
@@ -81,7 +83,7 @@ public class FrdReqNotifItemEntity {
 		return mContent;
 	}
 	
-	public String getTime() {
+	public Date getTime() {
 		return mTime;
 	}
 	

@@ -59,6 +59,7 @@ public class NetworkService {
 			mNetCon.join(); // join就是阻塞调用线程，直到该线程结束后，调用线程才能继续执行
 							// 如在t1线程中调用t2.join(),则需要t2线程执行完后t1方能继续执行
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		if (mNetCon == null || !mNetCon.connectedOrNot()) {
 			mIsConnected = false;
@@ -67,7 +68,6 @@ public class NetworkService {
 			mSocket = mNetCon.getSocket();
 			mIsConnected = true;
 			startListen(mContext);
-
 			if (mSocket != null) {
 				System.out.println("socket is not null");
 			} else {
@@ -99,14 +99,6 @@ public class NetworkService {
 	 *            发送信息到服务器，先发送：type，后发送：sentence
 	 */
 	public void sendUpload(int type, Object obj) {
-//		sendUpload(type + "");
-//		sendUpload("hello1");
-//		Log.w("m", "mark1");
-//		User user = (User)obj;
-//		Log.w("m", "mark2");
-//		Log.w("mark", "mark:"+user.getUsername()+"-"+user.getPassword());
-//		sendUpload(obj);
-//		sendUpload("hello2");
 		sendUpload(type+"", obj);
 	}
 

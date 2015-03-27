@@ -10,7 +10,7 @@
 		<property name="dialect">
 			org.hibernate.dialect.MySQLDialect
 		</property>
-		<property name="connection.url">jdbc:mysql://192.168.52.141:3306/chatRoom</property>
+		<property name="connection.url">jdbc:mysql://192.168.52.142:3306/chatRoom</property>
 		<property name="connection.username">francis</property>
 		<property name="connection.password">zgfailmr</property>
 		<property name="connection.driver_class">

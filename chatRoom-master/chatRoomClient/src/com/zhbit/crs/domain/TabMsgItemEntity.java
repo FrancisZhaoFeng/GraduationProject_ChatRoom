@@ -1,5 +1,7 @@
 package com.zhbit.crs.domain;
 
+import java.util.Date;
+
 import com.zhbit.crs.commons.GlobalStrings;
 
 public class TabMsgItemEntity {
@@ -18,12 +20,12 @@ public class TabMsgItemEntity {
 	private boolean mImgId;
 	private String mName;
 	private String mSentence;
-	private String mTime;
+	private Date mTime;
 
 	private int mIsRead = NotReadYet;
 	private int mFrdReqStatus = FrdReqUnread;
 
-	public TabMsgItemEntity(int talkerId, boolean imgId, String name, String sentence, String time) {
+	public TabMsgItemEntity(int talkerId, boolean imgId, String name, String sentence, Date time) {
 		mTalkerId = talkerId;
 		mImgId = imgId;
 		mName = name;
@@ -71,7 +73,7 @@ public class TabMsgItemEntity {
 		return mName;
 	}
 
-	public String getTime() {
+	public Date getTime() {
 		return mTime;
 	}
 

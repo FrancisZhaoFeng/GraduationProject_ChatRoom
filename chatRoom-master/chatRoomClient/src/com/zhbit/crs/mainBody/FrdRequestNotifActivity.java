@@ -1,6 +1,7 @@
 package com.zhbit.crs.mainBody;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.yuner.www.R;
 
@@ -37,7 +38,7 @@ public class FrdRequestNotifActivity extends Activity {
 		mListOfNotif = null;
 	}
 	
-	public static void newNotification(int type, int id, boolean imgId, String name, String content, String time, User user) {
+	public static void newNotification(int type, int id, boolean imgId, String name, String content, Date time, User user) {
 		FrdReqNotifItemEntity entity = new FrdReqNotifItemEntity(type, id, imgId, name, content, time, user);
 		
 		if(mListOfNotif == null) {

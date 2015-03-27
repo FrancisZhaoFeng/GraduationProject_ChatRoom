@@ -1,11 +1,8 @@
 package com.zhbit.crs.service;
 
-import java.io.BufferedReader;
 import java.io.ObjectInputStream;
-import java.lang.String;
 
-import com.zhbit.crs.commons.*;
-import com.zhbit.crs.domain.ChatEntity;
+import com.zhbit.crs.commons.GlobalMsgTypes;
 import com.zhbit.crs.domain.ChatPerLog;
 import com.zhbit.crs.domain.ChatRoomLog;
 import com.zhbit.crs.domain.Friend;
@@ -37,7 +34,6 @@ public class ServerListenThread extends Thread {
 		while (true) {
 			try {
 				Object obj = mBuffRder.readObject();
-//				obj = mBuffRder.readObject();
 				System.out.println("mBuffRder.readObject()");
 				int msgType = Integer.parseInt((String)obj);
 				System.out.println("msgType:"+msgType);
@@ -50,13 +46,9 @@ public class ServerListenThread extends Thread {
 					return;
 				} else {
 					// type of message received
-//					int msgType = Integer.parseInt(received);
-//					String actualMsg = mBuffRder.readLine();
-//					actualMsg = actualMsg.replace(GlobalStrings.replaceOfReturn, "\n");
 					obj = mBuffRder.readObject();
-//					user = (User)obj1;
 					try {
-						System.out.println("a message with type " + msgType + " received from " + mServerActivity.getUserInfo().getName());
+						System.out.println("a message with type " + msgType + " received from " + mServerActivity.getUserInfo().getUsername());
 					} catch (Exception e) {
 					}
 					switch (msgType) {

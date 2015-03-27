@@ -10,14 +10,14 @@
             <column name="logid" />
             <generator class="identity" />
         </id>
-        <many-to-one name="userBySenderid" class="com.zhbit.crs.domain.User" fetch="select" lazy="false">
+        <many-to-one name="userBySenderid" class="com.zhbit.crs.domain.User" fetch="select">
             <column name="senderid" />
         </many-to-one>
-        <many-to-one name="userByReceiverid" class="com.zhbit.crs.domain.User" fetch="select" lazy="false">
+        <many-to-one name="userByReceiverid" class="com.zhbit.crs.domain.User" fetch="select">
             <column name="receiverid" />
         </many-to-one>
-        <property name="sendtime" type="date">
-            <column name="sendtime" length="10" not-null="true" />
+        <property name="sendtime" type="timestamp">
+            <column name="sendtime" length="19" not-null="true" />
         </property>
         <property name="sendtext" type="string">
             <column name="sendtext" length="280" />

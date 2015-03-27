@@ -9,46 +9,64 @@ import com.zhbit.crs.commons.GlobalStrings;
 public class ChatEntity {
 	public static final String strSplitter = GlobalStrings.entityDivider;
 	
-	private int type=0;
-	private int senderId=0;
-	private int senderAvatarId=0;
-	private String nick="";
-	private int sex=0;
-	private String time="";
-	private String content="";
+	private int mType=0;
+	private int mSenderId=0;
+	private int mSenderAvatarId=0;
+	private String mUserName="";
+	private int mSex=0;
+	private String mTime="";
+	private String mContent="";
 	
-	private int receiverId=0;
+	private int mReceiverId=0;
 	
-	public ChatEntity(){}
+	public ChatEntity() {}
 	
-	public static ChatEntity Str2Ent(String str0)
-	{
-		ChatEntity ent0=new ChatEntity();
-		
+	public ChatEntity(int senderId, int avatarId, String name, int sex, String time, String content, 
+			int receiverId) {
+		this.mSenderId = senderId;
+		this.mSenderAvatarId = avatarId;
+		this.mUserName = name;
+		this.mSex = sex;
+		this.mTime = time;
+		this.mContent = content;
+		this.mReceiverId = receiverId;
+	}
+	
+	public ChatEntity(int type, UserInfo sender, int receiverId, String sentence) {
+		this.mType = type;
+		this.mSenderId = sender.getId();
+		this.mSenderAvatarId = sender.getAvatarId();
+		this.mUserName = sender.getName();
+		this.mSex = sender.getSex();
+		this.mTime = genDate();
+		this.mContent = sentence;
+		this.mReceiverId = receiverId;
+	}
+	
+	public ChatEntity (String str0)
+	{		
 		String[] sbArr0=str0.split(strSplitter);
 		
-		ent0.setType(Integer.parseInt(sbArr0[0]));
-		ent0.setSenderId(Integer.parseInt(sbArr0[1]));
-		ent0.setSenderAvatarId(Integer.parseInt(sbArr0[2]));		
-		ent0.setNick(sbArr0[3]);
-		ent0.setSex(Integer.parseInt(sbArr0[4]));
-		ent0.setTime(sbArr0[5]);
-		ent0.setContent(sbArr0[6]);
-		ent0.setReceiverId(Integer.parseInt(sbArr0[7]));
-		
-		return ent0;
+		mType = Integer.parseInt(sbArr0[0]);
+		mSenderId = Integer.parseInt(sbArr0[1]);
+		mSenderAvatarId = Integer.parseInt(sbArr0[2]);		
+		mUserName = sbArr0[3];
+		mSex = Integer.parseInt(sbArr0[4]);
+		mTime = sbArr0[5];
+		mContent = sbArr0[6];
+		mReceiverId = Integer.parseInt(sbArr0[7]);
 	}
 	
 	public String toString()
 	{
-		String str=this.type+strSplitter;
-		str+=this.senderId+strSplitter;
-		str+=this.senderAvatarId+strSplitter;
-		str+=this.nick+strSplitter;
-		str+=this.sex+strSplitter;
-		str+=this.time+strSplitter;
-		str+=this.content+strSplitter;
-		str+=this.receiverId+strSplitter;
+		String str=this.mType+strSplitter;
+		str+=this.mSenderId+strSplitter;
+		str+=this.mSenderAvatarId+strSplitter;
+		str+=this.mUserName+strSplitter;
+		str+=this.mSex+strSplitter;
+		str+=this.mTime+strSplitter;
+		str+=this.mContent+strSplitter;
+		str+=this.mReceiverId+strSplitter;
 		return str;
 	}
 	
@@ -62,73 +80,78 @@ public class ChatEntity {
 
 	public int getType()
 	{
-		return type;
+		return mType;
 	}
 	
 	public void setType(int type0)
 	{
-		this.type=type0;
+		this.mType=type0;
 	}
 	
 	public int getSenderId()
 	{
-		return senderId;
+		return mSenderId;
 	}
 	
 	public void setSenderId(int senderId0)
 	{
-		this.senderId=senderId0;
+		this.mSenderId=senderId0;
 	}
 	
 	public int getSenderAvatarid()
 	{
-		return senderAvatarId;
+	//	return senderAvatarId;
+		if(mSex==0) {
+			return 0;
+		} else {
+			return 1;
+		}
 	}
 	
 	public void setSenderAvatarId(int senderAvatarId0)
 	{
-		this.senderAvatarId=senderAvatarId0;
+		this.mSenderAvatarId=senderAvatarId0;
 	}
 	
-	public String getNick() {
-		return nick;
+	public String getName() {
+		return mUserName;
 	}
 
-	public void setNick(String nick) {
-		this.nick = nick;
+	public void setName(String nick) {
+		this.mUserName = nick;
 	}
 	
 	public int getSex() {
-		return sex;
+		return mSex;
 	}
 
 	public void setSex(int sex) {
-		this.sex = sex;
+		this.mSex = sex;
 	}
 	
 	public String getTime() {
-		return time;
+		return mTime;
 	}
 
 	public void setTime(String time) {
-		this.time = time;
+		this.mTime = time;
 	}
 
 	public String getContent() {
-		return content;
+		return mContent;
 	}
 
 	public void setContent(String content) {
-		this.content = content;
+		this.mContent = content;
 	}
 	
 	public int getReceiverId()
 	{
-		return receiverId;
+		return mReceiverId;
 	}
 	
 	public void setReceiverId(int receiverId0)
 	{
-		this.receiverId=receiverId0;
+		this.mReceiverId=receiverId0;
 	}
 }

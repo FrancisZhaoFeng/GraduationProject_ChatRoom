@@ -87,11 +87,7 @@ public class ServerSendThread extends Thread {
 	}
 
 	private synchronized void send(Object type,Object obj) {
-//		String strToSend = str0;
-//
-//		strToSend = strToSend.replace("\n", GlobalStrings.replaceOfReturn);
 		try {
-//			mBuffWter.write(strToSend + "\n");
 			mBuffWter.writeObject(type);
 			mBuffWter.flush();
 			mBuffWter.writeObject(obj);
@@ -109,7 +105,7 @@ public class ServerSendThread extends Thread {
 		int senderId = GlobalInts.idPlaceholder; // since it's useless, so just
 													// a placeholder, we don't
 													// care who send the message
-		int receiverId = mClientActivity.getUserInfo().getId();
+		int receiverId = mClientActivity.getUserInfo().getUserid();
 		for (SendStackItem item0 : mSendList) {
 //			int type = item0.getType();
 //			String msg = item0.getStr();

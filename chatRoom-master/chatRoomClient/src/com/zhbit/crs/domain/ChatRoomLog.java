@@ -1,5 +1,7 @@
 package com.zhbit.crs.domain;
 
+import java.util.Date;
+
 /**
  * ChatRoomLog entity. @author MyEclipse Persistence Tools
  */
@@ -11,7 +13,7 @@ public class ChatRoomLog implements java.io.Serializable {
 	private Integer logid;
 	private User user;
 	private ChatRoom chatRoom;
-	private String sendtime;
+	private Date sendtime;
 	private String sendtext;
 	private byte[] sendimage;
 	private byte[] sendvoice;
@@ -24,13 +26,14 @@ public class ChatRoomLog implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public ChatRoomLog(String sendtime, Integer type) {
+	public ChatRoomLog(Date sendtime, Integer type) {
 		this.sendtime = sendtime;
 		this.type = type;
 	}
 
 	/** full constructor */
-	public ChatRoomLog(User user, ChatRoom chatRoom, String sendtime, String sendtext, byte[] sendimage, byte[] sendvoice, Integer type) {
+	public ChatRoomLog(User user, ChatRoom chatRoom, Date sendtime,
+			String sendtext, byte[] sendimage, byte[] sendvoice, Integer type) {
 		this.user = user;
 		this.chatRoom = chatRoom;
 		this.sendtime = sendtime;
@@ -66,11 +69,11 @@ public class ChatRoomLog implements java.io.Serializable {
 		this.chatRoom = chatRoom;
 	}
 
-	public String getSendtime() {
+	public Date getSendtime() {
 		return this.sendtime;
 	}
 
-	public void setSendtime(String sendtime) {
+	public void setSendtime(Date sendtime) {
 		this.sendtime = sendtime;
 	}
 
