@@ -13,7 +13,7 @@ public class ServerSendThread extends Thread {
 
 	private ServerActivity mClientActivity;
 
-//	private BufferedWriter mBuffWter;
+	// private BufferedWriter mBuffWter;
 	private ObjectOutputStream mBuffWter;
 	private ArrayList<SendStackItem> mSendList;
 
@@ -43,7 +43,7 @@ public class ServerSendThread extends Thread {
 				SendStackItem item0 = mSendList.get(0); // get one at the head
 
 				if (item0 != null) {
-					send(item0.getmType() + "",item0.getmObj());
+					send(item0.getmType() + "", item0.getmObj());
 				} else {
 					System.out.println("error, item0 = " + item0);
 					continue;
@@ -75,7 +75,7 @@ public class ServerSendThread extends Thread {
 		case GlobalMsgTypes.msgFriendshipRequestResponse:
 			break;
 		default:
-			send(type + "",obj);
+			send(type + "", obj);
 			return;
 		}
 
@@ -83,7 +83,7 @@ public class ServerSendThread extends Thread {
 		mSendList.add(item0); // add this item to the end of stack
 	}
 
-	private synchronized void send(Object type,Object obj) {
+	private synchronized void send(Object type, Object obj) {
 		try {
 			mBuffWter.writeObject(type);
 			mBuffWter.flush();
@@ -105,19 +105,21 @@ public class ServerSendThread extends Thread {
 													// care who send the message
 		int receiverId = mClientActivity.getUserInfo().getUserid();
 		for (SendStackItem item0 : mSendList) {
-//			int type = item0.getType();
-//			String msg = item0.getStr();
+			// int type = item0.getType();
+			// String msg = item0.getStr();
 			int type = item0.getmType();
 			Object msg = item0.getmObj();
 			switch (type) {
 			case GlobalMsgTypes.msgFromFriend:
-//				DBTempSaveUtil.saveUnsentChatMsg(senderId, receiverId, ChatEntity.Str2Ent(msg));
+				// DBTempSaveUtil.saveUnsentChatMsg(senderId, receiverId,
+				// ChatEntity.Str2Ent(msg));
 				break;
 			case GlobalMsgTypes.msgFriendshipRequest:
-//				DBTempSaveUtil.saveUnsentFrdReqs(senderId, receiverId, msg);
+				// DBTempSaveUtil.saveUnsentFrdReqs(senderId, receiverId, msg);
 				break;
 			case GlobalMsgTypes.msgFriendshipRequestResponse:
-//				DBTempSaveUtil.saveUnsentFrdReqResponse(receiverId, senderId, msg);
+				// DBTempSaveUtil.saveUnsentFrdReqResponse(receiverId, senderId,
+				// msg);
 				break;
 			default:
 				break;

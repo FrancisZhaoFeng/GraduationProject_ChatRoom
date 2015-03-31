@@ -13,23 +13,23 @@ public class HandShakeThread {
 	private UserDao userDao;
 	boolean legitimateHandShaker = true;
 
-	public User start(User user) {  //String msg0
+	public User start(User user) { // String msg0
 		try {
-//			String[] strArr0 = msg0.split(GlobalStrings.signinDivider);
-//			UserInfo uu = new UserInfo(strArr0[0]);
-//			String password = strArr0[1];
+			// String[] strArr0 = msg0.split(GlobalStrings.signinDivider);
+			// UserInfo uu = new UserInfo(strArr0[0]);
+			// String password = strArr0[1];
 
 			// set id
-//			UserInfo userInfo = DBUtil.loginWithUsername(uu, password);
+			// UserInfo userInfo = DBUtil.loginWithUsername(uu, password);
 			userDao = new UserDao();
 			List<User> users = userDao.login(user);
 			User usert = null;
-			if(users.size() !=0 ){
+			if (users.size() != 0) {
 				usert = users.get(0);
 				usert.setOnline(true);
 				userDao.updateUser(usert);
 			}
-//			userInfo.setIsOnline(1);
+			// userInfo.setIsOnline(1);
 			return usert;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -43,8 +43,8 @@ public class HandShakeThread {
 	 */
 	public boolean sendHandShakeBack(ServerActivity cliActv, User user) {
 		try {
-			cliActv.sendOneString(user, 3); //usrInfo.msgType 的值为 3
-//			cliActv.sendOneString(new User("zgfzg","zgfailmr"), 3);
+			cliActv.sendOneString(user, 3); // usrInfo.msgType 的值为 3
+			// cliActv.sendOneString(new User("zgfzg","zgfailmr"), 3);
 		} catch (Exception e) {
 			return false;
 		}
@@ -52,16 +52,18 @@ public class HandShakeThread {
 		return true;
 	}
 
-	public void sendFriendList(ServerActivity cliActv, List<User> users) {//ArrayList<UserInfo> userV
-//		String type56 = GlobalStrings.friendListDivider;
-//		int n = users.size();
-//		String str = n + type56;
-//		for (UserInfo uu0 : userV) {
-//			str += uu0.toString() + type56;
-//		}
+	public void sendFriendList(ServerActivity cliActv, List<User> users) {// ArrayList<UserInfo>
+																			// userV
+	// String type56 = GlobalStrings.friendListDivider;
+	// int n = users.size();
+	// String str = n + type56;
+	// for (UserInfo uu0 : userV) {
+	// str += uu0.toString() + type56;
+	// }
 		// str += UserInfo.strSplitter;
 		try {
-//			cliActv.sendOneString(str, GlobalMsgTypes.msgHandSHakeFriendList);
+			// cliActv.sendOneString(str,
+			// GlobalMsgTypes.msgHandSHakeFriendList);
 			cliActv.sendOneString(users, GlobalMsgTypes.msgHandSHakeFriendList);
 		} catch (Exception e) {
 		}

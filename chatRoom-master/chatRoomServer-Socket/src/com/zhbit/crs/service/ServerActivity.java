@@ -31,11 +31,11 @@ import com.zhbit.crs.domain.UserInfo;
 import com.zhbit.crs.md5.MD5;
 
 /**
-* @author zhaoguofeng
-* public constructor, major tasks here include : 
-* 1 : initialize the BufferedReader and OutputStreamWriter 
-* 2 : read in the user information and close this connection if input format is not correct
-*/
+ * @author zhaoguofeng public constructor, major tasks here include : 1 :
+ *         initialize the BufferedReader and OutputStreamWriter 2 : read in the
+ *         user information and close this connection if input format is not
+ *         correct
+ */
 public class ServerActivity {
 
 	private Socket mSocket;
@@ -47,7 +47,7 @@ public class ServerActivity {
 	private ServerListenThread mClientListen;
 	private ServerSendThread mClientSend;
 
-//	private UserInfo mUsrInfo;
+	// private UserInfo mUsrInfo;
 
 	private boolean mConnectSuccessfully;
 
@@ -57,9 +57,9 @@ public class ServerActivity {
 	private User user;
 
 	/**
-	 * public constructor, major tasks here include : 
-	 * 1 : initialize the BufferedReader and OutputStreamWriter 
-	 * 2 : read in the user information and close this connection if input format is not correct
+	 * public constructor, major tasks here include : 1 : initialize the
+	 * BufferedReader and OutputStreamWriter 2 : read in the user information
+	 * and close this connection if input format is not correct
 	 */
 	public ServerActivity(Socket socket, ServerListen serverListen) {
 		this.mSocket = socket;
@@ -67,7 +67,7 @@ public class ServerActivity {
 		mIsClosingAndSaving = false;
 		try {
 			mBuffRder = new ObjectInputStream(new BufferedInputStream(mSocket.getInputStream()));
-//			mBuffRder = new ObjectInputStream(mSocket.getInputStream());
+			// mBuffRder = new ObjectInputStream(mSocket.getInputStream());
 			mBuffWter = new ObjectOutputStream(mSocket.getOutputStream());
 			mServerListen = serverListen;
 
@@ -83,8 +83,8 @@ public class ServerActivity {
 
 	public void trySignup(User user) {
 		userDao = new UserDao();
-		if(!userDao.signUp(user)){
-			user.setUserid(-10); //与前端约定注册失败信息
+		if (!userDao.signUp(user)) {
+			user.setUserid(-10); // 与前端约定注册失败信息
 		}
 		sendOneString(user, GlobalMsgTypes.msgSignUp);
 	}
@@ -97,32 +97,36 @@ public class ServerActivity {
 			preceder.goOffLine();
 		}
 
-//		DBUtil.setOnAndOffLine(getUserInfo().getId(), 1);
+		// DBUtil.setOnAndOffLine(getUserInfo().getId(), 1);
 		mServerListen.updateFriendList(this);
 
 		// send online notification to all friends
-//		ArrayList<UserInfo> onlineList = DBUtil.getOnlineFriendList(getUserInfo().getId());
-//		for (UserInfo uup : onlineList) {
-//			ServerActivity target0 = ClientMap.getInstance().getById(uup.getId());
-//			if (target0 != null) {
-//				target0.sendOneString(getUserInfo().toString(), GlobalMsgTypes.msgFriendGoOnline);
-//			}
-//		}
-//
-//		onAskForUnsendMsgs();
+		// ArrayList<UserInfo> onlineList =
+		// DBUtil.getOnlineFriendList(getUserInfo().getId());
+		// for (UserInfo uup : onlineList) {
+		// ServerActivity target0 =
+		// ClientMap.getInstance().getById(uup.getId());
+		// if (target0 != null) {
+		// target0.sendOneString(getUserInfo().toString(),
+		// GlobalMsgTypes.msgFriendGoOnline);
+		// }
+		// }
+		//
+		// onAskForUnsendMsgs();
 	}
 
-	public void startHandShake(User userTemp) {  //String msg0
+	public void startHandShake(User userTemp) { // String msg0
 		mHandShake = new HandShakeThread();
 		this.user = mHandShake.start(userTemp);
 		userDao = new UserDao();
 		if (user != null) {
 			mHandShake.sendHandShakeBack(this, user);
-			if (user.getUserid() != null ) {  //mUsrInfo.getId() >= 0
+			if (user.getUserid() != null) { // mUsrInfo.getId() >= 0
 				List<Friend> friends = userDao.selectFriend(user);
-//				mHandShake.sendFriendList(this, DBUtil.loginToGetFriendList(mUsrInfo.getId()));
-				List <User> users = null;
-				for(int i = 0 ; i < friends.size();i++){
+				// mHandShake.sendFriendList(this,
+				// DBUtil.loginToGetFriendList(mUsrInfo.getId()));
+				List<User> users = null;
+				for (int i = 0; i < friends.size(); i++) {
 					users.add(userDao.selectUser(friends.get(i).getUserByFriendid()).get(0));
 				}
 				mHandShake.sendFriendList(this, users);
@@ -140,37 +144,40 @@ public class ServerActivity {
 			preceder.goOffLine();
 		}
 
-//		DBUtil.setOnAndOffLine(getUserInfo().getId(), 1);
-//		mServerListen.updateFriendList(this);
+		// DBUtil.setOnAndOffLine(getUserInfo().getId(), 1);
+		// mServerListen.updateFriendList(this);
 
 		// send online notification to all friends
-//		ArrayList<UserInfo> onlineList = DBUtil.getOnlineFriendList(getUserInfo().getId());
-//		for (UserInfo uup : onlineList) {
-//			ServerActivity target0 = ClientMap.getInstance().getById(uup.getId());
-//			if (target0 != null) {
-//				target0.sendOneString(getUserInfo().toString(), GlobalMsgTypes.msgFriendGoOnline);
-//			}
-//		}
+		// ArrayList<UserInfo> onlineList =
+		// DBUtil.getOnlineFriendList(getUserInfo().getId());
+		// for (UserInfo uup : onlineList) {
+		// ServerActivity target0 =
+		// ClientMap.getInstance().getById(uup.getId());
+		// if (target0 != null) {
+		// target0.sendOneString(getUserInfo().toString(),
+		// GlobalMsgTypes.msgFriendGoOnline);
+		// }
+		// }
 	}
 
-	public void startSearchPeople(SearchEntity searchEntity) {//String msg0
-//		SearchEntity s_ent0 = new SearchEntity(msg0);
+	public void startSearchPeople(SearchEntity searchEntity) {// String msg0
+	// SearchEntity s_ent0 = new SearchEntity(msg0);
 		List<User> users = null;
 		userDao = new UserDao();
 		if (searchEntity.getType() == SearchEntity.SEARCH_BY_NAME) {
-//			listU = DBUtil.searchForPeopleWithName(s_ent0);
+			// listU = DBUtil.searchForPeopleWithName(s_ent0);
 			users = userDao.searchUserByName(searchEntity);
 		} else {
-//			listU = DBUtil.searchForPeopleList(s_ent0);
+			// listU = DBUtil.searchForPeopleList(s_ent0);
 		}
 		if (users == null) {
 			users = new ArrayList<User>();
 		}
 
-//		String toSend = user.size() + GlobalStrings.searchListDivider;
-//		for (UserInfo uu : listU) {
-//			toSend += uu.toString() + GlobalStrings.searchListDivider;
-//		}
+		// String toSend = user.size() + GlobalStrings.searchListDivider;
+		// for (UserInfo uu : listU) {
+		// toSend += uu.toString() + GlobalStrings.searchListDivider;
+		// }
 		sendOneString(users, GlobalMsgTypes.msgSearchPeople);
 	}
 
@@ -186,39 +193,43 @@ public class ServerActivity {
 		System.out.println("start to send all unsends");
 
 		// for chatMsgs
-//		ArrayList<ChatPerLog> listOfChatPerLog = DBTempSaveUtil.getUnsentChatMsg(mUsrInfo.getId());
+		// ArrayList<ChatPerLog> listOfChatPerLog =
+		// DBTempSaveUtil.getUnsentChatMsg(mUsrInfo.getId());
 		chatLogDao = new ChatLogDao();
-		List<ChatPerLog> listOfChatPerLog =  chatLogDao.selectByReceiveId(user.getUserid());
+		List<ChatPerLog> listOfChatPerLog = chatLogDao.selectByReceiveId(user.getUserid());
 		for (ChatPerLog ent0 : listOfChatPerLog) {
 			sendOneData(ent0, 2);
 		}
 
 		// for frdReqs
-//		ArrayList<String> listOfFrdReqs = DBTempSaveUtil.getUnsentFrdReqs(mUsrInfo.getId());
-//		for (String str0 : listOfFrdReqs) {
-//			sendOneString(str0, GlobalMsgTypes.msgFriendshipRequest);
-//		}
+		// ArrayList<String> listOfFrdReqs =
+		// DBTempSaveUtil.getUnsentFrdReqs(mUsrInfo.getId());
+		// for (String str0 : listOfFrdReqs) {
+		// sendOneString(str0, GlobalMsgTypes.msgFriendshipRequest);
+		// }
 
 		// for frdReqResponses
-//		ArrayList<String> listOfFrdReqResp = DBTempSaveUtil.getUnsentFrdReqResponse(mUsrInfo.getId());
-//		for (String str0 : listOfFrdReqResp) {
-//			sendOneString(str0, GlobalMsgTypes.msgFriendshipRequestResponse);
-//		}
+		// ArrayList<String> listOfFrdReqResp =
+		// DBTempSaveUtil.getUnsentFrdReqResponse(mUsrInfo.getId());
+		// for (String str0 : listOfFrdReqResp) {
+		// sendOneString(str0, GlobalMsgTypes.msgFriendshipRequestResponse);
+		// }
 	}
 
 	/** notify a new message has come */
 	public void receivedNewMsg(int type, ChatPerLog chatPerLog) {
-//		ChatEntity ent0 = ChatEntity.Str2Ent(msg);
-		
+		// ChatEntity ent0 = ChatEntity.Str2Ent(msg);
+
 		if (type == 2) {
-//			int recvId = ent0.getReceiverId();
+			// int recvId = ent0.getReceiverId();
 			int recvId = chatPerLog.getUserByReceiverid().getUserid();
 			System.out.println("receivedNewMsg-");
 			ServerActivity ca0 = mServerListen.getClientActivityById(recvId);
 			if (ca0 != null) {
 				ca0.sendOneData(chatPerLog, 2);
 			} else {
-//				DBTempSaveUtil.saveUnsentChatMsg(mUsrInfo.getId(), recvId, ent0);
+				// DBTempSaveUtil.saveUnsentChatMsg(mUsrInfo.getId(), recvId,
+				// ent0);
 				new ChatLogDao().insertChatPerLog(chatPerLog);
 			}
 		}
@@ -234,13 +245,14 @@ public class ServerActivity {
 	}
 
 	/** send one ChatEntity to this client */
-	public void sendOneData(ChatPerLog chatPerLog, int sendType) {//ChatEntity entPackage
+	public void sendOneData(ChatPerLog chatPerLog, int sendType) {// ChatEntity
+																	// entPackage
 		System.out.println("Receiver is " + getUserInfo().getUsername());
 
-//		String toSend;
-//
-//		toSend = entPackage.toString();
-//		sendOneString(toSend, sendType);
+		// String toSend;
+		//
+		// toSend = entPackage.toString();
+		// sendOneString(toSend, sendType);
 		sendOneString(chatPerLog, sendType);
 	}
 
@@ -268,7 +280,8 @@ public class ServerActivity {
 			ServerActivity target0 = ClientMap.getInstance().getById(uu0.getId());
 			target0.sendOneString(msg0, GlobalMsgTypes.msgFriendshipRequest);
 		} else {
-//			DBTempSaveUtil.saveUnsentFrdReqs(requester.getId(), uu0.getId(), msg0);
+			// DBTempSaveUtil.saveUnsentFrdReqs(requester.getId(), uu0.getId(),
+			// msg0);
 		}
 	}
 
@@ -279,20 +292,21 @@ public class ServerActivity {
 		UserInfo requestee = new UserInfo(strArr0[2]);
 
 		if (response0 == GlobalInts.idAcceptFriendship) {
-//			DBUtil.makeFriends(requester.getId(), requestee.getId());
+			// DBUtil.makeFriends(requester.getId(), requestee.getId());
 		}
 
 		ServerActivity ca0 = ClientMap.getInstance().getById(requester.getId());
 		if (ca0 != null) {
 			ca0.sendOneString(msg0, GlobalMsgTypes.msgFriendshipRequestResponse);
 		} else {
-//			DBTempSaveUtil.saveUnsentFrdReqResponse(requester.getId(), requestee.getId(), msg0);
+			// DBTempSaveUtil.saveUnsentFrdReqResponse(requester.getId(),
+			// requestee.getId(), msg0);
 		}
 	}
 
-	public void onUpdateUserInfo(User user) {//String msg0
-//		UserInfo uu0 = new UserInfo(msg0);
-//		UserInfo uux = DBUtil.updateUserInfomaton(uu0);
+	public void onUpdateUserInfo(User user) {// String msg0
+	// UserInfo uu0 = new UserInfo(msg0);
+	// UserInfo uux = DBUtil.updateUserInfomaton(uu0);
 		userDao = new UserDao();
 		userDao.updateUser(user);
 	}
@@ -314,22 +328,25 @@ public class ServerActivity {
 		closeConnect();
 		mServerListen.removeOneClient(this);
 
-//		List<User> onlineList = DBUtil.getOnlineFriendList(getUserInfo().getId());
-//
-//		for (UserInfo uup : onlineList) {
-//			ServerActivity target0 = ClientMap.getInstance().getById(uup.getId());
-//			if (target0 != null) {
-//				target0.sendOneString(getUserInfo().toString(), GlobalMsgTypes.msgFriendGoOffline);
-//			}
-//		}
-//
-//		mClientSend.saveUnsends();
-//
-//		mIsClosingAndSaving = false;
+		// List<User> onlineList =
+		// DBUtil.getOnlineFriendList(getUserInfo().getId());
+		//
+		// for (UserInfo uup : onlineList) {
+		// ServerActivity target0 =
+		// ClientMap.getInstance().getById(uup.getId());
+		// if (target0 != null) {
+		// target0.sendOneString(getUserInfo().toString(),
+		// GlobalMsgTypes.msgFriendGoOffline);
+		// }
+		// }
+		//
+		// mClientSend.saveUnsends();
+		//
+		// mIsClosingAndSaving = false;
 	}
 
 	private void closeConnect() {
-//		DBUtil.setOnAndOffLine(getUserInfo().getId(), 0);
+		// DBUtil.setOnAndOffLine(getUserInfo().getId(), 0);
 		try {
 			mSocket.close();
 		} catch (Exception e) {

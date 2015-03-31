@@ -6,8 +6,6 @@ import java.util.Map;
 
 import com.zhbit.crs.service.ServerActivity;
 
-
-
 public class ClientMap {
 
 	private static ClientMap mInstance;
@@ -15,7 +13,7 @@ public class ClientMap {
 	private HashMap<Integer, ServerActivity> mMap;
 
 	public static ClientMap getInstance() {
-		if(mInstance == null) {
+		if (mInstance == null) {
 			mInstance = new ClientMap();
 		}
 		return mInstance;
