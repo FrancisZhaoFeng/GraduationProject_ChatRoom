@@ -25,10 +25,11 @@ public class ServerListenThread extends Thread {
 		mServerActivity = ca0;
 		mBuffRder = br0;
 	}
-//	public ServerListenThread(ServerActivity ca0, Socket mSocket) {
-//		mServerActivity = ca0;
-//		this.socket = mSocket;
-//	}
+
+	// public ServerListenThread(ServerActivity ca0, Socket mSocket) {
+	// mServerActivity = ca0;
+	// this.socket = mSocket;
+	// }
 
 	/*
 	 * (non-Javadoc)
@@ -42,12 +43,12 @@ public class ServerListenThread extends Thread {
 			try {
 				obj = mBuffRder.readObject();
 				System.out.println("mBuffRder.readObject()");
-				int msgType = Integer.parseInt((String)obj);
-				System.out.println("msgType:"+msgType);
+				int msgType = Integer.parseInt((String) obj);
+				System.out.println("msgType:" + msgType);
 				// if received == null, meaning the socket has been closed
 				// remove the class/threads etc.associated with this specific
 				// client
-				if ( obj == null) {   //received == null 
+				if (obj == null) { // received == null
 					System.out.println("obj is null");
 					mServerActivity.goOffLine();
 					return;
@@ -59,64 +60,66 @@ public class ServerListenThread extends Thread {
 					}
 					switch (msgType) {
 					case GlobalMsgTypes.msgPublicRoom:
-						System.out.println("GlobalMsgTypes.msgPublicRoom"+GlobalMsgTypes.msgPublicRoom);
-//						ChatEntity msg = ChatEntity.Str2Ent(actualMsg);
-						ChatRoomLog chatRoomLog = (ChatRoomLog)obj;
-//						mServerActivity.receivedNewMsg(msgType, msg.toString());
-//						mServerActivity.receivedNewMsg(msgType, chatRoomLog);
+						System.out.println("GlobalMsgTypes.msgPublicRoom" + GlobalMsgTypes.msgPublicRoom);
+						// ChatEntity msg = ChatEntity.Str2Ent(actualMsg);
+						ChatRoomLog chatRoomLog = (ChatRoomLog) obj;
+						// mServerActivity.receivedNewMsg(msgType,
+						// msg.toString());
+						// mServerActivity.receivedNewMsg(msgType, chatRoomLog);
 						// add this ChatEntity data package into the system
 						// stack
 						break;
 					case GlobalMsgTypes.msgChattingRoom:
-						System.out.println("GlobalMsgTypes.msgChattingRoom"+GlobalMsgTypes.msgChattingRoom);
+						System.out.println("GlobalMsgTypes.msgChattingRoom" + GlobalMsgTypes.msgChattingRoom);
 						/* to be added later */
 						break;
 					case GlobalMsgTypes.msgFromFriend:
-						System.out.println("GlobalMsgTypes.msgFromFriend"+GlobalMsgTypes.msgFromFriend);
-						ChatPerLog chatPerLog = (ChatPerLog)obj;
-//						ChatEntity msg2 = ChatEntity.Str2Ent(actualMsg);
-//						mServerActivity.receivedNewMsg(msgType, msg2.toString());
+						System.out.println("GlobalMsgTypes.msgFromFriend" + GlobalMsgTypes.msgFromFriend);
+						ChatPerLog chatPerLog = (ChatPerLog) obj;
+						// ChatEntity msg2 = ChatEntity.Str2Ent(actualMsg);
+						// mServerActivity.receivedNewMsg(msgType,
+						// msg2.toString());
 						mServerActivity.receivedNewMsg(msgType, chatPerLog);
 						/* to be added later */
 						break;
 					case GlobalMsgTypes.msgHandShake:
-						System.out.println("GlobalMsgTypes.msgHandShake"+GlobalMsgTypes.msgHandShake);
-						mServerActivity.startHandShake((User)obj);
+						System.out.println("GlobalMsgTypes.msgHandShake" + GlobalMsgTypes.msgHandShake);
+						mServerActivity.startHandShake((User) obj);
 						break;
 					case GlobalMsgTypes.msgSignUp:
-						System.out.println("GlobalMsgTypes.msgSignUp"+GlobalMsgTypes.msgSignUp);
-						mServerActivity.trySignup((User)obj);
+						System.out.println("GlobalMsgTypes.msgSignUp" + GlobalMsgTypes.msgSignUp);
+						mServerActivity.trySignup((User) obj);
 						break;
 					case GlobalMsgTypes.msgSearchPeople:
-						System.out.println("GlobalMsgTypes.msgSearchPeople"+GlobalMsgTypes.msgSearchPeople);
-						SearchEntity searchEntity = (SearchEntity)obj;
+						System.out.println("GlobalMsgTypes.msgSearchPeople" + GlobalMsgTypes.msgSearchPeople);
+						SearchEntity searchEntity = (SearchEntity) obj;
 						mServerActivity.startSearchPeople(searchEntity);
 						break;
 					case GlobalMsgTypes.msgFriendshipRequest:
-						Friend friend = (Friend)obj;
-						System.out.println("GlobalMsgTypes.msgFriendshipRequest"+GlobalMsgTypes.msgFriendshipRequest);
+						Friend friend = (Friend) obj;
+						System.out.println("GlobalMsgTypes.msgFriendshipRequest" + GlobalMsgTypes.msgFriendshipRequest);
 						System.out.println("one friend request comes");
-//						mServerActivity.startFriendshipRequest(friend);
+						// mServerActivity.startFriendshipRequest(friend);
 						break;
 					case GlobalMsgTypes.msgFriendshipRequestResponse:
-						System.out.println("GlobalMsgTypes.msgFriendshipRequestResponse"+GlobalMsgTypes.msgFriendshipRequestResponse);
-//						mServerActivity.onFriendshipRequestResponse(actualMsg);
+						System.out.println("GlobalMsgTypes.msgFriendshipRequestResponse" + GlobalMsgTypes.msgFriendshipRequestResponse);
+						// mServerActivity.onFriendshipRequestResponse(actualMsg);
 						break;
 					case GlobalMsgTypes.msgUpdateUserInfo:
-						System.out.println("GlobalMsgTypes.msgUpdateUserInfo"+GlobalMsgTypes.msgUpdateUserInfo);
-						mServerActivity.onUpdateUserInfo((User)obj);
+						System.out.println("GlobalMsgTypes.msgUpdateUserInfo" + GlobalMsgTypes.msgUpdateUserInfo);
+						mServerActivity.onUpdateUserInfo((User) obj);
 						break;
 					case GlobalMsgTypes.msgAskForUnsendMsgs:
-						System.out.println("GlobalMsgTypes.msgAskForUnsendMsgs"+GlobalMsgTypes.msgAskForUnsendMsgs);
+						System.out.println("GlobalMsgTypes.msgAskForUnsendMsgs" + GlobalMsgTypes.msgAskForUnsendMsgs);
 						mServerActivity.onAskForUnsendMsgs();
 						break;
 					case GlobalMsgTypes.msgMsgReceived:
-						System.out.println("GlobalMsgTypes.msgMsgReceived"+GlobalMsgTypes.msgMsgReceived);
+						System.out.println("GlobalMsgTypes.msgMsgReceived" + GlobalMsgTypes.msgMsgReceived);
 						mServerActivity.responsedOfMsgReceived();
 						break;
 					case GlobalMsgTypes.msgBackOnline:
-						System.out.println("GlobalMsgTypes.msgBackOnline"+GlobalMsgTypes.msgBackOnline);
-//						mServerActivity.backOnline(actualMsg);
+						System.out.println("GlobalMsgTypes.msgBackOnline" + GlobalMsgTypes.msgBackOnline);
+						// mServerActivity.backOnline(actualMsg);
 						break;
 					default:
 						break;
