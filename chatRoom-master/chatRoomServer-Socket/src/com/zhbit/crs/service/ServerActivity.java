@@ -81,17 +81,10 @@ public class ServerActivity {
 	}
 
 	public void trySignup(User user) {
-//		String[] strArr0 = msg0.split(GlobalStrings.signupDivider);
-//
-//		String userStr = strArr0[0];
-//		String password = strArr0[1];
-//
-//		UserInfo uu0 = new UserInfo(userStr);
-//
-//		UserInfo uux = DBUtil.signUp(uu0, password);
 		userDao = new UserDao();
-		userDao.signUp(user);
-
+		if(!userDao.signUp(user)){
+			user.setUserid(-10); //与前端约定注册失败信息
+		}
 		sendOneString(user, GlobalMsgTypes.msgSignUp);
 	}
 
@@ -121,7 +114,6 @@ public class ServerActivity {
 
 	public void startHandShake(User userTemp) {  //String msg0
 		mHandShake = new HandShakeThread();
-		userTemp.setPassword(new MD5().toMD5(userTemp.getPassword()));
 		this.user = mHandShake.start(userTemp);
 		userDao = new UserDao();
 		if (user != null) {

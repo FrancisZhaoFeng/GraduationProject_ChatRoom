@@ -93,7 +93,6 @@ public class MainBodyActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		// this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -135,7 +134,7 @@ public class MainBodyActivity extends Activity {
 		View viewFriendSearch = li.inflate(R.layout.main_tab_friends, null);
 		View viewSettings = li.inflate(R.layout.tabsettings_main, null);
 
-		/***************************** set the looks of the pager ***********************************************/
+		/***************************** set the looks of the pager initial***********************************************/
 		final ArrayList<View> listOfViews = new ArrayList<View>();
 		listOfViews.add(viewPastMsgs);
 		listOfViews.add(viewChooseRoom);
@@ -168,7 +167,6 @@ public class MainBodyActivity extends Activity {
 
 		mMainPager.setAdapter(pagerAdapter0);
 		/***************************** set the looks of the pager **********************************************/
-
 		ChooseRoomPage.getInstance().onInit(viewChooseRoom, this); // 聊天室列表界面
 		ChooseRoomPage.getInstance().onCreate();
 		FriendListPage.getInstance().onInit(viewFriendList, this); // 好友列表界面
@@ -186,7 +184,6 @@ public class MainBodyActivity extends Activity {
 		MainBodyService.getInstance().onReadFrdReqNotif();
 		MainBodyService.getInstance().onReadUnreadMsgAm();
 		// the msgItem read in is completed inside MainTabMsgPage
-
 		new AskForUnsendThread().start();
 	}
 
@@ -194,7 +191,6 @@ public class MainBodyActivity extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 		mInstance = null;
-
 		Intent intentTemp = new Intent(MainBodyActivity.this, ChatService.class);
 		stopService(intentTemp);
 		intentTemp = new Intent(MainBodyActivity.this, FriendRequestService.class);
@@ -203,7 +199,6 @@ public class MainBodyActivity extends Activity {
 			unregisterReceiver(mNetStateReceiver);
 		} catch (Exception e) {
 		}
-
 		((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).cancelAll();
 	}
 
@@ -274,7 +269,7 @@ public class MainBodyActivity extends Activity {
 	}
 
 	public void onReceiveSearchList(List<User> users) { // String msg0
-	// mSearchedString = msg0;
+		// mSearchedString = msg0;
 		this.users = users;
 		mMsg9Received = true;
 	}

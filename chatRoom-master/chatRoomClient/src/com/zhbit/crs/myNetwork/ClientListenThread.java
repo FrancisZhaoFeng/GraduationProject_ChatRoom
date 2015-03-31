@@ -27,7 +27,7 @@ public class ClientListenThread extends Thread {
 
 //	private InputStreamReader mInStrRder0;
 //	private BufferedReader mBuffRder0;
-	private ObjectInputStream is;
+	private ObjectInputStream is = null;
 	private User user;
 	private List<User> users;
 
@@ -42,16 +42,12 @@ public class ClientListenThread extends Thread {
 	public void run() {
 		super.run();
 		try {
-//			mInStrRder0 = new InputStreamReader(mSocket0.getInputStream());
-//			mBuffRder0 = new BufferedReader(mInStrRder0);
 			is = new ObjectInputStream(new BufferedInputStream(mSocket0.getInputStream()));
 			String resp = null;
 
 			while (true) {
 				if ((resp = (String)is.readObject()) != null) {   //mBuffRder0.readLine()
 					int msgType = Integer.parseInt(resp); // type of message received
-//					String actualMsg = mBuffRder0.readLine();
-//					actualMsg = actualMsg.replace(GlobalStrings.replaceOfReturn, "\n");
 					Object obj = is.readObject();
 					switch (msgType) {
 					case GlobalMsgTypes.msgPublicRoom:

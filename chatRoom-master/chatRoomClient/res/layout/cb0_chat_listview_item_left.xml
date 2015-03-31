@@ -21,12 +21,14 @@
         android:layout_toRightOf="@id/cb0ChatListviewAvatarLeft"
         android:layout_below="@id/cb0ChatListviewNameLeft"
         android:background="@drawable/cb0_chat_left">
+
     <TextView
         android:id="@+id/cb0ChatListviewMsgLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxWidth="220dp"
         android:textSize="16sp" />
+
 	</RelativeLayout>
 	<TextView
 	    android:id="@+id/cb0ChatListviewTimeLeft"

@@ -32,12 +32,12 @@ public class ServerListen {
 	}
 
 	public void updateFriendList(ServerActivity ca0) {
-		ClientMap.getInstance().insert(ca0.getUserInfo().getId(), ca0);
+		ClientMap.getInstance().insert(ca0.getUserInfo().getUserid(), ca0);
 	}
 	
 	public void removeOneClient(ServerActivity client0)
 	{
-		ClientMap.getInstance().remove(client0.getUserInfo().getId());
+		ClientMap.getInstance().remove(client0.getUserInfo().getUserid());
 	}
 
 	public ServerActivity getClientActivityById(int id) {

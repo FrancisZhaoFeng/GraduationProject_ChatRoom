@@ -99,7 +99,7 @@ public class NetworkService {
 	 *            发送信息到服务器，先发送：type，后发送：sentence
 	 */
 	public void sendUpload(int type, Object obj) {
-		sendUpload(type+"", obj);
+		sendUpload(""+type, obj);
 	}
 
 	/* synchronized so only one send action is happening at a time */

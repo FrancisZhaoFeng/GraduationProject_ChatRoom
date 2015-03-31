@@ -29,6 +29,7 @@ import com.zhbit.crs.domain.User;
 import com.zhbit.crs.mainBody.MainBodyActivity;
 import com.zhbit.crs.myNetwork.NetConnect;
 import com.zhbit.crs.myNetwork.NetworkService;
+import com.zhbit.crs.util.MD5;
 
 /**
  * MainActivity is the entry activity, which provides a login page set to
@@ -88,8 +89,9 @@ public class MainActivity extends Activity {
 		mPassword = mEtPassword.getText().toString();
 		if (mName.equals("") || mName.length() < 5 || mName.length() >= 16 || mPassword.length() < 5 || mPassword.length() >= 16) {// Please
 			// Name and Sex"
-			Toast.makeText(MainActivity.this, "Please Specify Your Name and Password correctly", Toast.LENGTH_LONG).show();
+			Toast.makeText(MainActivity.this, "Please Specify Your Nickname and Password correctly", Toast.LENGTH_LONG).show();
 		} else {
+			mPassword =new MD5().toMD5(mPassword);
 			user = new User(mName, mPassword);
 			/**
 			 * if mNetcon is connected already, close it first here we use try
@@ -106,11 +108,6 @@ public class MainActivity extends Activity {
 			NetworkService.getInstance().setupConnection();
 			Log.w("mark", "NetworkService.getInstance().setupConnection()");
 			if (NetworkService.getInstance().getIsConnected()) {
-				// String usrInfo = mUserInfo.toString() +
-				// GlobalStrings.signinDivider + mPassword +
-				// GlobalStrings.signinDivider;
-				// NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgHandShake,
-				// usrInfo);
 				NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgHandShake, user);
 				Log.w("mark", "NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgHandShake, user)");
 			} else {
@@ -134,14 +131,11 @@ public class MainActivity extends Activity {
 			}
 			Log.d("connectedApp isonline : ", "" + user.getOnline() + "+++" + "++++++++++");
 			ConnectedApp connected_app0 = ConnectedApp.getInstance();
-			// connected_app0.setConnect(mNetCon);
 			connected_app0.setUserInfo(user);
 			connected_app0.clearListActivity();
 			connected_app0.instantiateListActivity();
 
 			Intent intent0 = new Intent(MainActivity.this, MainBodyActivity.class);
-			// intent0.putExtra("username", mUserInfo.getName());
-			// intent0.putExtra("usersex", mUserInfo.getSex());
 			startActivity(intent0);
 
 			finish();

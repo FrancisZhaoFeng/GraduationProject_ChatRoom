@@ -94,6 +94,7 @@ public class ServerSendThread extends Thread {
 			mBuffWter.flush();
 			System.out.println("here is send object function\n");
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 

@@ -3,6 +3,7 @@ package com.zhbit.crs.action;
 import org.yuner.www.R;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
@@ -19,7 +20,10 @@ import android.widget.Toast;
 import com.zhbit.crs.commons.GlobalErrors;
 import com.zhbit.crs.commons.GlobalMsgTypes;
 import com.zhbit.crs.domain.User;
+import com.zhbit.crs.mainBody.MainBodyActivity;
 import com.zhbit.crs.myNetwork.NetworkService;
+import com.zhbit.crs.util.MD5;
+import com.zhbit.crs.util.tools;
 
 public class RegisterActivity extends Activity {
 
@@ -59,9 +63,9 @@ public class RegisterActivity extends Activity {
 		mEtPassword = (EditText) findViewById(R.id.main_register_edittext_password);
 		mEtConfirmPassword = (EditText) findViewById(R.id.main_register_edittext_confirm_password);
 		mEtTelephone = (EditText) findViewById(R.id.main_register_edittext_telephone);
-		mSpBirthYear = (Spinner) findViewById(R.id.main_register_spinner_year);
-		mSpBirthMonth = (Spinner) findViewById(R.id.main_register_spinner_month);
-		mSpBirthDay = (Spinner) findViewById(R.id.main_register_spinner_day);
+//		mSpBirthYear = (Spinner) findViewById(R.id.main_register_spinner_year);
+//		mSpBirthMonth = (Spinner) findViewById(R.id.main_register_spinner_month);
+//		mSpBirthDay = (Spinner) findViewById(R.id.main_register_spinner_day);
 		mSpAge = (Spinner) findViewById(R.id.main_register_spinner_age);
 		mRgpSex = (RadioGroup) findViewById(R.id.mainRegisterRgpChooseSex);
 
@@ -81,10 +85,10 @@ public class RegisterActivity extends Activity {
 				String confirmPassword = mEtConfirmPassword.getText().toString().trim();
 				String telephone = mEtTelephone.getText().toString().trim();
 
-				int birthYear = mSpBirthYear.getSelectedItemPosition() + 1941;
-				int birthMonth = mSpBirthMonth.getSelectedItemPosition() + 1;
-				int birthDay = mSpBirthDay.getSelectedItemPosition() + 1;
-				int age = mSpAge.getSelectedItemPosition()+16;
+//				int birthYear = mSpBirthYear.getSelectedItemPosition() + 1941;
+//				int birthMonth = mSpBirthMonth.getSelectedItemPosition() + 1;
+//				int birthDay = mSpBirthDay.getSelectedItemPosition() + 1;
+				int age = mSpAge.getSelectedItemPosition()+5;
 
 				int sex;
 				int sexChoseId = mRgpSex.getCheckedRadioButtonId();
@@ -100,13 +104,16 @@ public class RegisterActivity extends Activity {
 					break;
 				}
 				if (name.equals("")) {
-					Toast.makeText(RegisterActivity.this, "please set name and age correctly", Toast.LENGTH_SHORT).show();
+					Toast.makeText(RegisterActivity.this, "please input Nickname", Toast.LENGTH_SHORT).show();
 					return;
 				} else if (name.length() < 5) {
-					Toast.makeText(RegisterActivity.this, "name should be greater than 5 characters", Toast.LENGTH_SHORT).show();
+					Toast.makeText(RegisterActivity.this, "Nickname should be greater than 5 characters", Toast.LENGTH_SHORT).show();
 					return;
 				} else if (name.length() >= 16) {
-					Toast.makeText(RegisterActivity.this, "name should be less than 5 characters", Toast.LENGTH_SHORT).show();
+					Toast.makeText(RegisterActivity.this, "Nickname should be less than 16 characters", Toast.LENGTH_SHORT).show();
+					return;
+				}else if(new tools().checkInput(password)){
+					Toast.makeText(RegisterActivity.this, "password should 3 kind of (number,upper,lower,underline)", Toast.LENGTH_SHORT).show();
 					return;
 				}else if (password.length() < 5) {
 					Toast.makeText(RegisterActivity.this, "password should be longer than 5 characters", Toast.LENGTH_SHORT).show();
@@ -114,7 +121,10 @@ public class RegisterActivity extends Activity {
 				} else if (!password.equals(confirmPassword)) {
 					Toast.makeText(RegisterActivity.this, "your confirmed password is not same as your password", Toast.LENGTH_SHORT).show();
 					return;
-				} else if (sex < 0) {
+				} else if (telephone.length() != 11) {
+					Toast.makeText(RegisterActivity.this, "phone numbe should be 11 number", Toast.LENGTH_SHORT).show();
+					return;
+				}else if (sex < 0) {
 					Toast.makeText(RegisterActivity.this, "please choose your gender", Toast.LENGTH_SHORT).show();
 					return;
 				}
@@ -124,7 +134,8 @@ public class RegisterActivity extends Activity {
 				 * + "password : " + password + "\n" + "sex " +
 				 * sex,Toast.LENGTH_SHORT).show();
 				 */
-				tryRegister(name, password, telephone,birthYear, birthMonth, birthDay,age , sex==0?false:true);//0代表女
+				password = new MD5().toMD5(password);  //MD5加密密码
+				tryRegister(name, password, telephone,age , sex==0?false:true);//0代表女
 			}
 		});
 	}
@@ -141,7 +152,7 @@ public class RegisterActivity extends Activity {
 		finish(); // destroy RegisterActivity when leave
 	}
 
-	public void tryRegister(String name, String password, String telephone,int birthYear, int birthMonth, int birthDay,int age, Boolean sex) {
+	public void tryRegister(String name, String password, String telephone,int age, Boolean sex) {
 //		UserInfo uu0 = new UserInfo(name, 0, sex, birthYear, birthMonth, birthDay, 0);
 		User user = new User(name,password,telephone,age,sex);
 		user.setOnline(false);//注册时默认设置不在线
@@ -168,6 +179,9 @@ public class RegisterActivity extends Activity {
 			Toast.makeText(this, "sorry name already exist", Toast.LENGTH_SHORT).show();
 		} else if (mUserAfterRegister.getUserid() >= 0) {
 			Toast.makeText(this, "congratulations register successfully", Toast.LENGTH_SHORT).show();
+
+			Intent intent0 = new Intent(RegisterActivity.this, MainActivity.class);
+			startActivity(intent0);
 		} else {
 			Toast.makeText(this, "sorry cannot register", Toast.LENGTH_SHORT).show();
 		}

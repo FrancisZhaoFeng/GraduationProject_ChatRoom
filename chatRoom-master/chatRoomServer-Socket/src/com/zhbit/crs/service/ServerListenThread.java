@@ -75,7 +75,6 @@ public class ServerListenThread extends Thread {
 						break;
 					case GlobalMsgTypes.msgHandShake:
 						System.out.println("GlobalMsgTypes.msgHandShake"+GlobalMsgTypes.msgHandShake);
-//						mServerActivity.startHandShake(actualMsg);
 						mServerActivity.startHandShake((User)obj);
 						break;
 					case GlobalMsgTypes.msgSignUp:

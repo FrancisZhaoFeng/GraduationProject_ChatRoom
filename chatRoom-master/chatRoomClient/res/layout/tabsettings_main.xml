@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@drawable/title_bar" >
-        
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -16,128 +16,230 @@
             android:text="Settings"
             android:textColor="#fff"
             android:textSize="18sp" />
-        
     </RelativeLayout>
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/shape_bg"
         android:orientation="vertical" >
-	    
-	    <LinearLayout
-	        android:layout_width="match_parent"
-	        android:layout_height="50dp"
-	        android:gravity="center_vertical"
-	        android:orientation="horizontal" >    
-	        <TextView
-	            android:layout_width="0px"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1"
-	            android:layout_marginLeft="10dp"
-	            android:paddingLeft="6dp"
-	            android:gravity="left"
-	            android:text="Birthday"
-	            android:textSize="18sp" />
-	        <RelativeLayout 
-	            android:layout_width="0px"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="2.6"
-	            android:layout_marginLeft="5dp"
-	            android:layout_marginRight="5dp" >		        
-	            <Spinner
-		            android:id="@+id/tabsettings_spinner_year"
-		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content"
-		            android:layout_alignParentLeft="true"
-		            android:layout_centerVertical="true"
-		            android:layout_marginLeft="1dp"
-		            android:entries="@array/birth_year_range" />
-		        <Spinner
-		            android:id="@+id/tabsettings_spinner_month"
-		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content"
-		            android:layout_toRightOf="@id/tabsettings_spinner_year"
-		            android:layout_centerVertical="true"
-		            android:layout_marginLeft="1dp"
-		            android:entries="@array/birth_month_range" />
-		        <Spinner
-		            android:id="@+id/tabsettings_spinner_day"
-		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content"
-		            android:layout_toRightOf="@id/tabsettings_spinner_month"
-		            android:layout_centerVertical="true"
-		            android:layout_marginLeft="1dp"
-		            android:entries="@array/birth_day_range" />
-	        </RelativeLayout>
-	        
-	    </LinearLayout>
-	    
-	    <View
-	        android:layout_width="match_parent"
-	        android:layout_height="1dp"
-	        android:background="@drawable/shape_line" />
-	    
-	    <LinearLayout
-	        android:layout_width="match_parent"
-	        android:layout_height="60dp"
-	        android:gravity="center_vertical"
-	        android:orientation="horizontal" >    
-	        <TextView
-	            android:layout_width="0px"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1"
-	            android:layout_marginLeft="10dp"
-	            android:paddingLeft="6dp"
-	            android:gravity="left"
-	            android:text="Gender"
-	            android:textSize="18sp" />
-	        <RadioGroup
-	            android:layout_width="0px"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="2.6"
-			    android:id="@+id/tabsettings_rgp_chooseSex"
-			    android:paddingLeft="5dp"
-			    android:layout_centerVertical="true">
-			    <RadioButton
-			        android:id="@+id/tabsettings_rd_btnFemale"
-			        android:layout_width="wrap_content"
-			    	android:layout_height="wrap_content"
-			    	android:text="Female"/>
-			    <RadioButton
-			        android:id="@+id/tabsettings_rd_btnMale"
-			        android:layout_width="wrap_content"
-			    	android:layout_height="wrap_content"
-			    	android:text="Male"/>
-			</RadioGroup>
-	    </LinearLayout>
-	    
-	    <View
-	        android:layout_width="match_parent"
-	        android:layout_height="1dp"
-	        android:background="@drawable/shape_line" />
-	    
-	</LinearLayout>
-    
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="6dp"
+                android:text="Age"
+                android:textSize="18sp" />
+
+            <RelativeLayout
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="2.6" >
+
+                <Spinner
+                    android:id="@+id/tabsettings_spinner_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="1dp"
+                    android:entries="@array/age_range" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/shape_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="6dp"
+                android:text="Gender"
+                android:textSize="18sp" />
+
+            <RadioGroup
+                android:id="@+id/tabsettings_rgp_chooseSex"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_weight="2.6"
+                android:paddingLeft="5dp" >
+
+                <RadioButton
+                    android:id="@+id/tabsettings_rd_btnFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female" />
+
+                <RadioButton
+                    android:id="@+id/tabsettings_rd_btnMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/shape_line" />
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" >
-	    <Button
-	        android:id="@+id/tabsettings_btn_update"
-	        android:layout_width="match_parent"
-	        android:layout_height="40dp"
-	        android:layout_centerInParent="true"
-	        android:layout_marginLeft="20dp"
-	        android:layout_marginRight="20dp"
-	        android:layout_marginTop="40dp"
-	        android:text="Update"
-	        android:background="@drawable/register_btn_bg" />
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp" >
+
+        <Button
+            android:id="@+id/tabsettings_btn_updateInfo"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/register_btn_bg"
+            android:text="UpdateInfo" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_bg"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/shape_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/tabsettings_edittext_oldpassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#ffffff"
+                android:hint="Input old password"
+                android:inputType="textPassword"
+                android:maxLength="15"
+                android:paddingBottom="2dp"
+                android:paddingLeft="6dp"
+                android:paddingTop="2dp"
+                android:singleLine="true"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/shape_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/tabsettings_edittext_newpassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#ffffff"
+                android:hint="NewPassword at least 5 letters"
+                android:inputType="textPassword"
+                android:maxLength="15"
+                android:paddingBottom="2dp"
+                android:paddingLeft="6dp"
+                android:paddingTop="2dp"
+                android:singleLine="true"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/shape_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/tabsettings_edittext_confirm_newpassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#ffffff"
+                android:hint="Confirm NewPassword"
+                android:inputType="textPassword"
+                android:maxLength="15"
+                android:paddingBottom="2dp"
+                android:paddingLeft="6dp"
+                android:paddingTop="2dp"
+                android:singleLine="true"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="3dp" >
+
+        <Button
+            android:id="@+id/tabsettings_btn_updatepassword"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/register_btn_bg"
+            android:text="UpdatePassword" />
     </RelativeLayout>
 
 </LinearLayout>
