@@ -23,7 +23,6 @@ public class ServerSendThread extends Thread {
 
 	public ServerSendThread(ServerActivity ca0, ObjectOutputStream bufw) {
 		mClientActivity = ca0;
-
 		mBuffWter = bufw;
 		mSendList = new ArrayList<SendStackItem>();
 	}
@@ -44,8 +43,6 @@ public class ServerSendThread extends Thread {
 				SendStackItem item0 = mSendList.get(0); // get one at the head
 
 				if (item0 != null) {
-//					send(item0.getType() + "");
-//					send(item0.getStr());
 					send(item0.getmType() + "",item0.getmObj());
 				} else {
 					System.out.println("error, item0 = " + item0);

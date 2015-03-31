@@ -67,6 +67,7 @@ public class ServerActivity {
 		mIsClosingAndSaving = false;
 		try {
 			mBuffRder = new ObjectInputStream(new BufferedInputStream(mSocket.getInputStream()));
+//			mBuffRder = new ObjectInputStream(mSocket.getInputStream());
 			mBuffWter = new ObjectOutputStream(mSocket.getOutputStream());
 			mServerListen = serverListen;
 
@@ -89,7 +90,6 @@ public class ServerActivity {
 	}
 
 	public void backOnline(User userTemp) {
-//		mUsrInfo = new UserInfo(str0);
 		this.user = userTemp;
 
 		ServerActivity preceder = mServerListen.getClientActivityById(user.getUserid());

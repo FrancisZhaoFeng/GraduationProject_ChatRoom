@@ -1,6 +1,8 @@
 package com.zhbit.crs.service;
 
+import java.io.BufferedInputStream;
 import java.io.ObjectInputStream;
+import java.net.Socket;
 
 import com.zhbit.crs.commons.GlobalMsgTypes;
 import com.zhbit.crs.domain.ChatPerLog;
@@ -17,11 +19,16 @@ public class ServerListenThread extends Thread {
 	private ServerActivity mServerActivity;
 	private ObjectInputStream mBuffRder;
 	private User user;
+	private Object obj;
 
 	public ServerListenThread(ServerActivity ca0, ObjectInputStream br0) {
 		mServerActivity = ca0;
 		mBuffRder = br0;
 	}
+//	public ServerListenThread(ServerActivity ca0, Socket mSocket) {
+//		mServerActivity = ca0;
+//		this.socket = mSocket;
+//	}
 
 	/*
 	 * (non-Javadoc)
@@ -33,7 +40,7 @@ public class ServerListenThread extends Thread {
 		super.run();
 		while (true) {
 			try {
-				Object obj = mBuffRder.readObject();
+				obj = mBuffRder.readObject();
 				System.out.println("mBuffRder.readObject()");
 				int msgType = Integer.parseInt((String)obj);
 				System.out.println("msgType:"+msgType);
@@ -45,7 +52,6 @@ public class ServerListenThread extends Thread {
 					mServerActivity.goOffLine();
 					return;
 				} else {
-					// type of message received
 					obj = mBuffRder.readObject();
 					try {
 						System.out.println("a message with type " + msgType + " received from " + mServerActivity.getUserInfo().getUsername());
@@ -98,7 +104,7 @@ public class ServerListenThread extends Thread {
 						break;
 					case GlobalMsgTypes.msgUpdateUserInfo:
 						System.out.println("GlobalMsgTypes.msgUpdateUserInfo"+GlobalMsgTypes.msgUpdateUserInfo);
-//						mServerActivity.onUpdateUserInfo(actualMsg);
+						mServerActivity.onUpdateUserInfo((User)obj);
 						break;
 					case GlobalMsgTypes.msgAskForUnsendMsgs:
 						System.out.println("GlobalMsgTypes.msgAskForUnsendMsgs"+GlobalMsgTypes.msgAskForUnsendMsgs);
@@ -118,7 +124,7 @@ public class ServerListenThread extends Thread {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("Client Listen Shutting Down!!!");
+				System.out.println("Server Listen Shutting Down!!!");
 				// remove the class/threads etc. associated with this specific
 				// client
 				mServerActivity.goOffLine();

@@ -20,6 +20,14 @@ public class User implements java.io.Serializable {
 	private boolean sex;
 	private boolean online;
 	private boolean blacklist;
+//	private Set friendsForUserid = new HashSet(0);
+//	private Set friendsForFriendid = new HashSet(0);
+//	private Set chatRoomLogs = new HashSet(0);
+//	private Set chatRooms = new HashSet(0);
+//	private Set chatPerLogsForReceiverid = new HashSet(0);
+//	private Set chatRooms_1 = new HashSet(0);
+//	private Set chatPerLogsForSenderid = new HashSet(0);
+
 	// Constructors
 
 	/** default constructor */
@@ -48,7 +56,7 @@ public class User implements java.io.Serializable {
 		this.sex = sex;
 	}
 
-	/** full constructor */
+	/** full constructor */  //, Set friendsForUserid, Set friendsForFriendid, Set chatRoomLogs, Set chatRooms, Set chatPerLogsForReceiverid, Set chatRooms_1, Set chatPerLogsForSenderid
 	public User(String username, String password, String telephone, Integer age, boolean sex, boolean online, boolean blacklist) {
 		this.username = username;
 		this.password = password;
@@ -56,6 +64,14 @@ public class User implements java.io.Serializable {
 		this.age = age;
 		this.sex = sex;
 		this.online = online;
+		this.blacklist = blacklist;
+//		this.friendsForUserid = friendsForUserid;
+//		this.friendsForFriendid = friendsForFriendid;
+//		this.chatRoomLogs = chatRoomLogs;
+//		this.chatRooms = chatRooms;
+//		this.chatPerLogsForReceiverid = chatPerLogsForReceiverid;
+//		this.chatRooms_1 = chatRooms_1;
+//		this.chatPerLogsForSenderid = chatPerLogsForSenderid;
 	}
 
 	// Property accessors

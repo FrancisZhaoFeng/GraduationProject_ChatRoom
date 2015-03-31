@@ -1,11 +1,12 @@
 package com.zhbit.crs.myNetwork;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import android.content.Context;
-import android.util.Log;
-
-import com.zhbit.crs.domain.User;
 
 /**
  * @author zhaoguofeng 该类为网络服务类，提供：
@@ -16,6 +17,8 @@ import com.zhbit.crs.domain.User;
 public class NetworkService {
 
 	private static NetworkService mInstance;
+	private ObjectOutputStream os;
+	private ObjectInputStream is;
 	/**
 	 * @return
 	 * 返回网络服务类的实例
@@ -67,8 +70,16 @@ public class NetworkService {
 		} else {
 			mSocket = mNetCon.getSocket();
 			mIsConnected = true;
-			startListen(mContext);
+//			startListen(mContext);
 			if (mSocket != null) {
+				try {
+					os = new ObjectOutputStream(mSocket.getOutputStream());
+					///is = new ObjectInputStream(new BufferedInputStream(mSocket.getInputStream()));
+					startListen(mContext);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				System.out.println("socket is not null");
 			} else {
 				System.out.println("socket is null");
@@ -82,8 +93,10 @@ public class NetworkService {
 	 */
 	private void startListen(Context context0) {
 		mListenThread = new ClientListenThread(context0, mSocket);
+//		mListenThread = new ClientListenThread(context0, is);
 		mListenThread.start();
-		mSendThread = new ClientSendThread();
+		mSendThread = new ClientSendThread(os);
+//		mSendThread = new ClientSendThread();
 	}
 
 	/**
@@ -105,7 +118,8 @@ public class NetworkService {
 	/* synchronized so only one send action is happening at a time */
 	private synchronized void sendUpload(Object type,Object obj) {
 //		buff = buff.replace("\n", GlobalStrings.replaceOfReturn);
-		mSendThread.start(mSocket,type, obj);
+		mSendThread.start(type, obj);
+//		mSendThread.start(mSocket,type, obj);
 	}
 
 	/**
