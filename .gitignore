@@ -14,8 +14,11 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 *.png
+*.apk
 *.dex
 *.class
+*.cache
+*.ap_
 
 # Windows shortcuts
 *.lnk

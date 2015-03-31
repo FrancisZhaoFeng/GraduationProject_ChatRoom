@@ -9,9 +9,8 @@ import java.net.Socket;
 import android.content.Context;
 
 /**
- * @author zhaoguofeng 该类为网络服务类，提供：
- * 1.提供网络服务类对象:getInstance;
- * 2.设置连接,新建一个连接服务端的线程类，并启动该类的线程:setupConnection； 
+ * @author zhaoguofeng 该类为网络服务类，提供： 1.提供网络服务类对象:getInstance;
+ *         2.设置连接,新建一个连接服务端的线程类，并启动该类的线程:setupConnection；
  * 
  */
 public class NetworkService {
@@ -19,9 +18,9 @@ public class NetworkService {
 	private static NetworkService mInstance;
 	private ObjectOutputStream os;
 	private ObjectInputStream is;
+
 	/**
-	 * @return
-	 * 返回网络服务类的实例
+	 * @return 返回网络服务类的实例
 	 */
 	public static NetworkService getInstance() {
 		if (mInstance == null) {
@@ -29,7 +28,7 @@ public class NetworkService {
 		}
 		return mInstance;
 	}
- 
+
 	/**
 	 * 查看是否存在连接服务端的socket对象
 	 */
@@ -70,11 +69,12 @@ public class NetworkService {
 		} else {
 			mSocket = mNetCon.getSocket();
 			mIsConnected = true;
-//			startListen(mContext);
+			// startListen(mContext);
 			if (mSocket != null) {
 				try {
 					os = new ObjectOutputStream(mSocket.getOutputStream());
-					///is = new ObjectInputStream(new BufferedInputStream(mSocket.getInputStream()));
+					// /is = new ObjectInputStream(new
+					// BufferedInputStream(mSocket.getInputStream()));
 					startListen(mContext);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -93,10 +93,10 @@ public class NetworkService {
 	 */
 	private void startListen(Context context0) {
 		mListenThread = new ClientListenThread(context0, mSocket);
-//		mListenThread = new ClientListenThread(context0, is);
+		// mListenThread = new ClientListenThread(context0, is);
 		mListenThread.start();
 		mSendThread = new ClientSendThread(os);
-//		mSendThread = new ClientSendThread();
+		// mSendThread = new ClientSendThread();
 	}
 
 	/**
@@ -112,14 +112,15 @@ public class NetworkService {
 	 *            发送信息到服务器，先发送：type，后发送：sentence
 	 */
 	public void sendUpload(int type, Object obj) {
-		sendUpload(""+type, obj);
+
+		sendUpload("" + type, obj);
 	}
 
 	/* synchronized so only one send action is happening at a time */
-	private synchronized void sendUpload(Object type,Object obj) {
-//		buff = buff.replace("\n", GlobalStrings.replaceOfReturn);
+	private synchronized void sendUpload(Object type, Object obj) {
+		// buff = buff.replace("\n", GlobalStrings.replaceOfReturn);
 		mSendThread.start(type, obj);
-//		mSendThread.start(mSocket,type, obj);
+		// mSendThread.start(mSocket,type, obj);
 	}
 
 	/**
