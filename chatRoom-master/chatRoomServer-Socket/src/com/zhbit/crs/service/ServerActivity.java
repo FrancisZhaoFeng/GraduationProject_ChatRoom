@@ -66,12 +66,12 @@ public class ServerActivity {
 		mConnectSuccessfully = true;
 		mIsClosingAndSaving = false;
 		try {
-			mBuffRder = new ObjectInputStream(new BufferedInputStream(mSocket.getInputStream()));
-			// mBuffRder = new ObjectInputStream(mSocket.getInputStream());
+//			mBuffRder = new ObjectInputStream(new BufferedInputStream(mSocket.getInputStream()));
 			mBuffWter = new ObjectOutputStream(mSocket.getOutputStream());
 			mServerListen = serverListen;
 
-			mClientListen = new ServerListenThread(this, mBuffRder);
+//			mClientListen = new ServerListenThread(this, mBuffRder);
+			mClientListen = new ServerListenThread(this, socket);
 			mClientListen.start();
 			mClientSend = new ServerSendThread(this, mBuffWter);
 			mClientSend.start();

@@ -20,16 +20,17 @@ public class ServerListenThread extends Thread {
 	private ObjectInputStream mBuffRder;
 	private User user;
 	private Object obj;
+	private Socket socket;
 
-	public ServerListenThread(ServerActivity ca0, ObjectInputStream br0) {
-		mServerActivity = ca0;
-		mBuffRder = br0;
-	}
-
-	// public ServerListenThread(ServerActivity ca0, Socket mSocket) {
+	// public ServerListenThread(ServerActivity ca0, ObjectInputStream br0) {
 	// mServerActivity = ca0;
-	// this.socket = mSocket;
+	// mBuffRder = br0;
 	// }
+
+	public ServerListenThread(ServerActivity ca0, Socket mSocket) {
+		mServerActivity = ca0;
+		this.socket = mSocket;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -41,6 +42,8 @@ public class ServerListenThread extends Thread {
 		super.run();
 		while (true) {
 			try {
+				mBuffRder = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
+//				mBuffRder = new ObjectInputStream(socket.getInputStream());
 				obj = mBuffRder.readObject();
 				System.out.println("mBuffRder.readObject()");
 				int msgType = Integer.parseInt((String) obj);

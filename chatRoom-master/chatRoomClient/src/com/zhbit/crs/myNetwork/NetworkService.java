@@ -16,8 +16,6 @@ import android.content.Context;
 public class NetworkService {
 
 	private static NetworkService mInstance;
-	private ObjectOutputStream os;
-	private ObjectInputStream is;
 
 	/**
 	 * @return 返回网络服务类的实例
@@ -69,17 +67,8 @@ public class NetworkService {
 		} else {
 			mSocket = mNetCon.getSocket();
 			mIsConnected = true;
-			// startListen(mContext);
+			 startListen(mContext);
 			if (mSocket != null) {
-				try {
-					os = new ObjectOutputStream(mSocket.getOutputStream());
-					// /is = new ObjectInputStream(new
-					// BufferedInputStream(mSocket.getInputStream()));
-					startListen(mContext);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 				System.out.println("socket is not null");
 			} else {
 				System.out.println("socket is null");
@@ -92,11 +81,16 @@ public class NetworkService {
 	 *            1.新建一个客户端监听线程并启动； 2.新建一个客户端发送信息类；
 	 */
 	private void startListen(Context context0) {
+		try {
+			ObjectOutputStream os = new ObjectOutputStream(mSocket.getOutputStream());
+			mSendThread = new ClientSendThread(os);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		mListenThread = new ClientListenThread(context0, mSocket);
-		// mListenThread = new ClientListenThread(context0, is);
 		mListenThread.start();
-		mSendThread = new ClientSendThread(os);
-		// mSendThread = new ClientSendThread();
+		
 	}
 
 	/**
@@ -112,7 +106,6 @@ public class NetworkService {
 	 *            发送信息到服务器，先发送：type，后发送：sentence
 	 */
 	public void sendUpload(int type, Object obj) {
-
 		sendUpload("" + type, obj);
 	}
 

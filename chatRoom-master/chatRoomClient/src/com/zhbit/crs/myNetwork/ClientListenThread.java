@@ -27,6 +27,7 @@ public class ClientListenThread extends Thread {
 	private ObjectInputStream is = null;
 	private User user;
 	private List<User> users;
+	String resp = null;
 
 	public ClientListenThread(Context par, Socket s) {
 		this.mContext0 = par;
@@ -46,13 +47,11 @@ public class ClientListenThread extends Thread {
 	public void run() {
 		super.run();
 		try {
-			is = new ObjectInputStream(new BufferedInputStream(mSocket0.getInputStream()));
-			String resp = null;
-
 			while (true) {
+//				is = new ObjectInputStream(new BufferedInputStream(mSocket0.getInputStream()));
+				is = new ObjectInputStream(mSocket0.getInputStream());
 				if ((resp = (String) is.readObject()) != null) { // mBuffRder0.readLine()
-					int msgType = Integer.parseInt(resp); // type of message
-															// received
+					int msgType = Integer.parseInt(resp); // type of message  received
 					Object obj = is.readObject();
 					switch (msgType) {
 					case GlobalMsgTypes.msgPublicRoom:
@@ -61,8 +60,7 @@ public class ClientListenThread extends Thread {
 						/* falls through */
 					case GlobalMsgTypes.msgFromFriend:
 						/*
-						 * try here to secure for the possible message with
-						 * first input character as "\n"
+						 * try here to secure for the possible message with first input character as "\n"
 						 */
 						Log.w("GlobalMsgTypes.msgFromFriend", "" + GlobalMsgTypes.msgFromFriend);
 						uponReceivedMsg();
