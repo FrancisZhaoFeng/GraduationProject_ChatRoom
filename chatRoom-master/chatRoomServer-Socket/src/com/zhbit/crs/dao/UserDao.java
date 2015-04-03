@@ -15,7 +15,9 @@ public class UserDao {
 	
 //	public static void main(String args[]){
 ////		new UserDao().signUp(new User("zgfailmr","zgfailmr","15961324654",45));
-//		new UserDao().login(new User("zgfailmr","zgfailmr"));
+////		new UserDao().login(new User("zgfailmr","zgfailmr"));
+//		new UserDao().searchUser(new SearchEntity(false,0,0,0,"z"));
+//		new UserDao().searchUser(new SearchEntity(true, 22, 27, 1, ""));
 //	}
 	
 	
@@ -128,15 +130,19 @@ public class UserDao {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<User> searchUserByName(SearchEntity searchEntity){
+	public List<User> searchUser(SearchEntity searchEntity){
 		List<User> users = null;
-		String hql = "from Friend where username like '%"+searchEntity.getName()+"%'";
+		String hql;
+		if(!searchEntity.getType()){
+			hql = "from User where username like '%"+searchEntity.getName()+"%'";
+		}else{
+			hql = "from User where sex="+searchEntity.getSex()+" and age between "+searchEntity.getLowerAge()+" and "+searchEntity.getUpperAge()+"";
+		}
 		System.out.println(hql);
 		session = HibernateUtils.getSession();
 		session.beginTransaction();
 		Query query;
 		query = session.createQuery(hql);
-		query.setParameter(0, searchEntity.getName());
 		users = query.list();
 		session.close();
 		return users;

@@ -1,6 +1,7 @@
 package com.zhbit.crs.myNetwork;
 
 import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.List;
@@ -27,7 +28,7 @@ public class ClientListenThread extends Thread {
 	private ObjectInputStream is = null;
 	private User user;
 	private List<User> users;
-	String resp = null;
+	private Object obj;
 
 	public ClientListenThread(Context par, Socket s) {
 		this.mContext0 = par;
@@ -48,11 +49,11 @@ public class ClientListenThread extends Thread {
 		super.run();
 		try {
 			while (true) {
-//				is = new ObjectInputStream(new BufferedInputStream(mSocket0.getInputStream()));
-				is = new ObjectInputStream(mSocket0.getInputStream());
-				if ((resp = (String) is.readObject()) != null) { // mBuffRder0.readLine()
-					int msgType = Integer.parseInt(resp); // type of message  received
-					Object obj = is.readObject();
+				is = new ObjectInputStream(new BufferedInputStream(mSocket0.getInputStream()));
+				obj = is.readObject();
+				if (obj != null) { // mBuffRder0.readLine()
+					int msgType = Integer.parseInt((String)obj); // type of message  received
+					obj = is.readObject();
 					switch (msgType) {
 					case GlobalMsgTypes.msgPublicRoom:
 						/* falls through */
@@ -152,7 +153,10 @@ public class ClientListenThread extends Thread {
 					}
 				}
 			}
-		} catch (Exception e) {
+		} catch (IOException e) {
+			e.printStackTrace();
+		}catch (Exception e) {
+			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}

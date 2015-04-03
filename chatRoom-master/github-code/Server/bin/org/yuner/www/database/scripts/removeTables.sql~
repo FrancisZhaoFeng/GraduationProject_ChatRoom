@@ -1,0 +1,3 @@
+use my_IM_GGMM;
+drop table if exists friendList;
+drop table if exists userInfo;

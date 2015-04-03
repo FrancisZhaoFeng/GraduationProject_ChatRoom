@@ -33,7 +33,7 @@ public class NetConnect extends Thread {
 	// private String mHostIp="192.168.208.128";
 	private String mHostIp = "172.16.15.101";
 
-	private int mHostPort = 8888;
+	private int mHostPort = 8880;
 
 	/* socket */
 	private Socket mSocket0 = null;

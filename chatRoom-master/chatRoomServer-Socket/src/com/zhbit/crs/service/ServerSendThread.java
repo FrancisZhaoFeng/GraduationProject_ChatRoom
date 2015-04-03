@@ -2,6 +2,7 @@ package com.zhbit.crs.service;
 
 import java.io.BufferedWriter;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.ArrayList;
 
 import com.zhbit.crs.commons.*;
@@ -18,12 +19,19 @@ public class ServerSendThread extends Thread {
 	private ArrayList<SendStackItem> mSendList;
 
 	private boolean mIsRunning;
-	private boolean mReceived; // the heartbeat message from client verifying
-								// they have received the message you send
+	private boolean mReceived; // the heartbeat message from client verifying they have received the message you send
+	
+	private Socket mSocket;
 
 	public ServerSendThread(ServerActivity ca0, ObjectOutputStream bufw) {
 		mClientActivity = ca0;
 		mBuffWter = bufw;
+		mSendList = new ArrayList<SendStackItem>();
+	}
+	
+	public ServerSendThread(ServerActivity ca0, Socket socket) {
+		mClientActivity = ca0;
+		mSocket = socket;
 		mSendList = new ArrayList<SendStackItem>();
 	}
 
@@ -85,6 +93,7 @@ public class ServerSendThread extends Thread {
 
 	private synchronized void send(Object type, Object obj) {
 		try {
+			mBuffWter = new ObjectOutputStream(mSocket.getOutputStream());
 			mBuffWter.writeObject(type);
 			mBuffWter.flush();
 			mBuffWter.writeObject(obj);

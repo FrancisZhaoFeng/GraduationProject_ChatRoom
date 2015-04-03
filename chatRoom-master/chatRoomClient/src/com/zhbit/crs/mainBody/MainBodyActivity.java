@@ -62,7 +62,6 @@ public class MainBodyActivity extends Activity {
 	private ImageView mTabSettings;
 
 	/* friend search string/boolean definition */
-	String mSearchedString;
 	boolean mMsg9Received;
 	private List<User> users;
 
@@ -261,11 +260,11 @@ public class MainBodyActivity extends Activity {
 
 	/*** search friends ***/
 	public void startSearch(SearchEntity sEnt0) {
-		NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgSearchPeople, sEnt0.toString());
+		NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgSearchPeople, sEnt0);
 		mMsg9Received = false;
 		while (!mMsg9Received) {
 		}
-		gotoFriendSearchResult(mSearchedString);
+		gotoFriendSearchResult(users);
 	}
 
 	public void onReceiveSearchList(List<User> users) { // String msg0
@@ -322,33 +321,33 @@ public class MainBodyActivity extends Activity {
 	}
 
 	public void gotoChatActivity() {
-		Intent intent0 = new Intent(MainBodyActivity.this, ChatActivity.class);
-		startActivity(intent0.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+		Intent intent = new Intent(MainBodyActivity.this, ChatActivity.class);
+		startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
 		overridePendingTransition(R.anim.my_slide_right_in, R.anim.my_slide_left_out);
 	}
 
 	public void gotoTabMsgFrdReqNotifActivity() {
-		Intent intent0 = new Intent(MainBodyActivity.this, FrdRequestNotifActivity.class);
-		startActivity(intent0.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+		Intent intent = new Intent(MainBodyActivity.this, FrdRequestNotifActivity.class);
+		startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
 		overridePendingTransition(R.anim.my_slide_right_in, R.anim.my_slide_left_out);
 	}
 
-	public void gotoFriendSearchResult(String searchedString) {
-		Intent intent0 = new Intent(MainBodyActivity.this, FriendSearchResultActivity.class);
-		intent0.putExtra("searchResult", searchedString);
-		startActivity(intent0.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+	public void gotoFriendSearchResult(List<User> users) { //String searchedString
+		Intent intent = new Intent(MainBodyActivity.this, FriendSearchResultActivity.class);
+		intent.putExtra("searchResult", "");
+		startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
 		overridePendingTransition(R.anim.my_slide_right_in, R.anim.my_slide_left_out);
 	}
 
 	public void gotoSearchBynameActivity() {
-		Intent intent0 = new Intent(MainBodyActivity.this, SearchFriendByNameActivity.class);
-		startActivity(intent0.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+		Intent intent = new Intent(MainBodyActivity.this, SearchFriendByNameActivity.class);
+		startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
 		overridePendingTransition(R.anim.my_slide_right_in, R.anim.my_slide_left_out);
 	}
 
 	public void gotoSearchByelseActivity() {
-		Intent intent0 = new Intent(MainBodyActivity.this, SearchFriendByElseActivity.class);
-		startActivity(intent0.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+		Intent intent = new Intent(MainBodyActivity.this, SearchFriendByElseActivity.class);
+		startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
 		overridePendingTransition(R.anim.my_slide_right_in, R.anim.my_slide_left_out);
 	}
 

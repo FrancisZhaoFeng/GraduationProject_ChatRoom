@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.yuner.www"
+    android:versionCode="7"
+    android:versionName="1.1" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>    
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/new_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="org.yuner.www.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.yuner.www.chatter.ChatActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="org.yuner.www.friendRequest.ChooseRoomActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="org.yuner.www.friendRequest.FriendListActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="org.yuner.www.RegisterActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="org.yuner.www.friendRequest.SearchFriendActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="org.yuner.www.friendRequest.FriendSearchResultActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="org.yuner.www.mainBody.MainBodyActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="org.yuner.www.mainBody.SearchFriendByNameActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="org.yuner.www.mainBody.SearchFriendByElseActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="org.yuner.www.mainBody.FrdRequestNotifActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="org.yuner.www.mainBody.TabMsgFrdReqProcActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <service
+            android:name="org.yuner.www.chatServices.ChatService">
+        </service>
+        <service
+            android:name="org.yuner.www.friendRequest.FriendRequestService">
+        </service>
+    </application> 
+
+</manifest>

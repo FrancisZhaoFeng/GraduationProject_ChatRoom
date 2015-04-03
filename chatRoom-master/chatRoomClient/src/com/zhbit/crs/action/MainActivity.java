@@ -11,6 +11,7 @@ package com.zhbit.crs.action;
 import org.yuner.www.R;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -32,8 +34,8 @@ import com.zhbit.crs.myNetwork.NetworkService;
 import com.zhbit.crs.util.MD5;
 
 /**
- * MainActivity is the entry activity, which provides a login page set to
- * collect user information and verification of username/password
+ * MainActivity is the entry activity, which provides a login page set to collect user information and verification of
+ * username/password
  */
 public class MainActivity extends Activity {
 
@@ -67,7 +69,7 @@ public class MainActivity extends Activity {
 
 		mBtnLogin.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				MainActivity.this.tryLogin();
+				MainActivity.this.tryLogin(v);
 			}
 		});
 
@@ -84,22 +86,20 @@ public class MainActivity extends Activity {
 		super.onDestroy();
 	}
 
-	public void tryLogin() {
+	public void tryLogin(View v) {
+		hideSystemKeyBoard(this, v);
 		mName = mEtAccount.getText().toString();
 		mPassword = mEtPassword.getText().toString();
 		if (mName.equals("") || mName.length() < 5 || mName.length() >= 16 || mPassword.length() < 5 || mPassword.length() >= 16) {// Please
 			// Name and Sex"
 			Toast.makeText(MainActivity.this, "Please Specify Your Nickname and Password correctly", Toast.LENGTH_LONG).show();
 		} else {
-			mPassword =new MD5().toMD5(mPassword);
+			mPassword = new MD5().toMD5(mPassword);
 			user = new User(mName, mPassword);
 			/**
-			 * if mNetcon is connected already, close it first here we use try
-			 * because mNetCon might not have been instantiated yet try {
-			 * NetConnect.getnetConnect().closeNetConnect(); } catch (Exception
-			 * e) {} try { InitData.closeInitData();
-			 * FriendListInfo.closeFriendListInfo();
-			 * ChatServiceData.closeChatServiceData(); } catch (Exception e) {}
+			 * if mNetcon is connected already, close it first here we use try because mNetCon might not have been instantiated
+			 * yet try { NetConnect.getnetConnect().closeNetConnect(); } catch (Exception e) {} try { InitData.closeInitData();
+			 * FriendListInfo.closeFriendListInfo(); ChatServiceData.closeChatServiceData(); } catch (Exception e) {}
 			 */
 			CloseAll.closeAll();
 			/* to establish a new connect */
@@ -124,9 +124,8 @@ public class MainActivity extends Activity {
 				e.printStackTrace();
 			}
 			user = initData.getUser();
-			Log.d("connectedApp isonline : ", "" + user.getOnline() + "+++" + "++++++++++");
-			if (user.getUserid() < 0) {
-				Toast.makeText(this, "invalid username or password", Toast.LENGTH_SHORT).show();
+			if (user == null) {
+				Toast.makeText(this, "invalid username or password", Toast.LENGTH_LONG).show();
 				return;
 			}
 			Log.d("connectedApp isonline : ", "" + user.getOnline() + "+++" + "++++++++++");
@@ -142,4 +141,8 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	public static void hideSystemKeyBoard(Context mcontext, View v) {
+		InputMethodManager imm = (InputMethodManager) ((MainActivity) mcontext).getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+	}
 }

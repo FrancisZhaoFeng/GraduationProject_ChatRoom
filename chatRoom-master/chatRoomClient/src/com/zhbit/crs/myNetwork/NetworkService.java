@@ -9,8 +9,7 @@ import java.net.Socket;
 import android.content.Context;
 
 /**
- * @author zhaoguofeng 该类为网络服务类，提供： 1.提供网络服务类对象:getInstance;
- *         2.设置连接,新建一个连接服务端的线程类，并启动该类的线程:setupConnection；
+ * @author zhaoguofeng 该类为网络服务类，提供： 1.提供网络服务类对象:getInstance; 2.设置连接,新建一个连接服务端的线程类，并启动该类的线程:setupConnection；
  * 
  */
 public class NetworkService {
@@ -49,8 +48,7 @@ public class NetworkService {
 	}
 
 	/**
-	 * 设置连接： 1.新建一个连接服务端的线程类，并启动该类的线程（join）； 2.获取一个连接到服务端的socket对象；
-	 * 3.调用startListen(Context context0)，启动监听
+	 * 设置连接： 1.新建一个连接服务端的线程类，并启动该类的线程（join）； 2.获取一个连接到服务端的socket对象； 3.调用startListen(Context context0)，启动监听
 	 */
 	public void setupConnection() {
 		mNetCon = new NetConnect();
@@ -67,7 +65,7 @@ public class NetworkService {
 		} else {
 			mSocket = mNetCon.getSocket();
 			mIsConnected = true;
-			 startListen(mContext);
+			startListen(mContext);
 			if (mSocket != null) {
 				System.out.println("socket is not null");
 			} else {
@@ -81,16 +79,17 @@ public class NetworkService {
 	 *            1.新建一个客户端监听线程并启动； 2.新建一个客户端发送信息类；
 	 */
 	private void startListen(Context context0) {
-		try {
-			ObjectOutputStream os = new ObjectOutputStream(mSocket.getOutputStream());
-			mSendThread = new ClientSendThread(os);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		// try {
+		// ObjectOutputStream os = new ObjectOutputStream(mSocket.getOutputStream());
+		// mSendThread = new ClientSendThread(os);
+		// } catch (IOException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		mSendThread = new ClientSendThread();
 		mListenThread = new ClientListenThread(context0, mSocket);
 		mListenThread.start();
-		
+
 	}
 
 	/**
@@ -112,8 +111,8 @@ public class NetworkService {
 	/* synchronized so only one send action is happening at a time */
 	private synchronized void sendUpload(Object type, Object obj) {
 		// buff = buff.replace("\n", GlobalStrings.replaceOfReturn);
-		mSendThread.start(type, obj);
-		// mSendThread.start(mSocket,type, obj);
+		// mSendThread.start(type, obj);
+		mSendThread.start(mSocket, type, obj);
 	}
 
 	/**

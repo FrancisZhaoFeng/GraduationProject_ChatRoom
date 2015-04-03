@@ -10,7 +10,7 @@ import org.yuner.www.beans.ChatEntity;
 public class ServerListen {
 	
 	/*  the PORT number for this application  */
-	public static final int PORT=8888;
+	public static final int PORT=8880;
 
 	public static void main(String args[]){
 		new ServerListen().begin();

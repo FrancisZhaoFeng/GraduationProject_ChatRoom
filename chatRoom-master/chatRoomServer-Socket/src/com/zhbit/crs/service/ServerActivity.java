@@ -16,6 +16,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Controller;
+
 import com.zhbit.crs.action.ClientMap;
 import com.zhbit.crs.action.ServerListen;
 import com.zhbit.crs.commons.GlobalInts;
@@ -31,10 +33,8 @@ import com.zhbit.crs.domain.UserInfo;
 import com.zhbit.crs.md5.MD5;
 
 /**
- * @author zhaoguofeng public constructor, major tasks here include : 1 :
- *         initialize the BufferedReader and OutputStreamWriter 2 : read in the
- *         user information and close this connection if input format is not
- *         correct
+ * @author zhaoguofeng public constructor, major tasks here include : 1 : initialize the BufferedReader and OutputStreamWriter 2 : read in the user information and close this
+ *         connection if input format is not correct
  */
 public class ServerActivity {
 
@@ -57,23 +57,23 @@ public class ServerActivity {
 	private User user;
 
 	/**
-	 * public constructor, major tasks here include : 1 : initialize the
-	 * BufferedReader and OutputStreamWriter 2 : read in the user information
-	 * and close this connection if input format is not correct
+	 * public constructor, major tasks here include : 1 : initialize the BufferedReader and OutputStreamWriter 2 : read in the user information and close this connection if
+	 * input format is not correct
 	 */
 	public ServerActivity(Socket socket, ServerListen serverListen) {
 		this.mSocket = socket;
 		mConnectSuccessfully = true;
 		mIsClosingAndSaving = false;
 		try {
-//			mBuffRder = new ObjectInputStream(new BufferedInputStream(mSocket.getInputStream()));
-			mBuffWter = new ObjectOutputStream(mSocket.getOutputStream());
+			// mBuffRder = new ObjectInputStream(new BufferedInputStream(mSocket.getInputStream()));
+			// mBuffWter = new ObjectOutputStream(mSocket.getOutputStream());
 			mServerListen = serverListen;
 
-//			mClientListen = new ServerListenThread(this, mBuffRder);
+			// mClientListen = new ServerListenThread(this, mBuffRder);
 			mClientListen = new ServerListenThread(this, socket);
 			mClientListen.start();
-			mClientSend = new ServerSendThread(this, mBuffWter);
+			// mClientSend = new ServerSendThread(this, mBuffWter);
+			mClientSend = new ServerSendThread(this, socket);
 			mClientSend.start();
 		} catch (Exception e) {
 			System.out.println("error occurs for creating");
@@ -119,21 +119,16 @@ public class ServerActivity {
 		mHandShake = new HandShakeThread();
 		this.user = mHandShake.start(userTemp);
 		userDao = new UserDao();
+		mHandShake.sendHandShakeBack(this, user);
 		if (user != null) {
-			mHandShake.sendHandShakeBack(this, user);
-			if (user.getUserid() != null) { // mUsrInfo.getId() >= 0
-				List<Friend> friends = userDao.selectFriend(user);
-				// mHandShake.sendFriendList(this,
-				// DBUtil.loginToGetFriendList(mUsrInfo.getId()));
-				List<User> users = null;
-				for (int i = 0; i < friends.size(); i++) {
-					users.add(userDao.selectUser(friends.get(i).getUserByFriendid()).get(0));
-				}
-				mHandShake.sendFriendList(this, users);
-			} else {
-				unableToConnect();
-				return;
+			List<Friend> friends = userDao.selectFriend(user);
+			// mHandShake.sendFriendList(this,
+			// DBUtil.loginToGetFriendList(mUsrInfo.getId()));
+			List<User> users = null;
+			for (int i = 0; i < friends.size(); i++) {
+				users.add(userDao.selectUser(friends.get(i).getUserByFriendid()).get(0));
 			}
+			mHandShake.sendFriendList(this, users);
 		} else {
 			unableToConnect();
 			return;
@@ -143,41 +138,12 @@ public class ServerActivity {
 		if (preceder != null) {
 			preceder.goOffLine();
 		}
-
-		// DBUtil.setOnAndOffLine(getUserInfo().getId(), 1);
-		// mServerListen.updateFriendList(this);
-
-		// send online notification to all friends
-		// ArrayList<UserInfo> onlineList =
-		// DBUtil.getOnlineFriendList(getUserInfo().getId());
-		// for (UserInfo uup : onlineList) {
-		// ServerActivity target0 =
-		// ClientMap.getInstance().getById(uup.getId());
-		// if (target0 != null) {
-		// target0.sendOneString(getUserInfo().toString(),
-		// GlobalMsgTypes.msgFriendGoOnline);
-		// }
-		// }
 	}
 
 	public void startSearchPeople(SearchEntity searchEntity) {// String msg0
-	// SearchEntity s_ent0 = new SearchEntity(msg0);
 		List<User> users = null;
 		userDao = new UserDao();
-		if (searchEntity.getType() == SearchEntity.SEARCH_BY_NAME) {
-			// listU = DBUtil.searchForPeopleWithName(s_ent0);
-			users = userDao.searchUserByName(searchEntity);
-		} else {
-			// listU = DBUtil.searchForPeopleList(s_ent0);
-		}
-		if (users == null) {
-			users = new ArrayList<User>();
-		}
-
-		// String toSend = user.size() + GlobalStrings.searchListDivider;
-		// for (UserInfo uu : listU) {
-		// toSend += uu.toString() + GlobalStrings.searchListDivider;
-		// }
+		users = userDao.searchUser(searchEntity);
 		sendOneString(users, GlobalMsgTypes.msgSearchPeople);
 	}
 
@@ -266,8 +232,7 @@ public class ServerActivity {
 	}
 
 	/*
-	 * friendship request and response are always integer(response) +
-	 * userinfo(requester) + userinfo(requestee)
+	 * friendship request and response are always integer(response) + userinfo(requester) + userinfo(requestee)
 	 */
 	public void startFriendshipRequest(String msg0) {
 		System.out.println("start the request processing");
@@ -305,8 +270,8 @@ public class ServerActivity {
 	}
 
 	public void onUpdateUserInfo(User user) {// String msg0
-	// UserInfo uu0 = new UserInfo(msg0);
-	// UserInfo uux = DBUtil.updateUserInfomaton(uu0);
+		// UserInfo uu0 = new UserInfo(msg0);
+		// UserInfo uux = DBUtil.updateUserInfomaton(uu0);
 		userDao = new UserDao();
 		userDao.updateUser(user);
 	}

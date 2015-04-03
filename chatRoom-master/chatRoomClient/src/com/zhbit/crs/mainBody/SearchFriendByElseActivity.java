@@ -36,24 +36,24 @@ public class SearchFriendByElseActivity extends Activity {
 		mBtnSearchByElse.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				int lage = mSearchSpLowage.getSelectedItemPosition() + 5;
-				int uage = mSearchSpHighage.getSelectedItemPosition() + 5;
+				int lage = mSearchSpLowage.getSelectedItemPosition() + 16;
+				int uage = mSearchSpHighage.getSelectedItemPosition() + 33;
 				
-				int sex00;
+				int sex;
 				int choseId = mRgpSex.getCheckedRadioButtonId();
 				switch(choseId) {
 				case R.id.cc0_friend_list_search_rdbtn_female:
-					sex00 = SearchEntity.FEMALE_GENDER;
+					sex = SearchEntity.FEMALE_GENDER;
 					break;
 				case R.id.cc0_friend_list_search_rdbtn_male:
-					sex00 = SearchEntity.MALE_GENDER;
+					sex = SearchEntity.MALE_GENDER;
 					break;
 				default:
-					sex00 = SearchEntity.BOTH_GENDER;
+					sex = SearchEntity.BOTH_GENDER;
 					break;
 				}
 				
-				SearchEntity s_ent0 = new SearchEntity(SearchEntity.SEARCH_BY_ELSE, lage, uage, sex00, "xx");
+				SearchEntity s_ent0 = new SearchEntity(SearchEntity.SEARCH_BY_ELSE, lage, uage, sex,"");
 				MainBodyActivity.getInstance().startSearch(s_ent0);
 			}
 		});
