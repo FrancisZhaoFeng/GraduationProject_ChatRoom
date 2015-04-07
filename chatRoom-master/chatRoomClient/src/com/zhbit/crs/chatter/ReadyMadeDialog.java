@@ -3,7 +3,7 @@ package com.zhbit.crs.chatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.yuner.www.R;
+import com.zhbit.crs.R;
 
 import android.app.Dialog;
 import android.content.Context;

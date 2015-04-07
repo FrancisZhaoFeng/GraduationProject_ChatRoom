@@ -3,8 +3,6 @@ package com.zhbit.crs.chatServices;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.util.Log;
-
 import com.zhbit.crs.domain.User;
 import com.zhbit.crs.util.UnsavedChatMsg;
 

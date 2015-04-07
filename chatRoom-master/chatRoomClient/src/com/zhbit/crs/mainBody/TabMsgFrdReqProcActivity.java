@@ -1,7 +1,5 @@
 package com.zhbit.crs.mainBody;
 
-import org.yuner.www.R;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -13,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.zhbit.crs.R;
 import com.zhbit.crs.action.ConnectedApp;
 import com.zhbit.crs.chatServices.FriendListInfo;
 import com.zhbit.crs.commons.GlobalMsgTypes;

@@ -21,13 +21,13 @@ public class FrdRequestEntity {
 		mRequestee = requestee;
 	}
 	
-	public FrdRequestEntity(List<User> users) {
+	public FrdRequestEntity(Friend friend) {
 //		String[] arr0 = str0.split(GlobalStrings.friendshipRequestDivider);
 //		mStatus = Integer.parseInt(arr0[0]);
 //		mRequester = new UserInfo(arr0[1]);
 //		mRequestee = new UserInfo(arr0[2]);
-		mRequester = users.get(0);
-		mRequestee = users.get(1);
+		mRequester = friend.getUserByUserid();
+		mRequestee = friend.getUserByFriendid();
 	}
 	
 	public String toString() {
@@ -59,5 +59,4 @@ public class FrdRequestEntity {
 	public User getRequestee() {
 		return mRequestee;
 	}
-	
 }

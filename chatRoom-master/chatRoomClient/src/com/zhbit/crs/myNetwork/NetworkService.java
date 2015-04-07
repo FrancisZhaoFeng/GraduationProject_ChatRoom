@@ -1,9 +1,5 @@
 package com.zhbit.crs.myNetwork;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import android.content.Context;

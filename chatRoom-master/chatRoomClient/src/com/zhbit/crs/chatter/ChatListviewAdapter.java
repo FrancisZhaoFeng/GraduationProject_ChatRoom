@@ -10,8 +10,6 @@ package com.zhbit.crs.chatter;
 import java.util.Date;
 import java.util.List;
 
-import org.yuner.www.R;
-
 import android.content.Context;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
@@ -21,6 +19,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.zhbit.crs.R;
 import com.zhbit.crs.domain.ChatPerLog;
 
 public class ChatListviewAdapter extends BaseAdapter {

@@ -15,12 +15,6 @@ public class HandShakeThread {
 
 	public User start(User user) { // String msg0
 		try {
-			// String[] strArr0 = msg0.split(GlobalStrings.signinDivider);
-			// UserInfo uu = new UserInfo(strArr0[0]);
-			// String password = strArr0[1];
-
-			// set id
-			// UserInfo userInfo = DBUtil.loginWithUsername(uu, password);
 			userDao = new UserDao();
 			List<User> users = userDao.login(user);
 			User usert = null;
@@ -43,8 +37,7 @@ public class HandShakeThread {
 	 */
 	public boolean sendHandShakeBack(ServerActivity cliActv, User user) {
 		try {
-			cliActv.sendOneString(user, 3); // usrInfo.msgType 的值为 3
-			// cliActv.sendOneString(new User("zgfzg","zgfailmr"), 3);
+			cliActv.sendOneObject(user, 3); // usrInfo.msgType 的值为 3
 		} catch (Exception e) {
 			return false;
 		}
@@ -64,7 +57,7 @@ public class HandShakeThread {
 		try {
 			// cliActv.sendOneString(str,
 			// GlobalMsgTypes.msgHandSHakeFriendList);
-			cliActv.sendOneString(users, GlobalMsgTypes.msgHandSHakeFriendList);
+			cliActv.sendOneObject(users, GlobalMsgTypes.msgHandSHakeFriendList);
 		} catch (Exception e) {
 		}
 	}

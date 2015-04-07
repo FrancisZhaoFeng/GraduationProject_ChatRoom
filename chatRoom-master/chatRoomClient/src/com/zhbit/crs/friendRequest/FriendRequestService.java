@@ -11,6 +11,7 @@ import com.zhbit.crs.chatServices.FriendListInfo;
 import com.zhbit.crs.domain.ChatEntity;
 import com.zhbit.crs.domain.FrdReqNotifItemEntity;
 import com.zhbit.crs.domain.FrdRequestEntity;
+import com.zhbit.crs.domain.Friend;
 import com.zhbit.crs.domain.TabMsgItemEntity;
 import com.zhbit.crs.domain.User;
 import com.zhbit.crs.mainBody.FrdRequestNotifActivity;
@@ -40,8 +41,7 @@ public class FriendRequestService extends Service {
 	public void onCreate() {
 		super.onCreate();
 		mInstance = this;
-
-		IntentFilter ifter = new IntentFilter("yuner.example.hello.FRIEND_REQUEST_MSGS");
+		IntentFilter ifter = new IntentFilter("zhbit.example.hello.FRIEND_REQUEST_MSGS");
 		mFriendRequestReceiver = new FriendRequestMsgReceiver();
 		registerReceiver(mFriendRequestReceiver, ifter);
 	}
@@ -52,30 +52,34 @@ public class FriendRequestService extends Service {
 		unregisterReceiver(mFriendRequestReceiver);
 	}
 
-	public void processFriendRequest(List<User> users) { // String msg0
-		FrdRequestEntity reqEnt0 = new FrdRequestEntity(users);
-		mRequester = reqEnt0.getRequester();
-		mRequestee = reqEnt0.getRequestee();
+	public void processFriendRequest(Friend friend) { // String msg0
+//		FrdRequestEntity reqEnt = new FrdRequestEntity(friend);
+		mRequester = friend.getUserByUserid();
+		mRequestee = friend.getUserByFriendid();
 
-		MainTabMsgPage.getInstance().onUpdateById(TabMsgItemEntity.FrdReqNotifId, mRequester.getSex(), mRequester.getUsername(), mRequester.getUsername() + " wants to be your friend", ChatEntity.genDate(), true);
+		MainTabMsgPage.getInstance().onUpdateById(TabMsgItemEntity.FrdReqNotifId, mRequester.getSex(), mRequester.getUsername(),
+				mRequester.getUsername() + " wants to be your friend", ChatEntity.genDate(), true);
 		if (MainBodyActivity.getCurPage() == MainBodyActivity.mPageMsg) {
 			MainTabMsgPage.getInstance().onUpdateView();
 		}
 
-		FrdRequestNotifActivity.newNotification(FrdReqNotifItemEntity.mTypeFrdReq, mRequester.getUserid(), mRequester.getSex(), mRequester.getUsername(), mRequester.getUsername() + " wants to be your friend", ChatEntity.genDate(), mRequester);
+		FrdRequestNotifActivity.newNotification(FrdReqNotifItemEntity.mTypeFrdReq, mRequester.getUserid(), mRequester.getSex(), mRequester.getUsername(),
+				mRequester.getUsername() + " wants to be your friend", ChatEntity.genDate(), mRequester);
 		if (FrdRequestNotifActivity.getInstance() != null && FrdRequestNotifActivity.getInstance().getIsCurPage() == true) {
 			FrdRequestNotifActivity.getInstance().onUpdateView();
 		}
 	}
 
-	public void processFriendRequestResponse(List<User> users) {
-		FrdRequestEntity reqEnt0 = new FrdRequestEntity(users);
-		mRequestee = reqEnt0.getRequestee();
+	public void processFriendRequestResponse(Friend friend) {
+//		FrdRequestEntity reqEnt = new FrdRequestEntity(friend);
+		mRequestee = friend.getUserByFriendid();
 
-		if (reqEnt0.isAceepted()) {
-			MainTabMsgPage.getInstance().onUpdateById(TabMsgItemEntity.FrdReqNotifId, mRequestee.getSex(), mRequestee.getUsername(), mRequestee.getUsername() + " accepted your friend request", ChatEntity.genDate(), true);
+		if (friend.getNote().equals("accept")) {
+			MainTabMsgPage.getInstance().onUpdateById(TabMsgItemEntity.FrdReqNotifId, mRequestee.getSex(), mRequestee.getUsername(),
+					mRequestee.getUsername() + " accepted your friend request", ChatEntity.genDate(), true);
 		} else {
-			MainTabMsgPage.getInstance().onUpdateById(TabMsgItemEntity.FrdReqNotifId, mRequestee.getSex(), mRequestee.getUsername(), mRequestee.getUsername() + " declined your friend request", ChatEntity.genDate(), true);
+			MainTabMsgPage.getInstance().onUpdateById(TabMsgItemEntity.FrdReqNotifId, mRequestee.getSex(), mRequestee.getUsername(),
+					mRequestee.getUsername() + " declined your friend request", ChatEntity.genDate(), true);
 		}
 
 		if (MainBodyActivity.getCurPage() == MainBodyActivity.mPageMsg) {
@@ -83,13 +87,14 @@ public class FriendRequestService extends Service {
 		}
 
 		String msg11;
-		if (!reqEnt0.isAceepted()) {
+		if (!friend.getNote().equals("accept")) {
 			msg11 = mRequestee.getUsername() + " has declined your request to be friends";
 		} else {
 			msg11 = mRequestee.getUsername() + " has accepted your request to be friends";
 			FriendListInfo.getFriendListInfo().uponMakeNewFriend(mRequestee);
 		}
-		FrdRequestNotifActivity.newNotification(FrdReqNotifItemEntity.mTypeFrdReqResult, mRequestee.getUserid(), mRequestee.getSex(), mRequestee.getUsername(), msg11, ChatEntity.genDate(), mRequestee);
+		FrdRequestNotifActivity.newNotification(FrdReqNotifItemEntity.mTypeFrdReqResult, mRequestee.getUserid(), mRequestee.getSex(), mRequestee.getUsername(), msg11,
+				ChatEntity.genDate(), mRequestee);
 		if (FrdRequestNotifActivity.getInstance() != null && FrdRequestNotifActivity.getInstance().getIsCurPage() == true) {
 			FrdRequestNotifActivity.getInstance().onUpdateView();
 		}

@@ -2,10 +2,6 @@ package com.zhbit.crs.util;
 
 import java.util.regex.Pattern;
 
-import android.content.Context;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-
 public class tools {
 	public boolean checkInput(String str) {
 		int num = 0;

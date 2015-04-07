@@ -3,8 +3,6 @@ package com.zhbit.crs.mainBody;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.yuner.www.R;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -14,6 +12,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.zhbit.crs.R;
 import com.zhbit.crs.action.ConnectedApp;
 import com.zhbit.crs.domain.FrdReqNotifItemEntity;
 import com.zhbit.crs.domain.User;

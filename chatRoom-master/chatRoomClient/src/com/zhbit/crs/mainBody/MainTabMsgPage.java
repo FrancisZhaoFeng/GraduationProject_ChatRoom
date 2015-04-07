@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.yuner.www.R;
-
 import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -16,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.zhbit.crs.R;
 import com.zhbit.crs.action.ConnectedApp;
 import com.zhbit.crs.chatServices.ChatService;
 import com.zhbit.crs.chatServices.ChatServiceData;
@@ -24,6 +23,10 @@ import com.zhbit.crs.domain.TabMsgItemEntity;
 import com.zhbit.crs.domain.User;
 import com.zhbit.crs.util.DbSaveOldMsg;
 
+/**
+ * @author zhaoguofeng
+ *
+ */
 public class MainTabMsgPage {
 
 	private static MainTabMsgPage mInstance;

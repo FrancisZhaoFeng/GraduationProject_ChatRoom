@@ -1,7 +1,5 @@
 package com.zhbit.crs.action;
 
-import org.yuner.www.R;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -17,10 +15,10 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.zhbit.crs.R;
 import com.zhbit.crs.commons.GlobalErrors;
 import com.zhbit.crs.commons.GlobalMsgTypes;
 import com.zhbit.crs.domain.User;
-import com.zhbit.crs.mainBody.MainBodyActivity;
 import com.zhbit.crs.myNetwork.NetworkService;
 import com.zhbit.crs.util.MD5;
 import com.zhbit.crs.util.tools;

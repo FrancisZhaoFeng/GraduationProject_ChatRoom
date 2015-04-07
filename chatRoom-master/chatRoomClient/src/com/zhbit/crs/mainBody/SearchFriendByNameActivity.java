@@ -1,7 +1,5 @@
 package com.zhbit.crs.mainBody;
 
-import org.yuner.www.R;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +8,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.zhbit.crs.R;
 import com.zhbit.crs.domain.SearchEntity;
 import com.zhbit.crs.domain.User;
 

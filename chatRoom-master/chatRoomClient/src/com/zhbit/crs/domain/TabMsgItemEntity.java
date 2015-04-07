@@ -4,6 +4,10 @@ import java.util.Date;
 
 import com.zhbit.crs.commons.GlobalStrings;
 
+/**
+ * @author zhaoguofeng
+ * 消息显示实体类
+ */
 public class TabMsgItemEntity {
 
 	public static final int FrdReqNotifId = -1;

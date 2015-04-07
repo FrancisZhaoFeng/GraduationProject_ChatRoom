@@ -3,8 +3,6 @@ package com.zhbit.crs.myNetwork;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import android.util.Log;
-
 /**
  * @author zhaoguofeng 客户端发送消息到服务端，任何发送到服务端的信息都经过此类的start函数
  */

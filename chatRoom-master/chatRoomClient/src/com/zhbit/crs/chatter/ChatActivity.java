@@ -13,8 +13,6 @@ package com.zhbit.crs.chatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.yuner.www.R;
-
 import android.app.Activity;
 import android.app.Service;
 import android.content.ComponentName;
@@ -39,6 +37,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.zhbit.crs.R;
 import com.zhbit.crs.action.ConnectedApp;
 import com.zhbit.crs.chatServices.ChatService;
 import com.zhbit.crs.chatServices.ChatServiceData;

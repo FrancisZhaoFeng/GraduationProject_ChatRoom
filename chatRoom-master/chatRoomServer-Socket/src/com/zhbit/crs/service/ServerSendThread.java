@@ -109,9 +109,7 @@ public class ServerSendThread extends Thread {
 	}
 
 	public void saveUnsends() {
-		int senderId = GlobalInts.idPlaceholder; // since it's useless, so just
-													// a placeholder, we don't
-													// care who send the message
+		int senderId = GlobalInts.idPlaceholder; // since it's useless, so just a placeholder, we don't care who send the message
 		int receiverId = mClientActivity.getUserInfo().getUserid();
 		for (SendStackItem item0 : mSendList) {
 			// int type = item0.getType();

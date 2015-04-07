@@ -1,9 +1,8 @@
 package com.zhbit.crs.mainBody;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.yuner.www.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -21,6 +20,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 
+import com.zhbit.crs.R;
 import com.zhbit.crs.action.ConnectedApp;
 import com.zhbit.crs.chatServices.ChatService;
 import com.zhbit.crs.chatServices.ChatServiceData;
@@ -133,7 +133,7 @@ public class MainBodyActivity extends Activity {
 		View viewFriendSearch = li.inflate(R.layout.main_tab_friends, null);
 		View viewSettings = li.inflate(R.layout.tabsettings_main, null);
 
-		/***************************** set the looks of the pager initial***********************************************/
+		/***************************** set the looks of the pager initial ***********************************************/
 		final ArrayList<View> listOfViews = new ArrayList<View>();
 		listOfViews.add(viewPastMsgs);
 		listOfViews.add(viewChooseRoom);
@@ -332,9 +332,9 @@ public class MainBodyActivity extends Activity {
 		overridePendingTransition(R.anim.my_slide_right_in, R.anim.my_slide_left_out);
 	}
 
-	public void gotoFriendSearchResult(List<User> users) { //String searchedString
+	public void gotoFriendSearchResult(List<User> users) { // String searchedString
 		Intent intent = new Intent(MainBodyActivity.this, FriendSearchResultActivity.class);
-		intent.putExtra("searchResult", "");
+		intent.putExtra("searchResult", (Serializable) users);
 		startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
 		overridePendingTransition(R.anim.my_slide_right_in, R.anim.my_slide_left_out);
 	}

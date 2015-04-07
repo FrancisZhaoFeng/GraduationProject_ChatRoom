@@ -100,9 +100,9 @@ public class ServerListenThread extends Thread {
 						break;
 					case GlobalMsgTypes.msgFriendshipRequest:
 						Friend friend = (Friend) obj;
-						System.out.println("GlobalMsgTypes.msgFriendshipRequest" + GlobalMsgTypes.msgFriendshipRequest);
+						System.out.println("GlobalMsgTypes.msgFriendshipRequest:" + GlobalMsgTypes.msgFriendshipRequest);
 						System.out.println("one friend request comes");
-						// mServerActivity.startFriendshipRequest(friend);
+						 mServerActivity.startFriendshipRequest(friend);
 						break;
 					case GlobalMsgTypes.msgFriendshipRequestResponse:
 						System.out.println("GlobalMsgTypes.msgFriendshipRequestResponse" + GlobalMsgTypes.msgFriendshipRequestResponse);
@@ -122,7 +122,7 @@ public class ServerListenThread extends Thread {
 						break;
 					case GlobalMsgTypes.msgBackOnline:
 						System.out.println("GlobalMsgTypes.msgBackOnline" + GlobalMsgTypes.msgBackOnline);
-						// mServerActivity.backOnline(actualMsg);
+						 mServerActivity.backOnline((User)obj);
 						break;
 					default:
 						break;

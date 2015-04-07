@@ -3,7 +3,7 @@ package com.zhbit.crs.mainBody;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.yuner.www.R;
+import com.zhbit.crs.R;
 
 import android.content.Context;
 import android.view.LayoutInflater;

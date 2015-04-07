@@ -3,12 +3,14 @@ package com.zhbit.crs.action;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import com.zhbit.crs.dao.UserDao;
+import com.zhbit.crs.domain.User;
 import com.zhbit.crs.service.ServerActivity;
 
 public class ServerListen {
 
 	/* the PORT number for this application */
-	public static final int PORT = 8888;
+	public static final int PORT = 8887;
 
 	public static void main(String args[]) {
 		new ServerListen().begin();
@@ -27,12 +29,12 @@ public class ServerListen {
 		}
 	}
 
-	public void updateFriendList(ServerActivity ca0) {
-		ClientMap.getInstance().insert(ca0.getUserInfo().getUserid(), ca0);
+	public void updateFriendList(ServerActivity ca) {
+		ClientMap.getInstance().insert(ca.getUserInfo().getUserid(), ca);
 	}
 
-	public void removeOneClient(ServerActivity client0) {
-		ClientMap.getInstance().remove(client0.getUserInfo().getUserid());
+	public void removeOneClient(ServerActivity client) {
+		ClientMap.getInstance().remove(client.getUserInfo().getUserid());
 	}
 
 	public ServerActivity getClientActivityById(int id) {

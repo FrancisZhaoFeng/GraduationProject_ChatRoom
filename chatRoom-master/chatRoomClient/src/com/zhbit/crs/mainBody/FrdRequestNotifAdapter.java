@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import org.yuner.www.R;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.zhbit.crs.R;
 import com.zhbit.crs.commons.GlobalInts;
 import com.zhbit.crs.domain.FrdReqNotifItemEntity;
 

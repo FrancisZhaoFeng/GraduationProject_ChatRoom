@@ -2,8 +2,6 @@ package com.zhbit.crs.mainBody;
 
 import java.util.List;
 
-import org.yuner.www.R;
-
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.util.Log;
@@ -14,6 +12,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.zhbit.crs.R;
 import com.zhbit.crs.domain.User;
 
 public class FriendListAdapter extends BaseExpandableListAdapter {

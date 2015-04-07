@@ -23,10 +23,10 @@ public class ClientMap {
 		mMap = new HashMap<Integer, ServerActivity>();
 	}
 
-	public synchronized void insert(int id, ServerActivity ca0) {
+	public synchronized void insert(int id, ServerActivity ca) {
 		System.out.println("new id = " + id);
 
-		mMap.put(id, ca0);
+		mMap.put(id, ca);
 	}
 
 	public synchronized void remove(int id) {

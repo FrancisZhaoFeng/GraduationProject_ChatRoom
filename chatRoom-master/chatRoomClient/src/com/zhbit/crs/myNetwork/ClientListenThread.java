@@ -14,6 +14,7 @@ import com.zhbit.crs.action.RegisterActivity;
 import com.zhbit.crs.chatServices.InitData;
 import com.zhbit.crs.commons.GlobalMsgTypes;
 import com.zhbit.crs.domain.ChatPerLog;
+import com.zhbit.crs.domain.Friend;
 import com.zhbit.crs.domain.User;
 import com.zhbit.crs.mainBody.MainBodyActivity;
 
@@ -27,6 +28,7 @@ public class ClientListenThread extends Thread {
 
 	private ObjectInputStream is = null;
 	private User user;
+	private Friend friend;
 	private List<User> users;
 	private Object obj;
 
@@ -52,7 +54,7 @@ public class ClientListenThread extends Thread {
 				is = new ObjectInputStream(new BufferedInputStream(mSocket0.getInputStream()));
 				obj = is.readObject();
 				if (obj != null) { // mBuffRder0.readLine()
-					int msgType = Integer.parseInt((String)obj); // type of message  received
+					int msgType = Integer.parseInt((String) obj); // type of message received
 					obj = is.readObject();
 					switch (msgType) {
 					case GlobalMsgTypes.msgPublicRoom:
@@ -68,9 +70,9 @@ public class ClientListenThread extends Thread {
 						Log.w("message received +++", "+++++++++++++++++++");
 						// ChatEntity entTemp = new ChatEntity(actualMsg);
 						ChatPerLog chatPerLog = (ChatPerLog) obj;
-						Intent intent = new Intent("yuner.example.hello.MESSAGE_RECEIVED");
-						intent.putExtra("yuner.example.hello.msg_received", chatPerLog.toString());
-						intent.putExtra("yuner.example.hello.msg_type", msgType);
+						Intent intent = new Intent("zhbit.example.hello.MESSAGE_RECEIVED");
+						intent.putExtra("zhbit.example.hello.msg_received", chatPerLog.toString());
+						intent.putExtra("zhbit.example.hello.msg_type", msgType);
 						mContext0.sendBroadcast(intent);
 						break;
 					case GlobalMsgTypes.msgHandShake:
@@ -96,9 +98,9 @@ public class ClientListenThread extends Thread {
 					case GlobalMsgTypes.msgUpdateFriendList:
 						Log.w("GlobalMsgTypes.msgUpdateFriendList", "" + GlobalMsgTypes.msgUpdateFriendList);
 						user = (User) obj;
-						Intent intentp = new Intent("yuner.example.hello.MESSAGE_RECEIVED");
-						intentp.putExtra("yuner.example.hello.msg_received", user);
-						intentp.putExtra("yuner.example.hello.msg_type", msgType);
+						Intent intentp = new Intent("zhbit.example.hello.MESSAGE_RECEIVED");
+						intentp.putExtra("zhbit.example.hello.msg_received", user);
+						intentp.putExtra("zhbit.example.hello.msg_type", msgType);
 						mContext0.sendBroadcast(intentp);
 						break;
 					case GlobalMsgTypes.msgSignUp:
@@ -113,21 +115,21 @@ public class ClientListenThread extends Thread {
 						break;
 					case GlobalMsgTypes.msgFriendshipRequest:
 						Log.w("GlobalMsgTypes.msgFriendshipRequest", "" + GlobalMsgTypes.msgFriendshipRequest);
-						user = (User) obj;
+						friend = (Friend) obj;
 						uponReceivedMsg();
-						Intent intent2 = new Intent("yuner.example.hello.FRIEND_REQUEST_MSGS");
-						intent2.putExtra("yuner.example.hello.msg_received", user);
-						intent2.putExtra("yuner.example.hello.msg_type", msgType);
+						Intent intent2 = new Intent("zhbit.example.hello.FRIEND_REQUEST_MSGS");
+						intent2.putExtra("zhbit.example.hello.msg_received", friend);
+						intent2.putExtra("zhbit.example.hello.msg_type", msgType);
 						mContext0.sendBroadcast(intent2);
 						break;
 					case GlobalMsgTypes.msgFriendshipRequestResponse:
 						Log.w("GlobalMsgTypes.msgFriendshipRequestResponse", "" + GlobalMsgTypes.msgFriendshipRequestResponse);
-						User user = (User) obj;
+						friend = (Friend) obj;
 						uponReceivedMsg();
 						Log.d("response comes", "+++" + "++++++++++++++++++");
-						Intent intent3 = new Intent("yuner.example.hello.FRIEND_REQUEST_MSGS");
-						intent3.putExtra("yuner.example.hello.msg_received", user);
-						intent3.putExtra("yuner.example.hello.msg_type", msgType);
+						Intent intent3 = new Intent("zhbit.example.hello.FRIEND_REQUEST_MSGS");
+						intent3.putExtra("zhbit.example.hello.msg_received", friend);
+						intent3.putExtra("zhbit.example.hello.msg_type", msgType);
 						mContext0.sendBroadcast(intent3);
 						break;
 					case GlobalMsgTypes.msgFriendGoOnline:
@@ -135,17 +137,17 @@ public class ClientListenThread extends Thread {
 						// 1);
 						Log.w("GlobalMsgTypes.msgFriendGoOnline", "" + GlobalMsgTypes.msgFriendGoOnline);
 						user = (User) obj;
-						Intent intent6 = new Intent("yuner.example.hello.MESSAGE_RECEIVED");
-						intent6.putExtra("yuner.example.hello.msg_received", user);
-						intent6.putExtra("yuner.example.hello.msg_type", msgType);
+						Intent intent6 = new Intent("zhbit.example.hello.MESSAGE_RECEIVED");
+						intent6.putExtra("zhbit.example.hello.msg_received", user);
+						intent6.putExtra("zhbit.example.hello.msg_type", msgType);
 						mContext0.sendBroadcast(intent6);
 						break;
 					case GlobalMsgTypes.msgFriendGoOffline:
 						Log.w("GlobalMsgTypes.msgFriendGoOffline", "" + GlobalMsgTypes.msgFriendGoOffline);
 						user = (User) obj;
-						Intent intent7 = new Intent("yuner.example.hello.MESSAGE_RECEIVED");
-						intent7.putExtra("yuner.example.hello.msg_received", user);
-						intent7.putExtra("yuner.example.hello.msg_type", msgType);
+						Intent intent7 = new Intent("zhbit.example.hello.MESSAGE_RECEIVED");
+						intent7.putExtra("zhbit.example.hello.msg_received", user);
+						intent7.putExtra("zhbit.example.hello.msg_type", msgType);
 						mContext0.sendBroadcast(intent7);
 						break;
 					default:
@@ -155,7 +157,7 @@ public class ClientListenThread extends Thread {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}

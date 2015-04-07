@@ -36,7 +36,7 @@ public class ChatService extends Service {
 
 	private int mCurType = 0; // 0 for public room (default), 1 for group room,
 								// 2 for friend chatting
-//	private UserInfo mMyUserInfo;
+								// private UserInfo mMyUserInfo;
 	private User mMyUserInfo;
 
 	private int mFriendId;
@@ -69,11 +69,11 @@ public class ChatService extends Service {
 
 		mInstance = this;
 
-		IntentFilter ifter = new IntentFilter("yuner.example.hello.MESSAGE_RECEIVED");
+		IntentFilter ifter = new IntentFilter("zhbit.example.hello.MESSAGE_RECEIVED");
 		mMsgReceiver = new ChatMsgReceiver(this);
 		ChatService.this.registerReceiver(mMsgReceiver, ifter);
 
-//		mMyUserInfo = ConnectedApp.getInstance().getUserInfo();
+		// mMyUserInfo = ConnectedApp.getInstance().getUserInfo();
 		mMyUserInfo = ConnectedApp.getInstance().getUserInfo();
 	}
 
@@ -126,7 +126,7 @@ public class ChatService extends Service {
 	}
 
 	public void newMsgArrive(ChatPerLog chatPerLog, boolean isSelf) {
-//		ChatEntity msgEntity = new ChatEntity(str0);
+		// ChatEntity msgEntity = new ChatEntity(str0);
 
 		int type = chatPerLog.getType();
 		// id is the id of the one client is talking to, regardless of him/her
@@ -147,9 +147,11 @@ public class ChatService extends Service {
 		}
 
 		if (!ChatActivity.getIsActive() || mFriendId != id) {
-			MainTabMsgPage.getInstance().onUpdateByUserinfo(FriendListInfo.getFriendListInfo().getUserFromId(id), chatPerLog.getSendtext(), chatPerLog.getSendtime() ,true);
+			MainTabMsgPage.getInstance().onUpdateByUserinfo(FriendListInfo.getFriendListInfo().getUserFromId(id), chatPerLog.getSendtext(), chatPerLog.getSendtime(),
+					true);
 		} else {
-			MainTabMsgPage.getInstance().onUpdateByUserinfo(FriendListInfo.getFriendListInfo().getUserFromId(id), chatPerLog.getSendtext(), chatPerLog.getSendtime(), false);
+			MainTabMsgPage.getInstance().onUpdateByUserinfo(FriendListInfo.getFriendListInfo().getUserFromId(id), chatPerLog.getSendtext(), chatPerLog.getSendtime(),
+					false);
 		}
 
 		if (MainBodyActivity.getCurPage() == MainBodyActivity.mPageMsg) {

@@ -136,7 +136,11 @@ public class UserDao {
 		if(!searchEntity.getType()){
 			hql = "from User where username like '%"+searchEntity.getName()+"%'";
 		}else{
-			hql = "from User where sex="+searchEntity.getSex()+" and age between "+searchEntity.getLowerAge()+" and "+searchEntity.getUpperAge()+"";
+			if(searchEntity.getSex() ==2 ){
+				hql = "from User where age between "+searchEntity.getLowerAge()+" and "+searchEntity.getUpperAge()+"";
+			}else{
+				hql = "from User where sex="+searchEntity.getSex()+" and age between "+searchEntity.getLowerAge()+" and "+searchEntity.getUpperAge()+"";
+			}
 		}
 		System.out.println(hql);
 		session = HibernateUtils.getSession();

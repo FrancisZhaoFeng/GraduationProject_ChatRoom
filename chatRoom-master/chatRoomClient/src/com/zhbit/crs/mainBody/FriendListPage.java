@@ -3,14 +3,13 @@ package com.zhbit.crs.mainBody;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.yuner.www.R;
-
 import android.content.Context;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 
+import com.zhbit.crs.R;
 import com.zhbit.crs.chatServices.ChatService;
 import com.zhbit.crs.chatServices.ChatServiceData;
 import com.zhbit.crs.chatServices.FriendListInfo;
