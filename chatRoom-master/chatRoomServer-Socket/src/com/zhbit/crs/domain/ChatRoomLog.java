@@ -9,7 +9,7 @@ import java.util.Date;
 public class ChatRoomLog implements java.io.Serializable {
 
 	// Fields
-
+	private static final long serialVersionUID = -4777197771783394088L;
 	private Integer logid;
 	private User user;
 	private ChatRoom chatRoom;

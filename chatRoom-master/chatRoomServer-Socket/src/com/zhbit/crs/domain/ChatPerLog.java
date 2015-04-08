@@ -9,7 +9,7 @@ import java.util.Date;
 public class ChatPerLog implements java.io.Serializable {
 
 	// Fields
-
+	private static final long serialVersionUID = 5268425463780540575L;
 	private Integer logid;
 	private User userBySenderid;
 	private User userByReceiverid;

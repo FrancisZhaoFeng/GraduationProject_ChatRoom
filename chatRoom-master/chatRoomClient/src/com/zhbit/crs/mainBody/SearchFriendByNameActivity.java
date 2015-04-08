@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.zhbit.crs.R;
-import com.zhbit.crs.domain.SearchEntity;
+import com.zhbit.crs.domain.ZSearchEntity;
 import com.zhbit.crs.domain.User;
 
 public class SearchFriendByNameActivity extends Activity {
@@ -37,7 +37,7 @@ public class SearchFriendByNameActivity extends Activity {
 			public void onClick(View v) {
 				Log.d("start search by name", "++++++" + "+++++++++++++");
 				String searchName = mSearchEtName.getText().toString();
-				SearchEntity s_ent0 = new SearchEntity(SearchEntity.SEARCH_BY_NAME, -1, -1, -1,searchName);
+				ZSearchEntity s_ent0 = new ZSearchEntity(ZSearchEntity.SEARCH_BY_NAME, -1, -1, -1,searchName);
 				MainBodyActivity.getInstance().startSearch(s_ent0);				
 			}
 		});

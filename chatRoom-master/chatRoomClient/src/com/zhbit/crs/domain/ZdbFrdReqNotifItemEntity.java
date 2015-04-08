@@ -1,11 +1,20 @@
 package com.zhbit.crs.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.zhbit.crs.commons.GlobalStrings;
 
-public class FrdReqNotifItemEntity {
+/**
+ * @author zhaoguofeng
+ * 好友请求提示实体
+ */
+public class ZdbFrdReqNotifItemEntity implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6027130540694880562L;
 	public static final int mTypeFrdReq = 1;
 	public static final int mTypeFrdReqResult = 2;
 	
@@ -26,7 +35,7 @@ public class FrdReqNotifItemEntity {
 	private int mIsRead = 0;
 	private int mStatus = mUnanswer;
 	
-	public FrdReqNotifItemEntity(int type, int id, boolean imgId, String name, String content, Date time, User strOfUser) {
+	public ZdbFrdReqNotifItemEntity(int type, int id, boolean imgId, String name, String content, Date time, User strOfUser) {
 		mType = type;
 		mNotifId = id;
 		mImgId = imgId;
@@ -36,7 +45,7 @@ public class FrdReqNotifItemEntity {
 		mStrOfUser = strOfUser;
 	}
 	
-	public FrdReqNotifItemEntity(String in) {
+	public ZdbFrdReqNotifItemEntity(String in) {
 		String[] strArr0 = in.split(GlobalStrings.entityDivider2);
 		
 		mType = Integer.parseInt(strArr0[0]);

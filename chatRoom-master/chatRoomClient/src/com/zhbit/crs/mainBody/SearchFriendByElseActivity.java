@@ -10,7 +10,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import com.zhbit.crs.R;
-import com.zhbit.crs.domain.SearchEntity;
+import com.zhbit.crs.domain.ZSearchEntity;
 
 public class SearchFriendByElseActivity extends Activity {
 
@@ -45,17 +45,17 @@ public class SearchFriendByElseActivity extends Activity {
 				String chSex = rdbtn.getText().toString();
 				switch (chSex) {
 				case "female":
-					sex = SearchEntity.FEMALE_GENDER;
+					sex = ZSearchEntity.FEMALE_GENDER;
 					break;
 				case "male":
-					sex = SearchEntity.MALE_GENDER;
+					sex = ZSearchEntity.MALE_GENDER;
 					break;
 				default:
-					sex = SearchEntity.BOTH_GENDER;
+					sex = ZSearchEntity.BOTH_GENDER;
 					break;
 				}
 
-				SearchEntity s_ent0 = new SearchEntity(SearchEntity.SEARCH_BY_ELSE, lage, uage, sex, "");
+				ZSearchEntity s_ent0 = new ZSearchEntity(ZSearchEntity.SEARCH_BY_ELSE, lage, uage, sex, "");
 				MainBodyActivity.getInstance().startSearch(s_ent0);
 			}
 		});

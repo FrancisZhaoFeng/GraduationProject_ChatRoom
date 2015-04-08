@@ -7,7 +7,7 @@ package com.zhbit.crs.domain;
 public class Friend implements java.io.Serializable {
 
 	// Fields
-
+	private static final long serialVersionUID = 8511348746671571563L;
 	private Integer id;
 	private User userByFriendid;
 	private User userByUserid;

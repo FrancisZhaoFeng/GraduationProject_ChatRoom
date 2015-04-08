@@ -8,7 +8,7 @@ import com.zhbit.crs.commons.GlobalMsgTypes;
 import com.zhbit.crs.domain.ChatPerLog;
 import com.zhbit.crs.domain.ChatRoomLog;
 import com.zhbit.crs.domain.Friend;
-import com.zhbit.crs.domain.SearchEntity;
+import com.zhbit.crs.domain.ZSearchEntity;
 import com.zhbit.crs.domain.User;
 
 /**
@@ -95,7 +95,7 @@ public class ServerListenThread extends Thread {
 						break;
 					case GlobalMsgTypes.msgSearchPeople:
 						System.out.println("GlobalMsgTypes.msgSearchPeople" + GlobalMsgTypes.msgSearchPeople);
-						SearchEntity searchEntity = (SearchEntity) obj;
+						ZSearchEntity searchEntity = (ZSearchEntity) obj;
 						mServerActivity.startSearchPeople(searchEntity);
 						break;
 					case GlobalMsgTypes.msgFriendshipRequest:

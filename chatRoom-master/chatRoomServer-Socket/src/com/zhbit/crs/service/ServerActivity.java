@@ -27,9 +27,9 @@ import com.zhbit.crs.dao.ChatLogDao;
 import com.zhbit.crs.dao.UserDao;
 import com.zhbit.crs.domain.ChatPerLog;
 import com.zhbit.crs.domain.Friend;
-import com.zhbit.crs.domain.SearchEntity;
+import com.zhbit.crs.domain.ZSearchEntity;
 import com.zhbit.crs.domain.User;
-import com.zhbit.crs.domain.UserInfo;
+import com.zhbit.crs.domain.ZUserInfo;
 import com.zhbit.crs.md5.MD5;
 
 /**
@@ -138,7 +138,7 @@ public class ServerActivity {
 		mServerListen.updateFriendList(this);
 	}
 
-	public void startSearchPeople(SearchEntity searchEntity) {// String msg0
+	public void startSearchPeople(ZSearchEntity searchEntity) {// String msg0
 		List<User> users = null;
 		users = userDao.searchUser(searchEntity);
 		sendOneObject(users, GlobalMsgTypes.msgSearchPeople);
@@ -224,8 +224,8 @@ public class ServerActivity {
 	public void onFriendshipRequestResponse(String msg0) {
 		String[] strArr0 = msg0.split(GlobalStrings.friendshipRequestDivider);
 		int response0 = Integer.parseInt(strArr0[0]);
-		UserInfo requester = new UserInfo(strArr0[1]);
-		UserInfo requestee = new UserInfo(strArr0[2]);
+		ZUserInfo requester = new ZUserInfo(strArr0[1]);
+		ZUserInfo requestee = new ZUserInfo(strArr0[2]);
 
 		if (response0 == GlobalInts.idAcceptFriendship) {
 			// DBUtil.makeFriends(requester.getId(), requestee.getId());

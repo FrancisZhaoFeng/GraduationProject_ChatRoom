@@ -10,6 +10,10 @@ public class ChatPerLog implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5268425463780540575L;
 	private Integer logid;
 	private User userBySenderid;
 	private User userByReceiverid;
@@ -31,7 +35,7 @@ public class ChatPerLog implements java.io.Serializable {
 		this.sendtime = sendtime;
 		this.type = type;
 	}
-	
+
 	public ChatPerLog(int type, User sender, int receiverId, String sentence) {
 		this.type = type;
 		this.userBySenderid = sender;
@@ -40,9 +44,7 @@ public class ChatPerLog implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public ChatPerLog(User userBySenderid, User userByReceiverid,
-			Date sendtime, String sendtext, byte[] sendimage, byte[] sendvoice,
-			Integer type, boolean isread) {
+	public ChatPerLog(User userBySenderid, User userByReceiverid, Date sendtime, String sendtext, byte[] sendimage, byte[] sendvoice, Integer type, boolean isread) {
 		this.userBySenderid = userBySenderid;
 		this.userByReceiverid = userByReceiverid;
 		this.sendtime = sendtime;

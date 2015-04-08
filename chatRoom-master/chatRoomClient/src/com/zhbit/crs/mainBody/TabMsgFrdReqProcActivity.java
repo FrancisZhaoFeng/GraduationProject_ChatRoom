@@ -15,14 +15,14 @@ import com.zhbit.crs.R;
 import com.zhbit.crs.action.ConnectedApp;
 import com.zhbit.crs.chatServices.FriendListInfo;
 import com.zhbit.crs.commons.GlobalMsgTypes;
-import com.zhbit.crs.domain.FrdReqNotifItemEntity;
-import com.zhbit.crs.domain.FrdRequestEntity;
+import com.zhbit.crs.domain.ZdbFrdReqNotifItemEntity;
+import com.zhbit.crs.domain.ZFrdRequestEntity;
 import com.zhbit.crs.domain.User;
 import com.zhbit.crs.myNetwork.NetworkService;
 
 public class TabMsgFrdReqProcActivity extends Activity {
 
-	private FrdReqNotifItemEntity mThisItem;
+	private ZdbFrdReqNotifItemEntity mThisItem;
 
 	private TextView mTvHeadName;
 	private ImageView mImgIcon;
@@ -44,7 +44,7 @@ public class TabMsgFrdReqProcActivity extends Activity {
 		Intent intent0 = getIntent();
 		String in = intent0.getStringExtra("itemStr");
 		mThisPos = intent0.getIntExtra("itemPos", 0);
-		mThisItem = new FrdReqNotifItemEntity(in);
+		mThisItem = new ZdbFrdReqNotifItemEntity(in);
 
 		mTvHeadName = (TextView) findViewById(R.id.tabmsg_frd_req_proc_header_name);
 		mImgIcon = (ImageView) findViewById(R.id.tabmsg_frd_req_proc_icon);
@@ -79,12 +79,12 @@ public class TabMsgFrdReqProcActivity extends Activity {
 				// set dialog message
 				alertDialogBuilder.setMessage("are you sure to accept the request?").setCancelable(true).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-						FrdRequestEntity reqEnt0 = new FrdRequestEntity(mThisItem.getStrOfUser(), ConnectedApp.getInstance().getUserInfo());
+						ZFrdRequestEntity reqEnt0 = new ZFrdRequestEntity(mThisItem.getStrOfUser(), ConnectedApp.getInstance().getUserInfo());
 						reqEnt0.accept();
 						NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgFriendshipRequestResponse, reqEnt0.toString());
 
-						mThisItem.setStatus(FrdReqNotifItemEntity.mAccepted);
-						FrdRequestNotifActivity.getInstance().setItemStatus(mThisPos, FrdReqNotifItemEntity.mAccepted);
+						mThisItem.setStatus(ZdbFrdReqNotifItemEntity.mAccepted);
+						FrdRequestNotifActivity.getInstance().setItemStatus(mThisPos, ZdbFrdReqNotifItemEntity.mAccepted);
 
 						FriendListInfo.getFriendListInfo().uponMakeNewFriend(mThisItem.getStrOfUser());
 					}
@@ -109,12 +109,12 @@ public class TabMsgFrdReqProcActivity extends Activity {
 				// set dialog message
 				alertDialogBuilder.setMessage("are you sure to decline the request?").setCancelable(true).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-						FrdRequestEntity reqEnt0 = new FrdRequestEntity(mThisItem.getStrOfUser(), ConnectedApp.getInstance().getUserInfo());
+						ZFrdRequestEntity reqEnt0 = new ZFrdRequestEntity(mThisItem.getStrOfUser(), ConnectedApp.getInstance().getUserInfo());
 						reqEnt0.decline();
 						NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgFriendshipRequestResponse, reqEnt0.toString());
 
-						mThisItem.setStatus(FrdReqNotifItemEntity.mDeclined);
-						FrdRequestNotifActivity.getInstance().setItemStatus(mThisPos, FrdReqNotifItemEntity.mDeclined);
+						mThisItem.setStatus(ZdbFrdReqNotifItemEntity.mDeclined);
+						FrdRequestNotifActivity.getInstance().setItemStatus(mThisPos, ZdbFrdReqNotifItemEntity.mDeclined);
 					}
 				}).setNegativeButton("No", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {

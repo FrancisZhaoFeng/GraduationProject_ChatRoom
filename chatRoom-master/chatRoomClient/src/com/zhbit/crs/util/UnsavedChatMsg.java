@@ -7,6 +7,10 @@ import android.util.SparseArray;
 import com.zhbit.crs.domain.ChatPerLog;
 import com.zhbit.crs.domain.User;
 
+/**
+ * @author zhaoguofeng
+ * 到目前为止，还没有保存的消息
+ */
 public class UnsavedChatMsg {
 
 	private static UnsavedChatMsg mInstance;

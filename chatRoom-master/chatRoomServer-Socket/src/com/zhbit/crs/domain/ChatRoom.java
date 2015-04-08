@@ -10,7 +10,7 @@ import java.util.Set;
 public class ChatRoom implements java.io.Serializable {
 
 	// Fields
-
+	private static final long serialVersionUID = -814845858690774532L;
 	private Integer chatroomid;
 	private User user;
 	private String chatroomname;

@@ -15,17 +15,18 @@ import android.widget.TextView;
 
 import com.zhbit.crs.R;
 import com.zhbit.crs.commons.GlobalInts;
-import com.zhbit.crs.domain.FrdReqNotifItemEntity;
+import com.zhbit.crs.domain.ZdbFrdReqNotifItemEntity;
+import com.zhbit.crs.util.tools;
 
 public class FrdRequestNotifAdapter extends BaseAdapter {
 
-	private List<FrdReqNotifItemEntity> mVector;
+	private List<ZdbFrdReqNotifItemEntity> mVector;
 	private LayoutInflater mInflater;
 	private Context mContext0;
 	private int mSelfId;
 	private HashMap<Integer, Integer> mIdForPos;
 
-	public FrdRequestNotifAdapter(Context context, List<FrdReqNotifItemEntity> vector) {
+	public FrdRequestNotifAdapter(Context context, List<ZdbFrdReqNotifItemEntity> vector) {
 		this.mVector = vector;
 		mInflater = LayoutInflater.from(context);
 		mContext0 = context;
@@ -74,8 +75,8 @@ public class FrdRequestNotifAdapter extends BaseAdapter {
 			avatarV.setImageResource(R.drawable.cb0_h003);
 		nameOfSpeakerV.setText(name);
 		textV.setText(sentence);
-//		timeV.setText(time);
-		if (status == FrdReqNotifItemEntity.mUnanswer) {
+		timeV.setText(tools.genDate(time));
+		if (status == ZdbFrdReqNotifItemEntity.mUnanswer) {
 			statusV.setVisibility(TextView.INVISIBLE);
 		} else {
 			statusV.setVisibility(TextView.VISIBLE);

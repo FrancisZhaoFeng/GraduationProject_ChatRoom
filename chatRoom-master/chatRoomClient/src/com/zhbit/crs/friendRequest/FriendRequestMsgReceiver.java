@@ -1,7 +1,5 @@
 package com.zhbit.crs.friendRequest;
 
-import java.util.List;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +7,6 @@ import android.util.Log;
 
 import com.zhbit.crs.commons.GlobalMsgTypes;
 import com.zhbit.crs.domain.Friend;
-import com.zhbit.crs.domain.User;
 
 public class FriendRequestMsgReceiver extends BroadcastReceiver {
 

@@ -1,5 +1,8 @@
 package com.zhbit.crs.util;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 public class tools {
@@ -11,14 +14,11 @@ public class tools {
 		num = str.contains("_") ? num + 1 : num;
 		return num < 3;
 	}
-
-//	public void hide() {
-//		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//		imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-//	}
-//
-//	public static void hideSystemKeyBoard(Context mcontext, View v) {
-//		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//		imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-//	}
+	
+	public static String genDate(Date date)
+	{
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd-HH:mm:ss");
+		String timex=dateFormat.format(date);
+		return timex;
+	}
 }

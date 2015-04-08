@@ -1,8 +1,11 @@
 package com.zhbit.crs.domain;
 
 
-public class SearchEntity implements java.io.Serializable {
+public class ZSearchEntity implements java.io.Serializable{
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = -3286564461647015368L;
 	private static int LOWER_BOUNDRY_OF_AGE = 5;
 	private static int UPPER_BOUNDRY_OF_AGE = 97;
@@ -18,7 +21,7 @@ public class SearchEntity implements java.io.Serializable {
 	private int sex = BOTH_GENDER;  // 0 for lady, 1 for guy, 10 for both
 	private String name = null;
 
-	public SearchEntity(boolean type, int lage, int uage, int sex, String name) {
+	public ZSearchEntity(boolean type, int lage, int uage, int sex, String name) {
 		if(type == SEARCH_BY_NAME || type == SEARCH_BY_ELSE) {
 			this.searchType = type;
 		}

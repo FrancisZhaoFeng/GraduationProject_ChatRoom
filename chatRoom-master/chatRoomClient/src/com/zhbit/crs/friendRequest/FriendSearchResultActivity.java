@@ -17,7 +17,7 @@ import com.zhbit.crs.R;
 import com.zhbit.crs.action.ConnectedApp;
 import com.zhbit.crs.chatServices.FriendListInfo;
 import com.zhbit.crs.commons.GlobalMsgTypes;
-import com.zhbit.crs.domain.FrdRequestEntity;
+import com.zhbit.crs.domain.ZFrdRequestEntity;
 import com.zhbit.crs.domain.Friend;
 import com.zhbit.crs.domain.User;
 import com.zhbit.crs.myNetwork.NetworkService;

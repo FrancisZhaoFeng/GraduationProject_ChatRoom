@@ -7,7 +7,7 @@ package com.zhbit.crs.domain;
 public class ChatRoomMem implements java.io.Serializable {
 
 	// Fields
-
+	private static final long serialVersionUID = 1580889167043775388L;
 	private Integer memid;
 	private User user;
 	private ChatRoom chatRoom;

@@ -4,13 +4,13 @@ package com.zhbit.crs.domain;
   *	the wrapper for a message stored in the ClientSendThread stack
   */
 
-public class SendStackItem {
+public class ZSendStackItem {
 
 	private int mType;
 //	private String mStr;
 	private Object mObj;
 
-	public SendStackItem(int type, Object obj) {
+	public ZSendStackItem(int type, Object obj) {
 		mType = type;
 //		mStr = str;
 		mObj = obj;

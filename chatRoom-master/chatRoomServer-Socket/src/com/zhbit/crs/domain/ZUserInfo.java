@@ -2,39 +2,38 @@ package com.zhbit.crs.domain;
 
 import java.util.Calendar;
 
-import com.zhbit.crs.commons.GlobalStrings;
-
-public class UserInfo {
+public class ZUserInfo {
 	
-	public static final String strSplitter = GlobalStrings.entityDivider;
-	public static final int girl = 0;
-	public static final int guy = 1;
+	public static String strSplitter = ZdbChatEntity.strSplitter;
 	
 	public int msgType = 3;
 	
 	private String mName = "";
 	private int mId = 0;
 	private int mSex = 0;
+//	private int mAge = 0;
 	private int mAvatarId = 0;
 	private int mIsOnline = 0; // 0 for offline, 1 for online
 	private int mBirthYear = 1970;
 	private int mBirthMonth = 1;
 	private int mBirthDay = 1;
+
 	private String mSignupTime = "xx";
 	private String mHometown = "xx";
 	private String mCurLocation = "xx";
 	
-	public UserInfo(String name,int id,int sex,int year, int month, int day,int avatarId) {
+	public ZUserInfo(String name, int id, int sex, int year, int month, int day, int avatarId) {
 		mName = new String(name);
 		mId = id;
 		mSex = sex;
+//		mAge = age;
 		mBirthYear = year;
 		mBirthMonth = month;
 		mBirthDay = day;
 		mAvatarId = avatarId;
 	}
 	
-	public UserInfo(String st0)
+	public ZUserInfo(String st0)
 	{
 		String[] sbArr0 = st0.split(strSplitter);
 		
@@ -88,19 +87,16 @@ public class UserInfo {
 	{
 		return mSex;
 	}
-	
-	public void setSex(int sex) {
-		mSex = sex;
-	}
-	
+
 	public int getAge() {
+	//	return mAge;
 		int age;
 		Calendar calendar0 = Calendar.getInstance();
 		int year = calendar0.get(Calendar.YEAR);
 		int month = calendar0.get(Calendar.MONTH) + 1;  // because month starts from 0
 		int day = calendar0.get(Calendar.DATE);
 
-		age = year - mBirthYear;
+		age = mBirthYear - year;
 		if(month < mBirthMonth) {
 			age -= 1;
 		} else if(month == mBirthMonth && day < mBirthDay) {
@@ -121,11 +117,11 @@ public class UserInfo {
 	public int getIsOnline() {
 		return mIsOnline;
 	}
-	
+
 	public void setIsOnline(int onOff) {
 		mIsOnline = onOff;
 	}
-	
+
 	public int getBirthYear() {
 		return mBirthYear;
 	}

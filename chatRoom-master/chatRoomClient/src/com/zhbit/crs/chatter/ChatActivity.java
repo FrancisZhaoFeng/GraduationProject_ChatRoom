@@ -44,6 +44,10 @@ import com.zhbit.crs.chatServices.ChatServiceData;
 import com.zhbit.crs.domain.ChatPerLog;
 import com.zhbit.crs.util.DbSaveOldMsg;
 
+/**
+ * @author zhaoguofeng
+ * 好友聊天界面
+ */
 public class ChatActivity extends Activity{
 	
 	private static boolean mIsActive = false;

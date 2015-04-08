@@ -6,7 +6,7 @@ import java.util.Date;
 
 import com.zhbit.crs.commons.GlobalStrings;
 
-public class ChatEntity {
+public class ZdbChatEntity {
 	public static final String strSplitter = GlobalStrings.entityDivider;
 	
 	private int mType=0;
@@ -19,9 +19,9 @@ public class ChatEntity {
 	
 	private int mReceiverId=0;
 	
-	public ChatEntity() {}
+	public ZdbChatEntity() {}
 	
-	public ChatEntity(int senderId, int avatarId, String name, int sex, Date time, String content, 
+	public ZdbChatEntity(int senderId, int avatarId, String name, int sex, Date time, String content, 
 			int receiverId) {
 		this.mSenderId = senderId;
 		this.mSenderAvatarId = avatarId;
@@ -32,7 +32,7 @@ public class ChatEntity {
 		this.mReceiverId = receiverId;
 	}
 	
-	public ChatEntity(int type, UserInfo sender, int receiverId, String sentence) {
+	public ZdbChatEntity(int type, ZUserInfo sender, int receiverId, String sentence) {
 		this.mType = type;
 		this.mSenderId = sender.getId();
 		this.mSenderAvatarId = sender.getAvatarId();
@@ -43,7 +43,7 @@ public class ChatEntity {
 		this.mReceiverId = receiverId;
 	}
 	
-	public ChatEntity (String str0)
+	public ZdbChatEntity (String str0)
 	{		
 		String[] sbArr0=str0.split(strSplitter);
 		

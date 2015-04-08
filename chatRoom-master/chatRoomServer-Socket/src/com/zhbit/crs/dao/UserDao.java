@@ -6,7 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.zhbit.crs.domain.Friend;
-import com.zhbit.crs.domain.SearchEntity;
+import com.zhbit.crs.domain.ZSearchEntity;
 import com.zhbit.crs.domain.User;
 import com.zhbit.crs.tools.HibernateUtils;
 
@@ -130,7 +130,7 @@ public class UserDao {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<User> searchUser(SearchEntity searchEntity){
+	public List<User> searchUser(ZSearchEntity searchEntity){
 		List<User> users = null;
 		String hql;
 		if(!searchEntity.getType()){

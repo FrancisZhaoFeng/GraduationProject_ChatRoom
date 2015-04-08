@@ -1,10 +1,8 @@
 package com.zhbit.crs.domain;
 
-import java.util.List;
-
 import com.zhbit.crs.commons.GlobalStrings;
 
-public class FrdRequestEntity {
+public class ZFrdRequestEntity {
 
 	private static final int idRefuseFriendship = 22;
 	private static final int idAcceptFriendship = 23;
@@ -15,13 +13,13 @@ public class FrdRequestEntity {
 	private User mRequester;
 	private User mRequestee;
 	
-	public FrdRequestEntity(User requester, User requestee) {//UserInfo requester, UserInfo requestee
+	public ZFrdRequestEntity(User requester, User requestee) {//UserInfo requester, UserInfo requestee
 		mStatus = idRefuseFriendship;
 		mRequester = requester;
 		mRequestee = requestee;
 	}
 	
-	public FrdRequestEntity(Friend friend) {
+	public ZFrdRequestEntity(Friend friend) {
 //		String[] arr0 = str0.split(GlobalStrings.friendshipRequestDivider);
 //		mStatus = Integer.parseInt(arr0[0]);
 //		mRequester = new UserInfo(arr0[1]);

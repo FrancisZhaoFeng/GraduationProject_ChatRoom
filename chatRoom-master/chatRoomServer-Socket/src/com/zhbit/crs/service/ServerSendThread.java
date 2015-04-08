@@ -6,8 +6,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import com.zhbit.crs.commons.*;
-import com.zhbit.crs.domain.ChatEntity;
-import com.zhbit.crs.domain.SendStackItem;
+import com.zhbit.crs.domain.ZdbChatEntity;
+import com.zhbit.crs.domain.ZSendStackItem;
 import com.zhbit.crs.domain.User;
 
 public class ServerSendThread extends Thread {
@@ -16,7 +16,7 @@ public class ServerSendThread extends Thread {
 
 	// private BufferedWriter mBuffWter;
 	private ObjectOutputStream mBuffWter;
-	private ArrayList<SendStackItem> mSendList;
+	private ArrayList<ZSendStackItem> mSendList;
 
 	private boolean mIsRunning;
 	private boolean mReceived; // the heartbeat message from client verifying they have received the message you send
@@ -26,13 +26,13 @@ public class ServerSendThread extends Thread {
 	public ServerSendThread(ServerActivity ca0, ObjectOutputStream bufw) {
 		mClientActivity = ca0;
 		mBuffWter = bufw;
-		mSendList = new ArrayList<SendStackItem>();
+		mSendList = new ArrayList<ZSendStackItem>();
 	}
 	
 	public ServerSendThread(ServerActivity ca0, Socket socket) {
 		mClientActivity = ca0;
 		mSocket = socket;
-		mSendList = new ArrayList<SendStackItem>();
+		mSendList = new ArrayList<ZSendStackItem>();
 	}
 
 	public void run() {
@@ -48,7 +48,7 @@ public class ServerSendThread extends Thread {
 					eer.printStackTrace();
 				}
 			} else {
-				SendStackItem item0 = mSendList.get(0); // get one at the head
+				ZSendStackItem item0 = mSendList.get(0); // get one at the head
 
 				if (item0 != null) {
 					send(item0.getmType() + "", item0.getmObj());
@@ -87,7 +87,7 @@ public class ServerSendThread extends Thread {
 			return;
 		}
 
-		SendStackItem item0 = new SendStackItem(type, obj);
+		ZSendStackItem item0 = new ZSendStackItem(type, obj);
 		mSendList.add(item0); // add this item to the end of stack
 	}
 
@@ -111,7 +111,7 @@ public class ServerSendThread extends Thread {
 	public void saveUnsends() {
 		int senderId = GlobalInts.idPlaceholder; // since it's useless, so just a placeholder, we don't care who send the message
 		int receiverId = mClientActivity.getUserInfo().getUserid();
-		for (SendStackItem item0 : mSendList) {
+		for (ZSendStackItem item0 : mSendList) {
 			// int type = item0.getType();
 			// String msg = item0.getStr();
 			int type = item0.getmType();

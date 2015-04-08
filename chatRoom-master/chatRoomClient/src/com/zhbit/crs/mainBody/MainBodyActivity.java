@@ -28,7 +28,7 @@ import com.zhbit.crs.chatServices.FriendListInfo;
 import com.zhbit.crs.chatServices.InitData;
 import com.zhbit.crs.chatter.ChatActivity;
 import com.zhbit.crs.commons.GlobalMsgTypes;
-import com.zhbit.crs.domain.SearchEntity;
+import com.zhbit.crs.domain.ZSearchEntity;
 import com.zhbit.crs.domain.User;
 import com.zhbit.crs.friendRequest.FriendRequestService;
 import com.zhbit.crs.friendRequest.FriendSearchResultActivity;
@@ -259,7 +259,7 @@ public class MainBodyActivity extends Activity {
 	};
 
 	/*** search friends ***/
-	public void startSearch(SearchEntity sEnt0) {
+	public void startSearch(ZSearchEntity sEnt0) {
 		NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgSearchPeople, sEnt0);
 		mMsg9Received = false;
 		while (!mMsg9Received) {
@@ -320,18 +320,28 @@ public class MainBodyActivity extends Activity {
 		}
 	}
 
+	/**
+	 * 进入与好友聊天界面
+	 */
 	public void gotoChatActivity() {
 		Intent intent = new Intent(MainBodyActivity.this, ChatActivity.class);
 		startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
 		overridePendingTransition(R.anim.my_slide_right_in, R.anim.my_slide_left_out);
 	}
 
+	/**
+	 * 进入好友申请消息界面，显示形式：listView
+	 */
 	public void gotoTabMsgFrdReqNotifActivity() {
 		Intent intent = new Intent(MainBodyActivity.this, FrdRequestNotifActivity.class);
 		startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
 		overridePendingTransition(R.anim.my_slide_right_in, R.anim.my_slide_left_out);
 	}
 
+	/**
+	 * @param users
+	 * 进入搜索用户后，显示用户界面，显示形式：listView
+	 */
 	public void gotoFriendSearchResult(List<User> users) { // String searchedString
 		Intent intent = new Intent(MainBodyActivity.this, FriendSearchResultActivity.class);
 		intent.putExtra("searchResult", (Serializable) users);
@@ -339,12 +349,18 @@ public class MainBodyActivity extends Activity {
 		overridePendingTransition(R.anim.my_slide_right_in, R.anim.my_slide_left_out);
 	}
 
+	/**
+	 * 进入通过用户名进行模糊搜索界面，要求：输入用户名（模糊搜索），显示形式：文本框
+	 */
 	public void gotoSearchBynameActivity() {
 		Intent intent = new Intent(MainBodyActivity.this, SearchFriendByNameActivity.class);
 		startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
 		overridePendingTransition(R.anim.my_slide_right_in, R.anim.my_slide_left_out);
 	}
 
+	/**
+	 * 进入通过年龄段和性别搜索界面，要求：输入年龄段和性别，显示形式：radiogroup
+	 */
 	public void gotoSearchByelseActivity() {
 		Intent intent = new Intent(MainBodyActivity.this, SearchFriendByElseActivity.class);
 		startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));

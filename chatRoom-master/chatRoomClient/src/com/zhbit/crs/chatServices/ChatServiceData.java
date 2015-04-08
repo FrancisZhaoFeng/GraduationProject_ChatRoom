@@ -8,7 +8,7 @@ import android.util.SparseIntArray;
 
 import com.zhbit.crs.domain.ChatPerLog;
 import com.zhbit.crs.domain.User;
-import com.zhbit.crs.domain.UserInfo;
+import com.zhbit.crs.domain.ZUserInfo;
 
 
 public class ChatServiceData {
@@ -51,7 +51,7 @@ public class ChatServiceData {
 		
 	}
 	
-	public void offLineUser(UserInfo userInfo) {
+	public void offLineUser(ZUserInfo userInfo) {
 		int id = userInfo.getId();
 		
 		for(int i = 0;i < mFriendIds.size();i++) {
