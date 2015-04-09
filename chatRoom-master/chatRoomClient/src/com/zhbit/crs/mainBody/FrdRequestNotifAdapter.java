@@ -18,18 +18,21 @@ import com.zhbit.crs.commons.GlobalInts;
 import com.zhbit.crs.domain.ZdbFrdReqNotifItemEntity;
 import com.zhbit.crs.util.tools;
 
+/**
+ * @author zhaoguofeng 此布局内嵌到“好友请求消息界面listView”
+ */
 public class FrdRequestNotifAdapter extends BaseAdapter {
 
 	private List<ZdbFrdReqNotifItemEntity> mVector;
 	private LayoutInflater mInflater;
-	private Context mContext0;
+	private Context mContext;
 	private int mSelfId;
 	private HashMap<Integer, Integer> mIdForPos;
 
 	public FrdRequestNotifAdapter(Context context, List<ZdbFrdReqNotifItemEntity> vector) {
 		this.mVector = vector;
 		mInflater = LayoutInflater.from(context);
-		mContext0 = context;
+		mContext = context;
 		mSelfId = GlobalInts.idFrdReqNotifItemSt;
 		mIdForPos = new HashMap<Integer, Integer>();
 	}
@@ -64,8 +67,7 @@ public class FrdRequestNotifAdapter extends BaseAdapter {
 			public void onClick(View v) {
 				int id = v.getId();
 				int pos = mIdForPos.get(id);
-				// TabMsgFrdReqNotifActivity.getInstance().onPopupForResponse(pos);
-				FrdRequestNotifActivity.getInstance().onPopupForResponse2(pos);
+				FrdRequestNotifActivity.getInstance().onPopupForResponse(pos);   //调用界面accept和refuse按钮界面
 			}
 		});
 

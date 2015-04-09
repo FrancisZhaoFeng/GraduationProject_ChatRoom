@@ -89,7 +89,6 @@ public class MainBodyActivity extends Activity {
 	}
 
 	/*************************** static access functions ***********************************/
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -110,11 +109,10 @@ public class MainBodyActivity extends Activity {
 		intentTemp = new Intent(MainBodyActivity.this, FriendRequestService.class);
 		startService(intentTemp);
 		MainBodyService.getInstance().onInit(this);
-		mNetStateReceiver = new NetStateReceiver();
+		mNetStateReceiver = new NetStateReceiver();  //检查客户端与服务端的连接状态
 		registerReceiver(mNetStateReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
 		mMainPager = (CustomViewPager) findViewById(R.id.main_body_main_container_tabpager);
-
 		mTabMsgs = (ImageView) findViewById(R.id.main_body_main_container_msgs);
 		mTabContacts = (ImageView) findViewById(R.id.main_body_main_container_contacts);
 		mTabFriends = (ImageView) findViewById(R.id.main_body_main_container_friends);
@@ -124,9 +122,7 @@ public class MainBodyActivity extends Activity {
 		mTabFriends.setOnClickListener(new MainBodyOnClickListener(mTabNumFriends));
 		mTabSettings.setOnClickListener(new MainBodyOnClickListener(mTabNumSettings));
 
-		LayoutInflater li = LayoutInflater.from(this); // Obtains the
-														// LayoutInflater from
-														// the given context.
+		LayoutInflater li = LayoutInflater.from(this); // Obtains the LayoutInflater from the given context.
 		View viewPastMsgs = li.inflate(R.layout.tabmsg_main, null);
 		View viewChooseRoom = li.inflate(R.layout.cc0_choose_room, null);
 		View viewFriendList = li.inflate(R.layout.cc0_friend_list, null);

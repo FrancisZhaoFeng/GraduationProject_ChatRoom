@@ -69,7 +69,7 @@ public class MainTabMsgPage {
 		mListOfEntity = new ArrayList<ZdbTabMsgItemEntity>();
 
 		DbSaveOldMsg.onInit(mContext);
-		DbSaveOldMsg.getInstance().getTabMsgItem(ConnectedApp.getInstance().getUserInfo().getUserid(), (ArrayList<ZdbTabMsgItemEntity>) mListOfEntity);
+		DbSaveOldMsg.getInstance().getTabMsgItem(ConnectedApp.getInstance().getUser().getUserid(), (ArrayList<ZdbTabMsgItemEntity>) mListOfEntity);
 		for (ZdbTabMsgItemEntity ent : mListOfEntity) {
 			mListOfIds.add(ent.getTalkerId());
 		}
@@ -101,7 +101,7 @@ public class MainTabMsgPage {
 	 * @param updateNotif
 	 * 更新 通过用户
 	 */
-	public void onUpdateByUserinfo(User user, String sentence, Date time, boolean updateNotif) {
+	public void onUpdateByUser(User user, String sentence, Date time, boolean updateNotif) {
 		if (mListOfIds.contains(user.getUserid())) {
 			int idx = mListOfIds.indexOf(user.getUserid());
 			mListOfIds.remove(idx);
@@ -121,7 +121,7 @@ public class MainTabMsgPage {
 	 * @param name
 	 * @param sentence
 	 * @param time
-	 * @param updateNotif
+	 * @param updateNotif+（是否通知栏显示此信息）
 	 * 更新 通过id 
 	 */
 	public void onUpdateById(int id, boolean avatarId, String name, String sentence, Date time, boolean updateNotif) {
@@ -138,6 +138,9 @@ public class MainTabMsgPage {
 		}
 	}
 
+	/**
+	 * 消息显示界面每个listView的布局
+	 */
 	public void onUpdateView() {
 		mListView.setAdapter(new MainTabMsgAdapter(mContext, mListOfEntity));
 	}

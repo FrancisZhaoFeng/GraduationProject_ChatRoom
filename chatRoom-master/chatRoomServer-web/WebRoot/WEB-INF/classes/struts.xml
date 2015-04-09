@@ -4,7 +4,7 @@
 	    "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-	<package name="chatRoom" extends="struts-default" >
+	<package name="chatRoom"  extends="struts-default">
 		<action name="manager" class="ManagerAction">
 			<result name="input">/false.jsp</result>
 			<result name="REGISTER">/register.jsp</result>

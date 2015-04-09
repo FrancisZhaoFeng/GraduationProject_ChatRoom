@@ -11,6 +11,11 @@ import com.zhbit.crs.action.ConnectedApp;
 import com.zhbit.crs.commons.GlobalMsgTypes;
 import com.zhbit.crs.domain.User;
 
+/**
+ * @author zhaoguofeng
+ * 检查客户端与服务端的连接状态，连接：发送msgBackOnline信息到服务端，不在线：关闭socket连接
+ *
+ */
 public class NetStateReceiver extends BroadcastReceiver {
 
 	@Override
@@ -20,8 +25,8 @@ public class NetStateReceiver extends BroadcastReceiver {
 			if (!NetworkService.getInstance().getIsConnected()) {
 				System.out.println("connected again");
 				NetworkService.getInstance().setupConnection();
-				User uu0 = ConnectedApp.getInstance().getUserInfo();
-				NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgBackOnline, uu0.toString());
+				User user = ConnectedApp.getInstance().getUser();
+				NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgBackOnline, user);
 			}
 		} else {
 			Log.w("closeConnection", "关闭连接服务端的读入流和socket连接");

@@ -41,7 +41,7 @@ public class MainBodyService {
 		DbSaveOldMsg.getInstance();
 
 		List<User> friendList = FriendListInfo.getFriendListInfo().getFriendList();
-		int myId = ConnectedApp.getInstance().getUserInfo().getUserid();
+		int myId = ConnectedApp.getInstance().getUser().getUserid();
 		for (User user : friendList) {
 			int id = user.getUserid();
 			ArrayList<ChatPerLog> mapFriendsEntity = (ArrayList<ChatPerLog>) ChatServiceData.getInstance().getCurMsg(2, id);
@@ -54,14 +54,14 @@ public class MainBodyService {
 		ArrayList<ZdbFrdReqNotifItemEntity> list = FrdRequestNotifActivity.getListOfNotif();
 
 		DbSaveOldMsg.onInit(mContext);
-		DbSaveOldMsg.getInstance().getFrdReqNotif(ConnectedApp.getInstance().getUserInfo().getUserid(), list);
+		DbSaveOldMsg.getInstance().getFrdReqNotif(ConnectedApp.getInstance().getUser().getUserid(), list);
 	}
 
 	public void onReadUnreadMsgAm() {
 		DbSaveOldMsg.onInit(mContext);
 
 		List<User> friendList = FriendListInfo.getFriendListInfo().getFriendList();
-		int myId = ConnectedApp.getInstance().getUserInfo().getUserid();
+		int myId = ConnectedApp.getInstance().getUser().getUserid();
 		for (User uu0 : friendList) {
 			int friendId = uu0.getUserid();
 			int num = DbSaveOldMsg.getInstance().getUnreadMsgs(myId, friendId);
@@ -80,7 +80,7 @@ public class MainBodyService {
 		DbSaveOldMsg.onInit(mContext);
 		DbSaveOldMsg.getInstance();
 
-		int myId = ConnectedApp.getInstance().getUserInfo().getUserid();
+		int myId = ConnectedApp.getInstance().getUser().getUserid();
 		for (User user : listOfUsers) {
 			int id = user.getUserid();
 			ArrayList<ChatPerLog> listOfEntity = mapOfEntity.get(id);
@@ -101,7 +101,7 @@ public class MainBodyService {
 		DbSaveOldMsg.onInit(mContext);
 
 		List<User> friendList = FriendListInfo.getFriendListInfo().getFriendList();
-		int myId = ConnectedApp.getInstance().getUserInfo().getUserid();
+		int myId = ConnectedApp.getInstance().getUser().getUserid();
 		for (User user : friendList) {
 			int friendId = user.getUserid();
 			int num = ChatServiceData.getInstance().getUnreadMsgs(friendId);
@@ -115,14 +115,14 @@ public class MainBodyService {
 	public void saveTabMsgItems() {
 		List<ZdbTabMsgItemEntity> listOfEntity = MainTabMsgPage.getInstance().getListOfEntity();
 		DbSaveOldMsg.onInit(mContext);
-		DbSaveOldMsg.getInstance().saveTabMsgItem(ConnectedApp.getInstance().getUserInfo().getUserid(), listOfEntity);
+		DbSaveOldMsg.getInstance().saveTabMsgItem(ConnectedApp.getInstance().getUser().getUserid(), listOfEntity);
 	}
 
 	/**
 	 * 保存，消息界面好友请求-提示项,FrdReqNotifItemEntity
 	 */
 	public void saveFrdNotifItems() {
-		DbSaveOldMsg.getInstance().saveFrdReqNotif(ConnectedApp.getInstance().getUserInfo().getUserid(), FrdRequestNotifActivity.getListOfNotif());
+		DbSaveOldMsg.getInstance().saveFrdReqNotif(ConnectedApp.getInstance().getUser().getUserid(), FrdRequestNotifActivity.getListOfNotif());
 	}
 
 }

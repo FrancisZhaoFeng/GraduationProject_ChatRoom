@@ -14,7 +14,7 @@ public class GlobalMsgTypes {
 	public static final int msgFriendshipRequestResponse = 12;
 	public static final int msgFriendGoOnline = 13;
 	public static final int msgFriendGoOffline = 14;
-	public static final int msgUpdateUserInfo = 15;
+	public static final int msgUpdateUser = 15;
 	public static final int msgAskForUnsendMsgs = 16;
 	public static final int msgMsgReceived = 17;
 	public static final int msgBackOnline = 18;

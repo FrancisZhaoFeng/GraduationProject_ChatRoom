@@ -129,7 +129,7 @@ public class MainActivity extends Activity {
 			}
 			Log.d("connectedApp isonline : ", "" + user.getOnline() + "+++" + "++++++++++");
 			ConnectedApp connected_app0 = ConnectedApp.getInstance();
-			connected_app0.setUserInfo(user);
+			connected_app0.setUser(user);
 			connected_app0.clearListActivity();
 			connected_app0.instantiateListActivity();
 

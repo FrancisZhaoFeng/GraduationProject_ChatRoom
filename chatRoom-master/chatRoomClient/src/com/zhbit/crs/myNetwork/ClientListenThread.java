@@ -23,8 +23,8 @@ import com.zhbit.crs.mainBody.MainBodyActivity;
  * 
  */
 public class ClientListenThread extends Thread {
-	private Context mContext0;
-	private Socket mSocket0;
+	private Context mContext;
+	private Socket mSocket;
 
 	private ObjectInputStream is = null;
 	private User user;
@@ -33,12 +33,12 @@ public class ClientListenThread extends Thread {
 	private Object obj;
 
 	public ClientListenThread(Context par, Socket s) {
-		this.mContext0 = par;
-		this.mSocket0 = s;
+		this.mContext = par;
+		this.mSocket = s;
 	}
 
 	public ClientListenThread(Context par, ObjectInputStream is) {
-		this.mContext0 = par;
+		this.mContext = par;
 		this.is = is;
 	}
 
@@ -51,7 +51,7 @@ public class ClientListenThread extends Thread {
 		super.run();
 		try {
 			while (true) {
-				is = new ObjectInputStream(new BufferedInputStream(mSocket0.getInputStream()));
+				is = new ObjectInputStream(new BufferedInputStream(mSocket.getInputStream()));
 				obj = is.readObject();
 				if (obj != null) { // mBuffRder0.readLine()
 					int msgType = Integer.parseInt((String) obj); // type of message received
@@ -73,7 +73,7 @@ public class ClientListenThread extends Thread {
 						Intent intent = new Intent("zhbit.example.hello.MESSAGE_RECEIVED");
 						intent.putExtra("zhbit.example.hello.msg_received", chatPerLog.toString());
 						intent.putExtra("zhbit.example.hello.msg_type", msgType);
-						mContext0.sendBroadcast(intent);
+						mContext.sendBroadcast(intent);
 						break;
 					case GlobalMsgTypes.msgHandShake:
 						Log.w("GlobalMsgTypes.msgHandShake", "" + GlobalMsgTypes.msgHandShake);
@@ -101,7 +101,7 @@ public class ClientListenThread extends Thread {
 						Intent intentp = new Intent("zhbit.example.hello.MESSAGE_RECEIVED");
 						intentp.putExtra("zhbit.example.hello.msg_received", user);
 						intentp.putExtra("zhbit.example.hello.msg_type", msgType);
-						mContext0.sendBroadcast(intentp);
+						mContext.sendBroadcast(intentp);
 						break;
 					case GlobalMsgTypes.msgSignUp:
 						Log.w("GlobalMsgTypes.msgSignUp", "" + GlobalMsgTypes.msgSignUp);
@@ -120,7 +120,7 @@ public class ClientListenThread extends Thread {
 						Intent intent2 = new Intent("zhbit.example.hello.FRIEND_REQUEST_MSGS");
 						intent2.putExtra("zhbit.example.hello.msg_received", friend);
 						intent2.putExtra("zhbit.example.hello.msg_type", msgType);
-						mContext0.sendBroadcast(intent2);
+						mContext.sendBroadcast(intent2);   //接收者：FriendRequestMsgReceiver
 						break;
 					case GlobalMsgTypes.msgFriendshipRequestResponse:
 						Log.w("GlobalMsgTypes.msgFriendshipRequestResponse", "" + GlobalMsgTypes.msgFriendshipRequestResponse);
@@ -130,7 +130,7 @@ public class ClientListenThread extends Thread {
 						Intent intent3 = new Intent("zhbit.example.hello.FRIEND_REQUEST_MSGS");
 						intent3.putExtra("zhbit.example.hello.msg_received", friend);
 						intent3.putExtra("zhbit.example.hello.msg_type", msgType);
-						mContext0.sendBroadcast(intent3);
+						mContext.sendBroadcast(intent3);   //接收者：FriendRequestMsgReceiver
 						break;
 					case GlobalMsgTypes.msgFriendGoOnline:
 						// FriendListInfo.getFriendListInfo().friendGoOnAndOffline(actualMsg,
@@ -140,7 +140,7 @@ public class ClientListenThread extends Thread {
 						Intent intent6 = new Intent("zhbit.example.hello.MESSAGE_RECEIVED");
 						intent6.putExtra("zhbit.example.hello.msg_received", user);
 						intent6.putExtra("zhbit.example.hello.msg_type", msgType);
-						mContext0.sendBroadcast(intent6);
+						mContext.sendBroadcast(intent6);   
 						break;
 					case GlobalMsgTypes.msgFriendGoOffline:
 						Log.w("GlobalMsgTypes.msgFriendGoOffline", "" + GlobalMsgTypes.msgFriendGoOffline);
@@ -148,7 +148,7 @@ public class ClientListenThread extends Thread {
 						Intent intent7 = new Intent("zhbit.example.hello.MESSAGE_RECEIVED");
 						intent7.putExtra("zhbit.example.hello.msg_received", user);
 						intent7.putExtra("zhbit.example.hello.msg_type", msgType);
-						mContext0.sendBroadcast(intent7);
+						mContext.sendBroadcast(intent7);
 						break;
 					default:
 						break;

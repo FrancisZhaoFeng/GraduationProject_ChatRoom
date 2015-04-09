@@ -21,7 +21,7 @@ import com.zhbit.crs.mainBody.FrdRequestNotifActivity;
 public class ConnectedApp {
 
 	private static ConnectedApp mInstance;
-	private User mUserInfo;
+	private User mUser;
 	private Activity mCurActivity;
 	private List<Activity> allActivities;
 
@@ -39,12 +39,12 @@ public class ConnectedApp {
 
 	}
 
-	public User getUserInfo() {
-		return mUserInfo;
+	public User getUser() {
+		return mUser;
 	}
 
-	public void setUserInfo(User user) {
-		mUserInfo = user;
+	public void setUser(User user) {
+		mUser = user;
 	}
 
 	public Activity getCurActivity() {
@@ -90,7 +90,7 @@ public class ConnectedApp {
 
 	public void clearAll() {
 		clearListActivity();
-		mUserInfo = null;
+		mUser = null;
 		mCurActivity = null;
 		allActivities = null;
 		mInstance = null;

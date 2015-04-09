@@ -48,7 +48,7 @@ public class GlobalMsgTypes {
 	 * 好友不在线类型
 	 */
 	public static final int msgFriendGoOffline = 14;
-	public static final int msgUpdateUserInfo = 15;
+	public static final int msgUpdateUser = 15;
 	public static final int msgAskForUnsendMsgs = 16;
 	public static final int msgMsgReceived = 17;
 	/**

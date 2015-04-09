@@ -2,9 +2,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -37,9 +35,6 @@
 </style>
 
 <body>
-<%-- 	<%
-		com.zhbit.crs.action.ManagerAction.startServerListem();
-	%> --%>
 	<jsp:include page="h-all.jsp"></jsp:include>
 	<div class="miaoshu">
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;近年来，越来越多的企业在其内部使用局域网来进行工作。<br />

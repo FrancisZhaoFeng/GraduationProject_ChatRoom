@@ -4,12 +4,12 @@
     android:layout_height="match_parent"
     android:background="@drawable/mm_listitem"
     android:orientation="vertical" >
-    
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@drawable/title_bar" >
-        
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -17,15 +17,14 @@
             android:text="Notifications"
             android:textColor="#fff"
             android:textSize="18sp" />
-        
     </RelativeLayout>
-    
-	<ListView
+
+    <ListView
         android:id="@+id/tabmsg_frd_req_notif_page_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@null"
         android:dividerHeight="0dp" >
-	</ListView>
-    
+    </ListView>
+
 </LinearLayout>

@@ -15,11 +15,17 @@ import com.zhbit.crs.R;
 import com.zhbit.crs.action.ConnectedApp;
 import com.zhbit.crs.chatServices.FriendListInfo;
 import com.zhbit.crs.commons.GlobalMsgTypes;
+import com.zhbit.crs.domain.Friend;
 import com.zhbit.crs.domain.ZdbFrdReqNotifItemEntity;
 import com.zhbit.crs.domain.ZFrdRequestEntity;
 import com.zhbit.crs.domain.User;
 import com.zhbit.crs.myNetwork.NetworkService;
 
+/**
+ * @author zhaoguofeng
+ * 此界面是：accept 或 refuse 界面
+ * 消息界面（点击好友请求消息）-好友请求消息列表listView形式（点击最近的消息）-accept 或 refuse 界面
+ */
 public class TabMsgFrdReqProcActivity extends Activity {
 
 	private ZdbFrdReqNotifItemEntity mThisItem;
@@ -33,6 +39,10 @@ public class TabMsgFrdReqProcActivity extends Activity {
 
 	private int mThisPos;
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 * 消息界面（点击好友请求消息）-好友请求消息列表listView形式（点击最近的消息）-accept 或 refuse 界面
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
@@ -41,10 +51,9 @@ public class TabMsgFrdReqProcActivity extends Activity {
 		// this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.tabmsg_frd_req_proc2);
 
-		Intent intent0 = getIntent();
-		String in = intent0.getStringExtra("itemStr");
-		mThisPos = intent0.getIntExtra("itemPos", 0);
-		mThisItem = new ZdbFrdReqNotifItemEntity(in);
+		Intent intent = getIntent();
+		mThisItem = (ZdbFrdReqNotifItemEntity)intent.getSerializableExtra("itemObj");
+		mThisPos = intent.getIntExtra("itemPos", 0);
 
 		mTvHeadName = (TextView) findViewById(R.id.tabmsg_frd_req_proc_header_name);
 		mImgIcon = (ImageView) findViewById(R.id.tabmsg_frd_req_proc_icon);
@@ -60,14 +69,14 @@ public class TabMsgFrdReqProcActivity extends Activity {
 			mImgIcon.setImageResource(R.drawable.cb0_h003);
 		}
 
-		User uu0 = mThisItem.getStrOfUser();
-		if (uu0.getSex() == false) {
+		User user = mThisItem.getUser();
+		if (user.getSex() == false) {
 			mTvGender.setText("Girl");
 		} else {
 			mTvGender.setText("Guy");
 		}
 
-		mTvAge.setText(uu0.getAge() + "");
+		mTvAge.setText(user.getAge() + "");
 
 		mBtnAccept.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -79,14 +88,11 @@ public class TabMsgFrdReqProcActivity extends Activity {
 				// set dialog message
 				alertDialogBuilder.setMessage("are you sure to accept the request?").setCancelable(true).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-						ZFrdRequestEntity reqEnt0 = new ZFrdRequestEntity(mThisItem.getStrOfUser(), ConnectedApp.getInstance().getUserInfo());
-						reqEnt0.accept();
-						NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgFriendshipRequestResponse, reqEnt0.toString());
-
+						Friend friendReq = new Friend(ConnectedApp.getInstance().getUser(),mThisItem.getUser(), "accept");
+						NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgFriendshipRequestResponse, friendReq); //发送Friend类数据到服务器，note字段赋予accept值
 						mThisItem.setStatus(ZdbFrdReqNotifItemEntity.mAccepted);
 						FrdRequestNotifActivity.getInstance().setItemStatus(mThisPos, ZdbFrdReqNotifItemEntity.mAccepted);
-
-						FriendListInfo.getFriendListInfo().uponMakeNewFriend(mThisItem.getStrOfUser());
+						FriendListInfo.getFriendListInfo().uponMakeNewFriend(mThisItem.getUser());
 					}
 				}).setNegativeButton("No", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
@@ -109,10 +115,10 @@ public class TabMsgFrdReqProcActivity extends Activity {
 				// set dialog message
 				alertDialogBuilder.setMessage("are you sure to decline the request?").setCancelable(true).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-						ZFrdRequestEntity reqEnt0 = new ZFrdRequestEntity(mThisItem.getStrOfUser(), ConnectedApp.getInstance().getUserInfo());
-						reqEnt0.decline();
-						NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgFriendshipRequestResponse, reqEnt0.toString());
-
+//						ZFrdRequestEntity reqEnt0 = new ZFrdRequestEntity(mThisItem.getUser(), ConnectedApp.getInstance().getUser());
+//						reqEnt0.decline();
+						Friend friendReq = new Friend( ConnectedApp.getInstance().getUser(),mThisItem.getUser(),"refuse");
+						NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgFriendshipRequestResponse, friendReq);
 						mThisItem.setStatus(ZdbFrdReqNotifItemEntity.mDeclined);
 						FrdRequestNotifActivity.getInstance().setItemStatus(mThisPos, ZdbFrdReqNotifItemEntity.mDeclined);
 					}

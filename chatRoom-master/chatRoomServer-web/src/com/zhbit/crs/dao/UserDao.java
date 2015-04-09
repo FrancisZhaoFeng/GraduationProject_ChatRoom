@@ -7,8 +7,8 @@ import javax.annotation.Resource;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.zhbit.crs.domain.Friend;
-import com.zhbit.crs.domain.SearchEntity;
 import com.zhbit.crs.domain.User;
 
 @Transactional
@@ -83,13 +83,5 @@ public class UserDao {
 			// TODO: handle exception
 		}
 		return true;
-	}
-	
-	public List<User> searchUserByName(SearchEntity searchEntity){
-		List<User> users = null;
-		String hql = "from Friend where username like '%"+searchEntity.getName()+"%'";
-		System.out.println(hql);
-		users = sessionFactory.getCurrentSession().createQuery(hql).list();
-		return users;
 	}
 }

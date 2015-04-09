@@ -19,6 +19,6 @@ sessionFactoryId=
 basePersistenceClass=
 genAnnotations=false
 reSettingsFile=
-configFile=/chatRoomServer-test/src/hibernate.cfg.xml
+configFile=/chatRoomServer-Web/src/hibernate/src/hibernate.cfg.xml
 createConfigFile=true
 addLibs2Classpath=true

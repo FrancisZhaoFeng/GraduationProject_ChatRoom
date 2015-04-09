@@ -16,6 +16,10 @@ import com.zhbit.crs.chatServices.ChatServiceData;
 import com.zhbit.crs.domain.ZdbTabMsgItemEntity;
 import com.zhbit.crs.util.tools;
 
+/**
+ * @author zhaoguofeng
+ * 消息界面，每个listView的布局
+ */
 public class MainTabMsgAdapter extends BaseAdapter {
 
 	private List<ZdbTabMsgItemEntity> mVector;

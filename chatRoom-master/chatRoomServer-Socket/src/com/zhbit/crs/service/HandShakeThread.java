@@ -45,18 +45,16 @@ public class HandShakeThread {
 		return true;
 	}
 
-	public void sendFriendList(ServerActivity cliActv, List<User> users) {// ArrayList<UserInfo>
-																			// userV
-	// String type56 = GlobalStrings.friendListDivider;
-	// int n = users.size();
-	// String str = n + type56;
-	// for (UserInfo uu0 : userV) {
-	// str += uu0.toString() + type56;
-	// }
+	public void sendFriendList(ServerActivity cliActv, List<User> users) {// ArrayList<UserInfo> userV
+		// String type56 = GlobalStrings.friendListDivider;
+		// int n = users.size();
+		// String str = n + type56;
+		// for (UserInfo uu0 : userV) {
+		// str += uu0.toString() + type56;
+		// }
 		// str += UserInfo.strSplitter;
 		try {
-			// cliActv.sendOneString(str,
-			// GlobalMsgTypes.msgHandSHakeFriendList);
+			// cliActv.sendOneString(str, GlobalMsgTypes.msgHandSHakeFriendList);
 			cliActv.sendOneObject(users, GlobalMsgTypes.msgHandSHakeFriendList);
 		} catch (Exception e) {
 		}

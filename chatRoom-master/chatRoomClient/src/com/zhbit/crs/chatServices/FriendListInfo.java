@@ -71,6 +71,9 @@ public class FriendListInfo {
 	 * FriendListPage.getInstance().onFriendListUpdate(); } }
 	 */
 
+	/**
+	 * @param user
+	 */
 	public void uponMakeNewFriend(User user) {//UserInfo uu0
 		int newId = user.getUserid();
 		if (mSparseArrayOfFriends.get(newId) != null) {

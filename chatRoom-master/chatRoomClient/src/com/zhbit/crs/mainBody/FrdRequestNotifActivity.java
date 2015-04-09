@@ -55,9 +55,9 @@ public class FrdRequestNotifActivity extends Activity {
 	}
 
 	private boolean mIsCurPage = false;
-	private ListView mListView0;
+	private ListView mListView;
 	private ZdbFrdReqNotifItemEntity mEntity;
-	private Dialog mDialog0;
+	private Dialog mDialog;
 
 	/*
 	 * (non-Javadoc)
@@ -81,9 +81,9 @@ public class FrdRequestNotifActivity extends Activity {
 			mListOfNotif = new ArrayList<ZdbFrdReqNotifItemEntity>();
 		}
 
-		mListView0 = (ListView) findViewById(R.id.tabmsg_frd_req_notif_page_listview);
+		mListView = (ListView) findViewById(R.id.tabmsg_frd_req_notif_page_listview);
 
-		mListView0.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			}
@@ -111,63 +111,21 @@ public class FrdRequestNotifActivity extends Activity {
 		mIsCurPage = false;
 	}
 
-	public void onPopupForResponse2(int position) {
-		Intent intent0 = new Intent(FrdRequestNotifActivity.this, TabMsgFrdReqProcActivity.class);
+	/**
+	 * @param position
+	 * 调用accept，refuse界面
+	 */
+	public void onPopupForResponse(int position) {
+		Intent intent = new Intent(FrdRequestNotifActivity.this, TabMsgFrdReqProcActivity.class); //TabMsgFrdReqProcActivity 是accept，refuse界面
 		mEntity = mListOfNotif.get(position);
 
 		if (mEntity.getType() == ZdbFrdReqNotifItemEntity.mTypeFrdReq && mEntity.getStatus() == ZdbFrdReqNotifItemEntity.mUnanswer) {
-			intent0.putExtra("itemStr", mEntity.toString());
-			intent0.putExtra("itemPos", position);
-			startActivity(intent0.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+			intent.putExtra("itemObj", mEntity);
+			intent.putExtra("itemPos", position);
+			startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
 			overridePendingTransition(R.anim.my_slide_right_in, R.anim.my_slide_left_out);
 		}
 	}
-
-	/*
-	 * public void onPopupForResponse(int position) { mEntity = mListOfNotif.get(position);
-	 * 
-	 * if(mEntity.getType() == FrdReqNotifItemEntity.mTypeFrdReq) { LayoutInflater inflater =
-	 * LayoutInflater.from(TabMsgFrdReqNotifActivity.this); View conView = inflater.inflate(R.layout.cc0_friendship_request_popup,
-	 * null);
-	 * 
-	 * mDialog0 = new Dialog(TabMsgFrdReqNotifActivity.this); mDialog0.setContentView(conView); mDialog0.show();
-	 * 
-	 * Button btnOk = (Button)conView.findViewById(R.id.cc0_friendship_request_popup_btn_agree); Button btnNo =
-	 * (Button)conView.findViewById(R.id.cc0_friendship_request_popup_btn_refuse); ImageView avatarView =
-	 * (ImageView)conView.findViewById(R.id.cc0_friendship_request_popup_requester_avatar); TextView nameView =
-	 * (TextView)conView.findViewById(R.id.cc0_friendship_request_popup_requester_name);
-	 * 
-	 * if(mEntity.getImgId() == 0) { avatarView.setImageResource(R.drawable.cb0_h001); } else {
-	 * avatarView.setImageResource(R.drawable.cb0_h003); }
-	 * 
-	 * nameView.setText(mEntity.getName());
-	 * 
-	 * btnOk.setOnClickListener(new View.OnClickListener() {
-	 * 
-	 * @Override public void onClick(View v) { String toSend = GlobalInts.idAcceptFriendship +
-	 * GlobalStrings.friendshipRequestDivider + mEntity.getStrOfUser() + GlobalStrings.friendshipRequestDivider +
-	 * ConnectedApp.getInstance().getUserInfo().toString() + GlobalStrings.friendshipRequestDivider;
-	 * NetConnect.getnetConnect().sendUpload(GlobalMsgTypes.msgFriendshipRequestResponse + "");
-	 * NetConnect.getnetConnect().sendUpload(toSend);
-	 * 
-	 * mDialog0.dismiss();
-	 * 
-	 * mEntity.setStatus(FrdReqNotifItemEntity.mAccepted);
-	 * 
-	 * FriendListInfo.getFriendListInfo().uponMakeNewFriend(new UserInfo(mEntity.getStrOfUser())); } });
-	 * 
-	 * btnNo.setOnClickListener(new View.OnClickListener() {
-	 * 
-	 * @Override public void onClick(View v) { String toSend = GlobalInts.idRefuseFriendship +
-	 * GlobalStrings.friendshipRequestDivider + mEntity.getStrOfUser() + GlobalStrings.friendshipRequestDivider +
-	 * ConnectedApp.getInstance().getUserInfo().toString() + GlobalStrings.friendshipRequestDivider;
-	 * NetConnect.getnetConnect().sendUpload(GlobalMsgTypes.msgFriendshipRequestResponse + "");
-	 * NetConnect.getnetConnect().sendUpload(toSend);
-	 * 
-	 * mDialog0.dismiss();
-	 * 
-	 * mEntity.setStatus(FrdReqNotifItemEntity.mDeclined); } }); } }
-	 */
 
 	public void setItemStatus(int pos, int status) {
 		mEntity = mListOfNotif.get(pos);
@@ -178,8 +136,11 @@ public class FrdRequestNotifActivity extends Activity {
 		return mIsCurPage;
 	}
 
+	/**
+	 * 进入“好友消息请求界面listView”，必须调用此函数，因：listView元素由FrdRequestNotifAdapter布局组成
+	 */
 	public void onUpdateView() {
-		mListView0.setAdapter(new FrdRequestNotifAdapter(this, mListOfNotif));
+		mListView.setAdapter(new FrdRequestNotifAdapter(this, mListOfNotif));
 	}
 
 }

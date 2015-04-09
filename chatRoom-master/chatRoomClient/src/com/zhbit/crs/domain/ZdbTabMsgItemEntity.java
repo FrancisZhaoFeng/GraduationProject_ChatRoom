@@ -35,6 +35,14 @@ public class ZdbTabMsgItemEntity implements Serializable{
 	private int mIsRead = NotReadYet;
 	private int mFrdReqStatus = FrdReqUnread;
 
+	/**
+	 * @param talkerId
+	 * @param imgId
+	 * @param name
+	 * @param sentence
+	 * @param time
+	 * 消息显示实体类，初始化
+	 */
 	public ZdbTabMsgItemEntity(int talkerId, boolean imgId, String name, String sentence, Date time) {
 		mTalkerId = talkerId;
 		mImgId = imgId;

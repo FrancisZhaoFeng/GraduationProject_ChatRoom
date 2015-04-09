@@ -13,14 +13,30 @@ import com.zhbit.crs.tools.HibernateUtils;
 public class UserDao {
 	Session session = null;
 	
-//	public static void main(String args[]){
-////		new UserDao().signUp(new User("zgfailmr","zgfailmr","15961324654",45));
-////		new UserDao().login(new User("zgfailmr","zgfailmr"));
-//		new UserDao().searchUser(new SearchEntity(false,0,0,0,"z"));
-//		new UserDao().searchUser(new SearchEntity(true, 22, 27, 1, ""));
+//	public static void main(String args[]) {
+//		UserDao userDao = new UserDao();
+		// userDao().signUp(new User("zgfailmr","zgfailmr","15961324654",45));
+		// userDao().login(new User("zgfailmr","zgfailmr"));
+		// userDao().searchUser(new SearchEntity(false,0,0,0,"z"));
+		// userDao().searchUser(new SearchEntity(true, 22, 27, 1, ""));
+		/*--------测试insertFriend，isFriend------------*/
+//		User user1 = userDao.login(new User("zgfzg", "31B69A7494A0EEC4AC544FD648C9D604")).get(0);
+//		User user2 = userDao.login(new User("lmrlm", "31B69A7494A0EEC4AC544FD648C9D604")).get(0);
+//		Friend friend1 = new Friend(user1, user2, "");
+//		Friend friend2 = new Friend(user2, user1, "");
+//		userDao.insertFriend(friend1);
+//		userDao.insertFriend(friend2);
+//		@SuppressWarnings("unused")
+//		List<Friend> friends = userDao.isFriend(friend1);
+//		return;
 //	}
 	
 	
+	/**
+	 * @param user
+	 * @return
+	 * 注册
+	 */
 	public boolean signUp(User user){
 		try {
 			session = HibernateUtils.getSession();
@@ -36,6 +52,11 @@ public class UserDao {
 		return true;
 	}
 	
+	/**
+	 * @param user
+	 * @return
+	 * 登陆
+	 */
 	@SuppressWarnings("unchecked")
 	public List<User> login(User user){
 		List<User> users = null;
@@ -99,7 +120,7 @@ public class UserDao {
 	@SuppressWarnings("unchecked")
 	public List<Friend> isFriend(Friend friend){
 		List<Friend> friends = null;
-		String hql = "from Friend f where (f.userid=? and f.friendid=?) or (f.userid=? and f.friendid=?)";
+		String hql = "from Friend where userid=? and friendid=?";
 		System.out.println(hql);
 		session = HibernateUtils.getSession();
 		session.beginTransaction();
@@ -107,14 +128,12 @@ public class UserDao {
 		query = session.createQuery(hql);
 		query.setParameter(0, friend.getUserByUserid());
 		query.setParameter(1, friend.getUserByFriendid());
-		query.setParameter(2, friend.getUserByFriendid());
-		query.setParameter(3, friend.getUserByUserid());
 		friends = query.list();
 		session.close();
 		return friends;
 	}
 	
-	public boolean makeFriend(Friend friend){
+	public boolean insertFriend(Friend friend){
 		try {
 			session = HibernateUtils.getSession();
 			session.beginTransaction();

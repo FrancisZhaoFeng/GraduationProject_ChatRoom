@@ -64,7 +64,7 @@ foreign key (userid) references User(userid)
 )engine=innodb default character set utf8;
 /*=====================7创建Friend表=====================*/
 create table Friend(
-id int primary key,
+id int primary key auto_increment,
 userid int,
 friendid int,
 note varchar(120),

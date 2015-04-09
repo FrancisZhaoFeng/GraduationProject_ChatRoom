@@ -40,6 +40,10 @@ public class ChatServiceData {
 		mMapFriendsUnread = new SparseIntArray();
 	}
 	
+	/**
+	 * @param user
+	 * 
+	 */
 	public void newUser(User user) {  //UserInfo userInfo
 //		int id = userInfo.getId();
 		int id = user.getUserid();
@@ -48,11 +52,10 @@ public class ChatServiceData {
 		mMapFriendsEntity.put(id, new ArrayList<ChatPerLog>());
 		mMapFriendsSelf.put(id, new ArrayList<Boolean>());
 		mMapFriendsUnread.put(id, 0);
-		
 	}
 	
-	public void offLineUser(ZUserInfo userInfo) {
-		int id = userInfo.getId();
+	public void offLineUser(User user) {
+		int id = user.getUserid();
 		
 		for(int i = 0;i < mFriendIds.size();i++) {
 			if(mFriendIds.get(i).intValue() == id) {

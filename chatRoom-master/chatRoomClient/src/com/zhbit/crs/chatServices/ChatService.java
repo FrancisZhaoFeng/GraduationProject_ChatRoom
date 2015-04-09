@@ -37,7 +37,7 @@ public class ChatService extends Service {
 	private int mCurType = 0; // 0 for public room (default), 1 for group room,
 								// 2 for friend chatting
 								// private UserInfo mMyUserInfo;
-	private User mMyUserInfo;
+	private User mMyUser;
 
 	private int mFriendId;
 
@@ -74,7 +74,7 @@ public class ChatService extends Service {
 		ChatService.this.registerReceiver(mMsgReceiver, ifter);
 
 		// mMyUserInfo = ConnectedApp.getInstance().getUserInfo();
-		mMyUserInfo = ConnectedApp.getInstance().getUserInfo();
+		mMyUser = ConnectedApp.getInstance().getUser();
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class ChatService extends Service {
 
 	public void sendMyMessage(String st0) {
 		if (mCurType == GlobalMsgTypes.msgFromFriend) {
-			ChatPerLog ent0 = new ChatPerLog(mCurType, mMyUserInfo, mFriendId, st0);
+			ChatPerLog ent0 = new ChatPerLog(mCurType, mMyUser, mFriendId, st0);
 			NetworkService.getInstance().sendUpload(mCurType, ent0.toString());
 			newMsgArrive(ent0, true);
 		}
@@ -147,10 +147,10 @@ public class ChatService extends Service {
 		}
 
 		if (!ChatActivity.getIsActive() || mFriendId != id) {
-			MainTabMsgPage.getInstance().onUpdateByUserinfo(FriendListInfo.getFriendListInfo().getUserFromId(id), chatPerLog.getSendtext(), chatPerLog.getSendtime(),
+			MainTabMsgPage.getInstance().onUpdateByUser(FriendListInfo.getFriendListInfo().getUserFromId(id), chatPerLog.getSendtext(), chatPerLog.getSendtime(),
 					true);
 		} else {
-			MainTabMsgPage.getInstance().onUpdateByUserinfo(FriendListInfo.getFriendListInfo().getUserFromId(id), chatPerLog.getSendtext(), chatPerLog.getSendtime(),
+			MainTabMsgPage.getInstance().onUpdateByUser(FriendListInfo.getFriendListInfo().getUserFromId(id), chatPerLog.getSendtext(), chatPerLog.getSendtime(),
 					false);
 		}
 

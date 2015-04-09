@@ -58,7 +58,7 @@ public class MainTabSettingsPage {
 		mBtnUpdatePwd = (Button)mViewOfPage.findViewById(R.id.tabsettings_btn_updatepassword);
 		
 
-		User me = ConnectedApp.getInstance().getUserInfo();
+		User me = ConnectedApp.getInstance().getUser();
 		mSpAge.setSelection(me.getAge() - 5);
 
 		if (me.getSex() == false) {
@@ -88,12 +88,12 @@ public class MainTabSettingsPage {
 				// return;
 				// }
 
-				User me = ConnectedApp.getInstance().getUserInfo();
+				User me = ConnectedApp.getInstance().getUser();
 				me.setAge(age);
 				me.setSex(sex);
 
-				NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgUpdateUserInfo, me);
-				ConnectedApp.getInstance().setUserInfo(me);
+				NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgUpdateUser, me);
+				ConnectedApp.getInstance().setUser(me);
 				Toast.makeText(mContext0, "congratulations, you have successfully updated your information", Toast.LENGTH_SHORT).show();
 			}
 		});
@@ -106,7 +106,7 @@ public class MainTabSettingsPage {
 				String newPwd = mNewPassword.getText().toString().trim(); //未经加密
 				String newPassword = md.toMD5(newPwd);
 				String confirmPwd = md.toMD5(mNewConfirmPwd.getText().toString().trim());
-				User me = ConnectedApp.getInstance().getUserInfo();
+				User me = ConnectedApp.getInstance().getUser();
 
 				if(!oldPassword.equals(me.getPassword())){
 					Toast.makeText(mContext0, "Old password error input again!", Toast.LENGTH_SHORT).show();
@@ -123,8 +123,8 @@ public class MainTabSettingsPage {
 				}
 				me.setPassword(newPassword);
 
-				NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgUpdateUserInfo, me);
-				ConnectedApp.getInstance().setUserInfo(me);
+				NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgUpdateUser, me);
+				ConnectedApp.getInstance().setUser(me);
 				Toast.makeText(mContext0, "congratulations, you have successfully updated your information", Toast.LENGTH_SHORT).show();
 			}
 		});

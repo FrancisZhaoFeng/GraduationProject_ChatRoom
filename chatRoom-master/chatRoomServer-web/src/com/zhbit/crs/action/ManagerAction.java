@@ -118,13 +118,6 @@ public class ManagerAction extends ActionSupport {
 		this.manager = manager;
 	}
 	
-	public static void startServerListem(){
-		if(!serverList){
-			new ServerListen().begin();
-			serverList = true;
-		}
-	}
-
 	// 注册
 	public String register() {
 		if (!manager.getPassword().equals(repwd)) {
@@ -180,7 +173,6 @@ public class ManagerAction extends ActionSupport {
 	public String selectUser() {
 		managerService.removeSession();
 		if (managerService.selectUser(searchStr)) {
-//			return "CHECKUSER";
 			this.clearValue();
 			return "CHECK";
 		} else {
@@ -194,7 +186,6 @@ public class ManagerAction extends ActionSupport {
 	public String selectChatRoom() {
 		managerService.removeSession();
 		if (managerService.selectChatRoom(searchStr)) {
-//			return "CHECKCHATROOM";
 			this.clearValue();
 			return "CHECK";
 		} else {
@@ -208,7 +199,6 @@ public class ManagerAction extends ActionSupport {
 	public String selectChatRoomLog() {
 		managerService.removeSession();
 		if (managerService.selectChatRoomLog(searchStr)) {
-//			return "CHECKCHATROOMLOG";
 			this.clearValue();
 			return "CHECK";
 		} else {
@@ -222,7 +212,6 @@ public class ManagerAction extends ActionSupport {
 	public String selectChatPerLog() {
 		managerService.removeSession();
 		if (managerService.selectChatPerLog(searchStr)) {
-//			return "CHECKCHATPERLOG";
 			this.clearValue();
 			return "CHECK";
 		} else {

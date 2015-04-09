@@ -58,7 +58,7 @@ public class ServerListenThread extends Thread {
 				} else {
 					obj = mBuffRder.readObject();
 					try {
-						System.out.println("a message with type " + msgType + " received from " + mServerActivity.getUserInfo().getUsername());
+						System.out.println("a message with type " + msgType + " received from " + mServerActivity.getUser().getUsername());
 					} catch (Exception e) {
 					}
 					switch (msgType) {
@@ -106,11 +106,11 @@ public class ServerListenThread extends Thread {
 						break;
 					case GlobalMsgTypes.msgFriendshipRequestResponse:
 						System.out.println("GlobalMsgTypes.msgFriendshipRequestResponse" + GlobalMsgTypes.msgFriendshipRequestResponse);
-						// mServerActivity.onFriendshipRequestResponse(actualMsg);
+						 mServerActivity.onFriendshipRequestResponse((Friend)obj);
 						break;
-					case GlobalMsgTypes.msgUpdateUserInfo:
-						System.out.println("GlobalMsgTypes.msgUpdateUserInfo" + GlobalMsgTypes.msgUpdateUserInfo);
-						mServerActivity.onUpdateUserInfo((User) obj);
+					case GlobalMsgTypes.msgUpdateUser:
+						System.out.println("GlobalMsgTypes.msgUpdateUser" + GlobalMsgTypes.msgUpdateUser);
+						mServerActivity.onUpdateUser((User) obj);
 						break;
 					case GlobalMsgTypes.msgAskForUnsendMsgs:
 						System.out.println("GlobalMsgTypes.msgAskForUnsendMsgs" + GlobalMsgTypes.msgAskForUnsendMsgs);

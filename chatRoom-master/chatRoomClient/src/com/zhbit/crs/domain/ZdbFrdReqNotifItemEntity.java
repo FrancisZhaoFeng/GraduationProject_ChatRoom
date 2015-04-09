@@ -24,7 +24,7 @@ public class ZdbFrdReqNotifItemEntity implements Serializable {
 	
 	private int mType;
 //	private String mStrOfUser;  // the String of other end user
-	private User mStrOfUser;
+	private User mUser;
 	
 	private int mNotifId;
 	private boolean mImgId;
@@ -42,7 +42,7 @@ public class ZdbFrdReqNotifItemEntity implements Serializable {
 		mName = name;
 		mContent = content;
 		mTime = time;
-		mStrOfUser = strOfUser;
+		mUser = strOfUser;
 	}
 	
 	public ZdbFrdReqNotifItemEntity(String in) {
@@ -67,7 +67,7 @@ public class ZdbFrdReqNotifItemEntity implements Serializable {
 		out += mTime + GlobalStrings.entityDivider2;
 		out += mIsRead + GlobalStrings.entityDivider2;
 		out += mStatus + GlobalStrings.entityDivider2;
-		out += mStrOfUser + GlobalStrings.entityDivider2;
+		out += mUser + GlobalStrings.entityDivider2;
 		
 		return out;
 	}
@@ -96,8 +96,8 @@ public class ZdbFrdReqNotifItemEntity implements Serializable {
 		return mTime;
 	}
 	
-	public User getStrOfUser() {
-		return mStrOfUser;
+	public User getUser() {
+		return mUser;
 	}
 	
 	public void setIsRead(int isRead) {

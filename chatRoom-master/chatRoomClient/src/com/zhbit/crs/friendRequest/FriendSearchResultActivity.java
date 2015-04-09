@@ -65,7 +65,7 @@ public class FriendSearchResultActivity extends Activity {
 		mListviewOfResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				User mySelf = ConnectedApp.getInstance().getUserInfo();
+				User mySelf = ConnectedApp.getInstance().getUser();
 				requestee = users.get(position);
 
 				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(FriendSearchResultActivity.this);
@@ -85,7 +85,7 @@ public class FriendSearchResultActivity extends Activity {
 					alertDialogBuilder.setMessage("are you sure to send friend request?").setCancelable(true)
 							.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog, int id) {
-									User myUser = ConnectedApp.getInstance().getUserInfo();
+									User myUser = ConnectedApp.getInstance().getUser();
 //									FrdRequestEntity reqEnt0 = new FrdRequestEntity(myUser, requestee);
 //									reqEnt0.accept();
 									NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgFriendshipRequest, new Friend(requestee,myUser,""));  //reqEnt0.toString()
