@@ -22,6 +22,12 @@
         <property name="isdelete" type="boolean">
             <column name="isdelete" />
         </property>
+        <set name="chatRoomLogTemps" inverse="true">
+            <key>
+                <column name="chatroomid" />
+            </key>
+            <one-to-many class="com.zhbit.crs.domain.ChatRoomLogTemp" />
+        </set>
         <set name="chatRoomLogs" inverse="true">
             <key>
                 <column name="chatroomid" />

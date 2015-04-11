@@ -92,7 +92,7 @@ public class MainTabSettingsPage {
 				me.setAge(age);
 				me.setSex(sex);
 
-				NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgUpdateUser, me);
+				NetworkService.getInstance().sendObject(GlobalMsgTypes.msgUpdateUser, me);
 				ConnectedApp.getInstance().setUser(me);
 				Toast.makeText(mContext0, "congratulations, you have successfully updated your information", Toast.LENGTH_SHORT).show();
 			}
@@ -123,7 +123,7 @@ public class MainTabSettingsPage {
 				}
 				me.setPassword(newPassword);
 
-				NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgUpdateUser, me);
+				NetworkService.getInstance().sendObject(GlobalMsgTypes.msgUpdateUser, me);
 				ConnectedApp.getInstance().setUser(me);
 				Toast.makeText(mContext0, "congratulations, you have successfully updated your information", Toast.LENGTH_SHORT).show();
 			}

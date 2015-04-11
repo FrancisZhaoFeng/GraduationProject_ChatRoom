@@ -6,9 +6,11 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.zhbit.crs.domain.Friend;
-import com.zhbit.crs.domain.ZSearchEntity;
+import com.zhbit.crs.domain.FriendId;
 import com.zhbit.crs.domain.User;
+import com.zhbit.crs.domain.ZSearchEntity;
 import com.zhbit.crs.tools.HibernateUtils;
+import com.zhbit.crs.tools.tools;
 
 public class UserDao {
 	Session session = null;
@@ -20,10 +22,10 @@ public class UserDao {
 		// userDao().searchUser(new SearchEntity(false,0,0,0,"z"));
 		// userDao().searchUser(new SearchEntity(true, 22, 27, 1, ""));
 		/*--------测试insertFriend，isFriend------------*/
-//		User user1 = userDao.login(new User("zgfzg", "31B69A7494A0EEC4AC544FD648C9D604")).get(0);
-//		User user2 = userDao.login(new User("lmrlm", "31B69A7494A0EEC4AC544FD648C9D604")).get(0);
-//		Friend friend1 = new Friend(user1, user2, "");
-//		Friend friend2 = new Friend(user2, user1, "");
+//		User user1 = userDao.login(new User("zgfab", "31B69A7494A0EEC4AC544FD648C9D604")).get(0);
+//		User user2 = userDao.login(new User("lmrab", "31B69A7494A0EEC4AC544FD648C9D604")).get(0);
+//		Friend friend1 = new Friend(new FriendId(user1,user2), tools.getDate());
+//		Friend friend2 = new Friend(new FriendId(user2,user1), tools.getDate());
 //		userDao.insertFriend(friend1);
 //		userDao.insertFriend(friend2);
 //		@SuppressWarnings("unused")
@@ -126,8 +128,8 @@ public class UserDao {
 		session.beginTransaction();
 		Query query;
 		query = session.createQuery(hql);
-		query.setParameter(0, friend.getUserByUserid());
-		query.setParameter(1, friend.getUserByFriendid());
+//		query.setParameter(0, friend.getUserByUserid());
+//		query.setParameter(1, friend.getUserByFriendid());
 		friends = query.list();
 		session.close();
 		return friends;

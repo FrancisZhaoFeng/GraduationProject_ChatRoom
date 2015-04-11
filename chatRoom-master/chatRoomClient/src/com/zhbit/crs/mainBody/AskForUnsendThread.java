@@ -12,7 +12,7 @@ public class AskForUnsendThread extends Thread{
 			sleep(500);
 		} catch(Exception e) {}
 		// to ask for unsend msgs
-		NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgAskForUnsendMsgs, "xxxxxx"); // because here this msg is not used
+		NetworkService.getInstance().sendObject(GlobalMsgTypes.msgAskForUnsendMsgs, "xxxxxx"); // because here this msg is not used
 	}
 
 }

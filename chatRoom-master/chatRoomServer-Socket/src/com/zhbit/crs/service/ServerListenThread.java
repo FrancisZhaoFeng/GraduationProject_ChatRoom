@@ -130,7 +130,7 @@ public class ServerListenThread extends Thread {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("Server Listen Shutting Down!!!");
+				System.out.println("Server Listen Shutting Down!:"+ obj);
 				// remove the class/threads etc. associated with this specific
 				// client
 				mServerActivity.goOffLine();

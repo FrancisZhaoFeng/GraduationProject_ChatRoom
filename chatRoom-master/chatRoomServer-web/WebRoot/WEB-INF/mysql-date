@@ -26,7 +26,33 @@ createby int,
 isdelete boolean default 0,
 foreign key (createby) references User(userid)
 )engine=innodb default character set utf8;
-/*=====================4创建ChatRoomLog表=====================*/
+/*=====================4-1创建ChatRoomLogTemp表=====================*/
+create table ChatRoomLogTemp(
+logid int primary key auto_increment,
+senderid int,
+chatroomid int,
+sendtime date not null,
+sendtext varchar(280),
+sendimage mediumblob,
+sendvoice mediumblob,
+type int not null,
+foreign key (senderid) references User(userid),
+foreign key (chatroomid) references ChatRoom(chatroomid)
+)engine=innodb default character set utf8;
+/*=====================5-1创建ChatPerLogTemp表=====================*/
+create table ChatPerLogTemp(
+logid int primary key auto_increment,
+senderid int,
+receiverid int,
+sendtime date not null,
+sendtext varchar(280),
+sendimage mediumblob,
+sendvoice mediumblob,
+type int not null,
+foreign key (senderid) references User(userid),
+foreign key (receiverid) references User(userid)
+)engine=innodb default character set utf8;
+/*=====================4-2创建ChatRoomLog表=====================*/
 create table ChatRoomLog(
 logid int primary key auto_increment,
 senderid int,
@@ -39,7 +65,7 @@ type int not null,
 foreign key (senderid) references User(userid),
 foreign key (chatroomid) references ChatRoom(chatroomid)
 )engine=innodb default character set utf8;
-/*=====================5创建ChatPerLog表=====================*/
+/*=====================5-2创建ChatPerLog表=====================*/
 create table ChatPerLog(
 logid int primary key auto_increment,
 senderid int,
@@ -49,8 +75,6 @@ sendtext varchar(280),
 sendimage mediumblob,
 sendvoice mediumblob,
 type int not null,
-isread boolean,
-#foreign key (senderid,receiverid) references User(userid,userid)
 foreign key (senderid) references User(userid),
 foreign key (receiverid) references User(userid)
 )engine=innodb default character set utf8;
@@ -64,11 +88,12 @@ foreign key (userid) references User(userid)
 )engine=innodb default character set utf8;
 /*=====================7创建Friend表=====================*/
 create table Friend(
-id int primary key auto_increment,
 userid int,
 friendid int,
+friendtime datetime not null,
+state boolean,
 note varchar(120),
-#foreign key (userid,friendid) references User(userid,userid)
+primary key(userid,friendid),
 foreign key (userid) references User(userid),
 foreign key (friendid) references User(userid)
 )engine=innodb default character set utf8;
@@ -97,103 +122,19 @@ insert into Mkey(mid) values('223456');
 insert into Mkey(mid) values('323456');
 insert into Mkey(mid) values('423456');
 /*用户*/
-insert into User(username,password,telephone,age,sex) values('zgf','FF2F4354BDE68FBB2AED2BC8FA9B6B15','15913248728',23,1);
-insert into User(username,password,telephone,age,sex) values('lmr','FF2F4354BDE68FBB2AED2BC8FA9B6B15','15913248728',21,0);
-insert into User(username,password,telephone,age,sex) values('zyz','FF2F4354BDE68FBB2AED2BC8FA9B6B15','15913248728',24,1);
-insert into User(username,password,telephone,age,sex) values('zgf1','FF2F4354BDE68FBB2AED2BC8FA9B6B15','15913248728',23,1);
-insert into User(username,password,telephone,age,sex) values('lmr1','FF2F4354BDE68FBB2AED2BC8FA9B6B15','15913248728',21,0);
-insert into User(username,password,telephone,age,sex) values('zyz1','FF2F4354BDE68FBB2AED2BC8FA9B6B15','15913248728',24,1);
-insert into User(username,password,telephone,age,sex) values('zgf2','FF2F4354BDE68FBB2AED2BC8FA9B6B15','15913248728',23,1);
-insert into User(username,password,telephone,age,sex) values('lmr2','FF2F4354BDE68FBB2AED2BC8FA9B6B15','15913248728',21,0);
-insert into User(username,password,telephone,age,sex) values('zyz2','FF2F4354BDE68FBB2AED2BC8FA9B6B15','15913248728',24,1);
-insert into User(username,password,telephone,age,sex) values('zgf3','FF2F4354BDE68FBB2AED2BC8FA9B6B15','15913248728',23,1);
-insert into User(username,password,telephone,age,sex) values('lmr3','FF2F4354BDE68FBB2AED2BC8FA9B6B15','15913248728',21,0);
-insert into User(username,password,telephone,age,sex) values('zyz3','FF2F4354BDE68FBB2AED2BC8FA9B6B15','15913248728',24,1);
-insert into User(username,password,telephone,age,sex) values('zgf4','FF2F4354BDE68FBB2AED2BC8FA9B6B15','15913248728',23,1);
-insert into User(username,password,telephone,age,sex) values('lmr4','FF2F4354BDE68FBB2AED2BC8FA9B6B15','15913248728',21,0);
-insert into User(username,password,telephone,age,sex) values('zyz4','FF2F4354BDE68FBB2AED2BC8FA9B6B15','15913248728',24,1);
-insert into User(username,password,telephone,age,sex) values('zgf5','FF2F4354BDE68FBB2AED2BC8FA9B6B15','15913248728',23,1);
-insert into User(username,password,telephone,age,sex) values('lmr5','FF2F4354BDE68FBB2AED2BC8FA9B6B15','15913248728',21,0);
-insert into User(username,password,telephone,age,sex) values('zyz5','FF2F4354BDE68FBB2AED2BC8FA9B6B15','15913248728',24,1);
-insert into User(username,password,telephone,age,sex) values('zgf6','FF2F4354BDE68FBB2AED2BC8FA9B6B15','15913248728',23,1);
-insert into User(username,password,telephone,age,sex) values('lmr6','FF2F4354BDE68FBB2AED2BC8FA9B6B15','15913248728',21,0);
-insert into User(username,password,telephone,age,sex) values('zyz6','FF2F4354BDE68FBB2AED2BC8FA9B6B15','15913248728',24,1);
-insert into User(username,password,telephone,age,sex) values('zgf7','FF2F4354BDE68FBB2AED2BC8FA9B6B15','15913248728',23,1);
-insert into User(username,password,telephone,age,sex) values('lmr7','FF2F4354BDE68FBB2AED2BC8FA9B6B15','15913248728',21,0);
-insert into User(username,password,telephone,age,sex) values('zyz7','FF2F4354BDE68FBB2AED2BC8FA9B6B15','15913248728',24,1);
+insert into User(username,password,telephone,age,sex) values('zgfab','31B69A7494A0EEC4AC544FD648C9D604','15913248728',23,1);
+insert into User(username,password,telephone,age,sex) values('lmrab','31B69A7494A0EEC4AC544FD648C9D604','15913248728',21,0);
+insert into User(username,password,telephone,age,sex) values('zgfac','31B69A7494A0EEC4AC544FD648C9D604','15913248728',24,1);
+insert into User(username,password,telephone,age,sex) values('lmrac','31B69A7494A0EEC4AC544FD648C9D604','15913248728',23,1);
+insert into User(username,password,telephone,age,sex) values('zgfad','31B69A7494A0EEC4AC544FD648C9D604','15913248728',21,0);
+insert into User(username,password,telephone,age,sex) values('lmrad','31B69A7494A0EEC4AC544FD648C9D604','15913248728',24,1);
+insert into User(username,password,telephone,age,sex) values('zgfae','31B69A7494A0EEC4AC544FD648C9D604','15913248728',23,1);
+insert into User(username,password,telephone,age,sex) values('lmrae','31B69A7494A0EEC4AC544FD648C9D604','15913248728',21,0);
+insert into User(username,password,telephone,age,sex) values('zgfaf','31B69A7494A0EEC4AC544FD648C9D604','15913248728',24,1);
+insert into User(username,password,telephone,age,sex) values('lmraf','31B69A7494A0EEC4AC544FD648C9D604','15913248728',23,1);
+insert into User(username,password,telephone,age,sex) values('zgfag','31B69A7494A0EEC4AC544FD648C9D604','15913248728',21,0);
+insert into User(username,password,telephone,age,sex) values('lmrag','31B69A7494A0EEC4AC544FD648C9D604','15913248728',24,1);
 /*聊天室*/
-insert into ChatRoom(chatroomname,note,createby) values('zhbit','北理工','1');
-insert into ChatRoom(chatroomname,note,createby) values('jz','吉珠','2');
-insert into ChatRoom(chatroomname,note,createby) values('bsd','北师大','3');
-insert into ChatRoom(chatroomname,note,createby) values('zhbit1','北理工','4');
-insert into ChatRoom(chatroomname,note,createby) values('jz1','吉珠','5');
-insert into ChatRoom(chatroomname,note,createby) values('bsd1','北师大','6');
-insert into ChatRoom(chatroomname,note,createby) values('zhbit2','北理工','7');
-insert into ChatRoom(chatroomname,note,createby) values('jz2','吉珠','8');
-insert into ChatRoom(chatroomname,note,createby) values('bsd2','北师大','9');
-insert into ChatRoom(chatroomname,note,createby) values('zhbit3','北理工','1');
-insert into ChatRoom(chatroomname,note,createby) values('jz3','吉珠','2');
-insert into ChatRoom(chatroomname,note,createby) values('bsd3','北师大','3');
-insert into ChatRoom(chatroomname,note,createby) values('zhbit4','北理工','1');
-insert into ChatRoom(chatroomname,note,createby) values('jz4','吉珠','2');
-insert into ChatRoom(chatroomname,note,createby) values('bsd4','北师大','3');
-insert into ChatRoom(chatroomname,note,createby) values('zhbit5','北理工','1');
-insert into ChatRoom(chatroomname,note,createby) values('jz5','吉珠','2');
-insert into ChatRoom(chatroomname,note,createby) values('bsd5','北师大','3');
-insert into ChatRoom(chatroomname,note,createby) values('zhbit6','北理工','1');
-insert into ChatRoom(chatroomname,note,createby) values('jz6','吉珠','2');
-insert into ChatRoom(chatroomname,note,createby) values('bsd6','北师大','3');
-insert into ChatRoom(chatroomname,note,createby) values('zhbit7','北理工','1');
-insert into ChatRoom(chatroomname,note,createby) values('jz7','吉珠','2');
-insert into ChatRoom(chatroomname,note,createby) values('bsd7','北师大','3');
 /*聊天室聊天记录*/
-insert into ChatRoomLog(senderid,chatroomid,sendtime,sendtext,type) values(1,1,'2015-02-15','你好魅族01',1);
-insert into ChatRoomLog(senderid,chatroomid,sendtime,sendtext,type) values(3,2,'2015-02-15','你好魅族02',1);
-insert into ChatRoomLog(senderid,chatroomid,sendtime,sendtext,type) values(1,1,'2015-02-15','你好魅族03',1);
-insert into ChatRoomLog(senderid,chatroomid,sendtime,sendtext,type) values(1,1,'2015-02-15','你好魅族04',1);
-insert into ChatRoomLog(senderid,chatroomid,sendtime,sendtext,type) values(3,2,'2015-02-15','你好魅族05',1);
-insert into ChatRoomLog(senderid,chatroomid,sendtime,sendtext,type) values(1,1,'2015-02-15','你好魅族06',1);
-insert into ChatRoomLog(senderid,chatroomid,sendtime,sendtext,type) values(1,1,'2015-02-15','你好魅族07',1);
-insert into ChatRoomLog(senderid,chatroomid,sendtime,sendtext,type) values(3,2,'2015-02-15','你好魅族08',1);
-insert into ChatRoomLog(senderid,chatroomid,sendtime,sendtext,type) values(1,1,'2015-02-15','你好魅族09',1);
-insert into ChatRoomLog(senderid,chatroomid,sendtime,sendtext,type) values(1,1,'2015-02-15','你好魅族10',1);
-insert into ChatRoomLog(senderid,chatroomid,sendtime,sendtext,type) values(3,2,'2015-02-15','你好魅族11',1);
-insert into ChatRoomLog(senderid,chatroomid,sendtime,sendtext,type) values(1,1,'2015-02-15','你好魅族12',1);
-insert into ChatRoomLog(senderid,chatroomid,sendtime,sendtext,type) values(1,1,'2015-02-15','你好魅族13',1);
-insert into ChatRoomLog(senderid,chatroomid,sendtime,sendtext,type) values(3,2,'2015-02-15','你好魅族14',1);
-insert into ChatRoomLog(senderid,chatroomid,sendtime,sendtext,type) values(1,1,'2015-02-15','你好魅族15',1);
-insert into ChatRoomLog(senderid,chatroomid,sendtime,sendtext,type) values(1,1,'2015-02-15','你好魅族16',1);
-insert into ChatRoomLog(senderid,chatroomid,sendtime,sendtext,type) values(3,2,'2015-02-15','你好魅族17',1);
-insert into ChatRoomLog(senderid,chatroomid,sendtime,sendtext,type) values(1,1,'2015-02-15','你好魅族18',1);
-insert into ChatRoomLog(senderid,chatroomid,sendtime,sendtext,type) values(1,1,'2015-02-15','你好魅族19',1);
-insert into ChatRoomLog(senderid,chatroomid,sendtime,sendtext,type) values(3,2,'2015-02-15','你好魅族20',1);
-insert into ChatRoomLog(senderid,chatroomid,sendtime,sendtext,type) values(1,1,'2015-02-15','你好魅族21',1);
-insert into ChatRoomLog(senderid,chatroomid,sendtime,sendtext,type) values(1,1,'2015-02-15','你好魅族22',1);
-insert into ChatRoomLog(senderid,chatroomid,sendtime,sendtext,type) values(3,2,'2015-02-15','你好魅族23',1);
-insert into ChatRoomLog(senderid,chatroomid,sendtime,sendtext,type) values(1,1,'2015-02-15','你好魅族24',1);
 /*好友聊天记录*/
-insert into ChatPerLog(senderid,receiverid,sendtime,sendtext,type,isread) values(1,1,'2015-02-15','你好魅族01',1,0);
-insert into ChatPerLog(senderid,receiverid,sendtime,sendtext,type,isread) values(3,2,'2015-02-15','你好魅族02',1,0);
-insert into ChatPerLog(senderid,receiverid,sendtime,sendtext,type,isread) values(1,1,'2015-02-15','你好魅族03',1,0);
-insert into ChatPerLog(senderid,receiverid,sendtime,sendtext,type,isread) values(1,1,'2015-02-15','你好魅族04',1,0);
-insert into ChatPerLog(senderid,receiverid,sendtime,sendtext,type,isread) values(3,2,'2015-02-15','你好魅族05',1,0);
-insert into ChatPerLog(senderid,receiverid,sendtime,sendtext,type,isread) values(1,1,'2015-02-15','你好魅族06',1,0);
-insert into ChatPerLog(senderid,receiverid,sendtime,sendtext,type,isread) values(1,1,'2015-02-15','你好魅族07',1,0);
-insert into ChatPerLog(senderid,receiverid,sendtime,sendtext,type,isread) values(3,2,'2015-02-15','你好魅族08',1,0);
-insert into ChatPerLog(senderid,receiverid,sendtime,sendtext,type,isread) values(1,1,'2015-02-15','你好魅族09',1,0);
-insert into ChatPerLog(senderid,receiverid,sendtime,sendtext,type,isread) values(1,1,'2015-02-15','你好魅族10',1,0);
-insert into ChatPerLog(senderid,receiverid,sendtime,sendtext,type,isread) values(3,2,'2015-02-15','你好魅族11',1,0);
-insert into ChatPerLog(senderid,receiverid,sendtime,sendtext,type,isread) values(1,1,'2015-02-15','你好魅族12',1,0);
-insert into ChatPerLog(senderid,receiverid,sendtime,sendtext,type,isread) values(1,1,'2015-02-15','你好魅族13',1,0);
-insert into ChatPerLog(senderid,receiverid,sendtime,sendtext,type,isread) values(3,2,'2015-02-15','你好魅族14',1,0);
-insert into ChatPerLog(senderid,receiverid,sendtime,sendtext,type,isread) values(1,1,'2015-02-15','你好魅族15',1,0);
-insert into ChatPerLog(senderid,receiverid,sendtime,sendtext,type,isread) values(1,1,'2015-02-15','你好魅族16',1,0);
-insert into ChatPerLog(senderid,receiverid,sendtime,sendtext,type,isread) values(3,2,'2015-02-15','你好魅族17',1,0);
-insert into ChatPerLog(senderid,receiverid,sendtime,sendtext,type,isread) values(1,1,'2015-02-15','你好魅族18',1,0);
-insert into ChatPerLog(senderid,receiverid,sendtime,sendtext,type,isread) values(1,1,'2015-02-15','你好魅族19',1,0);
-insert into ChatPerLog(senderid,receiverid,sendtime,sendtext,type,isread) values(3,2,'2015-02-15','你好魅族20',1,0);
-insert into ChatPerLog(senderid,receiverid,sendtime,sendtext,type,isread) values(1,1,'2015-02-15','你好魅族21',1,0);
-insert into ChatPerLog(senderid,receiverid,sendtime,sendtext,type,isread) values(1,1,'2015-02-15','你好魅族22',1,0);
-insert into ChatPerLog(senderid,receiverid,sendtime,sendtext,type,isread) values(3,2,'2015-02-15','你好魅族23',1,0);
-insert into ChatPerLog(senderid,receiverid,sendtime,sendtext,type,isread) values(1,1,'2015-02-15','你好魅族24',1,0);
 /**/

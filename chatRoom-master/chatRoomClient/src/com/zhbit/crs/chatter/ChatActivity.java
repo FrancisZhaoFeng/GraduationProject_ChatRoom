@@ -184,11 +184,11 @@ public class ChatActivity extends Activity {
 
 		mBtnSend.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				String st0 = mEtInput.getText().toString();
+				String sendtext = mEtInput.getText().toString();
 
 				mEtInput.setText("");
 
-				if (!st0.equals("")) {
+				if (!sendtext.equals("")) {
 					// test codes
 					int topHeight = mRlTop.getHeight();
 
@@ -205,8 +205,8 @@ public class ChatActivity extends Activity {
 					mRlTop.setLayoutParams(topBanner_params);
 				}
 
-				if (!st0.equals("")) {
-					mPublicService.sendMyMessage(st0);
+				if (!sendtext.equals("")) {
+					mPublicService.sendMyMessage(sendtext);
 				}
 			}
 		});
@@ -282,8 +282,8 @@ public class ChatActivity extends Activity {
 class ToDisplayHistory extends Thread {
 	private Handler mHandler;
 
-	public ToDisplayHistory(Handler hl0) {
-		mHandler = hl0;
+	public ToDisplayHistory(Handler hl) {
+		mHandler = hl;
 	}
 
 	@Override

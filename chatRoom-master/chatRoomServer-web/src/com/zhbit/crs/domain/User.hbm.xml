@@ -31,15 +31,33 @@
         <property name="blacklist" type="boolean">
             <column name="blacklist" />
         </property>
+        <set name="chatRoomLogTemps" inverse="true">
+            <key>
+                <column name="senderid" />
+            </key>
+            <one-to-many class="com.zhbit.crs.domain.ChatRoomLogTemp" />
+        </set>
+        <set name="chatPerLogTempsForReceiverid" inverse="true">
+            <key>
+                <column name="receiverid" />
+            </key>
+            <one-to-many class="com.zhbit.crs.domain.ChatPerLogTemp" />
+        </set>
+        <set name="chatPerLogTempsForSenderid" inverse="true">
+            <key>
+                <column name="senderid" />
+            </key>
+            <one-to-many class="com.zhbit.crs.domain.ChatPerLogTemp" />
+        </set>
         <set name="friendsForUserid" inverse="true">
             <key>
-                <column name="userid" />
+                <column name="userid" not-null="true" />
             </key>
             <one-to-many class="com.zhbit.crs.domain.Friend" />
         </set>
         <set name="friendsForFriendid" inverse="true">
             <key>
-                <column name="friendid" />
+                <column name="friendid" not-null="true" />
             </key>
             <one-to-many class="com.zhbit.crs.domain.Friend" />
         </set>
@@ -49,13 +67,11 @@
             </key>
             <one-to-many class="com.zhbit.crs.domain.ChatRoomLog" />
         </set>
-        <set name="chatRooms" table="ChatRoomMem" catalog="chatRoom">
+        <set name="chatRoomMems" inverse="true">
             <key>
                 <column name="userid" />
             </key>
-            <many-to-many entity-name="com.zhbit.crs.domain.ChatRoom" lazy="false">
-                <column name="chatroomid" />
-            </many-to-many>
+            <one-to-many class="com.zhbit.crs.domain.ChatRoomMem" />
         </set>
         <set name="chatPerLogsForReceiverid" inverse="true">
             <key>
@@ -63,7 +79,7 @@
             </key>
             <one-to-many class="com.zhbit.crs.domain.ChatPerLog" />
         </set>
-        <set name="chatRooms_1" inverse="true">
+        <set name="chatRooms" inverse="true">
             <key>
                 <column name="createby" />
             </key>

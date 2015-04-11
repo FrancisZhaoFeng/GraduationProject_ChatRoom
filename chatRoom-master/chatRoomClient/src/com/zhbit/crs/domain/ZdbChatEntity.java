@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.zhbit.crs.commons.GlobalStrings;
+import com.zhbit.crs.util.tools;
 
 public class ZdbChatEntity {
 	public static final String strSplitter = GlobalStrings.entityDivider;
@@ -38,7 +39,7 @@ public class ZdbChatEntity {
 		this.mSenderAvatarId = sender.getAvatarId();
 		this.mUserName = sender.getName();
 		this.mSex = sender.getSex();
-		this.mTime = genDate();
+		this.mTime = tools.getDate();
 		this.mContent = sentence;
 		this.mReceiverId = receiverId;
 	}
@@ -70,15 +71,6 @@ public class ZdbChatEntity {
 		return str;
 	}
 	
-	public static Date genDate()
-	{
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd-HH:mm:ss");
-		Date date = new Date();
-//		String timex=dateFormat.format(date);
-//		return timex;
-		return date;
-	}
-
 	public int getType()
 	{
 		return mType;

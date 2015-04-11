@@ -37,7 +37,7 @@ public class ChatMsgReceiver extends BroadcastReceiver {
 			mParService.newMsgArrive((ChatPerLog) temp, false);
 			break;
 		case GlobalMsgTypes.msgUpdateFriendList:
-			// FriendListInfo.getFriendListInfo().updateFriendList(msgStr);
+//			 FriendListInfo.getFriendListInfo().updateFriendList(msgStr);
 			break;
 		case GlobalMsgTypes.msgFriendGoOnline:
 			FriendListInfo.getFriendListInfo().friendGoOnAndOffline((User) temp, true);

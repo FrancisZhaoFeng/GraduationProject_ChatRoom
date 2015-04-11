@@ -16,6 +16,7 @@ public class ChatRoom implements java.io.Serializable {
 	private String chatroomname;
 	private String note;
 	private boolean isdelete;
+	private Set chatRoomLogTemps = new HashSet(0);
 	private Set chatRoomLogs = new HashSet(0);
 	private Set chatRoomMems = new HashSet(0);
 
@@ -31,11 +32,14 @@ public class ChatRoom implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public ChatRoom(User user, String chatroomname, String note, boolean isdelete, Set chatRoomLogs, Set chatRoomMems) {
+	public ChatRoom(User user, String chatroomname, String note,
+			boolean isdelete, Set chatRoomLogTemps, Set chatRoomLogs,
+			Set chatRoomMems) {
 		this.user = user;
 		this.chatroomname = chatroomname;
 		this.note = note;
 		this.isdelete = isdelete;
+		this.chatRoomLogTemps = chatRoomLogTemps;
 		this.chatRoomLogs = chatRoomLogs;
 		this.chatRoomMems = chatRoomMems;
 	}
@@ -80,6 +84,14 @@ public class ChatRoom implements java.io.Serializable {
 
 	public void setIsdelete(boolean isdelete) {
 		this.isdelete = isdelete;
+	}
+
+	public Set getChatRoomLogTemps() {
+		return this.chatRoomLogTemps;
+	}
+
+	public void setChatRoomLogTemps(Set chatRoomLogTemps) {
+		this.chatRoomLogTemps = chatRoomLogTemps;
 	}
 
 	public Set getChatRoomLogs() {

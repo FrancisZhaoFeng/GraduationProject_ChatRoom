@@ -51,8 +51,8 @@ public class ConnectedApp {
 		return mCurActivity;
 	}
 
-	public void setCurActivity(Activity act0) {
-		mCurActivity = act0;
+	public void setCurActivity(Activity act) {
+		mCurActivity = act;
 	}
 
 	public void instantiateListActivity() {

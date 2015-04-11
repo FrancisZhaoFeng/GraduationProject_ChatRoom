@@ -24,8 +24,8 @@ public class ZFrdRequestEntity {
 //		mStatus = Integer.parseInt(arr0[0]);
 //		mRequester = new UserInfo(arr0[1]);
 //		mRequestee = new UserInfo(arr0[2]);
-		mRequester = friend.getUserByUserid();
-		mRequestee = friend.getUserByFriendid();
+		mRequester = friend.getId().getUserid();
+		mRequestee = friend.getId().getFriendid();
 	}
 	
 	public String toString() {

@@ -1,7 +1,5 @@
 package com.zhbit.crs.domain;
 
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * User entity. @author MyEclipse Persistence Tools
@@ -10,8 +8,7 @@ import java.util.Set;
 public class User implements java.io.Serializable {
 
 	// Fields
-
-	private static final long serialVersionUID = -3286564461647015367L;
+	private static final long serialVersionUID = 4115108842279854762L;
 	private Integer userid;
 	private String username;
 	private String password;
@@ -20,13 +17,6 @@ public class User implements java.io.Serializable {
 	private boolean sex;
 	private boolean online;
 	private boolean blacklist;
-//	private Set friendsForUserid = new HashSet(0);
-//	private Set friendsForFriendid = new HashSet(0);
-//	private Set chatRoomLogs = new HashSet(0);
-//	private Set chatRooms = new HashSet(0);
-//	private Set chatPerLogsForReceiverid = new HashSet(0);
-//	private Set chatRooms_1 = new HashSet(0);
-//	private Set chatPerLogsForSenderid = new HashSet(0);
 
 	// Constructors
 
@@ -34,12 +24,18 @@ public class User implements java.io.Serializable {
 	public User() {
 	}
 
+	/**
+	 * minimal constructor
+	 */
+	public User(int userid) {
+		this.userid = userid;
+	}
+
 	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
 	}
 
-	/** minimal constructor */
 	public User(String username, String password, String telephone, Integer age) {
 		this.username = username;
 		this.password = password;
@@ -47,8 +43,7 @@ public class User implements java.io.Serializable {
 		this.age = age;
 	}
 
-	/** minimal constructor */
-	public User(String username, String password, String telephone, Integer age, Boolean sex) {
+	public User(String username, String password, String telephone, Integer age, boolean sex) {
 		this.username = username;
 		this.password = password;
 		this.telephone = telephone;
@@ -56,7 +51,7 @@ public class User implements java.io.Serializable {
 		this.sex = sex;
 	}
 
-	/** full constructor */  //, Set friendsForUserid, Set friendsForFriendid, Set chatRoomLogs, Set chatRooms, Set chatPerLogsForReceiverid, Set chatRooms_1, Set chatPerLogsForSenderid
+	/** full constructor */
 	public User(String username, String password, String telephone, Integer age, boolean sex, boolean online, boolean blacklist) {
 		this.username = username;
 		this.password = password;
@@ -65,13 +60,6 @@ public class User implements java.io.Serializable {
 		this.sex = sex;
 		this.online = online;
 		this.blacklist = blacklist;
-//		this.friendsForUserid = friendsForUserid;
-//		this.friendsForFriendid = friendsForFriendid;
-//		this.chatRoomLogs = chatRoomLogs;
-//		this.chatRooms = chatRooms;
-//		this.chatPerLogsForReceiverid = chatPerLogsForReceiverid;
-//		this.chatRooms_1 = chatRooms_1;
-//		this.chatPerLogsForSenderid = chatPerLogsForSenderid;
 	}
 
 	// Property accessors
@@ -139,61 +127,5 @@ public class User implements java.io.Serializable {
 	public void setBlacklist(boolean blacklist) {
 		this.blacklist = blacklist;
 	}
-//
-//	public Set getFriendsForUserid() {
-//		return this.friendsForUserid;
-//	}
-//
-//	public void setFriendsForUserid(Set friendsForUserid) {
-//		this.friendsForUserid = friendsForUserid;
-//	}
-//
-//	public Set getFriendsForFriendid() {
-//		return this.friendsForFriendid;
-//	}
-//
-//	public void setFriendsForFriendid(Set friendsForFriendid) {
-//		this.friendsForFriendid = friendsForFriendid;
-//	}
-//
-//	public Set getChatRoomLogs() {
-//		return this.chatRoomLogs;
-//	}
-//
-//	public void setChatRoomLogs(Set chatRoomLogs) {
-//		this.chatRoomLogs = chatRoomLogs;
-//	}
-//
-//	public Set getChatRooms() {
-//		return this.chatRooms;
-//	}
-//
-//	public void setChatRooms(Set chatRooms) {
-//		this.chatRooms = chatRooms;
-//	}
-//
-//	public Set getChatPerLogsForReceiverid() {
-//		return this.chatPerLogsForReceiverid;
-//	}
-//
-//	public void setChatPerLogsForReceiverid(Set chatPerLogsForReceiverid) {
-//		this.chatPerLogsForReceiverid = chatPerLogsForReceiverid;
-//	}
-//
-//	public Set getChatRooms_1() {
-//		return this.chatRooms_1;
-//	}
-//
-//	public void setChatRooms_1(Set chatRooms_1) {
-//		this.chatRooms_1 = chatRooms_1;
-//	}
-//
-//	public Set getChatPerLogsForSenderid() {
-//		return this.chatPerLogsForSenderid;
-//	}
-//
-//	public void setChatPerLogsForSenderid(Set chatPerLogsForSenderid) {
-//		this.chatPerLogsForSenderid = chatPerLogsForSenderid;
-//	}
 
 }

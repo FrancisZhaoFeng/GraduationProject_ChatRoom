@@ -23,14 +23,14 @@ public class ServerSendThread extends Thread {
 	
 	private Socket mSocket;
 
-	public ServerSendThread(ServerActivity ca0, ObjectOutputStream bufw) {
-		mClientActivity = ca0;
+	public ServerSendThread(ServerActivity ca, ObjectOutputStream bufw) {
+		mClientActivity = ca;
 		mBuffWter = bufw;
 		mSendList = new ArrayList<ZSendStackItem>();
 	}
 	
-	public ServerSendThread(ServerActivity ca0, Socket socket) {
-		mClientActivity = ca0;
+	public ServerSendThread(ServerActivity ca, Socket socket) {
+		mClientActivity = ca;
 		mSocket = socket;
 		mSendList = new ArrayList<ZSendStackItem>();
 	}
@@ -48,12 +48,12 @@ public class ServerSendThread extends Thread {
 					eer.printStackTrace();
 				}
 			} else {
-				ZSendStackItem item0 = mSendList.get(0); // get one at the head
+				ZSendStackItem item = mSendList.get(0); // get one at the head
 
-				if (item0 != null) {
-					send(item0.getmType() + "", item0.getmObj());
+				if (item != null) {
+					send(item.getmType() + "", item.getmObj());
 				} else {
-					System.out.println("error, item0 = " + item0);
+					System.out.println("error, item = " + item);
 					continue;
 				}
 
@@ -87,13 +87,13 @@ public class ServerSendThread extends Thread {
 			return;
 		}
 
-		ZSendStackItem item0 = new ZSendStackItem(type, obj);
-		mSendList.add(item0); // add this item to the end of stack
+		ZSendStackItem item = new ZSendStackItem(type, obj);
+		mSendList.add(item); // add this item to the end of stack
 	}
 
 	private synchronized void send(Object type, Object obj) {
 		try {
-			this.sleep(150);
+			this.sleep(300);
 			mBuffWter = new ObjectOutputStream(mSocket.getOutputStream());
 			mBuffWter.writeObject(type);
 			mBuffWter.flush();
@@ -112,11 +112,11 @@ public class ServerSendThread extends Thread {
 	public void saveUnsends() {
 		int senderId = GlobalInts.idPlaceholder; // since it's useless, so just a placeholder, we don't care who send the message
 		int receiverId = mClientActivity.getUser().getUserid();
-		for (ZSendStackItem item0 : mSendList) {
-			// int type = item0.getType();
-			// String msg = item0.getStr();
-			int type = item0.getmType();
-			Object msg = item0.getmObj();
+		for (ZSendStackItem item : mSendList) {
+			// int type = item.getType();
+			// String msg = item.getStr();
+			int type = item.getmType();
+			Object msg = item.getmObj();
 			switch (type) {
 			case GlobalMsgTypes.msgFromFriend:
 				// DBTempSaveUtil.saveUnsentChatMsg(senderId, receiverId,

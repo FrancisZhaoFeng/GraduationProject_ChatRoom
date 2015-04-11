@@ -17,11 +17,18 @@ import com.zhbit.crs.R;
 import com.zhbit.crs.action.ConnectedApp;
 import com.zhbit.crs.chatServices.FriendListInfo;
 import com.zhbit.crs.commons.GlobalMsgTypes;
+import com.zhbit.crs.domain.FriendId;
 import com.zhbit.crs.domain.ZFrdRequestEntity;
 import com.zhbit.crs.domain.Friend;
 import com.zhbit.crs.domain.User;
 import com.zhbit.crs.myNetwork.NetworkService;
+import com.zhbit.crs.util.tools;
 
+/**
+ * @author zhaoguofeng
+ * 搜索后的listView界面 ，点击item可以加我好友
+ *
+ */
 public class FriendSearchResultActivity extends Activity {
 
 	private static FriendSearchResultActivity mInstance;
@@ -36,6 +43,9 @@ public class FriendSearchResultActivity extends Activity {
 		return mInstance;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -82,13 +92,11 @@ public class FriendSearchResultActivity extends Activity {
 								}
 							});
 				} else if (!FriendListInfo.getFriendListInfo().isIdFriend(requestee.getUserid())) {
-					alertDialogBuilder.setMessage("are you sure to send friend request?").setCancelable(true)
+					alertDialogBuilder.setMessage("are you sure to send friend request?").setCancelable(true)  //发送friend实体类到服务端
 							.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog, int id) {
 									User myUser = ConnectedApp.getInstance().getUser();
-//									FrdRequestEntity reqEnt0 = new FrdRequestEntity(myUser, requestee);
-//									reqEnt0.accept();
-									NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgFriendshipRequest, new Friend(requestee,myUser,""));  //reqEnt0.toString()
+									NetworkService.getInstance().sendObject(GlobalMsgTypes.msgFriendshipRequest, new Friend(new FriendId(myUser,requestee),tools.getDate(),""));
 								}
 							}).setNegativeButton("No", new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog, int id) {

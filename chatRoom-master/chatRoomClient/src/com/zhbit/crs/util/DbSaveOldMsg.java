@@ -131,7 +131,7 @@ public class DbSaveOldMsg {
 		// int cursGetcount = curs.getCount();
 		// curs.close();
 		// return cursGetcount;
-		return mObjs.size();
+		return mObjs != null?mObjs.size():0;
 	}
 
 	public int getKeyFromMasterGuestId(int masterId, int guestId) {

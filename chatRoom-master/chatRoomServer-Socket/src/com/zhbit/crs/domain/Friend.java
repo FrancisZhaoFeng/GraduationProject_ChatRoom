@@ -1,5 +1,7 @@
 package com.zhbit.crs.domain;
 
+import java.util.Date;
+
 /**
  * Friend entity. @author MyEclipse Persistence Tools
  */
@@ -7,10 +9,10 @@ package com.zhbit.crs.domain;
 public class Friend implements java.io.Serializable {
 
 	// Fields
-	private static final long serialVersionUID = 8511348746671571563L;
-	private Integer id;
-	private User userByFriendid;
-	private User userByUserid;
+	private static final long serialVersionUID = -6107034331421216387L;
+	private FriendId id;
+	private Date friendtime;
+	private boolean state;
 	private String note;
 
 	// Constructors
@@ -19,37 +21,50 @@ public class Friend implements java.io.Serializable {
 	public Friend() {
 	}
 
+	/** minimal constructor */
+	public Friend(FriendId id, Date friendtime) {
+		this.id = id;
+		this.friendtime = friendtime;
+	}
+	
+	public Friend(FriendId id, Date friendtime, String note) {
+		this.id = id;
+		this.friendtime = friendtime;
+		this.note = note;
+	}
+
 	/** full constructor */
-	public Friend(User userByFriendid, User userByUserid, String note) {
-		this.userByFriendid = userByFriendid;
-		this.userByUserid = userByUserid;
+	public Friend(FriendId id, Date friendtime, boolean state, String note) {
+		this.id = id;
+		this.friendtime = friendtime;
+		this.state = state;
 		this.note = note;
 	}
 
 	// Property accessors
 
-	public Integer getId() {
+	public FriendId getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(FriendId id) {
 		this.id = id;
 	}
 
-	public User getUserByFriendid() {
-		return this.userByFriendid;
+	public Date getFriendtime() {
+		return this.friendtime;
 	}
 
-	public void setUserByFriendid(User userByFriendid) {
-		this.userByFriendid = userByFriendid;
+	public void setFriendtime(Date friendtime) {
+		this.friendtime = friendtime;
 	}
 
-	public User getUserByUserid() {
-		return this.userByUserid;
+	public boolean getState() {
+		return this.state;
 	}
 
-	public void setUserByUserid(User userByUserid) {
-		this.userByUserid = userByUserid;
+	public void setState(boolean state) {
+		this.state = state;
 	}
 
 	public String getNote() {

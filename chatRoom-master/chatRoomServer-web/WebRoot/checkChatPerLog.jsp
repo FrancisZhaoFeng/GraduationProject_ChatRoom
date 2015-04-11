@@ -120,13 +120,13 @@
 						</td>
 						<td width="32%">
 							<div align="left"  style="overflow:auto; height: 30px;padding-top: 13px;">
-								<s:if test="#chatPerLog.type == 1">
+								<s:if test="#chatPerLog.sendtext != null">
 									<s:property value="#chatPerLog.sendtext" />
 								</s:if>
-								<s:elseif test="#chatPerLog.type == 2">
+								<s:elseif test="#chatPerLog.sendimage != null">
 									<s:property value="#chatPerLog.sendimage" />
 								</s:elseif>
-								<s:elseif test="#chatPerLog.type == 3">
+								<s:elseif test="#chatPerLog.sendvoice != null">
 									<s:property value="#chatPerLog.sendvoice" />
 								</s:elseif>
 							</div>

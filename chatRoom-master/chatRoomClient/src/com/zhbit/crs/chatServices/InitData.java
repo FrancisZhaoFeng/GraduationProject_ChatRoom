@@ -57,7 +57,7 @@ public class InitData extends Thread{
 		ChatServiceData mChatServiceData = ChatServiceData.getInstance();
 		if(users != null){
 			mListOfFriends = users;
-			for(int i = 1 ; i <= users.size() ; i++) {
+			for(int i = 0 ; i < users.size() ; i++) {
 //				UserInfo userInfo = new UserInfo(strArr0[p]);
 				mChatServiceData.newUser(users.get(i));
 				UnsavedChatMsg.getInstance().newUser(users.get(i));

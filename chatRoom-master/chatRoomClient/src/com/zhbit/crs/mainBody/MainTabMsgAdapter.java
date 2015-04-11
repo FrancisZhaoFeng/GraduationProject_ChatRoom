@@ -71,7 +71,7 @@ public class MainTabMsgAdapter extends BaseAdapter {
 		}
 		nameOfSpeakerV.setText(name);
 		textV.setText(sentence);
-		timeV.setText(tools.genDate(time));
+		timeV.setText(tools.gerStrDate(time));
 
 		return convertView;
 	}

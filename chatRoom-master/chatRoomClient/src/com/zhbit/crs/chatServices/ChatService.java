@@ -25,6 +25,7 @@ import com.zhbit.crs.mainBody.MainTabMsgPage;
 import com.zhbit.crs.myNetwork.NetConnect;
 import com.zhbit.crs.myNetwork.NetworkService;
 import com.zhbit.crs.util.UnsavedChatMsg;
+import com.zhbit.crs.util.tools;
 
 public class ChatService extends Service {
 
@@ -117,11 +118,11 @@ public class ChatService extends Service {
 		return mFriendId;
 	}
 
-	public void sendMyMessage(String st0) {
+	public void sendMyMessage(String sendtext) {
 		if (mCurType == GlobalMsgTypes.msgFromFriend) {
-			ChatPerLog ent0 = new ChatPerLog(mCurType, mMyUser, mFriendId, st0);
-			NetworkService.getInstance().sendUpload(mCurType, ent0.toString());
-			newMsgArrive(ent0, true);
+			ChatPerLog chatPerLog = new ChatPerLog(mMyUser, new User(mFriendId),tools.getDate(), sendtext ,null,null, mCurType);
+			NetworkService.getInstance().sendObject(mCurType, chatPerLog);
+			newMsgArrive(chatPerLog, true);
 		}
 	}
 

@@ -16,10 +16,12 @@ import com.zhbit.crs.action.ConnectedApp;
 import com.zhbit.crs.chatServices.FriendListInfo;
 import com.zhbit.crs.commons.GlobalMsgTypes;
 import com.zhbit.crs.domain.Friend;
+import com.zhbit.crs.domain.FriendId;
 import com.zhbit.crs.domain.ZdbFrdReqNotifItemEntity;
 import com.zhbit.crs.domain.ZFrdRequestEntity;
 import com.zhbit.crs.domain.User;
 import com.zhbit.crs.myNetwork.NetworkService;
+import com.zhbit.crs.util.tools;
 
 /**
  * @author zhaoguofeng
@@ -88,8 +90,8 @@ public class TabMsgFrdReqProcActivity extends Activity {
 				// set dialog message
 				alertDialogBuilder.setMessage("are you sure to accept the request?").setCancelable(true).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-						Friend friendReq = new Friend(ConnectedApp.getInstance().getUser(),mThisItem.getUser(), "accept");
-						NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgFriendshipRequestResponse, friendReq); //发送Friend类数据到服务器，note字段赋予accept值
+						Friend friendReq = new Friend(new FriendId(mThisItem.getUser(),ConnectedApp.getInstance().getUser()),tools.getDate(),true,"");
+						NetworkService.getInstance().sendObject(GlobalMsgTypes.msgFriendshipRequestResponse, friendReq); //发送Friend类数据到服务器，note字段赋予accept值
 						mThisItem.setStatus(ZdbFrdReqNotifItemEntity.mAccepted);
 						FrdRequestNotifActivity.getInstance().setItemStatus(mThisPos, ZdbFrdReqNotifItemEntity.mAccepted);
 						FriendListInfo.getFriendListInfo().uponMakeNewFriend(mThisItem.getUser());
@@ -117,8 +119,8 @@ public class TabMsgFrdReqProcActivity extends Activity {
 					public void onClick(DialogInterface dialog, int id) {
 //						ZFrdRequestEntity reqEnt0 = new ZFrdRequestEntity(mThisItem.getUser(), ConnectedApp.getInstance().getUser());
 //						reqEnt0.decline();
-						Friend friendReq = new Friend( ConnectedApp.getInstance().getUser(),mThisItem.getUser(),"refuse");
-						NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgFriendshipRequestResponse, friendReq);
+						Friend friendReq = new Friend(new FriendId(mThisItem.getUser(),ConnectedApp.getInstance().getUser()),tools.getDate(),false,"");
+						NetworkService.getInstance().sendObject(GlobalMsgTypes.msgFriendshipRequestResponse, friendReq);
 						mThisItem.setStatus(ZdbFrdReqNotifItemEntity.mDeclined);
 						FrdRequestNotifActivity.getInstance().setItemStatus(mThisPos, ZdbFrdReqNotifItemEntity.mDeclined);
 					}

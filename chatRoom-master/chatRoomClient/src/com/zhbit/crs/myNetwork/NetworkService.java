@@ -100,14 +100,12 @@ public class NetworkService {
 	 * @param sentence
 	 *            发送信息到服务器，先发送：type，后发送：sentence
 	 */
-	public void sendUpload(int type, Object obj) {
-		sendUpload("" + type, obj);
+	public void sendObject(int type, Object obj) {
+		sendObject("" + type, obj);
 	}
 
 	/* synchronized so only one send action is happening at a time */
-	private synchronized void sendUpload(Object type, Object obj) {
-		// buff = buff.replace("\n", GlobalStrings.replaceOfReturn);
-		// mSendThread.start(type, obj);
+	private synchronized void sendObject(Object type, Object obj) {
 		mSendThread.start(mSocket, type, obj);
 	}
 

@@ -3,20 +3,16 @@ package com.zhbit.crs.domain;
 import java.util.Date;
 
 /**
- * ChatPerLog entity. @author MyEclipse Persistence Tools
+ * ChatRoomLogTemp entity. @author MyEclipse Persistence Tools
  */
 
-public class ChatPerLog implements java.io.Serializable {
+public class ChatRoomLogTemp implements java.io.Serializable {
 
 	// Fields
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7386063188858556377L;
 	private Integer logid;
-	private User userBySenderid;
-	private User userByReceiverid;
+	private User user;
+	private ChatRoom chatRoom;
 	private Date sendtime;
 	private String sendtext;
 	private byte[] sendimage;
@@ -26,27 +22,20 @@ public class ChatPerLog implements java.io.Serializable {
 	// Constructors
 
 	/** default constructor */
-	public ChatPerLog() {
+	public ChatRoomLogTemp() {
 	}
 
 	/** minimal constructor */
-	public ChatPerLog(Date sendtime, Integer type) {
+	public ChatRoomLogTemp(Date sendtime, Integer type) {
 		this.sendtime = sendtime;
 		this.type = type;
 	}
 
-	public ChatPerLog(User userBySenderid, User userByReceiverid, String sendtext, Integer type) {
-		this.userBySenderid = userBySenderid;
-		this.userByReceiverid = userByReceiverid;
-		this.sendtext = sendtext;
-		this.type = type;
-	}
-	
-
 	/** full constructor */
-	public ChatPerLog(User userBySenderid, User userByReceiverid, Date sendtime, String sendtext, byte[] sendimage, byte[] sendvoice, Integer type) {
-		this.userBySenderid = userBySenderid;
-		this.userByReceiverid = userByReceiverid;
+	public ChatRoomLogTemp(User user, ChatRoom chatRoom, Date sendtime,
+			String sendtext, byte[] sendimage, byte[] sendvoice, Integer type) {
+		this.user = user;
+		this.chatRoom = chatRoom;
 		this.sendtime = sendtime;
 		this.sendtext = sendtext;
 		this.sendimage = sendimage;
@@ -64,20 +53,20 @@ public class ChatPerLog implements java.io.Serializable {
 		this.logid = logid;
 	}
 
-	public User getUserBySenderid() {
-		return this.userBySenderid;
+	public User getUser() {
+		return this.user;
 	}
 
-	public void setUserBySenderid(User userBySenderid) {
-		this.userBySenderid = userBySenderid;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public User getUserByReceiverid() {
-		return this.userByReceiverid;
+	public ChatRoom getChatRoom() {
+		return this.chatRoom;
 	}
 
-	public void setUserByReceiverid(User userByReceiverid) {
-		this.userByReceiverid = userByReceiverid;
+	public void setChatRoom(ChatRoom chatRoom) {
+		this.chatRoom = chatRoom;
 	}
 
 	public Date getSendtime() {

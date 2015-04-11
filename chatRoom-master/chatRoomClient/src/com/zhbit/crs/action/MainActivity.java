@@ -107,7 +107,7 @@ public class MainActivity extends Activity {
 			NetworkService.getInstance().setupConnection();
 			Log.w("mark", "NetworkService.getInstance().setupConnection()");
 			if (NetworkService.getInstance().getIsConnected()) {
-				NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgHandShake, user);
+				NetworkService.getInstance().sendObject(GlobalMsgTypes.msgHandShake, user);
 				Log.w("mark", "NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgHandShake, user)");
 			} else {
 				NetworkService.getInstance().closeConnection();

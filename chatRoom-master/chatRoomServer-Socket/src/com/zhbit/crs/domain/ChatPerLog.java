@@ -9,7 +9,11 @@ import java.util.Date;
 public class ChatPerLog implements java.io.Serializable {
 
 	// Fields
-	private static final long serialVersionUID = 5268425463780540575L;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7386063188858556377L;
 	private Integer logid;
 	private User userBySenderid;
 	private User userByReceiverid;
@@ -18,7 +22,6 @@ public class ChatPerLog implements java.io.Serializable {
 	private byte[] sendimage;
 	private byte[] sendvoice;
 	private Integer type;
-	private boolean isread;
 
 	// Constructors
 
@@ -31,18 +34,25 @@ public class ChatPerLog implements java.io.Serializable {
 		this.sendtime = sendtime;
 		this.type = type;
 	}
-	
-	public ChatPerLog(int type, User sender, int receiverId, String sentence) {
+
+	public ChatPerLog(User userBySenderid, User userByReceiverid, String sendtext, Integer type) {
+		this.userBySenderid = userBySenderid;
+		this.userByReceiverid = userByReceiverid;
+		this.sendtext = sendtext;
 		this.type = type;
-		this.userBySenderid = sender;
-		this.userByReceiverid.setUserid(receiverId);
-		this.sendtext = sentence;
 	}
+	
+	public ChatPerLog(User userBySenderid, User userByReceiverid, Date sendtime, String sendtext, Integer type) {
+		this.userBySenderid = userBySenderid;
+		this.userByReceiverid = userByReceiverid;
+		this.sendtime = sendtime;
+		this.sendtext = sendtext;
+		this.type = type;
+	}
+	
 
 	/** full constructor */
-	public ChatPerLog(User userBySenderid, User userByReceiverid,
-			Date sendtime, String sendtext, byte[] sendimage, byte[] sendvoice,
-			Integer type, boolean isread) {
+	public ChatPerLog(User userBySenderid, User userByReceiverid, Date sendtime, String sendtext, byte[] sendimage, byte[] sendvoice, Integer type) {
 		this.userBySenderid = userBySenderid;
 		this.userByReceiverid = userByReceiverid;
 		this.sendtime = sendtime;
@@ -50,7 +60,6 @@ public class ChatPerLog implements java.io.Serializable {
 		this.sendimage = sendimage;
 		this.sendvoice = sendvoice;
 		this.type = type;
-		this.isread = isread;
 	}
 
 	// Property accessors
@@ -117,14 +126,6 @@ public class ChatPerLog implements java.io.Serializable {
 
 	public void setType(Integer type) {
 		this.type = type;
-	}
-
-	public boolean getIsread() {
-		return this.isread;
-	}
-
-	public void setIsread(boolean isread) {
-		this.isread = isread;
 	}
 
 }

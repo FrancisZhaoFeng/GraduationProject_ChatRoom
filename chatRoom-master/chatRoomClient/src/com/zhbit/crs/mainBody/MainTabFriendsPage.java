@@ -11,7 +11,7 @@ public class MainTabFriendsPage {
 	private static MainTabFriendsPage mInstance;
 	
 	private View mViewOfPage;
-	private Context mContext0;
+	private Context mContext;
 	
 	private RelativeLayout mLayoutByName;
 	private RelativeLayout mLayoutByElse;
@@ -28,7 +28,7 @@ public class MainTabFriendsPage {
 	
 	public void onInit(View view, Context cont) {
 		mViewOfPage = view;
-		mContext0 = cont;
+		mContext = cont;
 	}
 	
 	public void onCreate() {

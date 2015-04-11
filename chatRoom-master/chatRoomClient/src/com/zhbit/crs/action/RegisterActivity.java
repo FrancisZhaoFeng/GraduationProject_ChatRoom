@@ -163,7 +163,7 @@ public class RegisterActivity extends Activity {
 		NetworkService.getInstance().onInit(this);
 		NetworkService.getInstance().setupConnection();
 		if (NetworkService.getInstance().getIsConnected()) {
-			NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgSignUp, user);
+			NetworkService.getInstance().sendObject(GlobalMsgTypes.msgSignUp, user);
 		} else {
 			NetworkService.getInstance().closeConnection();
 			Toast.makeText(this, "failed to connect to Server", Toast.LENGTH_LONG).show();

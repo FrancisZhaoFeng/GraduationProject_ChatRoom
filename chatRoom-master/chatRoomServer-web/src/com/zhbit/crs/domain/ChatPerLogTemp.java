@@ -3,17 +3,13 @@ package com.zhbit.crs.domain;
 import java.util.Date;
 
 /**
- * ChatPerLog entity. @author MyEclipse Persistence Tools
+ * ChatPerLogTemp entity. @author MyEclipse Persistence Tools
  */
 
-public class ChatPerLog implements java.io.Serializable {
+public class ChatPerLogTemp implements java.io.Serializable {
 
 	// Fields
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7386063188858556377L;
 	private Integer logid;
 	private User userBySenderid;
 	private User userByReceiverid;
@@ -26,25 +22,19 @@ public class ChatPerLog implements java.io.Serializable {
 	// Constructors
 
 	/** default constructor */
-	public ChatPerLog() {
+	public ChatPerLogTemp() {
 	}
 
 	/** minimal constructor */
-	public ChatPerLog(Date sendtime, Integer type) {
+	public ChatPerLogTemp(Date sendtime, Integer type) {
 		this.sendtime = sendtime;
 		this.type = type;
 	}
 
-	public ChatPerLog(User userBySenderid, User userByReceiverid, String sendtext, Integer type) {
-		this.userBySenderid = userBySenderid;
-		this.userByReceiverid = userByReceiverid;
-		this.sendtext = sendtext;
-		this.type = type;
-	}
-	
-
 	/** full constructor */
-	public ChatPerLog(User userBySenderid, User userByReceiverid, Date sendtime, String sendtext, byte[] sendimage, byte[] sendvoice, Integer type) {
+	public ChatPerLogTemp(User userBySenderid, User userByReceiverid,
+			Date sendtime, String sendtext, byte[] sendimage, byte[] sendvoice,
+			Integer type) {
 		this.userBySenderid = userBySenderid;
 		this.userByReceiverid = userByReceiverid;
 		this.sendtime = sendtime;

@@ -26,7 +26,7 @@ public class NetStateReceiver extends BroadcastReceiver {
 				System.out.println("connected again");
 				NetworkService.getInstance().setupConnection();
 				User user = ConnectedApp.getInstance().getUser();
-				NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgBackOnline, user);
+				NetworkService.getInstance().sendObject(GlobalMsgTypes.msgBackOnline, user);
 			}
 		} else {
 			Log.w("closeConnection", "关闭连接服务端的读入流和socket连接");

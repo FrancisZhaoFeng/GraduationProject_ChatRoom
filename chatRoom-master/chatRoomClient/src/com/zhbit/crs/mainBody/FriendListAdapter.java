@@ -89,6 +89,10 @@ public class FriendListAdapter extends BaseExpandableListAdapter {
 		return convertView;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.ExpandableListAdapter#getChildView(int, int, boolean, android.view.View, android.view.ViewGroup)
+	 * 显示Friend List
+	 */
 	@Override
 	public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
@@ -101,10 +105,10 @@ public class FriendListAdapter extends BaseExpandableListAdapter {
 		Log.d("isonline ? " + isOnline, "++++++++++++++++++++++++++++++++++++++++" + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		if (isOnline == true) {
 			holder.mIcon = (ImageView) convertView.findViewById(R.id.cc0_friend_list_item_avatar);
-			holder.mIcon.setBackgroundResource(getChild(groupPosition, childPosition).getUserid() == 0 ? R.drawable.cb0_h001 : R.drawable.cb0_h003);
+			holder.mIcon.setBackgroundResource(!getChild(groupPosition, childPosition).getSex() ? R.drawable.cb0_h001 : R.drawable.cb0_h003);
 		} else {
 			holder.mIcon = (ImageView) convertView.findViewById(R.id.cc0_friend_list_item_avatar);
-			holder.mIcon.setBackgroundResource(getChild(groupPosition, childPosition).getUserid() == 0 ? R.drawable.cb0_h001_dark : R.drawable.cb0_h003_dark);
+			holder.mIcon.setBackgroundResource(!getChild(groupPosition, childPosition).getSex() ? R.drawable.cb0_h001_dark : R.drawable.cb0_h003_dark);
 		}
 
 		holder.mChildName = (TextView) convertView.findViewById(R.id.cc0_friend_list_item_name);

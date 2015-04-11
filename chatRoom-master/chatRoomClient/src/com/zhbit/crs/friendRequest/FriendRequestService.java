@@ -14,6 +14,7 @@ import com.zhbit.crs.domain.ZdbTabMsgItemEntity;
 import com.zhbit.crs.mainBody.FrdRequestNotifActivity;
 import com.zhbit.crs.mainBody.MainBodyActivity;
 import com.zhbit.crs.mainBody.MainTabMsgPage;
+import com.zhbit.crs.util.tools;
 
 /**
  * @author zhaoguofeng 好友请求服务类，基础 Service
@@ -62,17 +63,17 @@ public class FriendRequestService extends Service {
 	 */
 	public void processFriendRequest(Friend friend) { // String msg0
 	// FrdRequestEntity reqEnt = new FrdRequestEntity(friend);
-		mRequester = friend.getUserByUserid();
-		mRequestee = friend.getUserByFriendid();
+		mRequester = friend.getId().getUserid();
+		mRequestee = friend.getId().getFriendid();
 
 		MainTabMsgPage.getInstance().onUpdateById(ZdbTabMsgItemEntity.FrdReqNotifId, mRequester.getSex(), mRequester.getUsername(),
-				mRequester.getUsername() + " wants to be your friend", ZdbChatEntity.genDate(), true);
+				mRequester.getUsername() + " wants to be your friend", tools.getDate(), true);
 		if (MainBodyActivity.getCurPage() == MainBodyActivity.mPageMsg) {  //确保当前界面在显示界面
 			MainTabMsgPage.getInstance().onUpdateView();
 		}
 
 		FrdRequestNotifActivity.newNotification(ZdbFrdReqNotifItemEntity.mTypeFrdReq, mRequester.getUserid(), mRequester.getSex(), mRequester.getUsername(),
-				mRequester.getUsername() + " wants to be your friend", ZdbChatEntity.genDate(), mRequester);
+				mRequester.getUsername() + " wants to be your friend", tools.getDate(), mRequester);
 		if (FrdRequestNotifActivity.getInstance() != null && FrdRequestNotifActivity.getInstance().getIsCurPage() == true) { // 确保当前界面在“好友消息请求界面”，后调用该界面listView的内容元素
 			FrdRequestNotifActivity.getInstance().onUpdateView();
 		}
@@ -84,14 +85,14 @@ public class FriendRequestService extends Service {
 	 */
 	public void processFriendRequestResponse(Friend friend) {
 		// FrdRequestEntity reqEnt = new FrdRequestEntity(friend);
-		mRequestee = friend.getUserByFriendid();
+		mRequestee = friend.getId().getFriendid();
 
-		if (friend.getNote().equals("accept")) {
+		if (friend.getState()) {
 			MainTabMsgPage.getInstance().onUpdateById(ZdbTabMsgItemEntity.FrdReqNotifId, mRequestee.getSex(), mRequestee.getUsername(),
-					mRequestee.getUsername() + " accepted your friend request", ZdbChatEntity.genDate(), true);
+					mRequestee.getUsername() + " accepted your friend request", tools.getDate(), true);
 		} else {
 			MainTabMsgPage.getInstance().onUpdateById(ZdbTabMsgItemEntity.FrdReqNotifId, mRequestee.getSex(), mRequestee.getUsername(),
-					mRequestee.getUsername() + " declined your friend request", ZdbChatEntity.genDate(), true);
+					mRequestee.getUsername() + " declined your friend request", tools.getDate(), true);
 		}
 
 		if (MainBodyActivity.getCurPage() == MainBodyActivity.mPageMsg) {
@@ -99,14 +100,14 @@ public class FriendRequestService extends Service {
 		}
 
 		String msg11;
-		if (!friend.getNote().equals("accept")) {
+		if (!friend.getState()) {
 			msg11 = mRequestee.getUsername() + " has declined your request to be friends";
 		} else {
 			msg11 = mRequestee.getUsername() + " has accepted your request to be friends";
 			FriendListInfo.getFriendListInfo().uponMakeNewFriend(mRequestee);
 		}
 		FrdRequestNotifActivity.newNotification(ZdbFrdReqNotifItemEntity.mTypeFrdReqResult, mRequestee.getUserid(), mRequestee.getSex(), mRequestee.getUsername(), msg11,
-				ZdbChatEntity.genDate(), mRequestee);
+				tools.getDate(), mRequestee);
 		if (FrdRequestNotifActivity.getInstance() != null && FrdRequestNotifActivity.getInstance().getIsCurPage() == true) {
 			FrdRequestNotifActivity.getInstance().onUpdateView();
 		}

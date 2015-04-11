@@ -77,7 +77,7 @@ public class FrdRequestNotifAdapter extends BaseAdapter {
 			avatarV.setImageResource(R.drawable.cb0_h003);
 		nameOfSpeakerV.setText(name);
 		textV.setText(sentence);
-		timeV.setText(tools.genDate(time));
+		timeV.setText(tools.gerStrDate(time));
 		if (status == ZdbFrdReqNotifItemEntity.mUnanswer) {
 			statusV.setVisibility(TextView.INVISIBLE);
 		} else {

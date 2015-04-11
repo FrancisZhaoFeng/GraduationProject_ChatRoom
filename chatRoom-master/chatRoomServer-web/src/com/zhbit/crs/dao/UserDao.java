@@ -68,7 +68,7 @@ public class UserDao {
 	
 	public List<Friend> isFriend(Friend friend){
 		List<Friend> friends = null;
-		String hql = "from Friend f where (f.userid="+friend.getUserByUserid()+" and f.friendid="+friend.getUserByFriendid()+") or (f.userid="+friend.getUserByFriendid()+" and f.friendid="+friend.getUserByUserid()+")";
+		String hql = "from Friend f where (f.userid="+friend.getId().getUserid()+" and f.friendid="+friend.getId().getFriendid()+") or (f.userid="+friend.getId().getFriendid()+" and f.friendid="+friend.getId().getUserid()+")";
 		System.out.println(hql);
 		friends = sessionFactory.getCurrentSession().createQuery(hql).list();
 		return friends;

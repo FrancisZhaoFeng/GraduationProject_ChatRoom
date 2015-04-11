@@ -7,30 +7,25 @@
 
 package com.zhbit.crs.service;
 
-import java.io.BufferedInputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Controller;
-
 import com.zhbit.crs.action.ClientMap;
 import com.zhbit.crs.action.ServerListen;
 import com.zhbit.crs.commons.GlobalInts;
 import com.zhbit.crs.commons.GlobalMsgTypes;
-import com.zhbit.crs.commons.GlobalStrings;
 import com.zhbit.crs.dao.ChatLogDao;
 import com.zhbit.crs.dao.UserDao;
 import com.zhbit.crs.domain.ChatPerLog;
+import com.zhbit.crs.domain.ChatPerLogTemp;
 import com.zhbit.crs.domain.Friend;
-import com.zhbit.crs.domain.ZSearchEntity;
+import com.zhbit.crs.domain.FriendId;
 import com.zhbit.crs.domain.User;
-import com.zhbit.crs.domain.ZUserInfo;
-import com.zhbit.crs.md5.MD5;
+import com.zhbit.crs.domain.ZSearchEntity;
+import com.zhbit.crs.tools.tools;
 
 /**
  * @author zhaoguofeng public constructor, major tasks here include : 1 : initialize the BufferedReader and OutputStreamWriter 2 : read in the user information and close this
@@ -110,18 +105,15 @@ public class ServerActivity {
 //		onAskForUnsendMsgs();
 	}
 
-	@SuppressWarnings("null")
 	public void startHandShake(User userTemp) { // String msg0
 		mHandShake = new HandShakeThread();
 		this.user = mHandShake.start(userTemp);
 		mHandShake.sendHandShakeBack(this, user);
 		if (user != null) {
 			List<Friend> friends = userDao.selectFriend(user);
-			// mHandShake.sendFriendList(this,DBUtil.loginToGetFriendList(mUsrInfo.getId()));
-			List<User> users = null;
+			List<User> users = new ArrayList<User>();
 			for (int i = 0; i < friends.size(); i++) {
-//				users.add(userDao.selectUser(friends.get(i).getUserByFriendid()).get(0));
-				users.add(friends.get(i).getUserByFriendid());
+				users.add(friends.get(i).getId().getFriendid());
 			}
 			mHandShake.sendFriendList(this, users);
 		} else {
@@ -155,9 +147,18 @@ public class ServerActivity {
 	 */
 	public void onAskForUnsendMsgs() {
 		System.out.println("start to send all unsends");
-		List<ChatPerLog> listOfChatPerLog = chatLogDao.selectByReceiveId(user.getUserid());
-		for (ChatPerLog ent : listOfChatPerLog) {
-			sendOneData(ent, 2);
+		List<ChatPerLogTemp> listOfChatPerLogTemp = chatLogDao.selectByReceiveId(user.getUserid());
+		for (ChatPerLogTemp chatPerLog : listOfChatPerLogTemp) {
+			if(chatPerLog.getType() == GlobalMsgTypes.msgFriendshipRequest){
+				Friend friend = new Friend(new FriendId(chatPerLog.getUserBySenderid(),chatPerLog.getUserByReceiverid()),chatPerLog.getSendtime(),chatPerLog.getSendtext());
+				sendOneObject(friend, GlobalMsgTypes.msgFriendshipRequest);//好友请求
+			}else if(chatPerLog.getType() == GlobalMsgTypes.msgFriendshipRequestResponse){
+				Friend friend = new Friend(new FriendId(chatPerLog.getUserByReceiverid(),chatPerLog.getUserBySenderid()),chatPerLog.getSendtime(),chatPerLog.getSendtext());
+				sendOneObject(friend, GlobalMsgTypes.msgFriendshipRequest);//好友请求回应
+			}else{
+				sendOneObject(chatPerLog, GlobalMsgTypes.msgFromFriend);//聊天记录
+			}
+			chatLogDao.deleteChatPerLogTemp(chatPerLog);
 		}
 	}
 
@@ -165,17 +166,19 @@ public class ServerActivity {
 	public void receivedNewMsg(int type, ChatPerLog chatPerLog) {
 		// ChatEntity ent0 = ChatEntity.Str2Ent(msg);
 
-		if (type == 2) {
+		if (type == GlobalMsgTypes.msgFromFriend) {
 			// int recvId = ent0.getReceiverId();
 			int recvId = chatPerLog.getUserByReceiverid().getUserid();
 			System.out.println("receivedNewMsg-");
-			ServerActivity ca0 = mServerListen.getClientActivityById(recvId);
-			if (ca0 != null) {
-				ca0.sendOneData(chatPerLog, 2);
-			} else {
-				// DBTempSaveUtil.saveUnsentChatMsg(mUsrInfo.getId(), recvId,
-				// ent0);
+			ServerActivity ca = mServerListen.getClientActivityById(recvId);
+			if (ca != null) {
 				chatLogDao.insertChatPerLog(chatPerLog);
+				ca.sendOneData(chatPerLog, GlobalMsgTypes.msgFromFriend);
+			} else {
+				// DBTempSaveUtil.saveUnsentChatMsg(mUsrInfo.getId(), recvId,  ent0);
+				chatLogDao.insertChatPerLog(chatPerLog);
+				ChatPerLogTemp chatPerLogTemp = new ChatPerLogTemp(chatPerLog);
+				chatLogDao.insertChatPerLogTemp(chatPerLogTemp);
 			}
 		}
 	}
@@ -208,40 +211,40 @@ public class ServerActivity {
 	 * friendship request and response are always integer(response) + userinfo(requester) + userinfo(requestee)
 	 */
 	public void startFriendshipRequest(Friend friend) { // String msg0
-		System.out.println("start the request processing");
-
-		// String[] strArr0 = msg0.split(GlobalStrings.friendshipRequestDivider);
-		User requester = friend.getUserByUserid();
-		User requestee = friend.getUserByFriendid();
+		User requester = friend.getId().getUserid();
+		User requestee = friend.getId().getFriendid();
 
 		if (isOneIdOnline(requestee.getUserid())) {
 			ServerActivity target = ClientMap.getInstance().getById(requestee.getUserid());
 			target.sendOneObject(friend, GlobalMsgTypes.msgFriendshipRequest);
 		} else {
-			// DBTempSaveUtil.saveUnsentFrdReqs(requester.getId(), requestee.getId(),msg0);
+			ChatPerLog chatPerLog = new ChatPerLog(requester,requestee,tools.getDate(),"",GlobalMsgTypes.msgFriendshipRequest);
+			chatLogDao.insertChatPerLog(chatPerLog);
+			//插入到临时表中
+			ChatPerLogTemp chatPerLogTemp = new ChatPerLogTemp(requester,requestee,tools.getDate(),"",GlobalMsgTypes.msgFriendshipRequest);
+			chatLogDao.insertChatPerLogTemp(chatPerLogTemp);
 		}
 	}
 
 	public void onFriendshipRequestResponse(Friend friendReq) {
-//		String[] strArr0 = msg0.split(GlobalStrings.friendshipRequestDivider);
-//		int response0 = Integer.parseInt(strArr0[0]);
-//		ZUserInfo requester = new ZUserInfo(strArr0[1]);
-//		ZUserInfo requestee = new ZUserInfo(strArr0[2]);
+		User requester = friendReq.getId().getUserid();
+		User requestee = friendReq.getId().getFriendid();
 
-		if (friendReq.getNote().equals(GlobalInts.idAcceptFriendshipStr)) {   //处理数据库表
-			// DBUtil.makeFriends(requester.getId(), requestee.getId());
+		if (friendReq.getState()) {   //处理数据库表
 			userDao.insertFriend(friendReq);
-			Friend friend = friendReq;
-			friend.setUserByFriendid(friendReq.getUserByUserid());
-			friend.setUserByUserid(friendReq.getUserByFriendid());
+			Friend friend = new Friend(new FriendId(requestee,requester),friendReq.getFriendtime(),friendReq.getNote());
 			userDao.insertFriend(friend);
 		}
 
-		ServerActivity ca = ClientMap.getInstance().getById(friendReq.getUserByUserid().getUserid());
+		ServerActivity ca = ClientMap.getInstance().getById(friendReq.getId().getUserid().getUserid());
 		if (ca != null) {
 			ca.sendOneObject(friendReq, GlobalMsgTypes.msgFriendshipRequestResponse);
 		} else {  //不在线，需要处理数据库表
-			// DBTempSaveUtil.saveUnsentFrdReqResponse(requester.getId(), requestee.getId(), msg0);
+			ChatPerLog chatPerLog = new ChatPerLog(requestee,requester,tools.getDate(),friendReq.getNote(),GlobalMsgTypes.msgFriendshipRequestResponse);
+			chatLogDao.insertChatPerLog(chatPerLog);
+			//插入到临时表中
+			ChatPerLogTemp chatPerLogTemp = new ChatPerLogTemp(requestee,requester,tools.getDate(),friendReq.getNote(),GlobalMsgTypes.msgFriendshipRequestResponse);
+			chatLogDao.insertChatPerLogTemp(chatPerLogTemp);
 		}
 	}
 

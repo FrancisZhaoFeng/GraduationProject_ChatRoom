@@ -11,7 +11,6 @@ public class User implements java.io.Serializable {
 
 	// Fields
 
-//	private static final long serialVersionUID = -3286564461647015367L;
 	private Integer userid;
 	private String username;
 	private String password;
@@ -20,12 +19,15 @@ public class User implements java.io.Serializable {
 	private boolean sex;
 	private boolean online;
 	private boolean blacklist;
+	private Set chatRoomLogTemps = new HashSet(0);
+	private Set chatPerLogTempsForReceiverid = new HashSet(0);
+	private Set chatPerLogTempsForSenderid = new HashSet(0);
 	private Set friendsForUserid = new HashSet(0);
 	private Set friendsForFriendid = new HashSet(0);
 	private Set chatRoomLogs = new HashSet(0);
-	private Set chatRooms = new HashSet(0);
+	private Set chatRoomMems = new HashSet(0);
 	private Set chatPerLogsForReceiverid = new HashSet(0);
-	private Set chatRooms_1 = new HashSet(0);
+	private Set chatRooms = new HashSet(0);
 	private Set chatPerLogsForSenderid = new HashSet(0);
 
 	// Constructors
@@ -33,11 +35,6 @@ public class User implements java.io.Serializable {
 	/** default constructor */
 	public User() {
 	}
-	
-//	public User(String username, String password) {
-//		this.username = username;
-//		this.password = password;
-//	}
 
 	/** minimal constructor */
 	public User(String username, String password, String telephone, Integer age) {
@@ -50,8 +47,10 @@ public class User implements java.io.Serializable {
 	/** full constructor */
 	public User(String username, String password, String telephone,
 			Integer age, boolean sex, boolean online, boolean blacklist,
-			Set friendsForUserid, Set friendsForFriendid, Set chatRoomLogs,
-			Set chatRooms, Set chatPerLogsForReceiverid, Set chatRooms_1,
+			Set chatRoomLogTemps, Set chatPerLogTempsForReceiverid,
+			Set chatPerLogTempsForSenderid, Set friendsForUserid,
+			Set friendsForFriendid, Set chatRoomLogs, Set chatRoomMems,
+			Set chatPerLogsForReceiverid, Set chatRooms,
 			Set chatPerLogsForSenderid) {
 		this.username = username;
 		this.password = password;
@@ -60,16 +59,17 @@ public class User implements java.io.Serializable {
 		this.sex = sex;
 		this.online = online;
 		this.blacklist = blacklist;
+		this.chatRoomLogTemps = chatRoomLogTemps;
+		this.chatPerLogTempsForReceiverid = chatPerLogTempsForReceiverid;
+		this.chatPerLogTempsForSenderid = chatPerLogTempsForSenderid;
 		this.friendsForUserid = friendsForUserid;
 		this.friendsForFriendid = friendsForFriendid;
 		this.chatRoomLogs = chatRoomLogs;
-		this.chatRooms = chatRooms;
+		this.chatRoomMems = chatRoomMems;
 		this.chatPerLogsForReceiverid = chatPerLogsForReceiverid;
-		this.chatRooms_1 = chatRooms_1;
+		this.chatRooms = chatRooms;
 		this.chatPerLogsForSenderid = chatPerLogsForSenderid;
 	}
-	
-	
 
 	// Property accessors
 
@@ -137,6 +137,30 @@ public class User implements java.io.Serializable {
 		this.blacklist = blacklist;
 	}
 
+	public Set getChatRoomLogTemps() {
+		return this.chatRoomLogTemps;
+	}
+
+	public void setChatRoomLogTemps(Set chatRoomLogTemps) {
+		this.chatRoomLogTemps = chatRoomLogTemps;
+	}
+
+	public Set getChatPerLogTempsForReceiverid() {
+		return this.chatPerLogTempsForReceiverid;
+	}
+
+	public void setChatPerLogTempsForReceiverid(Set chatPerLogTempsForReceiverid) {
+		this.chatPerLogTempsForReceiverid = chatPerLogTempsForReceiverid;
+	}
+
+	public Set getChatPerLogTempsForSenderid() {
+		return this.chatPerLogTempsForSenderid;
+	}
+
+	public void setChatPerLogTempsForSenderid(Set chatPerLogTempsForSenderid) {
+		this.chatPerLogTempsForSenderid = chatPerLogTempsForSenderid;
+	}
+
 	public Set getFriendsForUserid() {
 		return this.friendsForUserid;
 	}
@@ -161,12 +185,12 @@ public class User implements java.io.Serializable {
 		this.chatRoomLogs = chatRoomLogs;
 	}
 
-	public Set getChatRooms() {
-		return this.chatRooms;
+	public Set getChatRoomMems() {
+		return this.chatRoomMems;
 	}
 
-	public void setChatRooms(Set chatRooms) {
-		this.chatRooms = chatRooms;
+	public void setChatRoomMems(Set chatRoomMems) {
+		this.chatRoomMems = chatRoomMems;
 	}
 
 	public Set getChatPerLogsForReceiverid() {
@@ -177,12 +201,12 @@ public class User implements java.io.Serializable {
 		this.chatPerLogsForReceiverid = chatPerLogsForReceiverid;
 	}
 
-	public Set getChatRooms_1() {
-		return this.chatRooms_1;
+	public Set getChatRooms() {
+		return this.chatRooms;
 	}
 
-	public void setChatRooms_1(Set chatRooms_1) {
-		this.chatRooms_1 = chatRooms_1;
+	public void setChatRooms(Set chatRooms) {
+		this.chatRooms = chatRooms;
 	}
 
 	public Set getChatPerLogsForSenderid() {

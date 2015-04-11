@@ -71,7 +71,7 @@ public class ClientListenThread extends Thread {
 						// ChatEntity entTemp = new ChatEntity(actualMsg);
 						ChatPerLog chatPerLog = (ChatPerLog) obj;
 						Intent intent = new Intent("zhbit.example.hello.MESSAGE_RECEIVED");
-						intent.putExtra("zhbit.example.hello.msg_received", chatPerLog.toString());
+						intent.putExtra("zhbit.example.hello.msg_received", chatPerLog);
 						intent.putExtra("zhbit.example.hello.msg_type", msgType);
 						mContext.sendBroadcast(intent);
 						break;
@@ -167,7 +167,7 @@ public class ClientListenThread extends Thread {
 	 * 告知服务器，客户端接收者，已经接受此信息
 	 */
 	public void uponReceivedMsg() {
-		NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgMsgReceived, "xxxxx");
+		NetworkService.getInstance().sendObject(GlobalMsgTypes.msgMsgReceived, "xxxxx");
 	}
 
 	/**

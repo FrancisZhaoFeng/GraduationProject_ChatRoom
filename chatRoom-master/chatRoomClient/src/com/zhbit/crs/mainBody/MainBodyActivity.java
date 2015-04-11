@@ -256,7 +256,7 @@ public class MainBodyActivity extends Activity {
 
 	/*** search friends ***/
 	public void startSearch(ZSearchEntity sEnt0) {
-		NetworkService.getInstance().sendUpload(GlobalMsgTypes.msgSearchPeople, sEnt0);
+		NetworkService.getInstance().sendObject(GlobalMsgTypes.msgSearchPeople, sEnt0);
 		mMsg9Received = false;
 		while (!mMsg9Received) {
 		}
