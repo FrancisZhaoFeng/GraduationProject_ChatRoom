@@ -43,10 +43,18 @@ public class UnsavedChatMsg {
 		mMapFriendsSelf.get(id).add(isSelf0);
 	}
 
+	/**
+	 * @return
+	 * 获取与好友的聊天记录
+	 */
 	public SparseArray<ArrayList<ChatPerLog>> getMapFriendsEntity() {
 		return mMapFriendsEntity;
 	}
 
+	/**
+	 * @return
+	 * 获取聊天记录中，用户自己发送的消息为true
+	 */
 	public SparseArray<ArrayList<Boolean>> getMapFriendsSelf() {
 		return mMapFriendsSelf;
 	}

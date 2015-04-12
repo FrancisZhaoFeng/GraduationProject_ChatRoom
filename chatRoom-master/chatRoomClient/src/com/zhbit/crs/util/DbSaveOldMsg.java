@@ -68,14 +68,7 @@ public class DbSaveOldMsg {
 	 *            保存聊天记录到app客户端中
 	 */
 	public void saveMsg(int masterId, int guestId, boolean isSelfBool, ChatPerLog chatPerLog) {
-		int isSelf;
-		if (isSelfBool) {
-			isSelf = 1;
-		} else {
-			isSelf = 0;
-		}
-		// createSql = "create table if not exists oldMsg_" + masterId + "_" + guestId +
-		// " (_index integer primary key,isSelf int,strEntity text)";
+		// createSql = "create table if not exists oldMsg_" + masterId + "_" + guestId +  " (_index integer primary key,isSelf int,strEntity text)";
 		// insertSql = "insert into oldMsg_" + masterId + "_" + guestId + " (isSelf,strEntity)" + " values(?,?)";
 		// mSqlDb.execSQL(createSql);
 		// mSqlDb.execSQL(insertSql, new Object[] { isSelf, strOfEntity });
@@ -106,6 +99,7 @@ public class DbSaveOldMsg {
 		mObjs = getObject(selectSql);
 		for(int i = 0 ; mObjs != null && i < mObjs.size()  ; i++){
 			chatList.add((ChatPerLog)mObjs.get(i));
+			boolList.add(chatList.get(i).getUserBySenderid().getUserid() == masterId);
 		}
 		Log.e("getMsg", createSql);
 		Log.e("getMsg", selectSql);
@@ -144,11 +138,11 @@ public class DbSaveOldMsg {
 	/**
 	 * @param id
 	 * @param listOfEnt0
-	 *            保存消息界面的，list实体
+	 *            保存消息界面的，list的item实体
 	 */
 	public void saveTabMsgItem(int id, List<ZdbTabMsgItemEntity> listOfEnt) {
 		createSql = "create table if not exists oldTabMsg_" + id + " (_index integer primary key,classtabledata text)";
-		deleteSql = "delete from oldTabMsg_" + id;
+		deleteSql = "delete from oldTabMsg_" + id;  //删除以前list的item实体，因为消息界面已更新
 		mSqlDb.execSQL(createSql);  //db
 		mSqlDb.execSQL(deleteSql);  //db
 		Log.e("saveTabMsgItem", createSql);
@@ -293,7 +287,6 @@ public class DbSaveOldMsg {
 			objectOutputStream.close();
 			arrayOutputStream.close();
 			mSqlDb.execSQL(sql, new Object[] { data });  //insert into classtable(classtabledata) values(?)
-			mSqlDb.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -305,7 +298,7 @@ public class DbSaveOldMsg {
 	 * @return 从数据库中获取实体类对象
 	 */
 	public List<Object> getObject(String sql) {
-		List<Object> objs = null;
+		List<Object> objs = new ArrayList<Object>();
 		Cursor cursor = mSqlDb.rawQuery(sql, null);  //select * from classtable
 		if (cursor != null) {
 			while (cursor.moveToNext()) {
@@ -313,10 +306,10 @@ public class DbSaveOldMsg {
 				ByteArrayInputStream arrayInputStream = new ByteArrayInputStream(data);
 				try {
 					ObjectInputStream inputStream = new ObjectInputStream(arrayInputStream);
-					objs.add(inputStream.readObject());
+					Object obj = inputStream.readObject();
+					objs.add(obj);
 					inputStream.close();
 					arrayInputStream.close();
-					break;// 这里为了测试就取一个数据
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

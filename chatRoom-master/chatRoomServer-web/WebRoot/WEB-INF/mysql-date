@@ -22,15 +22,15 @@ create table ChatRoom(
 chatroomid int primary key auto_increment,
 chatroomname varchar(20) not null unique,
 note varchar(120) default "",
-createby int,
+createby int not null,
 isdelete boolean default 0,
 foreign key (createby) references User(userid)
 )engine=innodb default character set utf8;
 /*=====================4-1创建ChatRoomLogTemp表=====================*/
 create table ChatRoomLogTemp(
 logid int primary key auto_increment,
-senderid int,
-chatroomid int,
+senderid int not null,
+chatroomid int not null,
 sendtime date not null,
 sendtext varchar(280),
 sendimage mediumblob,
@@ -42,8 +42,8 @@ foreign key (chatroomid) references ChatRoom(chatroomid)
 /*=====================5-1创建ChatPerLogTemp表=====================*/
 create table ChatPerLogTemp(
 logid int primary key auto_increment,
-senderid int,
-receiverid int,
+senderid int not null,
+receiverid int not null,
 sendtime date not null,
 sendtext varchar(280),
 sendimage mediumblob,
@@ -55,8 +55,8 @@ foreign key (receiverid) references User(userid)
 /*=====================4-2创建ChatRoomLog表=====================*/
 create table ChatRoomLog(
 logid int primary key auto_increment,
-senderid int,
-chatroomid int,
+senderid int not null,
+chatroomid int not null,
 sendtime date not null,
 sendtext varchar(280),
 sendimage mediumblob,
@@ -68,8 +68,8 @@ foreign key (chatroomid) references ChatRoom(chatroomid)
 /*=====================5-2创建ChatPerLog表=====================*/
 create table ChatPerLog(
 logid int primary key auto_increment,
-senderid int,
-receiverid int,
+senderid int not null,
+receiverid int not null,
 sendtime date not null,
 sendtext varchar(280),
 sendimage mediumblob,
@@ -81,15 +81,15 @@ foreign key (receiverid) references User(userid)
 /*=====================6创建ChatRoomMem表=====================*/
 create table ChatRoomMem(
 memid int primary key,
-chatroomid int,
-userid int,
+chatroomid int not null,
+userid int not null,
 foreign key (chatroomid) references ChatRoom(chatroomid),
 foreign key (userid) references User(userid)
 )engine=innodb default character set utf8;
 /*=====================7创建Friend表=====================*/
 create table Friend(
-userid int,
-friendid int,
+userid int not null,
+friendid int not null,
 friendtime datetime not null,
 state boolean,
 note varchar(120),

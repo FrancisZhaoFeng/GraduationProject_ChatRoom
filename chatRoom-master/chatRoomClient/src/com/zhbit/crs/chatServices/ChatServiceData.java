@@ -74,6 +74,12 @@ public class ChatServiceData {
 		return id;
 	}
 	
+	/**
+	 * @param type
+	 * @param id
+	 * @return
+	 * 根据好友id，获取当前的聊天消息
+	 */
 	public List<ChatPerLog> getCurMsg(int type, int id) {
 		if(type ==2) {
 			return mMapFriendsEntity.get(id);
@@ -102,6 +108,11 @@ public class ChatServiceData {
 		mMapFriendsUnread.put(id, am);
 	}
 	
+	/**
+	 * @param id
+	 * @return
+	 * 获取与该好友未读的消息数量
+	 */
 	public int getUnreadMsgs(int id) {
 		return mMapFriendsUnread.get(id);
 	}

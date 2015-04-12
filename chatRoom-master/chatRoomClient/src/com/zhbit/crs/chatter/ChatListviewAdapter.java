@@ -40,11 +40,11 @@ public class ChatListviewAdapter extends BaseAdapter {
 		TextView content;
 		TextView NameOfSpeaker;
 
-		ChatPerLog ent0 = mVector.get(position);
-		String name = ent0.getUserBySenderid().getUsername();
-		Date time = ent0.getSendtime();
-		int sex = 1; // 根据性别，区别使用图片，此处固定为1
-		String real_msg = ent0.getSendtext();
+		ChatPerLog chatPerLog = mVector.get(position);
+		String name = chatPerLog.getUserBySenderid().getUsername();
+		Date time = chatPerLog.getSendtime();
+		String real_msg = chatPerLog.getSendtext();
+		boolean sex = chatPerLog.getUserBySenderid().getSex();
 
 		if (mVectorIsSelf.get(position).booleanValue()) {
 			convertView = mInflater.inflate(R.layout.cb0_chat_listview_item_right, null);
@@ -67,8 +67,7 @@ public class ChatListviewAdapter extends BaseAdapter {
 //			NameOfSpeaker.setText(time);  //mark time
 
 //			int avatarId = ent0.getSenderAvatarid();
-			int avatarId = ent0.getUserBySenderid().getUserid();
-			if (avatarId == 0)
+			if (!sex)
 				avatar.setImageResource(R.drawable.cb0_h001);
 			else
 				avatar.setImageResource(R.drawable.cb0_h003);
@@ -93,8 +92,7 @@ public class ChatListviewAdapter extends BaseAdapter {
 			NameOfSpeaker.setText(name + " " + time);
 
 			avatar = (ImageView) convertView.findViewById(R.id.cb0ChatListviewAvatarLeft);
-			int avatarId = ent0.getUserBySenderid().getUserid();
-			if (avatarId == 0)
+			if (!sex)
 				avatar.setImageResource(R.drawable.cb0_h001);
 			else
 				avatar.setImageResource(R.drawable.cb0_h003);

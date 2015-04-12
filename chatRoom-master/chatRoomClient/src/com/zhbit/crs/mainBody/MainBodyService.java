@@ -83,8 +83,8 @@ public class MainBodyService {
 		int myId = ConnectedApp.getInstance().getUser().getUserid();
 		for (User user : listOfUsers) {
 			int id = user.getUserid();
-			ArrayList<ChatPerLog> listOfEntity = mapOfEntity.get(id);
-			ArrayList<Boolean> listOfIsSelf = mapOfIsSelf.get(id);
+			ArrayList<ChatPerLog> listOfEntity = mapOfEntity.get(id);//获取与好友的聊天记录
+			ArrayList<Boolean> listOfIsSelf = mapOfIsSelf.get(id);//获取聊天记录中，用户自己发送的消息为true
 			int size = listOfEntity.size();
 			for (int i = 0; i < size; i++) {
 				ChatPerLog ent = listOfEntity.get(i);

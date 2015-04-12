@@ -109,6 +109,10 @@ public class FriendListInfo {
 		return mSparseArrayOfFriends.get(id);
 	}
 
+	/**
+	 * @return
+	 * 获取好友列表
+	 */
 	public List<User> getFriendList() {
 		return mListOfFriends;
 	}
