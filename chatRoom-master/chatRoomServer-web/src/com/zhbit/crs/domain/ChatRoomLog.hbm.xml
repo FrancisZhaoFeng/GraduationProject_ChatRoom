@@ -16,8 +16,8 @@
         <many-to-one name="chatRoom" class="com.zhbit.crs.domain.ChatRoom" fetch="select" lazy="false">
             <column name="chatroomid" />
         </many-to-one>
-        <property name="friendtime" type="timestamp">
-            <column name="friendtime" length="19" not-null="true" />
+        <property name="sendtime" type="timestamp">
+            <column name="sendtime" length="19" not-null="true" />
         </property>
         <property name="sendtext" type="string">
             <column name="sendtext" length="280" />

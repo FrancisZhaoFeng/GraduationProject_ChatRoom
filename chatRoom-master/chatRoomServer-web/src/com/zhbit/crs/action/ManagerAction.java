@@ -189,9 +189,11 @@ public class ManagerAction extends ActionSupport {
 			this.clearValue();
 			return "CHECK";
 		} else {
-			this.setMessage("查看失败");
+			this.setMessage("查看失败或不存在聊天室");
 			this.clearValue();
-			return "FALSE";
+//			return "FALSE";
+//			return "CHECK";
+			return "HOMEPAGE";
 		}
 	}
 
@@ -202,9 +204,11 @@ public class ManagerAction extends ActionSupport {
 			this.clearValue();
 			return "CHECK";
 		} else {
-			this.setMessage("查看失败");
+			this.setMessage("查看失败或不存在聊天室聊天记录");
 			this.clearValue();
-			return "FALSE";
+//			return "FALSE";
+//			return "CHECK";
+			return "HOMEPAGE";
 		}
 	}
 

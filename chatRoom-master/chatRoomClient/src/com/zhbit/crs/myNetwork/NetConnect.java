@@ -24,7 +24,7 @@ public class NetConnect extends Thread {
 	/* information about Server, ip address and portal number */
 	// private String mHostIp="54.251.178.242";
 	// private String mHostIp="192.168.208.128";
-	private String mHostIp = "172.16.15.101";
+	private String mHostIp = "172.29.32.138";
 
 	private int mHostPort = 8887;
 
