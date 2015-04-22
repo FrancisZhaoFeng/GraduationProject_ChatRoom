@@ -48,9 +48,3 @@ Network Trash Folder
 Temporary Items
 .apdisk
 *.class
-chatRoom-master/chatRoomServer-Socket/bin/hibernate.cfg.xml
-chatRoom-master/chatRoomServer-web/WebRoot/WEB-INF/classes/hibernate.cfg.xml
-chatRoom-master/chatRoomServer-Socket/bin/hibernate.cfg.xml
-chatRoom-master/chatRoomClient/gen/com/zhbit/crs/BuildConfig.java
-chatRoom-master/chatRoomClient/project.properties
-chatRoom-master/chatRoomServer-Socket/src/hibernate.cfg.xml
