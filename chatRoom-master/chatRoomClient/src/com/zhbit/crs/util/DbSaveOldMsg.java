@@ -94,38 +94,46 @@ public class DbSaveOldMsg {
 		mStartPoint = mStartPointArr.get(key);
 
 		createSql = "create table if not exists oldMsg_" + masterId + "_" + guestId + " (_index integer primary key,classtabledata text)";
-		selectSql = "SELECT * from OldMsg_" + masterId + "_" + guestId + " ORDER BY _index DESC LIMIT " + mStartPoint + "," + mReadLength;
+		selectSql = "SELECT * from OldMsg_" + masterId + "_" + guestId + " order by _index desc LIMIT " + mStartPoint + "," + mReadLength;
 		mSqlDb.execSQL(createSql);
 		mObjs = getObject(selectSql);
+		ChatPerLog chatPerLog = null;
 		for(int i = 0 ; mObjs != null && i < mObjs.size()  ; i++){
-			chatList.add((ChatPerLog)mObjs.get(i));
-			boolList.add(chatList.get(i).getUserBySenderid().getUserid() == masterId);
+			chatPerLog = (ChatPerLog)mObjs.get(i);
+			chatList.add(0,chatPerLog);
+//			chatList.add((ChatPerLog)mObjs.get(mObjs.size()-(i+1)));
+			boolList.add(0,chatPerLog.getUserBySenderid().getUserid() == masterId);
+		}
+		if(mObjs != null){
+			mStartPoint += mObjs.size();
+			mStartPointArr.put(key, mStartPoint);
 		}
 		Log.e("getMsg", createSql);
 		Log.e("getMsg", selectSql);
-		// if (!curs.moveToFirst()) {
-		// return 0;
-		// } else {
-		// mStartPoint += curs.getCount();
-		// mStartPointArr.put(key, mStartPoint);
-		// }
-		//
-		// do {
-		// String strEnt = curs.getString(curs.getColumnIndex("strEntity"));
-		// ChatPerLog ent = new ChatEntity(strEnt0);
-		// chatList.add(0, ent);
-		// int isSelf = curs.getInt(curs.getColumnIndex("isSelf"));
-		// if (isSelf == 1) {
-		// boolList.add(0, true);
-		// } else {
-		// boolList.add(0, false);
-		// }
-		// } while (curs.moveToNext());
-		//
-		// int cursGetcount = curs.getCount();
-		// curs.close();
-		// return cursGetcount;
 		return mObjs != null?mObjs.size():0;
+//
+//		if (!curs.moveToFirst()) {
+//			return 0;
+//		} else {
+//			mStartPoint += curs.getCount();
+//			mStartPointArr.put(key, mStartPoint);
+//		}
+//
+//		do {
+//			String strEnt = curs.getString(curs.getColumnIndex("strEntity"));
+//			ChatPerLog ent = new ChatEntity(strEnt0);
+//			chatList.add(0, ent);
+//			int isSelf = curs.getInt(curs.getColumnIndex("isSelf"));
+//			if (isSelf == 1) {
+//				boolList.add(0, true);
+//			} else {
+//				boolList.add(0, false);
+//			}
+//		} while (curs.moveToNext());
+//
+//		int cursGetcount = curs.getCount();
+//		curs.close();
+//		return cursGetcount;
 	}
 
 	public int getKeyFromMasterGuestId(int masterId, int guestId) {
@@ -166,7 +174,7 @@ public class DbSaveOldMsg {
 //		Cursor curs = mSqlDb.rawQuery(selectSql, null);
 		mObjs = getObject(selectSql);
 		for(int i = 0 ; mObjs != null && i < mObjs.size() ; i++){
-			msgItemList.add((ZdbTabMsgItemEntity)mObjs.get(i));
+			msgItemList.add(0,(ZdbTabMsgItemEntity)mObjs.get(i));
 		}
 		Log.e("getTabMsgItem", createSql);
 		Log.e("getTabMsgItem", selectSql);
@@ -214,7 +222,7 @@ public class DbSaveOldMsg {
 //		Cursor curs = mSqlDb.rawQuery(selectSql, null);
 		mObjs = getObject(selectSql);
 		for(int i = 0 ; mObjs != null && i < mObjs.size() ; i++){
-			msgItemList.add((ZdbFrdReqNotifItemEntity)mObjs.get(i));
+			msgItemList.add(0,(ZdbFrdReqNotifItemEntity)mObjs.get(i));
 		}
 		Log.e("getFrdReqNotif", createSql);
 		Log.e("getFrdReqNotif", selectSql);

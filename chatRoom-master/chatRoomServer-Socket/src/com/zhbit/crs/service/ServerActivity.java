@@ -15,7 +15,6 @@ import java.util.List;
 
 import com.zhbit.crs.action.ClientMap;
 import com.zhbit.crs.action.ServerListen;
-import com.zhbit.crs.commons.GlobalInts;
 import com.zhbit.crs.commons.GlobalMsgTypes;
 import com.zhbit.crs.dao.ChatLogDao;
 import com.zhbit.crs.dao.UserDao;
@@ -93,16 +92,16 @@ public class ServerActivity {
 		userDao.updateUser(userTemp);
 		mServerListen.updateFriendList(this);
 
-		///send online notification to all friends
-//		ArrayList<User> onlineList = DBUtil.getOnlineFriendList(getUserInfo().getId());
-//		for (User uup : onlineList) {
-//			ServerActivity target = ClientMap.getInstance().getById(uup.getUserid());
-//			if (target != null) {
-//				target.sendOneObject(getUserInfo(), GlobalMsgTypes.msgFriendGoOnline);
-//			}
-//		}
+		// /send online notification to all friends
+		// ArrayList<User> onlineList = DBUtil.getOnlineFriendList(getUserInfo().getId());
+		// for (User uup : onlineList) {
+		// ServerActivity target = ClientMap.getInstance().getById(uup.getUserid());
+		// if (target != null) {
+		// target.sendOneObject(getUserInfo(), GlobalMsgTypes.msgFriendGoOnline);
+		// }
+		// }
 
-//		onAskForUnsendMsgs();
+		// onAskForUnsendMsgs();
 	}
 
 	public void startHandShake(User userTemp) { // String msg0
@@ -148,17 +147,19 @@ public class ServerActivity {
 	public void onAskForUnsendMsgs() {
 		System.out.println("start to send all unsends");
 		List<ChatPerLogTemp> listOfChatPerLogTemp = chatLogDao.selectByReceiveId(user.getUserid());
-		for (ChatPerLogTemp chatPerLog : listOfChatPerLogTemp) {
-			if(chatPerLog.getType() == GlobalMsgTypes.msgFriendshipRequest){
-				Friend friend = new Friend(new FriendId(chatPerLog.getUserBySenderid(),chatPerLog.getUserByReceiverid()),chatPerLog.getSendtime(),chatPerLog.getSendtext());
-				sendOneObject(friend, GlobalMsgTypes.msgFriendshipRequest);//好友请求
-			}else if(chatPerLog.getType() == GlobalMsgTypes.msgFriendshipRequestResponse){
-				Friend friend = new Friend(new FriendId(chatPerLog.getUserByReceiverid(),chatPerLog.getUserBySenderid()),chatPerLog.getSendtime(),chatPerLog.getSendtext());
-				sendOneObject(friend, GlobalMsgTypes.msgFriendshipRequest);//好友请求回应
-			}else{
-				sendOneObject(chatPerLog, GlobalMsgTypes.msgFromFriend);//聊天记录
+		ChatPerLog chatPerLog = null;
+		for (ChatPerLogTemp chatPerLogTemp : listOfChatPerLogTemp) {
+			chatPerLog = new ChatPerLog(chatPerLogTemp);
+			if (chatPerLog.getType() == GlobalMsgTypes.msgFriendshipRequest) {
+				Friend friend = new Friend(new FriendId(chatPerLog.getUserBySenderid(), chatPerLog.getUserByReceiverid()), chatPerLog.getSendtime(), chatPerLog.getSendtext());
+				sendOneObject(friend, GlobalMsgTypes.msgFriendshipRequest);// 好友请求
+			} else if (chatPerLog.getType() == GlobalMsgTypes.msgFriendshipRequestResponse) {
+				Friend friend = new Friend(new FriendId(chatPerLog.getUserByReceiverid(), chatPerLog.getUserBySenderid()), chatPerLog.getSendtime(), chatPerLog.getSendtext());
+				sendOneObject(friend, GlobalMsgTypes.msgFriendshipRequest);// 好友请求回应
+			} else {
+				sendOneObject(chatPerLog, GlobalMsgTypes.msgFromFriend);// 聊天记录
 			}
-			chatLogDao.deleteChatPerLogTemp(chatPerLog);
+			 chatLogDao.deleteChatPerLogTemp(chatPerLogTemp);
 		}
 	}
 
@@ -175,7 +176,7 @@ public class ServerActivity {
 				chatLogDao.insertChatPerLog(chatPerLog);
 				ca.sendOneData(chatPerLog, GlobalMsgTypes.msgFromFriend);
 			} else {
-				// DBTempSaveUtil.saveUnsentChatMsg(mUsrInfo.getId(), recvId,  ent0);
+				// DBTempSaveUtil.saveUnsentChatMsg(mUsrInfo.getId(), recvId, ent0);
 				chatLogDao.insertChatPerLog(chatPerLog);
 				ChatPerLogTemp chatPerLogTemp = new ChatPerLogTemp(chatPerLog);
 				chatLogDao.insertChatPerLogTemp(chatPerLogTemp);
@@ -218,10 +219,10 @@ public class ServerActivity {
 			ServerActivity target = ClientMap.getInstance().getById(requestee.getUserid());
 			target.sendOneObject(friend, GlobalMsgTypes.msgFriendshipRequest);
 		} else {
-			ChatPerLog chatPerLog = new ChatPerLog(requester,requestee,tools.getDate(),"",GlobalMsgTypes.msgFriendshipRequest);
+			ChatPerLog chatPerLog = new ChatPerLog(requester, requestee, tools.getDate(), "", GlobalMsgTypes.msgFriendshipRequest);
 			chatLogDao.insertChatPerLog(chatPerLog);
-			//插入到临时表中
-			ChatPerLogTemp chatPerLogTemp = new ChatPerLogTemp(requester,requestee,tools.getDate(),"",GlobalMsgTypes.msgFriendshipRequest);
+			// 插入到临时表中
+			ChatPerLogTemp chatPerLogTemp = new ChatPerLogTemp(requester, requestee, tools.getDate(), "", GlobalMsgTypes.msgFriendshipRequest);
 			chatLogDao.insertChatPerLogTemp(chatPerLogTemp);
 		}
 	}
@@ -230,20 +231,20 @@ public class ServerActivity {
 		User requester = friendReq.getId().getUserid();
 		User requestee = friendReq.getId().getFriendid();
 
-		if (friendReq.getState()) {   //处理数据库表
+		if (friendReq.getState()) { // 处理数据库表
 			userDao.insertFriend(friendReq);
-			Friend friend = new Friend(new FriendId(requestee,requester),friendReq.getFriendtime(),friendReq.getNote());
+			Friend friend = new Friend(new FriendId(requestee, requester), friendReq.getFriendtime(), friendReq.getNote());
 			userDao.insertFriend(friend);
 		}
 
 		ServerActivity ca = ClientMap.getInstance().getById(friendReq.getId().getUserid().getUserid());
 		if (ca != null) {
 			ca.sendOneObject(friendReq, GlobalMsgTypes.msgFriendshipRequestResponse);
-		} else {  //不在线，需要处理数据库表
-			ChatPerLog chatPerLog = new ChatPerLog(requestee,requester,tools.getDate(),friendReq.getNote(),GlobalMsgTypes.msgFriendshipRequestResponse);
+		} else { // 不在线，需要处理数据库表
+			ChatPerLog chatPerLog = new ChatPerLog(requestee, requester, tools.getDate(), friendReq.getNote(), GlobalMsgTypes.msgFriendshipRequestResponse);
 			chatLogDao.insertChatPerLog(chatPerLog);
-			//插入到临时表中
-			ChatPerLogTemp chatPerLogTemp = new ChatPerLogTemp(requestee,requester,tools.getDate(),friendReq.getNote(),GlobalMsgTypes.msgFriendshipRequestResponse);
+			// 插入到临时表中
+			ChatPerLogTemp chatPerLogTemp = new ChatPerLogTemp(requestee, requester, tools.getDate(), friendReq.getNote(), GlobalMsgTypes.msgFriendshipRequestResponse);
 			chatLogDao.insertChatPerLogTemp(chatPerLogTemp);
 		}
 	}

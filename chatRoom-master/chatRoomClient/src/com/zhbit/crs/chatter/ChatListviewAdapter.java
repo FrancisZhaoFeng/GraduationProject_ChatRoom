@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.zhbit.crs.R;
 import com.zhbit.crs.domain.ChatPerLog;
+import com.zhbit.crs.util.tools;
 
 public class ChatListviewAdapter extends BaseAdapter {
 	private List<ChatPerLog> mVector;
@@ -64,7 +65,7 @@ public class ChatListviewAdapter extends BaseAdapter {
 				e.printStackTrace();
 			}
 
-//			NameOfSpeaker.setText(time);  //mark time
+			NameOfSpeaker.setText(tools.gerStrDate(time));  //mark time
 
 //			int avatarId = ent0.getSenderAvatarid();
 			if (!sex)

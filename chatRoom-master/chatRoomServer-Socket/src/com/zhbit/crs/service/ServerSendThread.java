@@ -1,14 +1,12 @@
 package com.zhbit.crs.service;
 
-import java.io.BufferedWriter;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import com.zhbit.crs.commons.*;
-import com.zhbit.crs.domain.ZdbChatEntity;
+import com.zhbit.crs.commons.GlobalInts;
+import com.zhbit.crs.commons.GlobalMsgTypes;
 import com.zhbit.crs.domain.ZSendStackItem;
-import com.zhbit.crs.domain.User;
 
 public class ServerSendThread extends Thread {
 
@@ -20,7 +18,7 @@ public class ServerSendThread extends Thread {
 
 	private boolean mIsRunning;
 	private boolean mReceived; // the heartbeat message from client verifying they have received the message you send
-	
+
 	private Socket mSocket;
 
 	public ServerSendThread(ServerActivity ca, ObjectOutputStream bufw) {
@@ -28,7 +26,7 @@ public class ServerSendThread extends Thread {
 		mBuffWter = bufw;
 		mSendList = new ArrayList<ZSendStackItem>();
 	}
-	
+
 	public ServerSendThread(ServerActivity ca, Socket socket) {
 		mClientActivity = ca;
 		mSocket = socket;
@@ -36,10 +34,8 @@ public class ServerSendThread extends Thread {
 	}
 
 	public void run() {
-
 		super.run();
 		mIsRunning = true;
-
 		while (mIsRunning) {
 			if (mSendList.size() == 0) {
 				try {
@@ -51,12 +47,11 @@ public class ServerSendThread extends Thread {
 				ZSendStackItem item = mSendList.get(0); // get one at the head
 
 				if (item != null) {
-					send(item.getmType() + "", item.getmObj());
+					send(""+item.getmType(), item.getmObj());
 				} else {
 					System.out.println("error, item = " + item);
 					continue;
 				}
-
 				mReceived = false;
 				while (!mReceived) {
 					try {
@@ -65,7 +60,6 @@ public class ServerSendThread extends Thread {
 						e.printStackTrace();
 					}
 				}
-
 				mSendList.remove(0);
 			}
 		}
@@ -99,7 +93,7 @@ public class ServerSendThread extends Thread {
 			mBuffWter.flush();
 			mBuffWter.writeObject(obj);
 			mBuffWter.flush();
-			System.out.println("here is send object function------------："+(String)type);
+			System.out.println("here is send object function------------：" + (String) type);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -119,15 +113,13 @@ public class ServerSendThread extends Thread {
 			Object msg = item.getmObj();
 			switch (type) {
 			case GlobalMsgTypes.msgFromFriend:
-				// DBTempSaveUtil.saveUnsentChatMsg(senderId, receiverId,
-				// ChatEntity.Str2Ent(msg));
+				// DBTempSaveUtil.saveUnsentChatMsg(senderId, receiverId, ChatEntity.Str2Ent(msg));
 				break;
 			case GlobalMsgTypes.msgFriendshipRequest:
 				// DBTempSaveUtil.saveUnsentFrdReqs(senderId, receiverId, msg);
 				break;
 			case GlobalMsgTypes.msgFriendshipRequestResponse:
-				// DBTempSaveUtil.saveUnsentFrdReqResponse(receiverId, senderId,
-				// msg);
+				// DBTempSaveUtil.saveUnsentFrdReqResponse(receiverId, senderId, msg);
 				break;
 			default:
 				break;

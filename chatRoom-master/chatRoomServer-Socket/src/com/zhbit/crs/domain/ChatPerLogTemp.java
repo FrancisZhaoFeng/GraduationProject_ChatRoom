@@ -26,7 +26,7 @@ public class ChatPerLogTemp implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public ChatPerLogTemp (ChatPerLog chatPerLog){
+	public ChatPerLogTemp(ChatPerLog chatPerLog) {
 		this.userBySenderid = chatPerLog.getUserBySenderid();
 		this.userByReceiverid = chatPerLog.getUserByReceiverid();
 		this.sendtime = chatPerLog.getSendtime();
@@ -35,18 +35,19 @@ public class ChatPerLogTemp implements java.io.Serializable {
 		this.sendvoice = chatPerLog.getSendvoice();
 		this.type = chatPerLog.getType();
 	}
+
 	public ChatPerLogTemp(Date sendtime, Integer type) {
 		this.sendtime = sendtime;
 		this.type = type;
 	}
-	
+
 	public ChatPerLogTemp(User userBySenderid, User userByReceiverid, String sendtext, Integer type) {
 		this.userBySenderid = userBySenderid;
 		this.userByReceiverid = userByReceiverid;
 		this.sendtext = sendtext;
 		this.type = type;
 	}
-	
+
 	public ChatPerLogTemp(User userBySenderid, User userByReceiverid, Date sendtime, String sendtext, Integer type) {
 		this.userBySenderid = userBySenderid;
 		this.userByReceiverid = userByReceiverid;
@@ -56,9 +57,7 @@ public class ChatPerLogTemp implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public ChatPerLogTemp(User userBySenderid, User userByReceiverid,
-			Date sendtime, String sendtext, byte[] sendimage, byte[] sendvoice,
-			Integer type) {
+	public ChatPerLogTemp(User userBySenderid, User userByReceiverid, Date sendtime, String sendtext, byte[] sendimage, byte[] sendvoice, Integer type) {
 		this.userBySenderid = userBySenderid;
 		this.userByReceiverid = userByReceiverid;
 		this.sendtime = sendtime;

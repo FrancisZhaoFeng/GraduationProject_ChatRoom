@@ -7,12 +7,10 @@ package com.zhbit.crs.domain;
 public class ZSendStackItem {
 
 	private int mType;
-//	private String mStr;
 	private Object mObj;
 
 	public ZSendStackItem(int type, Object obj) {
 		mType = type;
-//		mStr = str;
 		mObj = obj;
 	}
 

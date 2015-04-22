@@ -30,6 +30,16 @@ public class ChatPerLog implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
+	public ChatPerLog(ChatPerLogTemp chatPerLogTemp) {
+		this.userBySenderid = chatPerLogTemp.getUserBySenderid();
+		this.userByReceiverid = chatPerLogTemp.getUserByReceiverid();
+		this.sendtime = chatPerLogTemp.getSendtime();
+		this.sendtext = chatPerLogTemp.getSendtext();
+		this.sendimage = chatPerLogTemp.getSendimage();
+		this.sendvoice = chatPerLogTemp.getSendvoice();
+		this.type = chatPerLogTemp.getType();
+	}
+	
 	public ChatPerLog(Date sendtime, Integer type) {
 		this.sendtime = sendtime;
 		this.type = type;

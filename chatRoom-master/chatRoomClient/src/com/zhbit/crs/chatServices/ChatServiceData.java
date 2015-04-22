@@ -81,7 +81,7 @@ public class ChatServiceData {
 	 * 根据好友id，获取当前的聊天消息
 	 */
 	public List<ChatPerLog> getCurMsg(int type, int id) {
-		if(type ==2) {
+		if(type == 2) {
 			return mMapFriendsEntity.get(id);
 		} else {
 			return null;

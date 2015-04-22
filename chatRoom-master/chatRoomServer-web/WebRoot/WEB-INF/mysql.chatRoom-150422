@@ -1,0 +1,336 @@
+-- MySQL dump 10.13  Distrib 5.1.73, for redhat-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: chatRoom
+-- ------------------------------------------------------
+-- Server version	5.1.73
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `chatRoom`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `chatRoom` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
+
+USE `chatRoom`;
+
+--
+-- Table structure for table `ChatPerLog`
+--
+
+DROP TABLE IF EXISTS `ChatPerLog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ChatPerLog` (
+  `logid` int(11) NOT NULL AUTO_INCREMENT,
+  `senderid` int(11) NOT NULL,
+  `receiverid` int(11) NOT NULL,
+  `sendtime` datetime NOT NULL,
+  `sendtext` varchar(280) DEFAULT NULL,
+  `sendimage` mediumblob,
+  `sendvoice` mediumblob,
+  `type` int(11) NOT NULL,
+  PRIMARY KEY (`logid`),
+  KEY `senderid` (`senderid`),
+  KEY `receiverid` (`receiverid`),
+  CONSTRAINT `ChatPerLog_ibfk_1` FOREIGN KEY (`senderid`) REFERENCES `User` (`userid`),
+  CONSTRAINT `ChatPerLog_ibfk_2` FOREIGN KEY (`receiverid`) REFERENCES `User` (`userid`)
+) ENGINE=InnoDB AUTO_INCREMENT=152 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ChatPerLog`
+--
+
+LOCK TABLES `ChatPerLog` WRITE;
+/*!40000 ALTER TABLE `ChatPerLog` DISABLE KEYS */;
+INSERT INTO `ChatPerLog` VALUES (1,1,2,'2015-04-11 00:00:00','',NULL,NULL,11),(2,2,1,'2015-04-11 00:00:00','',NULL,NULL,12),(3,1,2,'2015-04-11 00:00:00','hh',NULL,NULL,2),(5,2,1,'2015-04-11 00:00:00',' hcb',NULL,NULL,2),(6,1,2,'2015-04-11 00:00:00','gg',NULL,NULL,2),(7,1,2,'2015-04-11 00:00:00','gvh',NULL,NULL,2),(8,1,2,'2015-04-11 00:00:00','fdr6h',NULL,NULL,2),(9,2,1,'2015-04-11 00:00:00','fvBj',NULL,NULL,2),(10,2,1,'2015-04-11 00:00:00','fg',NULL,NULL,2),(11,2,1,'2015-04-11 00:00:00','bcr',NULL,NULL,2),(12,2,1,'2015-04-11 00:00:00','jdz',NULL,NULL,2),(13,2,1,'2015-04-11 00:00:00','ijd',NULL,NULL,2),(14,2,1,'2015-04-11 00:00:00','ko8ff',NULL,NULL,2),(15,2,1,'2015-04-11 00:00:00','xethj',NULL,NULL,2),(16,2,1,'2015-04-11 00:00:00','cfj',NULL,NULL,2),(17,1,2,'2015-04-11 00:00:00','frhc',NULL,NULL,2),(18,1,2,'2015-04-11 00:00:00','fuih',NULL,NULL,2),(19,1,2,'2015-04-11 00:00:00','r4Bjudd',NULL,NULL,2),(20,1,2,'2015-04-11 00:00:00','utsfhj',NULL,NULL,2),(21,1,2,'2015-04-11 00:00:00','grthg',NULL,NULL,2),(22,1,2,'2015-04-11 00:00:00','ffujvf',NULL,NULL,2),(23,1,2,'2015-04-11 00:00:00','fDvG',NULL,NULL,2),(24,1,2,'2015-04-11 00:00:00','frvfytdhi',NULL,NULL,2),(25,1,2,'2015-04-11 00:00:00','dfhj',NULL,NULL,2),(26,1,2,'2015-04-11 00:00:00','fdjn',NULL,NULL,2),(27,1,2,'2015-04-11 00:00:00','hj',NULL,NULL,2),(28,1,2,'2015-04-11 00:00:00','jgdhkc',NULL,NULL,2),(29,1,2,'2015-04-11 00:00:00','fdjgj',NULL,NULL,2),(30,2,1,'2015-04-11 00:00:00','vxdgvc',NULL,NULL,2),(31,2,1,'2015-04-11 00:00:00','~dhv,c',NULL,NULL,2),(32,2,1,'2015-04-11 00:00:00','jCdgc',NULL,NULL,2),(33,2,1,'2015-04-11 00:00:00','xdtgh',NULL,NULL,2),(34,2,1,'2015-04-11 00:00:00','XdtgxC',NULL,NULL,2),(35,2,1,'2015-04-11 00:00:00','vxrb',NULL,NULL,2),(36,2,1,'2015-04-11 00:00:00','bcfuj',NULL,NULL,2),(37,2,1,'2015-04-11 00:00:00','fdy#v',NULL,NULL,2),(38,2,1,'2015-04-11 00:00:00','yjv',NULL,NULL,2),(39,2,1,'2015-04-11 00:00:00','gcv',NULL,NULL,2),(40,1,2,'2015-04-11 00:00:00','ugf',NULL,NULL,2),(41,2,1,'2015-04-11 00:00:00','gvh',NULL,NULL,2),(42,2,1,'2015-04-12 00:00:00','hgb',NULL,NULL,2),(43,2,1,'2015-04-12 00:00:00','fghh',NULL,NULL,2),(44,2,1,'2015-04-12 00:00:00','hgf',NULL,NULL,2),(45,2,1,'2015-04-12 00:00:00','gvbjjj',NULL,NULL,2),(46,2,1,'2015-04-12 00:00:00','ggj',NULL,NULL,2),(47,1,2,'2015-04-12 00:00:00','vhjbb',NULL,NULL,2),(48,2,1,'2015-04-12 00:00:00','Cgh',NULL,NULL,2),(49,2,1,'2015-04-12 00:00:00','cg',NULL,NULL,2),(50,2,1,'2015-04-12 00:00:00','hcnKo',NULL,NULL,2),(51,2,1,'2015-04-12 00:00:00','ghj',NULL,NULL,2),(52,2,1,'2015-04-12 00:00:00','7vb',NULL,NULL,2),(53,1,2,'2015-04-12 00:00:00','bzjd',NULL,NULL,2),(54,2,1,'2015-04-12 00:00:00','hhhjj',NULL,NULL,2),(55,2,1,'2015-04-12 00:00:00','hgghh',NULL,NULL,2),(56,2,1,'2015-04-12 00:00:00','jgfthB',NULL,NULL,2),(57,2,1,'2015-04-12 00:00:00','bthfy',NULL,NULL,2),(58,2,1,'2015-04-12 00:00:00','hfhh',NULL,NULL,2),(59,2,1,'2015-04-12 00:00:00','hh',NULL,NULL,2),(60,1,2,'2015-04-12 00:00:00','hh',NULL,NULL,2),(61,2,1,'2015-04-12 00:00:00','gg',NULL,NULL,2),(62,1,2,'2015-04-12 00:00:00','gg',NULL,NULL,2),(63,2,1,'2015-04-12 00:00:00','kk',NULL,NULL,2),(64,1,2,'2015-04-12 00:00:00','jj',NULL,NULL,2),(65,2,1,'2015-04-12 00:00:00','ff',NULL,NULL,2),(66,2,1,'2015-04-12 00:00:00','gh',NULL,NULL,2),(67,1,2,'2015-04-12 00:00:00','ghji',NULL,NULL,2),(68,1,2,'2015-04-12 00:00:00','hvfg',NULL,NULL,2),(69,2,1,'2015-04-12 00:00:00','fghff',NULL,NULL,2),(70,2,1,'2015-04-12 00:00:00','gbj',NULL,NULL,2),(71,2,1,'2015-04-12 00:00:00','ghh',NULL,NULL,2),(72,2,1,'2015-04-12 00:00:00','cgb',NULL,NULL,2),(73,2,1,'2015-04-12 00:00:00','cgh',NULL,NULL,2),(74,1,2,'2015-04-12 00:00:00','jvvhh',NULL,NULL,2),(75,2,1,'2015-04-12 00:00:00','ghjj',NULL,NULL,2),(76,1,2,'2015-04-12 00:00:00','xfhh',NULL,NULL,2),(77,2,1,'2015-04-12 00:00:00','gghh',NULL,NULL,2),(78,1,2,'2015-04-12 00:00:00','gyig8',NULL,NULL,2),(79,2,1,'2015-04-12 00:00:00','fucycu',NULL,NULL,2),(80,1,2,'2015-04-12 00:00:00','hhs',NULL,NULL,2),(81,2,1,'2015-04-12 00:00:00','ch',NULL,NULL,2),(82,1,2,'2015-04-12 00:00:00','dfg',NULL,NULL,2),(83,2,1,'2015-04-12 00:00:00','fdcg',NULL,NULL,2),(84,1,2,'2015-04-12 00:00:00','ffff',NULL,NULL,2),(85,2,1,'2015-04-12 00:00:00','fgyu',NULL,NULL,2),(86,1,2,'2015-04-12 00:00:00','fff',NULL,NULL,2),(87,2,1,'2015-04-12 00:00:00','gh',NULL,NULL,2),(88,1,2,'2015-04-12 00:00:00','fgg',NULL,NULL,2),(89,2,1,'2015-04-12 00:00:00','ghj',NULL,NULL,2),(90,1,2,'2015-04-12 00:00:00','fgg',NULL,NULL,2),(91,2,1,'2015-04-12 00:00:00','hh',NULL,NULL,2),(92,2,1,'2015-04-12 00:00:00','hhh',NULL,NULL,2),(93,2,1,'2015-04-12 00:00:00','gh',NULL,NULL,2),(94,2,1,'2015-04-12 00:00:00','hhkkll',NULL,NULL,2),(95,2,1,'2015-04-12 00:00:00','df',NULL,NULL,2),(96,2,1,'2015-04-12 00:00:00','bhh',NULL,NULL,2),(97,2,1,'2015-04-12 00:00:00','hh',NULL,NULL,2),(98,2,1,'2015-04-12 00:00:00','hhj',NULL,NULL,2),(100,1,2,'2015-04-12 00:00:00','ff',NULL,NULL,2),(101,2,1,'2015-04-12 00:00:00','hn',NULL,NULL,2),(102,2,1,'2015-04-12 00:00:00','ggh',NULL,NULL,2),(103,2,1,'2015-04-12 00:00:00','hh',NULL,NULL,2),(104,1,2,'2015-04-12 00:00:00','cf',NULL,NULL,2),(105,1,2,'2015-04-12 00:00:00','hh',NULL,NULL,2),(106,2,1,'2015-04-12 00:00:00','h',NULL,NULL,2),(107,1,2,'2015-04-12 00:00:00','jj',NULL,NULL,2),(108,2,1,'2015-04-12 00:00:00','hh',NULL,NULL,2),(109,2,1,'2015-04-12 00:00:00','la',NULL,NULL,2),(110,1,2,'2015-04-12 00:00:00','za',NULL,NULL,2),(111,1,2,'2015-04-12 00:00:00','zb',NULL,NULL,2),(112,2,1,'2015-04-12 00:00:00','la',NULL,NULL,2),(113,1,2,'2015-04-12 00:00:00','za',NULL,NULL,2),(114,2,1,'2015-04-12 00:00:00','lb',NULL,NULL,2),(115,1,2,'2015-04-12 00:00:00','zb',NULL,NULL,2),(116,2,1,'2015-04-13 00:00:00','lc',NULL,NULL,2),(117,2,1,'2015-04-13 11:32:24','lc',NULL,NULL,2),(118,1,2,'2015-04-13 11:32:36','zc',NULL,NULL,2),(119,2,1,'2015-04-13 11:32:37','ld',NULL,NULL,2),(120,1,2,'2015-04-13 11:32:44','zd',NULL,NULL,2),(121,2,1,'2015-04-13 11:32:44','le',NULL,NULL,2),(122,1,2,'2015-04-13 11:32:50','ze',NULL,NULL,2),(123,2,1,'2015-04-13 11:32:49','lf',NULL,NULL,2),(124,1,2,'2015-04-13 11:32:55','zf',NULL,NULL,2),(125,2,1,'2015-04-13 11:32:54','lg',NULL,NULL,2),(126,1,2,'2015-04-13 11:33:00','zg',NULL,NULL,2),(127,2,1,'2015-04-13 11:33:00','lh',NULL,NULL,2),(128,1,2,'2015-04-13 11:33:07','zh',NULL,NULL,2),(129,2,1,'2015-04-13 11:33:06','li',NULL,NULL,2),(130,1,2,'2015-04-13 11:33:11','zi',NULL,NULL,2),(131,2,1,'2015-04-13 11:33:12','lj',NULL,NULL,2),(132,1,2,'2015-04-13 11:33:21','zj',NULL,NULL,2),(133,2,1,'2015-04-13 15:15:36','lk',NULL,NULL,2),(134,2,1,'2015-04-13 15:16:44','lk',NULL,NULL,2),(135,1,2,'2015-04-13 15:16:52','zk',NULL,NULL,2),(136,2,1,'2015-04-13 15:17:14','ll',NULL,NULL,2),(137,2,1,'2015-04-13 15:18:17','ll',NULL,NULL,2),(138,2,1,'2015-04-13 15:21:33','ll',NULL,NULL,2),(139,2,1,'2015-04-13 15:30:06','ll',NULL,NULL,2),(140,2,1,'2015-04-13 17:08:17','ll',NULL,NULL,2),(141,1,2,'2015-04-13 17:08:26','zl',NULL,NULL,2),(142,2,1,'2015-04-13 17:10:19','lm',NULL,NULL,2),(143,2,1,'2015-04-13 17:15:29','lm',NULL,NULL,2),(144,1,2,'2015-04-13 17:15:42','zm',NULL,NULL,2),(145,2,1,'2015-04-13 17:15:43','ln',NULL,NULL,2),(146,2,1,'2015-04-13 17:38:25','ln',NULL,NULL,2),(147,1,2,'2015-04-13 17:39:06','zn',NULL,NULL,2),(148,2,1,'2015-04-13 17:44:23','lo',NULL,NULL,2),(149,1,2,'2015-04-13 17:45:26','zo',NULL,NULL,2),(150,2,1,'2015-04-13 17:45:50','lp',NULL,NULL,2),(151,2,1,'2015-04-13 17:52:13','lp',NULL,NULL,2);
+/*!40000 ALTER TABLE `ChatPerLog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ChatPerLogTemp`
+--
+
+DROP TABLE IF EXISTS `ChatPerLogTemp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ChatPerLogTemp` (
+  `logid` int(11) NOT NULL AUTO_INCREMENT,
+  `senderid` int(11) NOT NULL,
+  `receiverid` int(11) NOT NULL,
+  `sendtime` datetime NOT NULL,
+  `sendtext` varchar(280) DEFAULT NULL,
+  `sendimage` mediumblob,
+  `sendvoice` mediumblob,
+  `type` int(11) NOT NULL,
+  PRIMARY KEY (`logid`),
+  KEY `senderid` (`senderid`),
+  KEY `receiverid` (`receiverid`),
+  CONSTRAINT `ChatPerLogTemp_ibfk_1` FOREIGN KEY (`senderid`) REFERENCES `User` (`userid`),
+  CONSTRAINT `ChatPerLogTemp_ibfk_2` FOREIGN KEY (`receiverid`) REFERENCES `User` (`userid`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ChatPerLogTemp`
+--
+
+LOCK TABLES `ChatPerLogTemp` WRITE;
+/*!40000 ALTER TABLE `ChatPerLogTemp` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ChatPerLogTemp` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ChatRoom`
+--
+
+DROP TABLE IF EXISTS `ChatRoom`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ChatRoom` (
+  `chatroomid` int(11) NOT NULL AUTO_INCREMENT,
+  `chatroomname` varchar(20) NOT NULL,
+  `note` varchar(120) DEFAULT '',
+  `createby` int(11) NOT NULL,
+  `isdelete` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`chatroomid`),
+  UNIQUE KEY `chatroomname` (`chatroomname`),
+  KEY `createby` (`createby`),
+  CONSTRAINT `ChatRoom_ibfk_1` FOREIGN KEY (`createby`) REFERENCES `User` (`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ChatRoom`
+--
+
+LOCK TABLES `ChatRoom` WRITE;
+/*!40000 ALTER TABLE `ChatRoom` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ChatRoom` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ChatRoomLog`
+--
+
+DROP TABLE IF EXISTS `ChatRoomLog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ChatRoomLog` (
+  `logid` int(11) NOT NULL AUTO_INCREMENT,
+  `senderid` int(11) NOT NULL,
+  `chatroomid` int(11) NOT NULL,
+  `sendtime` datetime NOT NULL,
+  `sendtext` varchar(280) DEFAULT NULL,
+  `sendimage` mediumblob,
+  `sendvoice` mediumblob,
+  `type` int(11) NOT NULL,
+  PRIMARY KEY (`logid`),
+  KEY `senderid` (`senderid`),
+  KEY `chatroomid` (`chatroomid`),
+  CONSTRAINT `ChatRoomLog_ibfk_1` FOREIGN KEY (`senderid`) REFERENCES `User` (`userid`),
+  CONSTRAINT `ChatRoomLog_ibfk_2` FOREIGN KEY (`chatroomid`) REFERENCES `ChatRoom` (`chatroomid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ChatRoomLog`
+--
+
+LOCK TABLES `ChatRoomLog` WRITE;
+/*!40000 ALTER TABLE `ChatRoomLog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ChatRoomLog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ChatRoomLogTemp`
+--
+
+DROP TABLE IF EXISTS `ChatRoomLogTemp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ChatRoomLogTemp` (
+  `logid` int(11) NOT NULL AUTO_INCREMENT,
+  `senderid` int(11) NOT NULL,
+  `chatroomid` int(11) NOT NULL,
+  `sendtime` datetime NOT NULL,
+  `sendtext` varchar(280) DEFAULT NULL,
+  `sendimage` mediumblob,
+  `sendvoice` mediumblob,
+  `type` int(11) NOT NULL,
+  PRIMARY KEY (`logid`),
+  KEY `senderid` (`senderid`),
+  KEY `chatroomid` (`chatroomid`),
+  CONSTRAINT `ChatRoomLogTemp_ibfk_1` FOREIGN KEY (`senderid`) REFERENCES `User` (`userid`),
+  CONSTRAINT `ChatRoomLogTemp_ibfk_2` FOREIGN KEY (`chatroomid`) REFERENCES `ChatRoom` (`chatroomid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ChatRoomLogTemp`
+--
+
+LOCK TABLES `ChatRoomLogTemp` WRITE;
+/*!40000 ALTER TABLE `ChatRoomLogTemp` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ChatRoomLogTemp` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ChatRoomMem`
+--
+
+DROP TABLE IF EXISTS `ChatRoomMem`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ChatRoomMem` (
+  `memid` int(11) NOT NULL,
+  `chatroomid` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  PRIMARY KEY (`memid`),
+  KEY `chatroomid` (`chatroomid`),
+  KEY `userid` (`userid`),
+  CONSTRAINT `ChatRoomMem_ibfk_1` FOREIGN KEY (`chatroomid`) REFERENCES `ChatRoom` (`chatroomid`),
+  CONSTRAINT `ChatRoomMem_ibfk_2` FOREIGN KEY (`userid`) REFERENCES `User` (`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ChatRoomMem`
+--
+
+LOCK TABLES `ChatRoomMem` WRITE;
+/*!40000 ALTER TABLE `ChatRoomMem` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ChatRoomMem` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Friend`
+--
+
+DROP TABLE IF EXISTS `Friend`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Friend` (
+  `userid` int(11) NOT NULL,
+  `friendid` int(11) NOT NULL,
+  `friendtime` datetime NOT NULL,
+  `state` tinyint(1) DEFAULT NULL,
+  `note` varchar(120) DEFAULT NULL,
+  PRIMARY KEY (`userid`,`friendid`),
+  KEY `friendid` (`friendid`),
+  CONSTRAINT `Friend_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `User` (`userid`),
+  CONSTRAINT `Friend_ibfk_2` FOREIGN KEY (`friendid`) REFERENCES `User` (`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Friend`
+--
+
+LOCK TABLES `Friend` WRITE;
+/*!40000 ALTER TABLE `Friend` DISABLE KEYS */;
+INSERT INTO `Friend` VALUES (1,2,'2015-04-11 11:58:49',1,''),(2,1,'2015-04-11 11:58:49',0,'');
+/*!40000 ALTER TABLE `Friend` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Manager`
+--
+
+DROP TABLE IF EXISTS `Manager`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Manager` (
+  `adminid` int(11) NOT NULL AUTO_INCREMENT,
+  `adminname` varchar(20) NOT NULL,
+  `password` varchar(120) NOT NULL,
+  PRIMARY KEY (`adminid`),
+  UNIQUE KEY `adminname` (`adminname`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Manager`
+--
+
+LOCK TABLES `Manager` WRITE;
+/*!40000 ALTER TABLE `Manager` DISABLE KEYS */;
+INSERT INTO `Manager` VALUES (1,'francis','FF2F4354BDE68FBB2AED2BC8FA9B6B15');
+/*!40000 ALTER TABLE `Manager` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Mkey`
+--
+
+DROP TABLE IF EXISTS `Mkey`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Mkey` (
+  `mid` int(11) NOT NULL,
+  `used` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`mid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Mkey`
+--
+
+LOCK TABLES `Mkey` WRITE;
+/*!40000 ALTER TABLE `Mkey` DISABLE KEYS */;
+INSERT INTO `Mkey` VALUES (123456,0),(223456,0),(323456,0),(423456,0);
+/*!40000 ALTER TABLE `Mkey` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `User`
+--
+
+DROP TABLE IF EXISTS `User`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `User` (
+  `userid` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(120) NOT NULL,
+  `telephone` varchar(20) NOT NULL,
+  `age` int(11) NOT NULL,
+  `sex` tinyint(1) DEFAULT NULL,
+  `online` tinyint(1) DEFAULT '0',
+  `blacklist` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`userid`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `User`
+--
+
+LOCK TABLES `User` WRITE;
+/*!40000 ALTER TABLE `User` DISABLE KEYS */;
+INSERT INTO `User` VALUES (1,'zgfab','31B69A7494A0EEC4AC544FD648C9D604','15913248728',23,1,0,0),(2,'lmrab','31B69A7494A0EEC4AC544FD648C9D604','15913248728',30,0,1,0),(5,'zgfac','31B69A7494A0EEC4AC544FD648C9D604','15913248728',24,1,0,0),(6,'lmrac','31B69A7494A0EEC4AC544FD648C9D604','15913248728',23,0,0,0),(7,'zgfad','31B69A7494A0EEC4AC544FD648C9D604','15913248728',21,1,0,0),(8,'lmrad','31B69A7494A0EEC4AC544FD648C9D604','15913248728',24,0,0,0),(9,'zgfae','31B69A7494A0EEC4AC544FD648C9D604','15913248728',23,1,0,0),(10,'lmrae','31B69A7494A0EEC4AC544FD648C9D604','15913248728',21,0,0,0),(11,'zgfaf','31B69A7494A0EEC4AC544FD648C9D604','15913248728',24,1,0,0),(12,'lmraf','31B69A7494A0EEC4AC544FD648C9D604','15913248728',23,0,0,0),(13,'zgfag','31B69A7494A0EEC4AC544FD648C9D604','15913248728',21,1,0,0),(14,'lmrag','31B69A7494A0EEC4AC544FD648C9D604','15913248728',24,0,0,0);
+/*!40000 ALTER TABLE `User` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2015-04-21 22:15:25
