@@ -64,13 +64,7 @@ public class ServerListenThread extends Thread {
 					switch (msgType) {
 					case GlobalMsgTypes.msgPublicRoom:
 						System.out.println("GlobalMsgTypes.msgPublicRoom" + GlobalMsgTypes.msgPublicRoom);
-						// ChatEntity msg = ChatEntity.Str2Ent(actualMsg);
 						ChatRoomLog chatRoomLog = (ChatRoomLog) obj;
-						// mServerActivity.receivedNewMsg(msgType,
-						// msg.toString());
-						// mServerActivity.receivedNewMsg(msgType, chatRoomLog);
-						// add this ChatEntity data package into the system
-						// stack
 						break;
 					case GlobalMsgTypes.msgChattingRoom:
 						System.out.println("GlobalMsgTypes.msgChattingRoom" + GlobalMsgTypes.msgChattingRoom);
@@ -79,9 +73,6 @@ public class ServerListenThread extends Thread {
 					case GlobalMsgTypes.msgFromFriend:
 						System.out.println("GlobalMsgTypes.msgFromFriend" + GlobalMsgTypes.msgFromFriend);
 						ChatPerLog chatPerLog = (ChatPerLog) obj;
-						// ChatEntity msg2 = ChatEntity.Str2Ent(actualMsg);
-						// mServerActivity.receivedNewMsg(msgType,
-						// msg2.toString());
 						mServerActivity.receivedNewMsg(msgType, chatPerLog);
 						/* to be added later */
 						break;

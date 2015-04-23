@@ -159,7 +159,7 @@ public class ServerActivity {
 			} else {
 				sendOneObject(chatPerLog, GlobalMsgTypes.msgFromFriend);// 聊天记录
 			}
-			 chatLogDao.deleteChatPerLogTemp(chatPerLogTemp);
+			chatLogDao.deleteChatPerLogTemp(chatPerLogTemp);
 		}
 	}
 
@@ -249,7 +249,8 @@ public class ServerActivity {
 		}
 	}
 
-	public void onUpdateUser(User user) {// String msg0
+	public void onUpdateUser(User userTemp) {// String msg0
+		user = userTemp;
 		// UserInfo uu0 = new UserInfo(msg0);
 		// UserInfo uux = DBUtil.updateUserInfomaton(uu0);
 		userDao.updateUser(user);

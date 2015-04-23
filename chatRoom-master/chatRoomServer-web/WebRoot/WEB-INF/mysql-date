@@ -135,6 +135,8 @@ insert into User(username,password,telephone,age,sex) values('lmraf','31B69A7494
 insert into User(username,password,telephone,age,sex) values('zgfag','31B69A7494A0EEC4AC544FD648C9D604','15913248728',21,0);
 insert into User(username,password,telephone,age,sex) values('lmrag','31B69A7494A0EEC4AC544FD648C9D604','15913248728',24,1);
 /*聊天室*/
+#insert into chatroom values(null,'zhbit','test',1,null);
 /*聊天室聊天记录*/
+#insert into chatroomlog values(null,1,1,'2015-04-11 00:00:00','test','','',2);
 /*好友聊天记录*/
 /**/
