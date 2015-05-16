@@ -59,7 +59,7 @@
 			<table style="margin: 0px auto" width="960px" border="0"
 				bordercolor="#000" cellpadding="0" cellspacing="0">
 				<tr>
-					<td width="5%">
+					<td width="8%">
 						<div align="center">
 							聊天记录id
 						</div>
@@ -92,7 +92,7 @@
 				</tr>
 				<s:iterator value="#request.listChatRoomLogs" var="chatRoomLog">
 					<tr>
-						<td width="5%">
+						<td width="8%">
 							<div align="center">
 								<s:property value="#chatRoomLog.logid" />
 							</div>
@@ -115,13 +115,23 @@
 						</td>
 						<td width="32%" >
 							<div align="left" style="overflow:auto; height: 30px;padding-top: 13px;">
-								<s:if test="#chatRoomLog.type == 1">
+<%-- 								<s:if test="#chatRoomLog.type == 1">
 									<s:property value="#chatRoomLog.sendtext" />
 								</s:if>
 								<s:elseif test="#chatRoomLog.type == 2">
 									<s:property value="#chatRoomLog.sendimage" />
 								</s:elseif>
 								<s:elseif test="#chatRoomLog.type == 3">
+									<s:property value="#chatRoomLog.sendvoice" />
+								</s:elseif>
+								 --%>
+								<s:if test="#chatRoomLog.sendtext != null">
+									<s:property value="#chatRoomLog.sendtext" />
+								</s:if>
+								<s:elseif test="#chatRoomLog.sendimage != null">
+									<s:property value="#chatRoomLog.sendimage" />
+								</s:elseif>
+								<s:elseif test="#chatRoomLog.sendvoice != null">
 									<s:property value="#chatRoomLog.sendvoice" />
 								</s:elseif>
 							</div>

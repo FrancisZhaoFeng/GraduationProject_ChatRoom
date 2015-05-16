@@ -17,6 +17,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 
 /**
+ * 
  * @author zhaoguofeng 连接服务端的类（通过ip和port，连接服务端），继承了Thread，重写了run方法
  */
 public class NetConnect extends Thread {
@@ -25,7 +26,8 @@ public class NetConnect extends Thread {
 	// private String mHostIp="54.251.178.242";
 	// private String mHostIp="192.168.208.128";
 //	private String mHostIp = "172.29.32.138";
-	private String mHostIp = "172.16.15.101";
+//	private String mHostIp = "172.16.15.101";
+	private String mHostIp = "172.16.152.48";
 
 	private int mHostPort = 8887;
 

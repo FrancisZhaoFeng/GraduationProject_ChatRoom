@@ -30,7 +30,7 @@ public class ChatLogDao {
 			session = HibernateUtils.getSession();
 			session.beginTransaction();
 			session.save(chatRoomLog);
-			session.beginTransaction().commit();
+			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -46,7 +46,7 @@ public class ChatLogDao {
 			session = HibernateUtils.getSession();
 			session.beginTransaction();
 			session.save(chatRoomLogTemp);
-			session.beginTransaction().commit();
+			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -62,7 +62,7 @@ public class ChatLogDao {
 			session = HibernateUtils.getSession();
 			session.beginTransaction();
 			session.save(chatPerLog);
-			session.beginTransaction().commit();
+			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -78,7 +78,7 @@ public class ChatLogDao {
 			session = HibernateUtils.getSession();
 			session.beginTransaction();
 			session.save(chatPerLogTemp);
-			session.beginTransaction().commit();
+			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -94,7 +94,7 @@ public class ChatLogDao {
 			session = HibernateUtils.getSession();
 			session.beginTransaction();
 			session.delete(chatRoomLog);
-			session.beginTransaction().commit();
+			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
 			return false;
@@ -109,7 +109,7 @@ public class ChatLogDao {
 			session = HibernateUtils.getSession();
 			session.beginTransaction();
 			session.delete(chatRoomLogTemp);
-			session.beginTransaction().commit();
+			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
 			return false;
@@ -124,7 +124,7 @@ public class ChatLogDao {
 			session = HibernateUtils.getSession();
 			session.beginTransaction();
 			session.delete(chatPerLog);
-			session.beginTransaction().commit();
+			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
 			return false;
@@ -139,7 +139,7 @@ public class ChatLogDao {
 			session = HibernateUtils.getSession();
 			session.beginTransaction();
 			session.delete(chatPerLogTemp);
-			session.beginTransaction().commit();
+			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
 			return false;
@@ -159,6 +159,7 @@ public class ChatLogDao {
 		query = session.createQuery(hql);
 		query.setParameter(0, receiveId);
 		chatPerLogTemps = query.list();
+		session.getTransaction().commit();
 		session.close();
 		return chatPerLogTemps;
 	}

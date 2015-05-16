@@ -59,7 +59,7 @@
 			<table style="margin: 0px auto" width="960px" border="0"
 				bordercolor="#000" cellpadding="0" cellspacing="0">
 				<tr>
-					<td width="5%">
+					<td width="8%">
 						<div align="center">
 							聊天记录id
 						</div>
@@ -97,7 +97,7 @@
 				</tr>
 				<s:iterator value="#request.listChatPerLogs" var="chatPerLog">
 					<tr>
-						<td width="5%">
+						<td width="8%">
 							<div align="center">
 								<s:property value="#chatPerLog.logid" />
 							</div>

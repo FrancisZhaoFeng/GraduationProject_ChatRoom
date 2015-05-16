@@ -23,6 +23,7 @@ public class HibernateUtils {
 
 	public static Session getSession() {
 		return factory.openSession();
+//		return factory.getCurrentSession();
 	}
 
 	public static void closeSession(Session session) {

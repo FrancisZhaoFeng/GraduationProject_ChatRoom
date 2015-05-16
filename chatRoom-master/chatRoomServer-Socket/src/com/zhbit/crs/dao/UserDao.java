@@ -6,11 +6,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.zhbit.crs.domain.Friend;
-import com.zhbit.crs.domain.FriendId;
 import com.zhbit.crs.domain.User;
 import com.zhbit.crs.domain.ZSearchEntity;
 import com.zhbit.crs.tools.HibernateUtils;
-import com.zhbit.crs.tools.tools;
 
 public class UserDao {
 	Session session = null;
@@ -44,7 +42,7 @@ public class UserDao {
 			session = HibernateUtils.getSession();
 			session.beginTransaction();
 			session.save(user);
-			session.beginTransaction().commit();
+			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -71,6 +69,7 @@ public class UserDao {
 		query.setParameter(0, user.getUsername());
 		query.setParameter(1, user.getPassword());
 		users = query.list();
+		session.getTransaction().commit();
 		session.close();
 		return users;
 	}
@@ -86,6 +85,7 @@ public class UserDao {
 		query = session.createQuery(hql);
 		query.setParameter(0, user.getUserid());
 		users = query.list();
+		session.getTransaction().commit();
 		session.close();
 		return users;
 	}
@@ -101,6 +101,7 @@ public class UserDao {
 		query = session.createQuery(hql);
 		query.setParameter(0, user.getUserid());
 		friends = query.list();
+		session.getTransaction().commit();
 		session.close();
 		return friends;
 	}
@@ -110,7 +111,7 @@ public class UserDao {
 			session = HibernateUtils.getSession();
 			session.beginTransaction();
 			session.update(user);
-			session.beginTransaction().commit();
+			session.getTransaction().commit();
 			session.close();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -131,6 +132,7 @@ public class UserDao {
 //		query.setParameter(0, friend.getUserByUserid());
 //		query.setParameter(1, friend.getUserByFriendid());
 		friends = query.list();
+		session.getTransaction().commit();
 		session.close();
 		return friends;
 	}
@@ -140,7 +142,7 @@ public class UserDao {
 			session = HibernateUtils.getSession();
 			session.beginTransaction();
 			session.save(friend);
-			session.beginTransaction().commit();
+			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -169,6 +171,7 @@ public class UserDao {
 		Query query;
 		query = session.createQuery(hql);
 		users = query.list();
+		session.getTransaction().commit();
 		session.close();
 		return users;
 	}

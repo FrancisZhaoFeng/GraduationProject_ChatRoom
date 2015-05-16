@@ -7,16 +7,16 @@
 	<package name="chatRoom"  extends="struts-default">
 		<action name="manager" class="ManagerAction">
 			<result name="input">/false.jsp</result>
-			<result name="REGISTER">/register.jsp</result>
 			<result name="FALSE">/false.jsp</result>
+			<result name="REGISTER">/register.jsp</result>
 			<result name="LOGIN">/login.jsp</result>
 			<result name="HOMEPAGE">/homePage.jsp</result>
-			<result name="CHECKUSER">/checkUser.jsp</result>
-			<result name="CHECKCHATROOM">/checkChatRoom.jsp</result>
-			<result name="CHECKCHATROOMLOG">/checkChatRoomLog.jsp</result>
-			<result name="CHECKCHATPERLOG">/checkChatPerLog.jsp</result>
 			<result name="CHECK">/checkDisplay.jsp</result>
 			<result name="CHANGEPWD">/changePwd.jsp</result>
+			<result name="CHECKUSER">/checkUser.jsp</result>  <!-- 通过checkDisplay.jsp将内容显示 -->
+			<result name="CHECKCHATROOM">/checkChatRoom.jsp</result><!-- 通过checkDisplay.jsp将内容显示 -->
+			<result name="CHECKCHATROOMLOG">/checkChatRoomLog.jsp</result><!-- 通过checkDisplay.jsp将内容显示 -->
+			<result name="CHECKCHATPERLOG">/checkChatPerLog.jsp</result><!-- 通过checkDisplay.jsp将内容显示 -->
 		</action>
 	</package>
 </struts>

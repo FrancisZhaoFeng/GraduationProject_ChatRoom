@@ -250,10 +250,10 @@ public class ServerActivity {
 	}
 
 	public void onUpdateUser(User userTemp) {// String msg0
-		user = userTemp;
 		// UserInfo uu0 = new UserInfo(msg0);
 		// UserInfo uux = DBUtil.updateUserInfomaton(uu0);
-		userDao.updateUser(user);
+		if(userDao.updateUser(userTemp))
+			user = userTemp;
 	}
 
 	public void responsedOfMsgReceived() {

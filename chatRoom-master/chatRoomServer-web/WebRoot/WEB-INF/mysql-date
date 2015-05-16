@@ -134,6 +134,10 @@ insert into User(username,password,telephone,age,sex) values('zgfaf','31B69A7494
 insert into User(username,password,telephone,age,sex) values('lmraf','31B69A7494A0EEC4AC544FD648C9D604','15913248728',23,1);
 insert into User(username,password,telephone,age,sex) values('zgfag','31B69A7494A0EEC4AC544FD648C9D604','15913248728',21,0);
 insert into User(username,password,telephone,age,sex) values('lmrag','31B69A7494A0EEC4AC544FD648C9D604','15913248728',24,1);
+insert into User(username,password,telephone,age,sex) values('zgfah','31B69A7494A0EEC4AC544FD648C9D604','15913248728',21,0);
+insert into User(username,password,telephone,age,sex) values('lmrah','31B69A7494A0EEC4AC544FD648C9D604','15913248728',24,1);
+insert into User(username,password,telephone,age,sex) values('zgfai','31B69A7494A0EEC4AC544FD648C9D604','15913248728',21,0);
+insert into User(username,password,telephone,age,sex) values('lmrai','31B69A7494A0EEC4AC544FD648C9D604','15913248728',24,1);
 /*聊天室*/
 #insert into chatroom values(null,'zhbit','test',1,null);
 /*聊天室聊天记录*/
