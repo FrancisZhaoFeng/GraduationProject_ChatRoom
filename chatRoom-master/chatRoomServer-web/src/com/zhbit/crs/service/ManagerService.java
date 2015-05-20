@@ -1,6 +1,5 @@
 package com.zhbit.crs.service;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -151,7 +150,7 @@ public class ManagerService {
 		User uTemp = null;
 		while(it.hasNext()){
 			uTemp = it.next();
-			if(uTemp.getUserid() == user.getUserid()){
+			if(uTemp.getUserid().equals(user.getUserid())){
 				user = uTemp;
 				break;
 			}
@@ -199,7 +198,7 @@ public class ManagerService {
 		ChatRoom cmTemp = null;
 		while(it.hasNext()){
 			cmTemp = it.next();
-			if(cmTemp.getChatroomid() == chatRoom.getChatroomid()){
+			if(cmTemp.getChatroomid().equals(chatRoom.getChatroomid())){
 				chatRoom = cmTemp;
 				break;
 			}
@@ -219,7 +218,7 @@ public class ManagerService {
 		ChatRoomLog crlTemp = null;
 		while(it.hasNext()){
 			crlTemp = it.next();
-			if(crlTemp.getLogid() == chatRoomLog.getLogid()){
+			if(crlTemp.getLogid().equals(chatRoomLog.getLogid())){
 				chatRoomLog = crlTemp;
 				break;
 			}
@@ -239,7 +238,7 @@ public class ManagerService {
 		ChatPerLog cplTemp = null;
 		while(it.hasNext()){
 			cplTemp =it.next();
-			if(cplTemp.getLogid() == chatPerLog.getLogid()){
+			if(cplTemp.getLogid().equals(chatPerLog.getLogid())){
 				chatPerLog = cplTemp;
 				break;
 			}

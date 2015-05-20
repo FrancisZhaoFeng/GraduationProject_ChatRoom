@@ -15,12 +15,15 @@ import com.zhbit.crs.domain.ChatRoomLog;
 import com.zhbit.crs.domain.Manager;
 import com.zhbit.crs.domain.Mkey;
 import com.zhbit.crs.domain.User;
+import com.zhbit.crs.tools.HibernateUtils;
 
 @Transactional
 public class ManagerDao {
 	Session session = null;
 	@Resource
 	private SessionFactory sessionFactory;
+
+	// HibernateUtils
 
 	public ManagerDao() {
 		// TODO Auto-generated constructor stub
@@ -30,7 +33,8 @@ public class ManagerDao {
 	@SuppressWarnings("unchecked")
 	public List<Mkey> checkMkey(Mkey mkey) {
 		List<Mkey> mkeys = null;
-		String hql = "from Mkey u where u.mid='" + mkey.getMid() + "'and u.used=0";
+		String hql = "from Mkey u where u.mid='" + mkey.getMid()
+				+ "'and u.used=0";
 		System.out.println(hql);
 		mkeys = sessionFactory.getCurrentSession().createQuery(hql).list();
 		return mkeys;
@@ -49,10 +53,12 @@ public class ManagerDao {
 	@SuppressWarnings("unchecked")
 	public boolean insertManager(Manager manager, Mkey mkey) {
 		List<Mkey> mkeys = null;
-		String hql = "from Mkey u where u.mid='" + mkey.getMid() + "' and u.used=0";
+		String hql = "from Mkey u where u.mid='" + mkey.getMid()
+				+ "' and u.used=0";
 		System.out.println(hql);
 		try {
-			session = sessionFactory.getCurrentSession();
+//			session = sessionFactory.getCurrentSession();
+			session = HibernateUtils.getSession();
 			session.beginTransaction();
 			mkeys = session.createQuery(hql).list();
 			if (mkeys.isEmpty()) {
@@ -76,9 +82,12 @@ public class ManagerDao {
 	@Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
 	public List<Manager> Login(Manager manager) {
 		List<Manager> managers = null;
-		String hql = "from Manager u where u.adminname='" + manager.getAdminname() + "' and u.password ='" + manager.getPassword() + "'";
+		String hql = "from Manager u where u.adminname='"
+				+ manager.getAdminname() + "' and u.password ='"
+				+ manager.getPassword() + "'";
 		System.out.println(hql);
-		session = sessionFactory.getCurrentSession();
+//		session = sessionFactory.getCurrentSession();
+		session = HibernateUtils.getSession();
 		session.beginTransaction();
 		managers = session.createQuery(hql).list();
 		session.getTransaction().commit();
@@ -97,13 +106,16 @@ public class ManagerDao {
 			hql = "from User";
 		} else {
 			System.out.println("==selectUser searchStr is not null");
-			hql = "from User where username like '%" + searchStr + "%' or telephone like '%" + searchStr + "%' or age like '%" + searchStr + "%'";
+			hql = "from User where username like '%" + searchStr
+					+ "%' or telephone like '%" + searchStr
+					+ "%' or age like '%" + searchStr + "%'";
 		}
 		System.out.println(hql);
-		session = sessionFactory.getCurrentSession(); // 获取session的操作
+//		session = sessionFactory.getCurrentSession(); // 获取session的操作
+		session = HibernateUtils.getSession();
 		session.beginTransaction();// 开启Transaction的操作
 		users = session.createQuery(hql).list(); // 从缓存中读取数据，缓存中不存在数据则从数据库中读取
-		session.getTransaction().commit(); // 此处才是真正与数据库交互的语句
+		// session.getTransaction().commit(); // 此处才是真正与数据库交互的语句
 		session.close();
 		return users;
 	}
@@ -118,10 +130,13 @@ public class ManagerDao {
 			System.out.println("==selectChatRoom searchStr is null");
 			hql = "from ChatRoom where isdelete!=1";
 		} else {
-			hql = "from ChatRoom where isdelete!=1 and (chatroomname like '%" + searchStr + "%' or note like '%" + searchStr + "%' or createby like '%" + searchStr + "%')";
+			hql = "from ChatRoom where isdelete!=1 and (chatroomname like '%"
+					+ searchStr + "%' or note like '%" + searchStr
+					+ "%' or createby like '%" + searchStr + "%')";
 		}
 		System.out.println(hql);
-		session = sessionFactory.getCurrentSession();
+//		session = sessionFactory.getCurrentSession();
+		session = HibernateUtils.getSession();
 		session.beginTransaction();
 		chatRooms = session.createQuery(hql).list();
 		session.getTransaction().commit();
@@ -139,11 +154,14 @@ public class ManagerDao {
 			System.out.println("==selectChatRoomLog searchStr is null");
 			hql = "from ChatRoomLog where type!=4";
 		} else {
-			hql = "from ChatRoomLog where type!=4 and (senderid like '%" + searchStr + "%' or chatroomid like '%" + searchStr + "%' or sendtime like '%" + searchStr
+			hql = "from ChatRoomLog where type!=4 and (senderid like '%"
+					+ searchStr + "%' or chatroomid like '%" + searchStr
+					+ "%' or sendtime like '%" + searchStr
 					+ "%' or sendtext like '%" + searchStr + "%' )";
 		}
 		System.out.println(hql);
-		session = sessionFactory.getCurrentSession();
+//		session = sessionFactory.getCurrentSession();
+		session = HibernateUtils.getSession();
 		session.beginTransaction();
 		chatRoomLogs = session.createQuery(hql).list();
 		session.getTransaction().commit();
@@ -161,11 +179,14 @@ public class ManagerDao {
 			System.out.println("==selectChatPerLog searchStr is null");
 			hql = "from ChatPerLog where type!=4";
 		} else {
-			hql = "from ChatPerLog where type!=4 and (senderid like '%" + searchStr + "%' or receiverid like '%" + searchStr + "%' or sendtime like '%" + searchStr
+			hql = "from ChatPerLog where type!=4 and (senderid like '%"
+					+ searchStr + "%' or receiverid like '%" + searchStr
+					+ "%' or sendtime like '%" + searchStr
 					+ "%' or sendtext like '%" + searchStr + "%')";
 		}
 		System.out.println(hql);
-		session = sessionFactory.getCurrentSession();
+//		session = sessionFactory.getCurrentSession();
+		session = HibernateUtils.getSession();
 		session.beginTransaction();
 		chatPerLogs = session.createQuery(hql).list();
 		session.getTransaction().commit();
@@ -198,10 +219,13 @@ public class ManagerDao {
 	// 更新用户，主要用于限制用户权限
 	public boolean updateUser(User user) {
 		try {
-			session = sessionFactory.getCurrentSession();
+			// session = sessionFactory.getCurrentSession();
+			session = HibernateUtils.getSession();
+			// Transaction tran = session.beginTransaction();
 			session.beginTransaction();
 			session.merge(user);
 			session.getTransaction().commit();
+			// tran.commit();
 			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -214,7 +238,8 @@ public class ManagerDao {
 	// 更新管理员，主要用于更新管理员密码
 	public boolean updateManager(Manager manager) {
 		try {
-			session = sessionFactory.getCurrentSession();
+//			session = sessionFactory.getCurrentSession();
+			session = HibernateUtils.getSession();
 			session.beginTransaction();
 			session.merge(manager);
 			session.getTransaction().commit();
@@ -230,7 +255,8 @@ public class ManagerDao {
 	// 更新聊天室，主要用于删除聊天室
 	public boolean updateChatRoom(ChatRoom chatRoom) {
 		try {
-			session = sessionFactory.getCurrentSession();
+//			session = sessionFactory.getCurrentSession();
+			session = HibernateUtils.getSession();
 			session.beginTransaction();
 			session.merge(chatRoom);
 			session.getTransaction().commit();
@@ -246,7 +272,8 @@ public class ManagerDao {
 	// 更新聊天室聊天记录，主要用于删除聊天记录，逻辑：将type修改为4，表示删除
 	public boolean updateChatRoomLog(ChatRoomLog chatRoomLog) {
 		try {
-			session = sessionFactory.getCurrentSession();
+//			session = sessionFactory.getCurrentSession();
+			session = HibernateUtils.getSession();
 			session.beginTransaction();
 			session.merge(chatRoomLog);
 			session.getTransaction().commit();
@@ -262,7 +289,8 @@ public class ManagerDao {
 	// 更新聊天室聊天记录，主要用于删除聊天记录，逻辑：将type修改为4，表示删除
 	public boolean updateChatPerLog(ChatPerLog chatPerLog) {
 		try {
-			session = sessionFactory.getCurrentSession();
+//			session = sessionFactory.getCurrentSession();
+			session = HibernateUtils.getSession();
 			session.beginTransaction();
 			session.merge(chatPerLog);
 			session.getTransaction().commit();
@@ -274,4 +302,21 @@ public class ManagerDao {
 		}
 		return true;
 	}
+	
+//	public boolean deleteChatPerLogById(String logid){
+//		try {
+////			session = sessionFactory.getCurrentSession();
+//			session = HibernateUtils.getSession();
+//			session.beginTransaction();
+//			hql ="delete from "
+//			session.merge(chatPerLog);
+//			session.getTransaction().commit();
+//			session.close();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return false;
+//			// TODO: handle exception
+//		}
+//		return true;
+//	}
 }

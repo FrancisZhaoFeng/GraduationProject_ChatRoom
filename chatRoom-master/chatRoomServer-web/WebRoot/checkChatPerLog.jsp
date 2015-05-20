@@ -114,8 +114,8 @@
 						</td>
 						<td width="16%">
 							<div align="center">
-								<!--<s:property value="#chatPerLog.sendtime" />-->
-								<fmt:formatDate value="${chatPerLog.sendtime}" pattern="yyyy-MM-dd HH:mm:ss" />
+								<s:property value="#chatPerLog.sendtime" />
+								<!--<fmt:formatDate value="${chatPerLog.sendtime}" pattern="yyyy-MM-dd HH:mm:ss" />-->
 							</div>
 						</td>
 						<td width="32%">

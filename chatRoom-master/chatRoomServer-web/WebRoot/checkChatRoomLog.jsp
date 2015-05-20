@@ -109,8 +109,8 @@
 						</td>
 						<td width="16%">
 							<div align="center">
-								<!--<s:property value="#chatRoomLog.sendtime" />-->
-								<fmt:formatDate value="${chatRoomLog.sendtime}" pattern="yyyy-MM-dd HH:mm:ss" />
+								<s:property value="#chatRoomLog.sendtime" />
+								<!--<fmt:formatDate value="${chatRoomLog.sendtime}" pattern="yyyy-MM-dd HH:mm:ss" />-->
 							</div>
 						</td>
 						<td width="32%" >

@@ -28,7 +28,6 @@ public class ManagerAction extends ActionSupport {
 	private ChatPerLog chatPerLog;
 	private ChatRoom chatRoom;
 	private String searchStr;
-	private static Boolean serverList = false;
 
 	public String getSearchStr() {
 		return searchStr;
@@ -120,6 +119,7 @@ public class ManagerAction extends ActionSupport {
 	
 	// 注册
 	public String register() {
+		this.clearValue();
 		if (!manager.getPassword().equals(repwd)) {
 			this.setMessage("密码不一致,请重新输入");
 			return "REGISTER";
@@ -176,8 +176,9 @@ public class ManagerAction extends ActionSupport {
 			this.clearValue();
 			return "CHECK";
 		} else {
-			this.setMessage("查看失败");
 			this.clearValue();
+			this.setMessage("查看失败");
+			
 			return "FALSE";
 		}
 	}
@@ -189,8 +190,9 @@ public class ManagerAction extends ActionSupport {
 			this.clearValue();
 			return "CHECK";
 		} else {
-			this.setMessage("查看失败或不存在聊天室");
 			this.clearValue();
+			this.setMessage("查看失败或不存在聊天室");
+//			this.clearValue();
 //			return "FALSE";
 //			return "CHECK";
 			return "HOMEPAGE";
@@ -204,8 +206,8 @@ public class ManagerAction extends ActionSupport {
 			this.clearValue();
 			return "CHECK";
 		} else {
-			this.setMessage("查看失败或不存在聊天室聊天记录");
 			this.clearValue();
+			this.setMessage("查看失败或不存在聊天室聊天记录");
 //			return "FALSE";
 //			return "CHECK";
 			return "HOMEPAGE";
@@ -219,8 +221,8 @@ public class ManagerAction extends ActionSupport {
 			this.clearValue();
 			return "CHECK";
 		} else {
-			this.setMessage("查看失败");
 			this.clearValue();
+			this.setMessage("查看失败");
 			return "FALSE";
 		}
 	}

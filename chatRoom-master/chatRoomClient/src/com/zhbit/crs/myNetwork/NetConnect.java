@@ -25,9 +25,10 @@ public class NetConnect extends Thread {
 	/* information about Server, ip address and portal number */
 	// private String mHostIp="54.251.178.242";
 	// private String mHostIp="192.168.208.128";
-//	private String mHostIp = "172.29.32.138";
-//	private String mHostIp = "172.16.15.101";
-	private String mHostIp = "172.16.152.48";
+	// private String mHostIp = "172.29.32.138";
+	// private String mHostIp = "172.16.15.101";
+	// private String mHostIp = "172.16.152.48";
+	private String mHostIp = "192.168.1.103";
 
 	private int mHostPort = 8887;
 
@@ -37,7 +38,9 @@ public class NetConnect extends Thread {
 	private boolean connectedAlready = false;
 
 	/*
-	 * singleton retrieval public static NetConnect getnetConnect() { if(netConnect == null) { netConnect = new NetConnect(); } return netConnect; }
+	 * singleton retrieval public static NetConnect getnetConnect() {
+	 * if(netConnect == null) { netConnect = new NetConnect(); } return
+	 * netConnect; }
 	 */
 
 	/**
@@ -84,16 +87,23 @@ public class NetConnect extends Thread {
 	}
 
 	/*
-	 * public void startListen(Context context0) { mClientListen0 = new ClientListenThread(context0,mSocket0); mClientListen0.start();
+	 * public void startListen(Context context0) { mClientListen0 = new
+	 * ClientListenThread(context0,mSocket0); mClientListen0.start();
 	 * 
 	 * mClientSend0 = new ClientSendThread(); }
 	 * 
-	 * public void sendUpload(int type, String sentence) { sendUpload(type + ""); sendUpload(sentence); }
+	 * public void sendUpload(int type, String sentence) { sendUpload(type +
+	 * ""); sendUpload(sentence); }
 	 * 
-	 * private synchronized void sendUpload(String buff) { buff = buff.replace("\n", GlobalStrings.replaceOfReturn); mClientSend0.start(mSocket0,buff); }
+	 * private synchronized void sendUpload(String buff) { buff =
+	 * buff.replace("\n", GlobalStrings.replaceOfReturn);
+	 * mClientSend0.start(mSocket0,buff); }
 	 * 
 	 * 
 	 * 
-	 * public void closeNetConnect() { try{ if(mClientListen0 != null) { mClientListen0.closeBufferedReader(); } } catch (Exception e) {} try{ if(mSocket0 != null) { mSocket0.close(); } } catch (Exception e) {} netConnect=null; }
+	 * public void closeNetConnect() { try{ if(mClientListen0 != null) {
+	 * mClientListen0.closeBufferedReader(); } } catch (Exception e) {} try{
+	 * if(mSocket0 != null) { mSocket0.close(); } } catch (Exception e) {}
+	 * netConnect=null; }
 	 */
 }
