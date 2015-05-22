@@ -257,6 +257,11 @@ public class ManagerAction extends ActionSupport {
 
 	// 更新管理员，主要用于更新管理员密码
 	public String updateManager() {
+		System.out.println("修改密码："+manager.getPassword()+"-"+repwd);
+		if(manager.getPassword().equals("") || repwd.equals("")){
+			this.setMessage("新密码不能为空，请重新输入");
+			return "CHANGEPWD";
+		}
 		String info = managerService.updateManager(oldpwd, repwd, manager);
 		this.setMessage(info);
 		if (info.equals("修改密码成功，请重新登陆！")) {

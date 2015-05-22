@@ -1,12 +1,6 @@
 package com.zhbit.crs.md5;
 
-
-/*************************************************
- * md5 ��ʵ����RSA Data Security, Inc.���ύ��IETF ��RFC1321�е�MD5 message-digest �㷨��
- *************************************************/
-
 public class MD5 {
-	// ������ЩS11-S44ʵ������һ��4*4�ľ�������д�Ƿ����޸�
 	static final int S11 = 7;
 	static final int S12 = 12;
 	static final int S13 = 17;
@@ -27,30 +21,17 @@ public class MD5 {
 	static final int S43 = 15;
 	static final int S44 = 21;
 
-	static final byte[] PADDING = { -128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0 };
-
-	// ����������Ա��MD5���������õ���3��������ݣ���ԭʼ��Cʵ����
-	// �����嵽MD5_CTX�ṹ��
+	static final byte[] PADDING = { -128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
 	private long[] state = new long[4]; // state (ABCD)
 	private long[] count = new long[2]; // number of bits, modulo 2^64 (lsb
 										// first)
 	private byte[] buffer = new byte[64]; // input buffer
 
-	// digestHexStr��MD5��Ψһһ��������Ա��������һ�μ������
-	// 16����ASCII��ʾ.
-
 	public String digestHexStr;
 
-	// digest,������һ�μ������2�����ڲ���ʾ����ʾ128bit��MD5ֵ.
-
 	private byte[] digest = new byte[16];
-
-	// getMD5ofStr����MD5����Ҫ�Ĺ�����������ڲ���������Ҫ����MD5�任���ַ�
-	// ���ص��Ǳ任��Ľ���������Ǵӹ�����ԱdigestHexStrȡ�õģ�
 
 	public String getMD5ofStr(String inbuf) {
 		md5Init();
@@ -63,30 +44,21 @@ public class MD5 {
 		return digestHexStr;
 	}
 
-	// ����MD5�����ı�׼���캯��JavaBeanҪ����һ��public�Ĳ���û�в���Ĺ��캯��
 	public MD5() {
 		md5Init();
 		return;
 	}
 
-	// md5Init��һ����ʼ�������ʼ�����ı�����װ���׼�Ļ���
-
 	private void md5Init() {
 		count[0] = 0L;
 		count[1] = 0L;
 		// Load magic initialization constants.
-
 		state[0] = 0x67452301L;
 		state[1] = 0xefcdab89L;
 		state[2] = 0x98badcfeL;
 		state[3] = 0x10325476L;
-
 		return;
 	}
-
-	// F, G, H ,I ��4�����MD5������ԭʼ��MD5��Cʵ���У�����������
-	// �򵥵�λ���㣬���ܳ���Ч�ʵĿ��ǰ�����ʵ�ֳ��˺꣬��java�У����ǰ�����
-	// ʵ�ֳ���private���������ֱ�����ԭ��C�еġ�
 
 	private long F(long x, long y, long z) {
 		return (x & y) | ((~x) & z);
@@ -103,8 +75,6 @@ public class MD5 {
 	private long I(long x, long y, long z) {
 		return y ^ (x | (~z));
 	}
-
-	// FF,GG,HH��II������F,G,H,I���н�һ���任
 
 	private long FF(long a, long b, long c, long d, long x, long s, long ac) {
 		a += F(b, c, d) + x + ac;
@@ -134,9 +104,6 @@ public class MD5 {
 		return a;
 	}
 
-	// md5Update��MD5���������̣�inbuf��Ҫ�任���ֽڴ���inputlen�ǳ��ȣ����
-	// ������getMD5ofStr���ã�����֮ǰ��Ҫ����md5init����˰�����Ƴ�private��
-
 	private void md5Update(byte[] inbuf, int inputLen) {
 		int i, index, partLen;
 		byte[] block = new byte[64];
@@ -145,24 +112,18 @@ public class MD5 {
 		if ((count[0] += (inputLen << 3)) < (inputLen << 3))
 			count[1]++;
 		count[1] += (inputLen >>> 29);
-
 		partLen = 64 - index;
-
 		// Transform as many times as possible.
 		if (inputLen >= partLen) {
 			md5Memcpy(buffer, inbuf, index, 0, partLen);
 			md5Transform(buffer);
-
 			for (i = partLen; i + 63 < inputLen; i += 64) {
-
 				md5Memcpy(block, inbuf, 0, i, 64);
 				md5Transform(block);
 			}
 			index = 0;
-
 		} else
 			i = 0;
-
 		// /* Buffer remaining input */
 		md5Memcpy(buffer, inbuf, index, i, inputLen - i);
 	}
@@ -170,34 +131,23 @@ public class MD5 {
 	private void md5Final() {
 		byte[] bits = new byte[8];
 		int index, padLen;
-
 		// /* Save number of bits */
 		Encode(bits, count, 8);
-
 		// /* Pad out to 56 mod 64.
 		index = (int) (count[0] >>> 3) & 0x3f;
 		padLen = (index < 56) ? (56 - index) : (120 - index);
 		md5Update(PADDING, padLen);
-
 		// /* Append length (before padding) */
 		md5Update(bits, 8);
-
 		// /* Store state in digest */
 		Encode(digest, state, 16);
 	}
 
-	// md5Memcpy��һ���ڲ�ʹ�õ�byte����Ŀ鿽�������input��inpos��ʼ��len���ȵ�
-	// �ֽڿ�����output��outposλ�ÿ�ʼ
-
-	private void md5Memcpy(byte[] output, byte[] input, int outpos, int inpos,
-			int len) {
+	private void md5Memcpy(byte[] output, byte[] input, int outpos, int inpos, int len) {
 		int i;
-
 		for (i = 0; i < len; i++)
 			output[outpos + i] = input[inpos + i];
 	}
-
-	// md5Transform��MD5���ı任������md5Update���ã�block�Ƿֿ��ԭʼ�ֽ�
 
 	private void md5Transform(byte block[]) {
 		long a = state[0], b = state[1], c = state[2], d = state[3];
@@ -283,9 +233,6 @@ public class MD5 {
 		state[3] += d;
 	}
 
-	// Encode��long���鰴˳����byte���飬��Ϊjava��long������64bit�ģ�
-	// ֻ���32bit������ӦԭʼCʵ�ֵ���;
-
 	private void Encode(byte[] output, long[] input, int len) {
 		int i, j;
 
@@ -297,32 +244,21 @@ public class MD5 {
 		}
 	}
 
-	// Decode��byte���鰴˳��ϳɳ�long���飬��Ϊjava��long������64bit�ģ�
-	// ֻ�ϳɵ�32bit����32bit���㣬����ӦԭʼCʵ�ֵ���;
-
 	private void Decode(long[] output, byte[] input, int len) {
 		int i, j;
 
 		for (i = 0, j = 0; j < len; i++, j += 4)
-			output[i] = b2iu(input[j]) | (b2iu(input[j + 1]) << 8)
-					| (b2iu(input[j + 2]) << 16) | (b2iu(input[j + 3]) << 24);
+			output[i] = b2iu(input[j]) | (b2iu(input[j + 1]) << 8) | (b2iu(input[j + 2]) << 16) | (b2iu(input[j + 3]) << 24);
 
 		return;
 	}
-
-	// b2iu��һ����byte���ղ�������ŵ�ԭ��ģ���λ��������Ϊjavaû��unsigned����
 
 	public static long b2iu(byte b) {
 		return b < 0 ? b & 0x7F + 128 : b;
 	}
 
-	// byteHEX()��������һ��byte���͵���ת����ʮ����Ƶ�ASCII��ʾ��
-	// ��Ϊjava�е�byte��toString�޷�ʵ����һ�㣬������û��C�����е�
-	// sprintf(outbuf,"%02X",ib)
-
 	public static String byteHEX(byte ib) {
-		char[] Digit = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A',
-				'B', 'C', 'D', 'E', 'F' };
+		char[] Digit = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 		char[] ob = new char[2];
 		ob[0] = Digit[(ib >>> 4) & 0X0F];
 		ob[1] = Digit[ib & 0X0F];
