@@ -119,9 +119,17 @@ public class ManagerAction extends ActionSupport {
 	
 	// 注册
 	public String register() {
-		this.clearValue();
+		System.out.println("密码"+manager.getPassword()+"-"+repwd+"m码："+mkey.getMid());
+		if(manager.getPassword().equals("")){
+			this.setMessage("密码不能为空，请输入密码");
+			return "REGISTER";   //REGISTER
+		}
 		if (!manager.getPassword().equals(repwd)) {
 			this.setMessage("密码不一致,请重新输入");
+			return "REGISTER";   //REGISTER
+		}
+		if( mkey.getMid() == null){
+			this.setMessage("M码不能为空，请重新输入");
 			return "REGISTER";
 		}
 		if (managerService.insertManager(manager, mkey)) {
@@ -135,6 +143,7 @@ public class ManagerAction extends ActionSupport {
 			this.setMessage("错误");
 			return "REGISTER";
 		}
+		
 	}
 
 	// 登陆
@@ -192,9 +201,6 @@ public class ManagerAction extends ActionSupport {
 		} else {
 			this.clearValue();
 			this.setMessage("查看失败或不存在聊天室");
-//			this.clearValue();
-//			return "FALSE";
-//			return "CHECK";
 			return "HOMEPAGE";
 		}
 	}
@@ -208,8 +214,6 @@ public class ManagerAction extends ActionSupport {
 		} else {
 			this.clearValue();
 			this.setMessage("查看失败或不存在聊天室聊天记录");
-//			return "FALSE";
-//			return "CHECK";
 			return "HOMEPAGE";
 		}
 	}
@@ -294,8 +298,8 @@ public class ManagerAction extends ActionSupport {
 	
 	//清空临时变量
 	public void clearValue(){
-		this.setRepwd(null);
-		this.setOldpwd(null);
+		// this.setRepwd(null);
+		// this.setOldpwd(null);
 		this.setMessage(null);
 		this.setSearchStr(null);
 	}
