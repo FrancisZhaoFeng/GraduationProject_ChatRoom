@@ -7,10 +7,11 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.GET_TASKS"/>    
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
         android:allowBackup="true"
@@ -71,12 +72,11 @@
             android:name="com.zhbit.crs.mainBody.TabMsgFrdReqProcActivity"
             android:screenOrientation="portrait" >
         </activity>
-        <service
-            android:name="com.zhbit.crs.chatServices.ChatService">
+
+        <service android:name="com.zhbit.crs.chatServices.ChatService" >
         </service>
-        <service
-            android:name="com.zhbit.crs.friendRequest.FriendRequestService">
+        <service android:name="com.zhbit.crs.friendRequest.FriendRequestService" >
         </service>
-    </application> 
+    </application>
 
 </manifest>
