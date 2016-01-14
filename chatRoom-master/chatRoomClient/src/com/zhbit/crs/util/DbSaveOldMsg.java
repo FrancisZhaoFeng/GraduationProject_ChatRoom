@@ -68,16 +68,10 @@ public class DbSaveOldMsg {
 	 *            保存聊天记录到app客户端中
 	 */
 	public void saveMsg(int masterId, int guestId, boolean isSelfBool, ChatPerLog chatPerLog) {
-		// createSql = "create table if not exists oldMsg_" + masterId + "_" + guestId +  " (_index integer primary key,isSelf int,strEntity text)";
-		// insertSql = "insert into oldMsg_" + masterId + "_" + guestId + " (isSelf,strEntity)" + " values(?,?)";
-		// mSqlDb.execSQL(createSql);
-		// mSqlDb.execSQL(insertSql, new Object[] { isSelf, strOfEntity });
-		// Log.e("saveMsg", createSql);
-		// Log.e("saveMsg", insertSql);
 		createSql = "create table if not exists oldMsg_" + masterId + "_" + guestId + " (_index integer primary key,classtabledata text)";
 		insertSql = "insert into oldMsg_" + masterId + "_" + guestId + "(classtabledata)" + " values(?)";
-		mSqlDb.execSQL(createSql); // db
-		saveObject(insertSql, chatPerLog);// db
+		mSqlDb.execSQL(createSql); 
+		saveObject(insertSql, chatPerLog);
 		Log.e("saveMsg", createSql);
 		Log.e("saveMsg", insertSql);
 	}
@@ -101,7 +95,6 @@ public class DbSaveOldMsg {
 		for(int i = 0 ; mObjs != null && i < mObjs.size()  ; i++){
 			chatPerLog = (ChatPerLog)mObjs.get(i);
 			chatList.add(0,chatPerLog);
-//			chatList.add((ChatPerLog)mObjs.get(mObjs.size()-(i+1)));
 			boolList.add(0,chatPerLog.getUserBySenderid().getUserid() == masterId);
 		}
 		if(mObjs != null){
@@ -111,29 +104,6 @@ public class DbSaveOldMsg {
 		Log.e("getMsg", createSql);
 		Log.e("getMsg", selectSql);
 		return mObjs != null?mObjs.size():0;
-//
-//		if (!curs.moveToFirst()) {
-//			return 0;
-//		} else {
-//			mStartPoint += curs.getCount();
-//			mStartPointArr.put(key, mStartPoint);
-//		}
-//
-//		do {
-//			String strEnt = curs.getString(curs.getColumnIndex("strEntity"));
-//			ChatPerLog ent = new ChatEntity(strEnt0);
-//			chatList.add(0, ent);
-//			int isSelf = curs.getInt(curs.getColumnIndex("isSelf"));
-//			if (isSelf == 1) {
-//				boolList.add(0, true);
-//			} else {
-//				boolList.add(0, false);
-//			}
-//		} while (curs.moveToNext());
-//
-//		int cursGetcount = curs.getCount();
-//		curs.close();
-//		return cursGetcount;
 	}
 
 	public int getKeyFromMasterGuestId(int masterId, int guestId) {
@@ -151,14 +121,14 @@ public class DbSaveOldMsg {
 	public void saveTabMsgItem(int id, List<ZdbTabMsgItemEntity> listOfEnt) {
 		createSql = "create table if not exists oldTabMsg_" + id + " (_index integer primary key,classtabledata text)";
 		deleteSql = "delete from oldTabMsg_" + id;  //删除以前list的item实体，因为消息界面已更新
-		mSqlDb.execSQL(createSql);  //db
-		mSqlDb.execSQL(deleteSql);  //db
+		mSqlDb.execSQL(createSql);  
+		mSqlDb.execSQL(deleteSql);  
 		Log.e("saveTabMsgItem", createSql);
 		Log.e("saveTabMsgItem", deleteSql);
 
 		insertSql = "insert into oldTabMsg_" + id + " (classtabledata)" + " values(?)";
 		for (ZdbTabMsgItemEntity ent : listOfEnt) {
-			saveObject(insertSql, ent);  //db
+			saveObject(insertSql, ent);  
 		}
 	}
 
@@ -170,26 +140,13 @@ public class DbSaveOldMsg {
 	public void getTabMsgItem(int id, ArrayList<ZdbTabMsgItemEntity> msgItemList) {
 		createSql = "create table if not exists oldTabMsg_" + id + " (_index integer primary key,classtabledata text)";
 		selectSql = "SELECT * from OldTabMsg_" + id + " ORDER BY _index DESC";
-		mSqlDb.execSQL(createSql); //db
-//		Cursor curs = mSqlDb.rawQuery(selectSql, null);
+		mSqlDb.execSQL(createSql); 
 		mObjs = getObject(selectSql);
 		for(int i = 0 ; mObjs != null && i < mObjs.size() ; i++){
 			msgItemList.add(0,(ZdbTabMsgItemEntity)mObjs.get(i));
 		}
 		Log.e("getTabMsgItem", createSql);
 		Log.e("getTabMsgItem", selectSql);
-
-//		if (!curs.moveToFirst()) {
-//			return;
-//		}
-//
-//		do {
-//			String strEnt0 = curs.getString(curs.getColumnIndex("strEntity"));
-//			ZdbTabMsgItemEntity ent0 = new ZdbTabMsgItemEntity(strEnt0);
-//
-//			msgItemList.add(0, ent0);
-//		} while (curs.moveToNext());
-//		curs.close();
 	}
 
 	/************************************ for Frd Req Notifications **************************************/
@@ -219,26 +176,12 @@ public class DbSaveOldMsg {
 		createSql = "create table if not exists oldFrdReqNotif_" + id + " (_index integer primary key,classtabledata text)";
 		selectSql = "SELECT * from oldFrdReqNotif_" + id + " ORDER BY _index DESC";
 		mSqlDb.execSQL(createSql);
-//		Cursor curs = mSqlDb.rawQuery(selectSql, null);
 		mObjs = getObject(selectSql);
 		for(int i = 0 ; mObjs != null && i < mObjs.size() ; i++){
 			msgItemList.add(0,(ZdbFrdReqNotifItemEntity)mObjs.get(i));
 		}
 		Log.e("getFrdReqNotif", createSql);
 		Log.e("getFrdReqNotif", selectSql);
-
-//		if (!curs.moveToFirst()) {
-//			return;
-//		}
-//
-//		do {
-//			String strEnt0 = curs.getString(curs.getColumnIndex("strEntity"));
-//			ZdbFrdReqNotifItemEntity ent0 = new ZdbFrdReqNotifItemEntity(strEnt0);
-//
-//			msgItemList.add(0, ent0);
-//		} while (curs.moveToNext());
-//
-//		curs.close();
 	}
 
 	/****************************** unread messages ***************************************************/
@@ -294,7 +237,7 @@ public class DbSaveOldMsg {
 			byte data[] = arrayOutputStream.toByteArray();
 			objectOutputStream.close();
 			arrayOutputStream.close();
-			mSqlDb.execSQL(sql, new Object[] { data });  //insert into classtable(classtabledata) values(?)
+			mSqlDb.execSQL(sql, new Object[] { data }); 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
